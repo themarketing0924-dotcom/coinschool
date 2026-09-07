@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://themarketing0924-dotcom.github.io/coinschool/sitemap.xml
+
+# 코인스쿨 — 블록체인 교육 플랫폼
