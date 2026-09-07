@@ -1,0 +1,1516 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>RWA 마스터클래스</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+  background: #000; color: #fff; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+:root {
+  --black: #000000; --near-black: #0D0D0D; --card-dark: #1C1C1E;
+  --mid: #3A3A3C; --muted: #6E6E73; --light: #F5F5F7; --white: #FFFFFF;
+  --gold: #E8A020; --blue: #0A84FF; --red: #FF453A; --green: #32D74B;
+  --apple-dark: #1D1D1F;
+}
+
+/* PROGRESS */
+#progress { position:fixed;top:0;left:0;z-index:9999;height:2px;width:0%;background:var(--gold);transition:width .1s linear; }
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:52px;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav-logo { font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6); }
+.nav-links { display:flex;gap:2rem;list-style:none; }
+.nav-links a { font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s; }
+.nav-links a:hover { color:#fff; }
+
+/* SECTION BASE */
+section { position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:11rem 2rem;text-align:center; }
+.wrap { max-width:900px;width:100%;margin-left:auto;margin-right:auto; }
+.wrap-wide { max-width:1100px;width:100%;margin-left:auto;margin-right:auto; }
+
+/* REVEAL */
+.reveal { opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity:1;transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.22s; }
+.reveal-delay-3 { transition-delay:.36s; }
+.reveal-delay-4 { transition-delay:.5s; }
+
+/* TYPE */
+/* Apple: eyebrow→headline — breathing room is the luxury */
+.eyebrow { font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:3.5rem; }
+.eyebrow-muted { font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:3.5rem; }
+/* ── APPLE 4-LAYER TYPE SYSTEM ─── */
+/* Layer 1: Eyebrow — already .eyebrow / .eyebrow-muted */
+/* Layer 2: Display headline */
+.display-xl { font-size:clamp(4.5rem,13vw,10rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-lg { font-size:clamp(3.2rem,9vw,7rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-md { font-size:clamp(2.4rem,6vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-dark { color:var(--apple-dark); }
+/* 라이트 배경 헤더 — 골드 그라데이션 */
+.display-grad-dark {
+  background:linear-gradient(135deg,#1D1D1F 0%,#B8880A 50%,#1D1D1F 92%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+/* Layer 3: Sub-stat 서브카피 — THE KEY BRIDGE */
+/* Apple rule: headline→sub-stat = 2.8rem, sub-stat→body = 2rem */
+.sub-stat {
+  font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;line-height:1.35;
+  text-align:center;max-width:520px;margin:2.8rem auto 0;
+  color:rgba(255,255,255,.9);word-break:keep-all;overflow-wrap:break-word;hyphens:none;
+  letter-spacing:-.01em;
+}
+.sub-stat-dark {
+  font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;line-height:1.35;
+  text-align:center;max-width:520px;margin:2.8rem auto 0;
+  color:rgba(29,29,31,.82);word-break:keep-all;overflow-wrap:break-word;hyphens:none;
+  letter-spacing:-.01em;
+}
+.sub-stat em,.sub-stat strong { font-style:normal;color:var(--gold); }
+.sub-stat-dark em,.sub-stat-dark strong { font-style:normal;color:#B8880A; }
+/* Layer 4: Body — 2rem below sub-stat */
+.body-lg { font-size:clamp(.95rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(255,255,255,.48);max-width:600px;margin:2rem auto 0;word-break:keep-all;overflow-wrap:break-word; }
+.body-lg-dark { font-size:clamp(.95rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(60,60,67,.58);max-width:600px;margin:2rem auto 0;word-break:keep-all;overflow-wrap:break-word; }
+
+.gold-text { color:var(--gold); }
+/* No divider lines — Apple uses whitespace only */
+.line { display:none; }
+.line-dark { display:none; }
+
+/* REFERENCE LINKS */
+.ref-link {
+  display:inline-flex;align-items:center;gap:.3em;
+  font-size:.68rem;font-weight:700;letter-spacing:.02em;
+  color:var(--blue);text-decoration:none;
+  border:1px solid rgba(10,132,255,.28);border-radius:5px;
+  padding:.18em .55em;transition:background .2s,border-color .2s;
+}
+.ref-link::before { content:'↗';font-size:.58rem; }
+.ref-link:hover { background:rgba(10,132,255,.1);border-color:rgba(10,132,255,.55); }
+.ref-link-dark { color:#0071E3;border-color:rgba(0,113,227,.25); }
+.ref-link-dark:hover { background:rgba(0,113,227,.07);border-color:rgba(0,113,227,.45); }
+.ref-row { display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.4rem; }
+.src-tag {
+  display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--mid);border-radius:99px;padding:.25em .8em;margin-top:1.2rem;
+}
+
+/* LUXURY SOURCE BAR */
+.src-bar {
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:.3rem;margin-top:2rem;
+  padding:.9rem 1.4rem;
+  background:rgba(232,160,32,.04);
+  border:1px solid rgba(232,160,32,.14);
+  border-radius:12px;
+  max-width:720px;margin-left:auto;margin-right:auto;
+}
+.src-bar-label {
+  font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-right:.4rem;flex-shrink:0;
+}
+.src-bar a {
+  font-size:.68rem;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;
+  padding:.15em .5em;border-radius:4px;
+  transition:color .2s,background .2s;white-space:nowrap;
+}
+.src-bar a:hover { color:var(--gold);background:rgba(232,160,32,.08); }
+.src-bar-sep { color:rgba(255,255,255,.15);font-size:.7rem; }
+/* Light version */
+.src-bar-light { background:rgba(232,160,32,.04);border-color:rgba(232,160,32,.14); }
+.src-bar-light a { color:rgba(29,29,31,.45); }
+.src-bar-light a:hover { color:var(--gold);background:rgba(232,160,32,.08); }
+
+/* HERO */
+#hero { background:#000;min-height:100vh; }
+.tag-chip {
+  display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(232,160,32,.35);border-radius:99px;padding:.3em 1em;margin-bottom:4.5rem;
+}
+.hero-sub { margin-top:2rem;font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.42);font-weight:400;line-height:1.6; }
+.scroll-hint {
+  position:absolute;bottom:2.5rem;font-size:.72rem;color:rgba(255,255,255,.22);letter-spacing:.1em;text-transform:uppercase;
+  animation:bounce 2s ease-in-out infinite;
+}
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* SHOCK */
+#shock { background:var(--near-black); }
+.shock-wrap { display:flex;align-items:flex-end;justify-content:center;gap:.1em; }
+.shock-num { font-size:clamp(7rem,20vw,16rem);font-weight:900;line-height:.85;letter-spacing:-.05em;color:#fff; }
+.shock-denom { font-size:clamp(2.5rem,6vw,5.5rem);font-weight:300;color:rgba(255,255,255,.22);letter-spacing:-.03em;padding-bottom:.4em; }
+.shock-label { margin-top:2rem;font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.48);font-weight:400;line-height:1.5; }
+.shock-label strong { color:rgba(255,255,255,.85);font-weight:700; }
+
+/* RING CHART */
+.ring-wrap { display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;margin-top:2.5rem; }
+.ring-legend { text-align:left; }
+.ring-legend-item { display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,.6); }
+.ring-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+
+/* THREE STATS */
+#three-stats { background:#111;min-height:60vh;padding:5rem 2rem; }
+.stats-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;max-width:960px; }
+.stat-col { padding:3rem 2rem;border-right:1px solid rgba(255,255,255,.08);text-align:center; }
+.stat-col:last-child { border-right:none; }
+.stat-big { font-size:clamp(2.8rem,6vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:.5rem; }
+.stat-big.red { color:var(--red); }
+.stat-big.gold { color:var(--gold); }
+.stat-label-sm { font-size:.82rem;color:rgba(255,255,255,.62);line-height:1.45; }
+.stat-src { font-size:.65rem;color:rgba(255,255,255,.45);margin-top:.4rem; }
+
+/* MINI BAR */
+.mini-bar-wrap { margin-top:1.2rem; }
+.mini-bar-row { display:flex;align-items:center;gap:.6rem;margin-bottom:.45rem;font-size:.7rem; }
+.mini-bar-label { color:rgba(255,255,255,.35);width:80px;text-align:right;flex-shrink:0; }
+.mini-bar-track { flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden; }
+.mini-bar-fill { height:100%;border-radius:99px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1); }
+.mini-bar-val { color:rgba(255,255,255,.5);width:40px;text-align:left;flex-shrink:0; }
+
+/* WHY / STRUCTURE */
+#why { background:#FAFAF8;min-height:auto;text-align:left;padding:8rem 2rem; }
+.section-head { text-align:center;margin-bottom:3.5rem; }
+.flow-row { display:flex;gap:0;max-width:860px;margin:0 auto 1.5rem;position:relative;align-items:stretch; }
+.flow-step {
+  flex:1;background:#fff;border:1px solid rgba(232,160,32,.1);border-radius:16px;
+  padding:1.4rem 1rem 1.2rem;margin:0 .4rem;text-align:center;position:relative;
+  box-shadow:0 1px 8px rgba(0,0,0,.04);
+}
+.flow-step-num { width:28px;height:28px;background:var(--apple-dark);color:#E8A020;font-size:.72rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem; }
+.flow-step-title { font-size:.8rem;font-weight:700;color:var(--apple-dark);line-height:1.3;margin-bottom:.3rem; }
+.flow-step-sub { font-size:.68rem;color:var(--muted);line-height:1.4; }
+.flow-step.bad .flow-step-num { background:var(--red);color:#fff; }
+.flow-conn {
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  width:24px;color:#C9A84C;font-size:1.1rem;
+}
+.callout-apple { max-width:720px;margin:2rem auto 0;background:linear-gradient(135deg,#1A1A1C,#2C2C2E);color:#fff;border-radius:20px;padding:1.8rem 2.2rem;text-align:center;border:1px solid rgba(232,160,32,.2); }
+.callout-apple p { font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.78); }
+.callout-apple strong { color:var(--gold); }
+
+/* FUNNEL CHART */
+.funnel-wrap { max-width:620px;margin:2.5rem auto 0; }
+.funnel-row { display:flex;align-items:center;gap:.8rem;margin-bottom:.75rem; }
+.funnel-label { font-size:.72rem;font-weight:700;color:var(--apple-dark);width:72px;min-width:72px;text-align:right;flex-shrink:0; }
+.funnel-track { flex:1;height:36px;background:rgba(0,0,0,.06);border-radius:6px;overflow:hidden; }
+.funnel-bar { height:100%;border-radius:6px;transition:width 1.4s cubic-bezier(.16,1,.3,1);width:0%; }
+.funnel-val { font-size:.72rem;font-weight:700;color:var(--apple-dark);width:80px;min-width:80px;text-align:left;flex-shrink:0; }
+
+/* KOREAN PAIN */
+#korean { background:#000; }
+.pain-table { width:100%;max-width:760px;margin:3rem auto 0;border-collapse:collapse;font-size:.88rem;border:1px solid rgba(255,255,255,.14); }
+.pain-table th { padding:.8rem 1.2rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid var(--gold);border-right:1px solid rgba(255,255,255,.14);color:var(--muted);text-align:left; }
+.pain-table th:last-child { border-right:none; }
+.pain-table td { padding:.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.14);border-right:1px solid rgba(255,255,255,.14);text-align:left;color:rgba(255,255,255,.68);line-height:1.4; }
+.pain-table td:last-child { border-right:none; }
+.pain-table tbody tr:last-child td { border-bottom:none; }
+.pain-table td:first-child { color:rgba(255,255,255,.42);font-size:.8rem; }
+.pain-table td.now { color:#E8A020;font-weight:700; }
+
+/* DOMINANCE CHART (Market Shift) */
+#shift { background:#FAFAF8; padding:5rem 2rem; min-height:auto; }
+.shift-flow { display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:2rem auto; }
+.shift-coin { font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:900;letter-spacing:-.02em;color:var(--apple-dark);padding:.8rem 1.2rem; }
+.shift-arrow { font-size:clamp(1rem,2vw,1.5rem);color:#AEAEB2;padding:0 .2rem; }
+.shift-end { font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:900;letter-spacing:-.02em;color:var(--red);padding:.8rem 1.2rem; }
+.btc-dom-chart { max-width:720px;margin:2.5rem auto 0; }
+/* TradingView 스타일 차트 래퍼 */
+.tv-chart-wrap {
+  height:240px;
+  background:#131722;border-radius:10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.28);
+}
+.tv-header {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1rem .5rem;border-bottom:1px solid rgba(255,255,255,.06);
+  flex-wrap:wrap;gap:.4rem;
+}
+.tv-pair { font-size:.72rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.85);font-family:'SF Mono','Fira Mono',monospace; }
+.tv-legend { display:flex;gap:1rem;flex-wrap:wrap; }
+.tv-legend span { font-size:.6rem;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:.3rem; }
+.tv-dot { width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0; }
+.tv-footer { padding:.4rem 1rem .5rem;font-size:.55rem;color:rgba(255,255,255,.22);letter-spacing:.04em;border-top:1px solid rgba(255,255,255,.04); }
+/* Shift callout */
+.shift-callout {
+  max-width:640px;margin:2.5rem auto 0;
+  padding:2rem 2.4rem;
+  background:#1A1A1C;border-radius:16px;
+  border:1px solid rgba(232,160,32,.18);
+  text-align:center;
+}
+.shift-callout-text { font-size:clamp(.88rem,2.2vw,1.05rem);color:rgba(255,255,255,.55);line-height:1.7;word-break:keep-all; }
+.shift-callout-strong { font-size:clamp(1.1rem,2.8vw,1.4rem);font-weight:800;color:#fff;margin:.6rem 0 .3rem;letter-spacing:-.02em;word-break:keep-all; }
+.shift-callout-sub { font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.35);word-break:keep-all; }
+
+/* CZ SIGNAL */
+#cz { background:var(--near-black); }
+.quote-mark { font-size:5rem;line-height:.6;color:var(--gold);opacity:.3;font-family:Georgia,serif;margin-bottom:.5rem; }
+.quote-text { font-size:clamp(2.4rem,6vw,4.8rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;max-width:760px;margin:0 auto;background:linear-gradient(135deg,#E8A020 0%,#F5D08A 35%,#fff 60%,#F5D08A 80%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.quote-author { margin-top:1.8rem;font-size:.78rem;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase; }
+.cz-events { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;max-width:780px;margin-left:auto;margin-right:auto; }
+.cz-event { background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.2rem 1.4rem;text-align:center;display:flex;flex-direction:column;align-items:center; }
+.cz-date { font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem; }
+.cz-place { font-size:.96rem;color:rgba(255,255,255,.85);font-weight:700;margin-bottom:.3rem; }
+.cz-desc { font-size:.86rem;color:var(--muted);line-height:1.4; }
+
+/* RWA DEFINITION */
+#rwa-def { background:#FAFAF8; }
+.rwa-cards { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:3rem auto 0;max-width:860px; }
+.rwa-card { background:#fff;border:1px solid rgba(232,160,32,.12);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 1px 12px rgba(0,0,0,.04); }
+.rwa-card:hover { border-color:rgba(232,160,32,.3);box-shadow:0 4px 20px rgba(232,160,32,.08); }
+.rwa-card-icon { font-size:1.8rem;margin-bottom:.8rem; }
+.rwa-card-title { font-size:.88rem;font-weight:700;color:var(--apple-dark);margin-bottom:.5rem; }
+.rwa-card-desc { font-size:.76rem;color:var(--muted);line-height:1.5; }
+.rwa-card-link { display:block;margin-top:.8rem; }
+
+/* TOKENIZATION FLOW DIAGRAM */
+.tok-flow { display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:2.5rem auto;max-width:780px; }
+.tok-node {
+  background:#fff;border:1.5px solid #E5E5EA;border-radius:14px;
+  padding:1rem 1.2rem;text-align:center;min-width:110px;
+}
+.tok-icon { font-size:1.5rem;margin-bottom:.3rem; }
+.tok-title { font-size:.72rem;font-weight:700;color:var(--apple-dark); }
+.tok-sub { font-size:.62rem;color:var(--muted);margin-top:.2rem; }
+.tok-arrow { font-size:1.4rem;color:#AEAEB2;padding:0 .4rem; }
+
+/* COMPARE */
+#compare { background:#111; }
+.cmp-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin:3rem auto 0; }
+.cmp-block { border-radius:20px;padding:2.2rem 1.8rem;text-align:left; }
+.cmp-block.bad { background:rgba(255,69,58,.05);border:1px solid rgba(255,69,58,.2); }
+.cmp-block.good { background:rgba(50,215,75,.05);border:1px solid rgba(50,215,75,.2); }
+.cmp-header { font-size:.84rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.4rem; }
+.cmp-block.bad .cmp-header { color:var(--red); }
+.cmp-block.good .cmp-header { color:var(--green); }
+.cmp-row { display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.8rem; }
+.cmp-icon { font-size:1rem;margin-top:.1rem;flex-shrink:0; }
+.cmp-text { font-size:.94rem;color:rgba(255,255,255,.62);line-height:1.45; }
+.cmp-text strong { color:rgba(255,255,255,.9); }
+
+/* RADAR SCORE */
+.score-row { display:flex;gap:1.5rem;justify-content:center;margin-top:2rem;flex-wrap:wrap; }
+.score-item { text-align:center; }
+.score-label { font-size:.82rem;color:var(--muted);margin-bottom:.3rem; }
+.score-bar-v { width:6px;height:60px;background:rgba(255,255,255,.08);border-radius:99px;margin:0 auto;position:relative;overflow:hidden; }
+.score-bar-v-fill { position:absolute;bottom:0;left:0;right:0;border-radius:99px;transition:height 1.2s cubic-bezier(.16,1,.3,1);height:0; }
+.score-val { font-size:.87rem;font-weight:700;margin-top:.4rem; }
+
+/* MARKET SIZE */
+#market { background:#030303; }
+.market-big { font-size:clamp(3.5rem,10vw,8rem);font-weight:900;letter-spacing:-.04em;line-height:.95;color:#fff; }
+.market-row { display:flex;gap:2rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap; }
+.market-item { text-align:center; }
+.market-num { font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1; }
+.market-label { font-size:.72rem;color:var(--muted);margin-top:.4rem; }
+.market-sep { width:1px;background:rgba(255,255,255,.1);align-self:stretch;min-height:60px; }
+
+/* MARKET BAR CHART */
+.mkt-bars { max-width:700px;margin:3rem auto 0; }
+.mkt-bar-row { display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem; }
+.mkt-bar-name { font-size:.75rem;color:rgba(255,255,255,.55);width:160px;text-align:right;flex-shrink:0; }
+.mkt-bar-track { flex:1;height:28px;background:rgba(255,255,255,.05);border-radius:6px;overflow:hidden;position:relative; }
+.mkt-bar-fill { height:100%;border-radius:6px;display:flex;align-items:center;padding-left:.6rem;transition:width 1.4s cubic-bezier(.16,1,.3,1);width:0; }
+.mkt-bar-fill span { font-size:.7rem;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap; }
+
+/* GROWTH CHART */
+.growth-chart { max-width:680px;margin:2.5rem auto 0;position:relative; }
+
+/* BINANCE MOVING */
+#binance { background:#FAFAF8; }
+.binance-cards { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:880px;margin:3rem auto 0; }
+.binance-card { background:#fff;border:1px solid rgba(232,160,32,.12);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 1px 12px rgba(0,0,0,.04); }
+.binance-card:hover { border-color:rgba(232,160,32,.3); }
+.binance-card-badge { display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(135deg,#1C1C1E,#3A3A3C);color:#E8A020;border-radius:6px;padding:.2em .7em;margin-bottom:1rem;border:1px solid rgba(232,160,32,.25); }
+.binance-card-title { font-size:.95rem;font-weight:700;color:var(--apple-dark);margin-bottom:.5rem; }
+.binance-card-desc { font-size:.76rem;color:var(--muted);line-height:1.5; }
+.binance-card-stat { margin-top:1rem;font-size:1.4rem;font-weight:900;letter-spacing:-.03em;color:var(--apple-dark); }
+
+/* CHECKLIST */
+#checklist { background:#080808; }
+.check-grid { display:grid;grid-template-columns:1fr 1fr;gap:1px;max-width:800px;margin:3rem auto 0;background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.14);border-radius:20px;overflow:hidden; }
+.check-cell { background:#0E0E0E;padding:1.5rem 1.8rem;display:flex;align-items:flex-start;gap:1rem; }
+.check-cell:hover { background:#131313; }
+.check-n { font-family:-apple-system,monospace;font-size:.68rem;font-weight:800;color:var(--gold);letter-spacing:.05em;flex-shrink:0;padding-top:.15rem; }
+.check-body-title { font-size:.85rem;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:.3rem; }
+.check-body-desc { font-size:.71rem;color:#636366;line-height:1.5; }
+
+/* WHY NOW */
+#why-now { background:#000; }
+.why-cards { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:760px;margin:3rem auto 0; }
+.why-card { background:var(--card-dark);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2rem 1.8rem;text-align:left; }
+.why-card-emoji { font-size:1.8rem;margin-bottom:1rem; }
+.why-card-title { font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.5rem; }
+.why-card-desc { font-size:.77rem;color:var(--muted);line-height:1.55; }
+
+/* CTA & FOOTER */
+#cta { background:linear-gradient(180deg,#0A0A0A 0%,#000 100%);border-top:1px solid rgba(232,160,32,.2); }
+.cta-title { font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem;background:linear-gradient(135deg,#E8A020 0%,#F5D08A 40%,#fff 70%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.cta-sub { font-size:clamp(.95rem,2vw,1.1rem);color:rgba(255,255,255,.48);line-height:1.65;max-width:580px;margin:1.6rem auto 3rem;word-break:keep-all;overflow-wrap:break-word; }
+footer { background:#000;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 2rem;text-align:center; }
+footer p { font-size:.72rem;color:rgba(255,255,255,.18);line-height:1.7; }
+footer a { color:rgba(255,255,255,.3); }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width:900px) {
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .cmp-grid,.check-grid { grid-template-columns:1fr 1fr; }
+  .why-cards { grid-template-columns:1fr 1fr; }
+  .rwa-cards,.binance-cards { grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:680px) {
+  nav { padding:0 1rem;height:48px; }
+  .nav-links { display:none; }
+  section { padding:5rem 1.2rem;min-height:auto; }
+  #hero { min-height:100vh; }
+  .stats-grid,.rwa-cards,.cmp-grid,.binance-cards,.check-grid,.why-cards { grid-template-columns:1fr; }
+  .stat-col { border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:2rem 1rem; }
+  .stat-col:last-child { border-bottom:none; }
+  .flow-row { flex-direction:column; }
+  .flow-step { margin:.3rem 0; }
+  .flow-conn { transform:rotate(90deg);margin:.2rem auto; }
+  .cz-events { grid-template-columns:1fr;max-width:320px; }
+  .cz-event { width:100%; }
+  .market-row { flex-direction:column;gap:1.5rem; }
+  .market-sep { display:none; }
+  .shift-flow { flex-direction:column;gap:.2rem; }
+  .tok-flow { flex-direction:column; }
+  .tok-arrow { transform:rotate(90deg); }
+  .mkt-bar-name { width:72px;font-size:.62rem; }
+  .score-row { gap:.8rem; }
+  .funnel-label { width:60px;min-width:60px;font-size:.66rem; }
+  .funnel-val { width:64px;min-width:64px;font-size:.66rem; }
+  .body-lg,.body-lg-dark { font-size:clamp(.86rem,3.5vw,1rem);max-width:100%;width:100%;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+  /* 모바일: 서브카피 좌우를 헤드라인과 동일하게 */
+  .sub-stat,.sub-stat-dark {
+    font-size:clamp(.78rem,3.4vw,1.0rem);
+    margin:1.2rem auto 0;
+    max-width:100%;
+    width:100%;
+    text-align:center;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+    hyphens:none;
+  }
+  .cta-sub { max-width:100%;width:100%;font-size:clamp(.82rem,3.8vw,.95rem);word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+  .cta-title { font-size:clamp(2rem,7vw,3.5rem);word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+  .hero-sub { font-size:clamp(.88rem,3.5vw,1rem);word-break:keep-all; }
+  .shock-num { font-size:clamp(6rem,18vw,12rem); }
+  .callout-apple { padding:1.2rem 1.4rem; }
+  .callout-apple p { font-size:.88rem; }
+  .shift-callout { padding:1.4rem 1.2rem;margin:1.8rem auto 0; }
+  .tv-header { padding:.5rem .75rem .4rem; }
+  .tv-legend { gap:.6rem; }
+  .tv-legend span { font-size:.55rem; }
+  .src-bar { padding:.7rem 1rem; }
+  .src-bar a,.src-bar-label { font-size:.6rem; }
+  .ring-wrap { gap:1.5rem; }
+  .ref-row { gap:.4rem; }
+  .ref-link { font-size:.62rem; }
+  .wrap,.wrap-wide { padding:0; }
+}
+
+@media (max-width:390px) {
+  .display-xl { font-size:clamp(3rem,11vw,4.5rem); }
+  .display-lg { font-size:clamp(2.2rem,9vw,3.2rem); }
+  .display-md { font-size:clamp(1.5rem,6vw,2.2rem); }
+  .shock-num { font-size:clamp(5rem,16vw,9rem); }
+  .mkt-bar-name { width:60px;font-size:.58rem; }
+}
+</style>
+
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-logo">🏛 RWA 마스터클래스</div>
+  <ul class="nav-links">
+    <li><a href="#shock">데이터</a></li>
+    <li><a href="#cz">CZ</a></li>
+    <li><a href="#rwa-def">RWA</a></li>
+    <li><a href="#market">시장</a></li>
+    <li><a href="#checklist">체크리스트</a></li>
+  </ul>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="tag-chip reveal">2025–2026 · 블록체인 마스터클래스</div>
+    <div class="display-xl reveal reveal-delay-1" style="background:linear-gradient(135deg,#E8A020 0%,#F5D08A 45%,#fff 72%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">게임이<br>바뀌었다</div>
+    <div class="sub-stat reveal reveal-delay-2">신규 상장 알트코인 <em>93개가 하락</em>한 지금<br>바이낸스 창업자는 1년째 같은 곳을 가리킨다</div>
+    <p class="body-lg reveal reveal-delay-3" style="max-width:520px">
+      이 두 사실은 연결되어 있다.<br>
+      <span style="color:rgba(255,255,255,.72);font-weight:600">지금 가장 중요한 흐름, RWA를 먼저 이해한 사람이 다음 기회를 잡는다.</span>
+    </p>
+    <div class="ref-row reveal reveal-delay-3">
+      <a class="ref-link" href="https://cryptorank.io/news/feed/1907f-rwa-market-hits-36-billion-why-tokenization-is-transforming-global-finance" target="_blank" rel="noopener">CryptoRank — RWA $360억 돌파</a>
+      <a class="ref-link" href="https://www.gncrypto.news/news/tokenized-rwas-jump-589-june-2026-binance-research/" target="_blank" rel="noopener">Binance Research — RWA 589% 급등</a>
+      <a class="ref-link" href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 실시간 데이터</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ 스크롤</div>
+</section>
+
+<!-- ════════ SHOCK STAT ════════ -->
+<section id="shock">
+  <div class="wrap">
+    <div class="eyebrow reveal">2025 Binance 신규 상장 결과</div>
+    <div class="shock-wrap reveal reveal-delay-1">
+      <div class="shock-num">93</div>
+      <div class="shock-denom">/100</div>
+    </div>
+    <div class="shock-label reveal reveal-delay-2">
+      2025년 바이낸스에 신규 상장된 토큰 100개 중<br>
+      <strong>93개가 상장 이후 하락</strong>했다.
+    </div>
+
+    <!-- RING CHART -->
+    <div class="ring-wrap reveal reveal-delay-3">
+      <canvas id="ringChart" width="180" height="180" style="flex-shrink:0"></canvas>
+      <div class="ring-legend">
+        <div class="ring-legend-item"><div class="ring-dot" style="background:var(--red)"></div>하락 토큰 — 93%</div>
+        <div class="ring-legend-item"><div class="ring-dot" style="background:rgba(50,215,75,.7)"></div>상승 토큰 — 7%</div>
+        <div style="margin-top:1rem;font-size:.72rem;color:var(--muted);line-height:1.5">
+          7개 중 상당수는<br>단기 급등 후 하락 전환
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal reveal-delay-4" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://cryptorank.io" target="_blank" rel="noopener">CryptoRank · 2025 상장 성과 분석</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research" target="_blank" rel="noopener">Binance Research 2026.06</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 2026.08</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ THREE STATS ════════ -->
+<section id="three-stats">
+  <div class="stats-grid reveal">
+    <div class="stat-col">
+      <div class="stat-big red">-78%</div>
+      <div class="stat-label-sm">신규 상장 토큰 중앙값 ROI<br>(Median 0.22x)</div>
+      <!-- Bar Chart: BTC vs 신규알트 -->
+      <canvas id="stat1Chart" width="260" height="90" style="width:100%;max-width:260px;margin-top:1rem"></canvas>
+      <div class="stat-src" style="margin-top:.6rem">출처: CryptoRank 2025</div>
+      <a class="ref-link" style="margin-top:.4rem" href="https://cryptorank.io/news/feed/1907f-rwa-market-hits-36-billion-why-tokenization-is-transforming-global-finance" target="_blank" rel="noopener">CryptoRank 원문 기사</a>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big red">-71.7%</div>
+      <div class="stat-label-sm">92개 토큰에 각 $100 투자 시<br>평균 수익률</div>
+      <!-- Pie/Donut: $100 → $28 잔액 -->
+      <canvas id="stat2Chart" width="100" height="100" style="width:100px;height:100px;margin:1rem auto 0;display:block"></canvas>
+      <div style="font-size:.65rem;color:rgba(255,255,255,.55);margin-top:.4rem">$100 투자 → 평균 $28.3 잔액</div>
+      <div class="stat-src" style="margin-top:.4rem">CryptoRank (Messari 방식)</div>
+      <a class="ref-link" style="margin-top:.4rem" href="https://news.bitcoin.com/rwa-market-cap-37-5-billion-120-percent-growth-2026/" target="_blank" rel="noopener">Bitcoin.com — RWA 시장 분석</a>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big gold">+589%</div>
+      <div class="stat-label-sm">2024→2026 온체인 RWA<br>시장 성장률</div>
+      <!-- Line Chart: RWA 성장 -->
+      <canvas id="stat3Chart" width="260" height="90" style="width:100%;max-width:260px;margin-top:1rem"></canvas>
+      <div class="stat-src" style="margin-top:.6rem">Binance Research 2026.06</div>
+      <a class="ref-link" style="margin-top:.4rem" href="https://www.gncrypto.news/news/tokenized-rwas-jump-589-june-2026-binance-research/" target="_blank" rel="noopener">Binance Research 원문</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY / STRUCTURE ════════ -->
+<section id="why">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div class="eyebrow-muted reveal">구조적 문제</div>
+      <div class="display-lg display-grad-dark reveal reveal-delay-1">왜 이렇게 됐나</div>
+      <div class="sub-stat-dark reveal reveal-delay-2">신규 상장이 안 오르는 건 <em>우연이 아니다</em><br>구조 자체가 <em>초기 투자자</em>에게 유리하게 설계되어 있다</div>
+      <p class="body-lg-dark reveal reveal-delay-3">
+        FDV 과대 설정, VC 저가 배정, 상장 후 매도 — 반복되는 패턴을 알면 피할 수 있다.
+      </p>
+    </div>
+
+    <!-- FLOW STEPS -->
+    <div class="flow-row reveal reveal-delay-2">
+      <div class="flow-step">
+        <div class="flow-step-num">①</div>
+        <div class="flow-step-title">FDV 과대 설정</div>
+        <div class="flow-step-sub">유통량 5–15%만<br>실제 거래됨<br><span style="color:#0071E3;font-size:.62rem">→ FDV 개념 설명</span></div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">②</div>
+        <div class="flow-step-title">VC·팀 저가 배정</div>
+        <div class="flow-step-sub">원가 대비<br>수십~수백배<br>낮은 단가</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">③</div>
+        <div class="flow-step-title">Binance Alpha</div>
+        <div class="flow-step-sub">Spot 상장 보장<br>아님 — 선별<br>과정 있음</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step bad">
+        <div class="flow-step-num" style="background:var(--red)">④</div>
+        <div class="flow-step-title">Spot 상장 후</div>
+        <div class="flow-step-sub">초기 물량 매도<br><strong style="color:var(--red)">일반 투자자가<br>출구 역할</strong></div>
+      </div>
+    </div>
+
+    <!-- FUNNEL: 머니 유입 감소 시각화 -->
+    <div class="funnel-wrap reveal reveal-delay-3">
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">신규 상장 후 유입 자금 감소 패턴</div>
+      <div class="funnel-row">
+        <div class="funnel-label">상장일</div>
+        <div class="funnel-track"><div class="funnel-bar" data-width="100" data-color="#E8A020"></div></div>
+        <div class="funnel-val">$100 유입</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">1주 후</div>
+        <div class="funnel-track"><div class="funnel-bar" data-width="52" data-color="#d4891b"></div></div>
+        <div class="funnel-val">-48% 감소</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">1개월 후</div>
+        <div class="funnel-track"><div class="funnel-bar" data-width="22" data-color="#c0721a"></div></div>
+        <div class="funnel-val">-78% 감소</div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">3개월 후</div>
+        <div class="funnel-track"><div class="funnel-bar" data-width="8" data-color="#FF453A"></div></div>
+        <div class="funnel-val" style="color:var(--red)">소멸</div>
+      </div>
+    </div>
+
+    <div class="callout-apple reveal reveal-delay-4">
+      <p>
+        A가 $1에 사고 B가 $2에 사고 C가 $3에 산다. A의 수익은 C의 자금에서 나온다.<br>
+        <strong>새 구매자 유입이 멈추면 구조가 붕괴된다. 이것이 공기 알트의 본질이다.</strong>
+      </p>
+    </div>
+    <div class="src-bar src-bar-light reveal reveal-delay-4">
+      <span class="src-bar-label" style="color:#B8880A">출처</span>
+      <a href="https://coinmarketcap.com/academy/article/fully-diluted-valuation" target="_blank" rel="noopener">FDV 개념 (CoinMarketCap)</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://www.binance.com/en/alpha" target="_blank" rel="noopener">Binance Alpha 공식 페이지</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://cryptorank.io" target="_blank" rel="noopener">CryptoRank 2025 상장 분석</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ KOREAN PAIN ════════ -->
+<section id="korean">
+  <div class="wrap">
+    <div class="eyebrow reveal">한국 투자자 이야기</div>
+    <div class="display-lg reveal reveal-delay-1">너무 많이<br>당해봤다</div>
+    <div class="sub-stat reveal reveal-delay-2"><em>1,200만 코린이</em>가 공통으로 겪은 것<br>좋은 프로젝트를 골랐는데도 손실이 났다</div>
+    <p class="body-lg reveal reveal-delay-3" style="max-width:760px">
+      ICO·IEO 수백 개 프로젝트. 문제는 선택이 아니었다 — <strong style="color:rgba(255,255,255,.72)">구조를 몰랐던 것이다.</strong><br>
+      그래서 이제 시장 자체가 학습했다.
+    </p>
+    <table class="pain-table reveal reveal-delay-3">
+      <thead>
+        <tr>
+          <th>구분</th><th>과거 (2018–2022)</th><th>현재 (2025–2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>투자 흐름</td><td>BTC→ETH→알트→소형알트→ICO</td><td class="now">BTC→ETH→SOL→끝</td></tr>
+        <tr><td>신규 상장 인식</td><td>새로운 기회</td><td class="now">피해야 할 위험</td></tr>
+        <tr><td>유동성 순환</td><td>알트 전반으로 퍼짐</td><td class="now">메가캡에서 멈춤</td></tr>
+        <tr><td>투자자 행동</td><td>좋은 프로젝트 발굴</td><td class="now">검증된 것만 매수</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-row reveal reveal-delay-4">
+      <a class="ref-link" href="https://finance.yahoo.com/news/ieo-investors-lose-millions-funding-142110114.html" target="_blank" rel="noopener">Yahoo Finance — IEO 투자자 수백만 달러 손실</a>
+      <a class="ref-link" href="https://www.coinspeaker.com/ico-ieo-sto-failed-what-next/" target="_blank" rel="noopener">CoinSpeaker — ICO·IEO 구조 실패 분석</a>
+      <span class="src-tag">※ 실제 기사 기반 분석</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MARKET SHIFT ════════ -->
+<section id="shift">
+  <div class="wrap">
+    <div class="eyebrow-muted reveal">알트코인 로테이션의 종말</div>
+    <div class="display-lg display-grad-dark reveal reveal-delay-1" style="margin-top:1.5rem;margin-bottom:1.5rem">알트로 돈이<br>흘러가지 않는다</div>
+    <div class="sub-stat-dark reveal reveal-delay-2"><em>BTC 도미넌스</em> 사상 최고치<br>알트코인으로 가던 <em>자금이 멈췄다</em></div>
+    <div class="shift-flow reveal reveal-delay-3">
+      <span class="shift-coin">BTC</span><span class="shift-arrow">→</span>
+      <span class="shift-coin">ETH</span><span class="shift-arrow">→</span>
+      <span class="shift-coin">SOL</span><span class="shift-arrow">→</span>
+      <span class="shift-end">끝</span>
+    </div>
+
+    <!-- BTC 도미넌스 & 알트 시즌 차트 — TradingView 스타일 -->
+    <div class="btc-dom-chart reveal reveal-delay-3">
+      <div class="tv-chart-wrap">
+        <div class="tv-header">
+          <div class="tv-pair">BTC.D / ALT.S / RWA</div>
+          <div class="tv-legend">
+            <span><span class="tv-dot" style="background:#F0B429"></span>BTC 도미넌스</span>
+            <span><span class="tv-dot" style="background:#FF453A"></span>알트 시즌</span>
+            <span><span class="tv-dot" style="background:#00C076"></span>RWA</span>
+          </div>
+        </div>
+        <canvas id="domChart" style="width:100%;display:block"></canvas>
+        <div class="tv-footer">
+          <span>TF: 분기  ·  Source: CryptoRank · Binance Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shift-callout reveal reveal-delay-4">
+      <p class="shift-callout-text">
+        알트코인 로테이션이 사라진 건<br>투자자가 무지해서가 아니다.
+      </p>
+      <p class="shift-callout-strong">너무 많이 당해봤기 때문이다.</p>
+      <p class="shift-callout-sub">Binance도 이것을 알고 있다.</p>
+    </div>
+    <div class="ref-row reveal reveal-delay-4">
+      <a class="ref-link-dark ref-link" href="https://coinmarketcap.com/charts/bitcoin-dominance/" target="_blank" rel="noopener">BTC 도미넌스 차트 (CoinMarketCap)</a>
+      <a class="ref-link-dark ref-link" href="https://beincrypto.com/bitcoin-dominance-explodes-to-60-66-and-buries-altseason-hopes-for-2026/" target="_blank" rel="noopener">BeInCrypto — BTC 도미넌스 60.66% 폭등</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CZ SIGNAL ════════ -->
+<section id="cz">
+  <div class="wrap">
+    <div class="eyebrow reveal">창펑자오(CZ) 발언</div>
+    <div class="quote-mark reveal">"</div>
+    <div class="quote-text reveal reveal-delay-1">
+      RWA의 성장 속도를<br>2025년 초 예상보다<br>훨씬 빠르게 과소평가했다.
+    </div>
+    <div class="quote-author reveal reveal-delay-2">창펑자오(CZ) · 바이낸스 창업자 · CoinDesk 인터뷰 2026.07</div>
+
+    <div class="cz-events reveal reveal-delay-3">
+      <div class="cz-event">
+        <div class="cz-date">2026.01</div>
+        <div class="cz-place">🇨🇭 다보스 WEF</div>
+        <div class="cz-desc">"약 12개 정부와<br>자산 토큰화를 논의 중"</div>
+        <a class="ref-link" style="margin-top:.7rem;font-size:.6rem" href="https://www.weforum.org/stories/2026/01/digital-economy-inflection-point-what-to-expect-for-digital-assets-in-2026/" target="_blank" rel="noopener">WEF 공식 기사</a>
+      </div>
+      <div class="cz-event">
+        <div class="cz-date">2026.07</div>
+        <div class="cz-place">🎙 신랑재경 인터뷰</div>
+        <div class="cz-desc">RWA·스테이블코인·대출을<br>핵심 성장 분야로 언급</div>
+        <a class="ref-link" style="margin-top:.7rem;font-size:.6rem" href="https://cryptobriefing.com/cz-underestimated-rwa-growth/" target="_blank" rel="noopener">CryptoBriefing — CZ RWA 발언</a>
+      </div>
+      <div class="cz-event">
+        <div class="cz-date">2026.08</div>
+        <div class="cz-place">🇭🇰 홍콩 Web3</div>
+        <div class="cz-desc">홍콩을 RWA 허브로<br>토큰화 증권 방향 제시</div>
+        <a class="ref-link" style="margin-top:.7rem;font-size:.6rem" href="https://cryptonews.net/news/other/33357347/" target="_blank" rel="noopener">CryptoNews — CZ 홍콩 RWA 허브</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHAT IS RWA ════════ -->
+<section id="rwa-def" style="background:#FAFAF8">
+  <div class="wrap-wide">
+    <div class="eyebrow-muted reveal">개념 정의</div>
+    <div class="display-lg display-grad-dark reveal reveal-delay-1">RWA란<br>무엇인가</div>
+    <div class="sub-stat-dark reveal reveal-delay-2"><em>부동산·채권·주식</em> 같은 실물자산을<br>블록체인 <em>토큰</em>으로 올리는 것</div>
+    <p class="body-lg-dark reveal reveal-delay-3" style="max-width:520px;margin-left:auto;margin-right:auto">
+      기존에는 기관만 접근 가능했던 자산을 —<br>누구나, 소액으로, 24시간 거래할 수 있게 된다.
+    </p>
+
+    <!-- TOKENIZATION FLOW -->
+    <div class="tok-flow reveal reveal-delay-3">
+      <div class="tok-node">
+        <div class="tok-icon">🏢</div>
+        <div class="tok-title">실물자산</div>
+        <div class="tok-sub">부동산·채권·주식</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node">
+        <div class="tok-icon">⚖️</div>
+        <div class="tok-title">법적 구조화</div>
+        <div class="tok-sub">SPV / 트러스트</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node">
+        <div class="tok-icon">⛓️</div>
+        <div class="tok-title">토큰 발행</div>
+        <div class="tok-sub">스마트컨트랙트</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node">
+        <div class="tok-icon">💵</div>
+        <div class="tok-title">수익 배분</div>
+        <div class="tok-sub">임대료·이자·배당</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node">
+        <div class="tok-icon">🌐</div>
+        <div class="tok-title">글로벌 유통</div>
+        <div class="tok-sub">24/7 거래 가능</div>
+      </div>
+    </div>
+
+    <div class="rwa-cards reveal reveal-delay-4">
+      <div class="rwa-card">
+        <div class="rwa-card-icon">📜</div>
+        <div class="rwa-card-title">채권·국채 토큰화</div>
+        <div class="rwa-card-desc">미국 국채 수익(T-Bill)을 온체인으로. BlackRock BUIDL, Ondo USDY, Franklin BENJI 등이 대표적.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://ondo.finance" target="_blank" rel="noopener">Ondo Finance</a>
+      </div>
+      <div class="rwa-card">
+        <div class="rwa-card-icon">🏢</div>
+        <div class="rwa-card-title">부동산 토큰화</div>
+        <div class="rwa-card-desc">건물 지분을 토큰으로 분할. RealT는 미국 부동산을 $50 단위로 소유 가능하게 했다.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://realt.co" target="_blank" rel="noopener">RealT 플랫폼</a>
+      </div>
+      <div class="rwa-card">
+        <div class="rwa-card-icon">📈</div>
+        <div class="rwa-card-title">주식 토큰화</div>
+        <div class="rwa-card-desc">Binance bStocks: 애플·테슬라·엔비디아 주식을 BNB Chain에서 24/7 거래. 실물 주식 1:1 담보.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://www.binance.com/en/stock-token" target="_blank" rel="noopener">Binance bStocks</a>
+      </div>
+      <div class="rwa-card">
+        <div class="rwa-card-icon">💰</div>
+        <div class="rwa-card-title">신용·대출 토큰화</div>
+        <div class="rwa-card-desc">Maple Finance: 기관 투자자에게 온체인 대출 제공. 실물 신용 리스크가 온체인에서 관리된다.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://maple.finance" target="_blank" rel="noopener">Maple Finance</a>
+      </div>
+      <div class="rwa-card">
+        <div class="rwa-card-icon">🏅</div>
+        <div class="rwa-card-title">원자재 토큰화</div>
+        <div class="rwa-card-desc">금, 원유, 탄소 크레딧을 온체인으로. Paxos PAXG는 금 1g 단위로 소유 가능하다.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://paxos.com/paxgold/" target="_blank" rel="noopener">Paxos Gold</a>
+      </div>
+      <div class="rwa-card">
+        <div class="rwa-card-icon">⛓️</div>
+        <div class="rwa-card-title">인프라 플랫폼</div>
+        <div class="rwa-card-desc">RWA.xyz에서 $31.8B의 온체인 실물자산 전체를 추적. 자산별·체인별·발행자별 데이터 제공.</div>
+        <a class="ref-link-dark ref-link rwa-card-link" href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 대시보드</a>
+      </div>
+    </div>
+
+    <div class="src-bar src-bar-light reveal reveal-delay-4" style="margin-top:2rem">
+      <span class="src-bar-label" style="color:#B8880A">출처</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 2026.08 — 실시간 온체인 데이터</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research 2026.06</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://www.bcg.com/capabilities/financial-institutions/insights" target="_blank" rel="noopener">BCG 토큰화 리포트</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ COMPARE ════════ -->
+<section id="compare">
+  <div class="wrap">
+    <div class="eyebrow reveal">핵심 차이</div>
+    <div class="display-lg reveal reveal-delay-1">일반 코인 vs RWA</div>
+    <div class="sub-stat reveal reveal-delay-2">공기 알트는 신규 매수자가 있어야 수익이 난다<br>RWA는 실물에서 <em>현금흐름이 독립적으로</em> 발생한다</div>
+
+    <div class="cmp-grid reveal reveal-delay-3">
+      <div class="cmp-block bad">
+        <div class="cmp-header">❌ 일반 코인 (공기 알트)</div>
+        <div class="cmp-row"><span class="cmp-icon">📉</span><span class="cmp-text">실물 자산 <strong>없음</strong>. 내러티브와 기대감으로만 가격 유지.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">👥</span><span class="cmp-text">신규 매수자가 있어야 기존 홀더가 수익 실현 가능.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">🔓</span><span class="cmp-text">락업 해제 시 초기 물량 매도 → 일반 투자자 손실.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">💨</span><span class="cmp-text">유입이 멈추면 구조 붕괴. <strong>A의 수익 = C의 자금.</strong></span></div>
+      </div>
+      <div class="cmp-block good">
+        <div class="cmp-header">✅ RWA 토큰</div>
+        <div class="cmp-row"><span class="cmp-icon">🏛️</span><span class="cmp-text">실물자산이 담보. 법적으로 검증된 소유권 구조.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">💵</span><span class="cmp-text">임대료·이자·배당 등 <strong>실물에서 발생하는 현금흐름</strong>이 배분.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">📊</span><span class="cmp-text">신규 구매자가 없어도 기존 보유자에게 수익 지속.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">⛓️</span><span class="cmp-text">Binance가 장기 생존성 평가의 <strong>핵심 기준</strong>으로 채택.</span></div>
+      </div>
+    </div>
+
+    <!-- 점수 비교 시각화 -->
+    <div style="margin-top:2.5rem" class="reveal reveal-delay-3">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem">항목별 비교 점수</div>
+      <div class="score-row" id="scoreRow">
+        <div class="score-item"><div class="score-label">실물 담보</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="5" data-rwa="95" style="background:var(--green)"></div></div><div class="score-val" style="color:var(--green)">RWA ↑</div></div>
+        <div class="score-item"><div class="score-label">현금흐름</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="0" data-rwa="90" style="background:var(--green)"></div></div><div class="score-val" style="color:var(--green)">RWA ↑</div></div>
+        <div class="score-item"><div class="score-label">가격 변동성</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="95" data-rwa="40" style="background:var(--red)"></div></div><div class="score-val" style="color:var(--red)">Alt ↑</div></div>
+        <div class="score-item"><div class="score-label">법적 보호</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="10" data-rwa="85" style="background:var(--green)"></div></div><div class="score-val" style="color:var(--green)">RWA ↑</div></div>
+        <div class="score-item"><div class="score-label">단기 수익</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="80" data-rwa="30" style="background:var(--red)"></div></div><div class="score-val" style="color:var(--red)">Alt ↑</div></div>
+        <div class="score-item"><div class="score-label">장기 안정성</div><div class="score-bar-v"><div class="score-bar-v-fill" data-alt="8" data-rwa="88" style="background:var(--green)"></div></div><div class="score-val" style="color:var(--green)">RWA ↑</div></div>
+      </div>
+      <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:.8rem">
+        <span style="font-size:.68rem;color:var(--muted)"><span style="color:var(--green)">●</span> RWA 우위</span>
+        <span style="font-size:.68rem;color:var(--muted)"><span style="color:var(--red)">●</span> 알트 우위</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MARKET SIZE ════════ -->
+<section id="market">
+  <div class="wrap">
+    <div class="eyebrow reveal">글로벌 시장 규모</div>
+    <div class="market-big reveal reveal-delay-1">
+      <span class="gold-text">$31.8B</span><br>
+      <span style="font-size:clamp(1.5rem,4vw,3rem);color:rgba(255,255,255,.3);font-weight:300">현재 온체인 RWA</span>
+    </div>
+    <div class="sub-stat reveal reveal-delay-2">BCG 전망 <em>$16.1조</em> (2030년)<br>현재 침투율은 잠재 시장의 <em>0.01%</em>에 불과하다</div>
+
+    <!-- 주요 플레이어 바 차트 -->
+    <div class="mkt-bars reveal reveal-delay-3">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:1rem">주요 RWA 플레이어 AUM</div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">BlackRock BUIDL</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="100" style="background:linear-gradient(90deg,var(--gold),#c8880e)"><span>$2.9B</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">Franklin BENJI</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="28" style="background:rgba(232,160,32,.65)"><span>$800M</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">Binance bStocks</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="17" style="background:rgba(232,160,32,.45)"><span>$500M</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">Ondo Finance</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="12" style="background:rgba(232,160,32,.35)"><span>$350M</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">RealT</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="4" style="background:rgba(232,160,32,.25)"><span>$110M</span></div></div>
+      </div>
+    </div>
+
+    <!-- RWA 성장 선 차트 -->
+    <div class="growth-chart reveal reveal-delay-4">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.8rem">온체인 RWA 시장 성장 추이</div>
+      <canvas id="growthChart" width="680" height="160" style="width:100%;max-width:680px"></canvas>
+      <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem;padding:0 .5rem">
+        <span>2024 Q1</span><span>2024 Q4</span><span>2025 Q2</span><span>2025 Q4</span><span>2026 Q2</span>
+      </div>
+    </div>
+
+    <div class="src-bar reveal reveal-delay-4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 2026.08 — 실시간 온체인 AUM</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.bcg.com/capabilities/financial-institutions/insights" target="_blank" rel="noopener">BCG 2030 전망 $16.1T</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.blackrock.com/us/individual/products/buidl" target="_blank" rel="noopener">BlackRock BUIDL $2.9B</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.franklintempleton.com/strategies/franklin-onchain-us-government-money-fund" target="_blank" rel="noopener">Franklin BENJI</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BINANCE MOVING ════════ -->
+<section id="binance" style="background:#FAFAF8">
+  <div class="wrap-wide">
+    <div class="eyebrow-muted reveal">바이낸스의 실제 행동</div>
+    <div class="display-lg display-grad-dark reveal reveal-delay-1">말이 아닌<br>상품으로 증명</div>
+    <div class="sub-stat-dark reveal reveal-delay-2">CZ가 <em>1년 동안</em> 같은 방향을 가리키는 동안<br>Binance는 이미 <em>세 가지 실물 인프라</em>를 만들었다</div>
+    <p class="body-lg-dark reveal reveal-delay-3" style="max-width:480px;margin-left:auto;margin-right:auto;text-align:center">
+      CZ의 발언은 단순한 의견이 아니다.<br>Binance는 이미 세 가지 실제 인프라를 만들었다.
+    </p>
+    <div class="binance-cards reveal reveal-delay-3">
+      <div class="binance-card">
+        <div class="binance-card-badge">bStocks</div>
+        <div class="binance-card-title">토큰화 주식</div>
+        <div class="binance-card-desc">애플·테슬라·엔비디아 등 미국 주식을 BNB Chain에서 24/7 거래. 실물 주식 1:1 담보.</div>
+        <div class="binance-card-stat">$500M <span style="font-size:.85rem;font-weight:400;color:var(--muted)">AUM · 7주</span></div>
+        <a class="ref-link-dark ref-link" style="margin-top:.8rem" href="https://crypto.news/binance-spotlights-tokenized-stocks-as-rwa-market-surges-nearly-600/" target="_blank" rel="noopener">Crypto.news — Binance 토큰화 주식</a>
+      </div>
+      <div class="binance-card">
+        <div class="binance-card-badge">Triparty</div>
+        <div class="binance-card-title">기관형 커스터디</div>
+        <div class="binance-card-desc">수익 창출 토큰 자산을 거래소 외부 중립 커스터디에 보관. 1:1로 거래 증거금에 반영.</div>
+        <div class="binance-card-stat">자본효율 <span style="font-size:.85rem;font-weight:400;color:var(--muted)">+ 리스크 감소</span></div>
+        <a class="ref-link-dark ref-link" style="margin-top:.8rem" href="https://tradersunion.com/news/brokers-news/show/2865157-binance-launches-rwusd-earn-product/" target="_blank" rel="noopener">TradersUnion — Binance RWUSD 출시</a>
+      </div>
+      <div class="binance-card">
+        <div class="binance-card-badge">Purification</div>
+        <div class="binance-card-title">상장 기준 변화</div>
+        <div class="binance-card-desc">Binance Research 2026: 실물 현금흐름 연결 인프라와 RWA를 장기 생존 핵심 기준으로 명시.</div>
+        <div class="binance-card-stat">New <span style="font-size:.85rem;font-weight:400;color:var(--muted)">Listing Criteria</span></div>
+        <a class="ref-link-dark ref-link" style="margin-top:.8rem" href="https://www.gncrypto.news/news/tokenized-rwas-jump-589-june-2026-binance-research/" target="_blank" rel="noopener">Binance Research — RWA 589%↑</a>
+      </div>
+    </div>
+
+    <!-- bStocks 7주 성장 시각화 -->
+    <div style="max-width:620px;margin:2.5rem auto 0" class="reveal reveal-delay-4">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.8rem">bStocks AUM 성장 (출시 후 7주)</div>
+      <canvas id="bstocksChart" width="620" height="130" style="width:100%;max-width:620px"></canvas>
+    </div>
+
+    <div class="src-bar src-bar-light reveal reveal-delay-4" style="margin-top:2rem">
+      <span class="src-bar-label" style="color:#B8880A">출처</span>
+      <a href="https://www.binance.com/en/stock-token" target="_blank" rel="noopener">Binance 주식 토큰 — 주식 토큰화 데이터</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research 2026.06 — RWA 리포트</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz 2026.08</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CHECKLIST ════════ -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="eyebrow reveal">진짜 RWA 판별법</div>
+    <div class="display-lg reveal reveal-delay-1">8가지<br>체크리스트</div>
+    <div class="sub-stat reveal reveal-delay-2">이름만 RWA인 토큰은 걸러야 한다.<br><em>8개 중 3개 미만이면 공기 알트코인이다.</em></div>
+    <p class="body-lg reveal reveal-delay-3" style="word-break:keep-all;overflow-wrap:break-word;hyphens:none;max-width:540px;margin-left:auto;margin-right:auto">
+      실물 담보·법적 구조·현금흐름·감사<br>— 이 네 가지가 없으면<br>RWA 이름표를 붙였을 뿐인 토큰에 불과하다.
+    </p>
+    <div class="check-grid reveal reveal-delay-3">
+      <div class="check-cell">
+        <div class="check-n">01</div>
+        <div>
+          <div class="check-body-title">실물자산이 실제로 존재하는가</div>
+          <div class="check-body-desc">등기·증서·계약서로 확인 가능한 실물 담보 — <a href="https://app.rwa.xyz/assets" target="_blank" rel="noopener" style="color:var(--blue)">RWA.xyz 자산 목록</a></div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">02</div>
+        <div>
+          <div class="check-body-title">법적 소유권 구조가 있는가</div>
+          <div class="check-body-desc">특수목적법인(SPV) 또는 법적 트러스트 구조 — <a href="https://www.sec.gov/divisions/corpfin/cf-noaction/2019/turnkey-jet-040219-2a1.htm" target="_blank" rel="noopener" style="color:var(--blue)">SEC 가이드라인</a></div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">03</div>
+        <div>
+          <div class="check-body-title">독립적 제3자가 감사하는가</div>
+          <div class="check-body-desc">팀 내부 주장 아닌 외부 감사·커스터디 증명 — Chainlink Proof of Reserve 등</div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">04</div>
+        <div>
+          <div class="check-body-title">실물에서 현금흐름이 발생하는가</div>
+          <div class="check-body-desc">임대료·이자·배당 등 신규 매수 없이도 수익</div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">05</div>
+        <div>
+          <div class="check-body-title">규제 준수 및 법적 명확성</div>
+          <div class="check-body-desc">증권법·자산관리법 요건을 충족하는 구조 — <a href="https://www.mas.gov.sg/development/fintech/digital-assets" target="_blank" rel="noopener" style="color:var(--blue)">MAS 규제 프레임워크</a></div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">06</div>
+        <div>
+          <div class="check-body-title">글로벌 유동성 접근 가능성</div>
+          <div class="check-body-desc">Binance·주요 DEX에 연결 가능한 인프라</div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">07</div>
+        <div>
+          <div class="check-body-title">투명한 자산 비율 공시</div>
+          <div class="check-body-desc">온체인에서 실시간으로 확인 가능한 담보 현황</div>
+        </div>
+      </div>
+      <div class="check-cell">
+        <div class="check-n">08</div>
+        <div>
+          <div class="check-body-title">사용 실적이 있는가</div>
+          <div class="check-body-desc">실제 거래량·사용자 수·수익 발생 이력</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY NOW ════════ -->
+<section id="why-now">
+  <div class="wrap">
+    <div class="eyebrow reveal">왜 지금인가</div>
+    <div class="display-lg reveal reveal-delay-1">극초기 시장<br>지금이 타이밍</div>
+    <div class="sub-stat reveal reveal-delay-2">잠재 시장의 <em>0.01%만 침투</em>된 지금<br>BlackRock과 Binance가 이미 자리를 잡았다</div>
+    <div class="why-cards reveal reveal-delay-3">
+      <div class="why-card">
+        <div class="why-card-emoji">🌱</div>
+        <div class="why-card-title">0.01% 침투율</div>
+        <div class="why-card-desc">현재 RWA는 잠재 시장의 0.01%만 침투. 1%가 되는 순간 100배 시장. <a href="https://www.bcg.com/capabilities/financial-institutions/insights" target="_blank" rel="noopener" style="color:var(--blue)">BCG 리포트 →</a></div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">🏛️</div>
+        <div class="why-card-title">기관이 먼저 들어왔다</div>
+        <div class="why-card-desc">BlackRock($10T AUM)·Franklin Templeton이 이미 진입. <a href="https://www.blackrock.com/us/individual/products/buidl" target="_blank" rel="noopener" style="color:var(--blue)">BUIDL 펀드 →</a></div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">⏱️</div>
+        <div class="why-card-title">규제 완성 전이다</div>
+        <div class="why-card-desc">각국 정부가 RWA 규제를 만드는 중. 완성 후엔 모두가 진입한다. <a href="https://www.mas.gov.sg" target="_blank" rel="noopener" style="color:var(--blue)">MAS 싱가포르 →</a></div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">📈</div>
+        <div class="why-card-title">복리 수익 구조</div>
+        <div class="why-card-desc">공기 알트는 가격 상승이 전부. RWA는 가격 + 실물 수익이 동시에 쌓인다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ LARRY FINK QUOTE ════════ -->
+<section id="fink" style="background:#000;text-align:center">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="color:var(--gold);opacity:.7">BlackRock CEO 발언</div>
+    <div class="cta-title reveal reveal-delay-1" style="margin-bottom:.8rem;font-size:clamp(1.9rem,5.5vw,4rem);background:none;-webkit-text-fill-color:#fff;color:#fff">
+      토크나이제이션은<br>금융의 다음 세대다.<br>모든 자산이 <span style="background:linear-gradient(135deg,#E8A020 0%,#F5D08A 40%,#fff 70%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">온체인</span>으로 이동할 것이다.
+    </div>
+    <div class="quote-author reveal reveal-delay-2" style="color:rgba(255,255,255,.55)">래리 핑크(Larry Fink) &nbsp;·&nbsp; CEO, BlackRock</div>
+    <div class="ref-row reveal reveal-delay-3">
+      <a class="ref-link" href="https://tech4impactsummit.com/blog/rwa-tokenization-reshaping-capital-markets/" target="_blank" rel="noopener">BlackRock BUIDL $25억 돌파 — 원문</a>
+      <a class="ref-link" href="https://www.spotedcrypto.com/rwa-tokenization-market-size-2026-guide/" target="_blank" rel="noopener">BlackRock·Ondo·Centrifuge RWA 시장 분석</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="cta">
+  <div class="wrap">
+    <div class="eyebrow reveal">지금 시작할 이유</div>
+    <div class="cta-title reveal reveal-delay-1" style="line-height:1.2">알트의 시대가 끝나고<br>실물의 시대가 온다</div>
+    <p class="cta-sub reveal reveal-delay-2">
+      <strong style="color:rgba(255,255,255,.75)">Binance 창업자</strong>가 1년 내내 같은 말을 반복하고 있다.<br>
+      <strong style="color:rgba(255,255,255,.75)">데이터도 같은 방향</strong>을 가리키고 있다.
+    </p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#hero" style="display:inline-block;background:var(--gold);color:#000;font-size:.9rem;font-weight:700;letter-spacing:.02em;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">처음부터 다시 보기 ↑</a>
+      <a href="#checklist" style="display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:.9rem;font-weight:600;letter-spacing:.02em;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">8가지 체크리스트</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    RWA 마스터클래스 · 교육 목적 자료<br>
+    이 자료는 투자 조언이 아닙니다. 모든 투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다.<br>
+    <a href="https://cryptorank.io" target="_blank" rel="noopener">CryptoRank</a> ·
+    <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research</a> ·
+    <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a> ·
+    <a href="https://www.coindesk.com" target="_blank" rel="noopener">CoinDesk</a> ·
+    <a href="https://www.bcg.com" target="_blank" rel="noopener">BCG</a>
+  </p>
+</footer>
+
+<script>
+// ── SCROLL PROGRESS ──────────────────────────────────────
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, { passive: true });
+
+// ── INTERSECTION OBSERVER ────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    // Trigger mini-bars
+    e.target.querySelectorAll('.mini-bar-fill[data-width]').forEach(el => {
+      el.style.width = el.dataset.width + '%';
+    });
+    // Trigger mkt-bars
+    e.target.querySelectorAll('.mkt-bar-fill[data-width]').forEach(el => {
+      el.style.width = el.dataset.width + '%';
+    });
+    // Trigger funnel bars (percentage-based — stays inside container on all screen sizes)
+    e.target.querySelectorAll('.funnel-bar[data-width]').forEach(el => {
+      el.style.width = el.dataset.width + '%';
+      el.style.background = el.dataset.color;
+    });
+    // Trigger score bars
+    e.target.querySelectorAll('.score-bar-v-fill[data-rwa]').forEach(el => {
+      el.style.height = el.dataset.rwa + '%';
+    });
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── RING CHART (93/100) ──────────────────────────────────
+function drawRing() {
+  const canvas = document.getElementById('ringChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 90, cy = 90, r = 72, lw = 16;
+  let pct = 0;
+  const target = 93 / 100;
+
+  function render() {
+    ctx.clearRect(0, 0, 180, 180);
+    // Track
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = lw; ctx.stroke();
+    // Fill (red for 93%)
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct);
+    ctx.strokeStyle = '#FF453A'; ctx.lineWidth = lw;
+    ctx.lineCap = 'round'; ctx.stroke();
+    // Green remainder
+    if (pct >= target) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, -Math.PI / 2 + Math.PI * 2 * target, -Math.PI / 2 + Math.PI * 2);
+      ctx.strokeStyle = 'rgba(50,215,75,.7)'; ctx.lineWidth = lw;
+      ctx.lineCap = 'round'; ctx.stroke();
+    }
+    // Center label
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 28px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.round(pct * 100) + '%', cx, cy + 5);
+    ctx.fillStyle = 'rgba(255,255,255,.35)';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.fillText('하락', cx, cy + 20);
+  }
+
+  const ringEl = canvas.closest('.reveal') || canvas.parentElement;
+  const ringObs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    ringObs.disconnect();
+    const start = performance.now();
+    const dur = 1400;
+    function step(now) {
+      const t = Math.min((now - start) / dur, 1);
+      pct = t < 1 ? t * t * (3 - 2 * t) * target : target; // smoothstep
+      render();
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, { threshold: 0.3 });
+  ringObs.observe(canvas);
+  render();
+}
+drawRing();
+
+// ── BTC DOMINANCE — Vanilla Canvas (TradingView 스타일) ──
+function drawDomChart() {
+  const canvas = document.getElementById('domChart');
+  if (!canvas) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const container = canvas.parentElement;
+  const W = container.clientWidth || 680;
+  const H = 220;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const pad = { top: 18, right: 16, bottom: 34, left: 42 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  const labels = ["'24Q1","'24Q2","'24Q3","'24Q4","'25Q1","'25Q2","'25Q3","'26Q1","'26Q3"];
+  const btcData = [48, 50, 52, 54, 55, 57, 58, 59, 60];
+  const altData = [72, 65, 55, 48, 42, 38, 32, 28, 24];
+  const rwaData = [8,  12, 16, 22, 32, 45, 62, 80, 100];
+  const n = labels.length;
+  const minY = 0, maxY = 100;
+
+  function xOf(i) { return pad.left + (i / (n - 1)) * cw; }
+  function yOf(v) { return pad.top + ch * (1 - (v - minY) / (maxY - minY)); }
+
+  // Grid
+  ctx.lineWidth = 1;
+  [0, 25, 50, 75, 100].forEach(v => {
+    const y = yOf(v);
+    ctx.strokeStyle = 'rgba(255,255,255,.06)';
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.28)';
+    ctx.font = '9px SF Mono, Fira Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v + '%', pad.left - 5, y + 3);
+  });
+
+  // X labels
+  ctx.fillStyle = 'rgba(255,255,255,.28)';
+  ctx.font = '9px SF Mono, Fira Mono, monospace';
+  ctx.textAlign = 'center';
+  labels.forEach((lbl, i) => {
+    ctx.fillText(lbl, xOf(i), H - 8);
+  });
+
+  // Draw bezier line + fill
+  function drawSeries(data, stroke, fillTop, fillBot, dashed) {
+    // Fill
+    const grad = ctx.createLinearGradient(0, pad.top, 0, H - pad.bottom);
+    grad.addColorStop(0, fillTop);
+    grad.addColorStop(1, fillBot);
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(data[0]));
+    for (let i = 1; i < n; i++) {
+      const cpx = (xOf(i-1) + xOf(i)) / 2;
+      ctx.bezierCurveTo(cpx, yOf(data[i-1]), cpx, yOf(data[i]), xOf(i), yOf(data[i]));
+    }
+    ctx.lineTo(xOf(n-1), H - pad.bottom);
+    ctx.lineTo(xOf(0), H - pad.bottom);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Line
+    ctx.beginPath();
+    ctx.setLineDash(dashed ? [4,3] : []);
+    ctx.moveTo(xOf(0), yOf(data[0]));
+    for (let i = 1; i < n; i++) {
+      const cpx = (xOf(i-1) + xOf(i)) / 2;
+      ctx.bezierCurveTo(cpx, yOf(data[i-1]), cpx, yOf(data[i]), xOf(i), yOf(data[i]));
+    }
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = dashed ? 1.5 : 2;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  drawSeries(rwaData,  '#00C076', 'rgba(0,192,118,.20)', 'rgba(0,192,118,.01)', false);
+  drawSeries(altData,  '#FF453A', 'rgba(255,69,58,.12)', 'rgba(255,69,58,.01)', true);
+  drawSeries(btcData,  '#F0B429', 'rgba(240,180,41,.22)', 'rgba(240,180,41,.02)', false);
+}
+
+// Observe for reveal, then draw
+(function() {
+  const canvas = document.getElementById('domChart');
+  if (!canvas) return;
+  const obs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    obs.disconnect();
+    drawDomChart();
+    window.addEventListener('resize', drawDomChart, { passive: true });
+  }, { threshold: 0.1 });
+  obs.observe(canvas);
+})();
+
+// ── MARKET GROWTH LINE CHART (Chart.js) ──────────────────
+function drawGrowthChart() {
+  const canvas = document.getElementById('growthChart');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ["'24 Q1","'24 Q2","'24 Q3","'24 Q4","'25 Q1","'25 Q2","'25 Q3","'26 Q2"],
+      datasets: [{
+        label: '온체인 RWA 시장 ($B)',
+        data: [4.8,6.5,9.2,13.4,18.5,23.8,28.2,31.8],
+        borderColor:'#E8A020',
+        backgroundColor: function(ctx){ const g=ctx.chart.ctx.createLinearGradient(0,0,0,200); g.addColorStop(0,'rgba(232,160,32,.35)'); g.addColorStop(1,'rgba(232,160,32,.02)'); return g; },
+        fill:true, tension:.4, pointRadius:5, pointHoverRadius:8,
+        pointBackgroundColor:'#E8A020', pointBorderColor:'rgba(0,0,0,.4)',
+        pointBorderWidth:1.5, borderWidth:3
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:true, aspectRatio:4,
+      animation:{ duration:1400, easing:'easeInOutQuart' },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          backgroundColor:'rgba(29,29,31,.92)', titleColor:'rgba(255,255,255,.5)',
+          bodyColor:'#E8A020', borderColor:'rgba(232,160,32,.3)',
+          borderWidth:1, padding:10, cornerRadius:8,
+          callbacks:{ label: ctx => ` $${ctx.parsed.y}B` }
+        }
+      },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,.06)' }, ticks:{ color:'rgba(255,255,255,.4)', font:{size:10} } },
+        y:{ min:0, max:35, grid:{ color:'rgba(255,255,255,.06)' },
+            ticks:{ color:'rgba(255,255,255,.4)', font:{size:10}, callback: v => '$'+v+'B' } }
+      }
+    }
+  });
+}
+drawGrowthChart();
+
+// ── bSTOCKS GROWTH BAR CHART (Chart.js) ──────────────────
+function drawBstocksChart() {
+  const canvas = document.getElementById('bstocksChart');
+  if (!canvas || !window.Chart) return;
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['1주차','2주차','3주차','4주차','5주차','6주차','7주차'],
+      datasets: [{
+        label: 'AUM ($M)',
+        data: [18,55,110,190,310,420,500],
+        backgroundColor: ['rgba(232,160,32,.35)','rgba(232,160,32,.45)','rgba(232,160,32,.52)','rgba(232,160,32,.6)','rgba(232,160,32,.72)','rgba(232,160,32,.85)','rgba(232,160,32,1)'],
+        borderColor: 'rgba(232,160,32,.2)',
+        borderWidth:0, borderRadius:6, borderSkipped:false
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:true, aspectRatio:4.5,
+      animation:{ duration:1100, easing:'easeInOutQuart' },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          backgroundColor:'rgba(29,29,31,.92)', titleColor:'rgba(255,255,255,.5)',
+          bodyColor:'#E8A020', borderColor:'rgba(232,160,32,.3)',
+          borderWidth:1, padding:10, cornerRadius:8,
+          callbacks:{ label: ctx => ` $${ctx.parsed.y}M AUM` }
+        }
+      },
+      scales:{
+        x:{ grid:{ display:false }, ticks:{ color:'rgba(0,0,0,.35)', font:{size:10} } },
+        y:{ min:0, max:560, grid:{ color:'rgba(0,0,0,.05)' },
+            ticks:{ color:'rgba(0,0,0,.35)', font:{size:10}, callback: v => '$'+v+'M' } }
+      }
+    }
+  });
+}
+drawBstocksChart();
+
+// ── THREE-STATS CHARTS ───────────────────────────────────
+function drawStatCharts() {
+  // STAT1: Horizontal bar — BTC +55% vs 신규알트 -78%
+  const c1 = document.getElementById('stat1Chart');
+  if (c1) {
+    const ctx = c1.getContext('2d');
+    const W = c1.width, H = c1.height;
+    const bars = [
+      { label: 'BTC', val: 55, color: '#E8A020', display: '+55%' },
+      { label: '신규알트', val: -78, color: '#FF453A', display: '-78%' }
+    ];
+    const maxAbs = 100, midX = W * 0.36;
+    ctx.clearRect(0, 0, W, H);
+    bars.forEach((b, i) => {
+      const y = 18 + i * 38;
+      // Label
+      ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText(b.label, midX - 8, y + 14);
+      // Track
+      const trackW = W - midX - 10;
+      ctx.fillStyle = 'rgba(255,255,255,.06)';
+      ctx.beginPath(); ctx.roundRect(midX, y + 4, trackW, 18, 4); ctx.fill();
+      // Fill (animate via IntersectionObserver)
+      const fillW = Math.abs(b.val) / maxAbs * trackW;
+      ctx.fillStyle = b.color;
+      ctx.beginPath(); ctx.roundRect(midX, y + 4, fillW, 18, 4); ctx.fill();
+      // Value
+      ctx.fillStyle = b.color; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(b.display, midX + fillW + 5, y + 16);
+    });
+  }
+
+  // STAT2: Donut — $100 invested, $28.3 remains
+  const c2 = document.getElementById('stat2Chart');
+  if (c2) {
+    const ctx = c2.getContext('2d');
+    const cx = c2.width / 2, cy = c2.height / 2, r = 40, rIn = 26;
+    const lost = 71.7 / 100 * Math.PI * 2;
+    const remain = (100 - 71.7) / 100 * Math.PI * 2;
+    ctx.clearRect(0, 0, c2.width, c2.height);
+    // Lost arc (red)
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + lost);
+    ctx.closePath(); ctx.fillStyle = '#FF453A'; ctx.fill();
+    // Remain arc (muted)
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, -Math.PI / 2 + lost, -Math.PI / 2 + lost + remain);
+    ctx.closePath(); ctx.fillStyle = 'rgba(255,255,255,.15)'; ctx.fill();
+    // Inner hole
+    ctx.beginPath(); ctx.arc(cx, cy, rIn, 0, Math.PI * 2);
+    ctx.fillStyle = '#111'; ctx.fill();
+    // Center text
+    ctx.fillStyle = '#FF453A'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('$28', cx, cy + 4);
+  }
+
+  // STAT3: Line chart — RWA 시장 규모 우상향
+  const c3 = document.getElementById('stat3Chart');
+  if (c3) {
+    const ctx = c3.getContext('2d');
+    const W = c3.width, H = c3.height;
+    const data = [4.8, 6.2, 8.1, 11.4, 16.3, 22.7, 28.4, 31.8];
+    const labels = ["'24Q1","'24Q3","'25Q1","'25Q3","'26Q1","'26Q2","'26Q3","'26Q4*"];
+    const pad = { t: 10, r: 10, b: 22, l: 36 };
+    const min = 0, max = 35;
+    function xAt(i) { return pad.l + i / (data.length - 1) * (W - pad.l - pad.r); }
+    function yAt(v) { return pad.t + (1 - (v - min) / (max - min)) * (H - pad.t - pad.b); }
+    ctx.clearRect(0, 0, W, H);
+    // Grid
+    [10, 20, 30].forEach(v => {
+      const y = yAt(v);
+      ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,.22)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText('$' + v + 'B', pad.l - 4, y + 3);
+    });
+    // Fill area
+    ctx.beginPath();
+    data.forEach((v, i) => { const x = xAt(i), y = yAt(v); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+    ctx.lineTo(xAt(data.length - 1), H - pad.b);
+    ctx.lineTo(xAt(0), H - pad.b);
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(0, pad.t, 0, H - pad.b);
+    grad.addColorStop(0, 'rgba(48,209,88,.35)'); grad.addColorStop(1, 'rgba(48,209,88,.03)');
+    ctx.fillStyle = grad; ctx.fill();
+    // Line
+    ctx.beginPath();
+    data.forEach((v, i) => { const x = xAt(i), y = yAt(v); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+    ctx.strokeStyle = '#30D158'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+    // Dots + labels
+    data.forEach((v, i) => {
+      const x = xAt(i), y = yAt(v);
+      ctx.beginPath(); ctx.arc(x, y, i === data.length - 1 ? 4 : 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#30D158'; ctx.fill();
+      if (i === 0 || i === data.length - 1) {
+        ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.font = '9px sans-serif';
+        ctx.textAlign = i === 0 ? 'left' : 'right';
+        ctx.fillText('$' + v + 'B', x + (i === 0 ? 4 : -4), y - 6);
+      }
+    });
+    // X labels
+    ctx.fillStyle = 'rgba(255,255,255,.28)'; ctx.font = '8px sans-serif'; ctx.textAlign = 'center';
+    [0, 3, 7].forEach(i => ctx.fillText(labels[i], xAt(i), H - pad.b + 13));
+  }
+}
+
+const statObs = new IntersectionObserver(([e]) => {
+  if (!e.isIntersecting) return;
+  statObs.disconnect();
+  drawStatCharts();
+}, { threshold: 0.2 });
+const statSection = document.getElementById('three-stats');
+if (statSection) statObs.observe(statSection);
+drawStatCharts();
+
+// ── POLYFILL roundRect ───────────────────────────────────
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    const rr = typeof r === 'number' ? [r,r,r,r] : r;
+    this.moveTo(x + rr[0], y);
+    this.lineTo(x + w - rr[1], y); this.arcTo(x + w, y, x + w, y + rr[1], rr[1]);
+    this.lineTo(x + w, y + h - rr[2]); this.arcTo(x + w, y + h, x + w - rr[2], y + h, rr[2]);
+    this.lineTo(x + rr[3], y + h); this.arcTo(x, y + h, x, y + h - rr[3], rr[3]);
+    this.lineTo(x, y + rr[0]); this.arcTo(x, y, x + rr[0], y, rr[0]);
+    this.closePath(); return this;
+  };
+}
+</script>
+
+
+</body></html>

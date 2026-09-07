@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고래를 따라가면 답이 보인다 — EP.05 고래 온체인 분석 마스터클래스</title>
+<meta name="description" content="대한민국 40~60대를 위한 30분 완성. 고래 지갑 움직임을 추적하여 시장 흐름을 읽는 방법을 중학교 1학년도 이해하는 언어로 설명합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Helvetica Neue",Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+:root{
+  --g1:#1D4ED8;--g2:#2563EB;--g3:#60A5FA;--g4:#1E3A8A;--g5:#BFDBFE;
+  --gold:#F59E0B;--red:#EF4444;--blue:#3B82F6;
+  --near-black:#0A0A0F;--muted:rgba(255,255,255,.38);
+}
+/* TYPE */
+.eyebrow{font-size:.82rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g3);margin-bottom:3.5rem;word-break:keep-all}
+.display-xl{font-size:clamp(3.8rem,11vw,9rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word}
+.display-lg{font-size:clamp(2.8rem,8vw,6.5rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word}
+.display-md{font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word}
+.sub-stat{font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:700;line-height:1.4;text-align:center;max-width:580px;margin:2.5rem auto 0;color:rgba(255,255,255,.88);word-break:keep-all;letter-spacing:-.01em}
+.sub-stat strong,.sub-stat em{font-style:normal;color:var(--g3)}
+.body-lg{font-size:clamp(1rem,1.9vw,1.2rem);font-weight:400;line-height:1.75;color:rgba(255,255,255,.52);max-width:600px;margin:2rem auto 0;word-break:keep-all}
+/* BAR + NAV */
+#legal-bar{background:rgba(5,15,10,.95);border-bottom:1px solid rgba(37,99,235,.15);padding:.42rem 1.5rem;text-align:center;font-size:.62rem;color:rgba(255,255,255,.35);line-height:1.5;position:fixed;top:0;left:0;right:0;z-index:999;backdrop-filter:blur(10px)}
+#legal-bar strong{color:rgba(255,255,255,.52)}
+#progress{position:fixed;top:26px;left:0;height:2px;background:linear-gradient(90deg,var(--g1),var(--g3));width:0%;z-index:1000;transition:width .1s linear}
+nav{position:fixed;top:26px;left:0;right:0;z-index:998;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-logo{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.85)}
+.nav-links{list-style:none;display:flex;gap:1.8rem}
+.nav-links a{font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-ep{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--g3);text-transform:uppercase;background:rgba(37,99,235,.12);padding:.25rem .7rem;border-radius:20px;border:1px solid rgba(37,99,235,.28)}
+/* SECTIONS */
+section{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:11rem 2rem;text-align:center}
+.wrap{max-width:820px;margin:0 auto;padding:0 2rem;text-align:center}
+.wrap-wide{max-width:1060px;margin:0 auto;padding:0 2rem;text-align:center}
+/* HERO */
+#hero{background:#000;overflow:hidden}
+#hero::before{content:'';position:absolute;top:-15%;left:50%;transform:translateX(-50%);width:80vw;max-width:900px;height:80vw;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.18) 0%,transparent 68%);animation:pulse-glow 7s ease-in-out infinite;pointer-events:none}
+@keyframes pulse-glow{0%,100%{opacity:.18}50%{opacity:.32}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-size:.68rem;color:rgba(255,255,255,.28);letter-spacing:.12em;text-transform:uppercase;animation:bounce 2.5s ease infinite}
+.g-green{background:linear-gradient(135deg,var(--g1) 0%,var(--g3) 45%,#fff 72%,var(--g1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ep-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g3);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:99px;padding:.3em .9em;margin-bottom:4rem}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+.reveal-scale.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.3s}.d4{transition-delay:.44s}.d5{transition-delay:.58s}
+/* PAIN NUMS */
+.pain-num-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.06)}
+.pain-num-col{padding:3.5rem 1.5rem;border-right:1px solid rgba(255,255,255,.06);text-align:center}
+.pain-num-col:last-child{border-right:none}
+.pain-big{font-size:clamp(2.8rem,6vw,5rem);font-weight:900;line-height:1;letter-spacing:-.04em}
+.pain-big.green{background:linear-gradient(135deg,var(--g1),var(--g5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pain-big.red{background:linear-gradient(135deg,#EF4444,#FCA5A5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pain-big.gold{background:linear-gradient(135deg,#F59E0B,#FDE68A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pain-label{font-size:.88rem;color:rgba(255,255,255,.52);line-height:1.6;margin-top:.6rem;word-break:keep-all}
+.pain-src{font-size:.65rem;color:rgba(255,255,255,.28);margin-top:.5rem}
+/* CALLOUT */
+.callout-dark{max-width:720px;margin:2.5rem auto 0;background:linear-gradient(135deg,rgba(29,78,216,.12),rgba(30,58,138,.06));border:1px solid rgba(37,99,235,.18);border-radius:20px;padding:1.8rem 2.2rem;text-align:center}
+.callout-dark p{font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.78);word-break:keep-all}
+.callout-dark strong{color:var(--g3)}
+/* TOOL CARDS */
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:840px;margin:3rem auto 0}
+.tool-card{background:rgba(255,255,255,.03);border:1px solid rgba(37,99,235,.14);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;transition:border-color .3s,transform .3s}
+.tool-card:hover{border-color:rgba(96,165,250,.35);transform:translateY(-3px)}
+.tool-icon{font-size:2rem;margin-bottom:.8rem}
+.tool-name{font-size:.98rem;font-weight:800;color:#fff;margin-bottom:.3rem}
+.tool-url{font-size:.65rem;font-weight:700;color:var(--g3);text-decoration:none;margin-bottom:.6rem;display:block;letter-spacing:.04em}
+.tool-desc{font-size:.78rem;color:rgba(255,255,255,.48);line-height:1.6;word-break:keep-all}
+.tool-badge{display:inline-block;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.2em .6em;border-radius:4px;margin-top:.5rem}
+.tool-badge.free{background:rgba(37,99,235,.12);color:var(--g3)}
+.tool-badge.paid{background:rgba(245,158,11,.1);color:#F59E0B}
+/* WHALE FLOW */
+.whale-flow{max-width:680px;margin:3rem auto 0;display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.whale-box{width:100%;text-align:center;font-size:.9rem;font-weight:600;padding:1rem 1.5rem;border-radius:12px;word-break:keep-all}
+.whale-box.trigger{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:rgba(252,165,165,.9)}
+.whale-box.process{background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);color:rgba(167,243,208,.9)}
+.whale-box.action{background:linear-gradient(135deg,rgba(29,78,216,.15),rgba(30,58,138,.1));border:1px solid rgba(37,99,235,.35);color:#fff;font-weight:700}
+.whale-arrow{font-size:1.2rem;color:rgba(37,99,235,.35);line-height:1;padding:.15rem 0}
+/* SIGNAL TABLE */
+.signal-table{max-width:800px;margin:3rem auto 0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(37,99,235,.18),0 8px 40px rgba(0,0,0,.6)}
+.sig-header{display:grid;grid-template-columns:180px 1fr 120px;background:linear-gradient(135deg,#1E3A8A,#1D4ED8);padding:.8rem 1.2rem}
+.sig-head{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.sig-row{display:grid;grid-template-columns:180px 1fr 120px;padding:.95rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.04);background:#0D1528;align-items:center}
+.sig-row:last-child{border-bottom:none}
+.sig-row:nth-child(even){background:#0F172A}
+.sig-signal{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.82);word-break:keep-all}
+.sig-meaning{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.55;word-break:keep-all}
+.sig-badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25em .6em;border-radius:5px}
+.sig-badge.bullish{background:rgba(37,99,235,.15);color:var(--g3)}
+.sig-badge.bearish{background:rgba(239,68,68,.12);color:#FCA5A5}
+.sig-badge.caution{background:rgba(245,158,11,.1);color:#FDE68A}
+/* STEPS */
+.steps{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:1rem}
+.step{display:flex;gap:1.2rem;align-items:flex-start;background:rgba(255,255,255,.025);border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:1.5rem 1.6rem;text-align:left}
+.step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g4));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;flex-shrink:0}
+.step-body{}
+.step-title{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.step-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6;word-break:keep-all}
+.step-code{font-size:.72rem;font-family:monospace;color:var(--g3);background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.12);border-radius:6px;padding:.3em .7em;margin-top:.5rem;display:inline-block;word-break:break-all}
+/* SRC BAR */
+.src-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem;margin-top:2rem;padding:.8rem 1.4rem;background:rgba(37,99,235,.03);border:1px solid rgba(37,99,235,.12);border-radius:12px;max-width:720px;margin-left:auto;margin-right:auto}
+.src-bar-label{font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--g3);margin-right:.4rem;flex-shrink:0}
+.src-bar a{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.42);text-decoration:none;padding:.15em .5em;border-radius:4px;white-space:nowrap}
+.src-bar a:hover{color:var(--g3);background:rgba(37,99,235,.08)}
+.src-bar-sep{color:rgba(255,255,255,.15);font-size:.7rem}
+/* STEP CHIPS */
+.step-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:2rem 0}
+.step-chip{font-size:.72rem;font-weight:700;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.22);color:var(--g3);border-radius:8px;padding:.35em .9em}
+/* CTA */
+#cta{background:linear-gradient(180deg,#0A0A0F 0%,#000 100%);border-top:1px solid rgba(37,99,235,.12)}
+.cta-title{font-size:clamp(2.2rem,6.5vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:3.5rem;margin-bottom:2.5rem;background:linear-gradient(135deg,var(--g1) 0%,var(--g3) 45%,#fff 72%,var(--g1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.42);line-height:1.68;max-width:520px;margin:0 auto 3.5rem;word-break:keep-all}
+.cta-btn{display:inline-block;background:var(--g1);color:#fff;font-size:.92rem;font-weight:700;padding:1rem 2.4rem;border-radius:50px;text-decoration:none;transition:all .3s;border:none;cursor:pointer}
+.cta-btn:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(29,78,216,.4)}
+.cta-btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.5);font-size:.88rem;font-weight:600;padding:.9rem 2rem;border-radius:50px;text-decoration:none;border:1px solid rgba(255,255,255,.15);transition:all .3s;cursor:pointer}
+.cta-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.3);transform:translateY(-1px)}
+.cta-btn-group{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.ep-series-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:2rem}
+.ep-pill{font-size:.68rem;color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:99px;padding:.25em .8em;text-decoration:none}
+.ep-pill.current{color:var(--g3);background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.28)}
+/* FOOTER */
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 2rem}
+.footer-inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1.5rem}
+.footer-left{flex:1 1 280px}
+.footer-right{flex:1 1 340px;text-align:right;border-left:1px solid rgba(37,99,235,.1);padding-left:1.5rem}
+footer p{font-size:.72rem;color:rgba(255,255,255,.32);line-height:1.8}
+footer a{color:rgba(255,255,255,.28);text-decoration:none}
+footer strong{color:rgba(255,255,255,.48)}
+/* DARK SECTION */
+#dark-tools{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:6rem 2rem}
+.tool-grid-light{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:840px;margin:3rem auto 0}
+.tool-card-light{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
+.tool-card-light:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.tool-card-light .tool-name{color:#1D1D1F}
+.tool-card-light .tool-desc{color:rgba(29,29,31,.55)}
+/* RESP */
+@media(max-width:680px){
+  .nav-links{display:none}
+  section{padding:5rem 1.2rem}
+  .pain-num-grid{grid-template-columns:1fr}
+  .pain-num-col{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:2rem 1rem}
+  .pain-num-col:last-child{border-bottom:none}
+  .tool-grid,.tool-grid-light{grid-template-columns:1fr 1fr}
+  .signal-table{font-size:.78rem}
+  .sig-header,.sig-row{grid-template-columns:1fr 1fr 80px}
+}
+</style>
+</head>
+<body>
+
+<div id="legal-bar">
+  <strong>⚠ 법적 고지:</strong> 본 페이지는 순수 교육 목적입니다. 온체인 데이터는 투자 조언이 아닙니다. 가상자산 투자는 원금 손실 위험이 있으며, 모든 투자 결정은 본인 책임입니다.
+</div>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-logo">⛓ 블록체인 마스터클래스</div>
+  <ul class="nav-links">
+    <li><a href="#whale-basics">고래란?</a></li>
+    <li><a href="#signals">신호 읽기</a></li>
+    <li><a href="#tools">분석 도구</a></li>
+    <li><a href="#practice">실전 방법</a></li>
+  </ul>
+  <span class="nav-ep">EP. 05</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <div class="ep-badge reveal">🐋 EP.05 · 고래 온체인 분석 마스터클래스</div>
+    <div class="display-xl reveal d1" style="background:linear-gradient(135deg,#fff 0%,var(--g3) 35%,var(--g1) 65%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:2rem">
+      고래를 따라가면<br>답이 보인다
+    </div>
+    <div class="sub-stat reveal d2">
+      상위 0.01% 고래들이 코인을 살 때,<br>
+      당신은 어디서 무엇을 하고 있었나요?<br>
+      <strong>그들의 지갑 움직임을 추적하는 방법을 알려드립니다.</strong>
+    </div>
+    <div class="step-row reveal d3">
+      <span class="step-chip">Part 1. 고래란 누구인가</span>
+      <span class="step-chip">Part 2. 온체인 신호 읽기</span>
+      <span class="step-chip">Part 3. 무료 분석 도구</span>
+      <span class="step-chip">Part 4. 실전 추적 방법</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ 스크롤</div>
+</section>
+
+<!-- PAIN NUMBERS -->
+<section style="min-height:auto;padding:0;background:#0A0A0F">
+  <div class="pain-num-grid reveal" style="width:100%">
+    <div class="pain-num-col">
+      <div class="pain-big green">0.01%</div>
+      <div class="pain-label">비트코인 전체 공급량의 27%를<br>보유하는 최상위 지갑 비율</div>
+      <div class="pain-src">출처: Glassnode 2026</div>
+    </div>
+    <div class="pain-num-col">
+      <div class="pain-big gold">72시간</div>
+      <div class="pain-label">고래 대규모 이동 신호 후<br>평균 시장 변동까지 걸리는 시간</div>
+      <div class="pain-src">출처: CryptoQuant 분석</div>
+    </div>
+    <div class="pain-num-col">
+      <div class="pain-big red">93%</div>
+      <div class="pain-label">개인 투자자가 고점에서 매수,<br>저점에서 매도하는 비율</div>
+      <div class="pain-src">출처: Chainalysis 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 1: 고래란? -->
+<section id="whale-basics" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">Part 1 · 고래의 세계</div>
+    <div class="display-lg reveal d1">
+      <span class="g-green">고래</span>는 누구고<br>왜 중요한가?
+    </div>
+    <div class="sub-stat reveal d2">
+      코인 시장의 가격은 결국 <strong>큰손의 결정</strong>에 따라 움직입니다.<br>
+      그들을 이해하지 못하면 언제나 뒤늦게 따라가게 됩니다.
+    </div>
+
+    <div style="max-width:680px;margin:3rem auto 0" class="reveal d3">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+        <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:14px;padding:1.5rem 1.2rem;text-align:left">
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FCA5A5;margin-bottom:.8rem">개인 투자자 🐟</div>
+          <div style="font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.65;word-break:keep-all">• 유튜브·커뮤니티 정보로 매매<br>• 공포와 탐욕에 따라 감정적 판단<br>• 고점 매수 / 저점 매도 반복<br>• 고래의 매도 물량 받아주는 역할</div>
+        </div>
+        <div style="background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.18);border-radius:14px;padding:1.5rem 1.2rem;text-align:left">
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g3);margin-bottom:.8rem">고래 / 기관 🐋</div>
+          <div style="font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.65;word-break:keep-all">• 온체인 데이터 + 수학적 모델 분석<br>• 저점에서 대량 매집, 고점에서 분산<br>• 시장 움직임을 <em>만드는</em> 주체<br>• 개인이 패닉할 때 매집</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-dark reveal d4">
+      <p>
+        💡 <strong>핵심 비유</strong><br>
+        고래는 큰 어선입니다. 어선이 물에서 움직이면 파도가 생깁니다.<br>
+        개인 투자자는 그 파도에 올라타거나 휩쓸리는 작은 배입니다.<br>
+        <strong>어선의 항로를 미리 알면, 파도를 올라탈 수 있습니다.</strong>
+      </p>
+    </div>
+
+    <div style="max-width:680px;margin:2.5rem auto 0" class="reveal d5">
+      <div style="font-size:.8rem;font-weight:700;color:rgba(255,255,255,.7);text-align:left;margin-bottom:.8rem;padding:.5rem 1rem;border-left:2px solid var(--g1)">
+        고래의 종류 — 누가 시장을 움직이나?
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏦</span><div><strong style="color:#fff">기관 투자자</strong> — 블랙록, 피델리티 등 수십조 운용. RWA 주요 플레이어</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🌐</span><div><strong style="color:#fff">국부펀드·정부</strong> — 엘살바도르, UAE, 미국 전략 비트코인 비축</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">👤</span><div><strong style="color:#fff">초기 채굴자·OG 고래</strong> — 비트코인 초기 보유자, 수만 개 보유</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏢</span><div><strong style="color:#fff">거래소 자체 지갑</strong> — 바이낸스, 코인베이스의 핫월렛·콜드월렛</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2: 온체인 신호 읽기 -->
+<section id="signals" style="background:#080812">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">Part 2 · 온체인 신호 해석</div>
+    <div class="display-lg reveal d1">
+      고래의 <span class="g-green">움직임</span>을<br>어떻게 읽나?
+    </div>
+    <div class="sub-stat reveal d2">
+      블록체인은 모든 거래 기록이 공개됩니다.<br>
+      <strong>숨길 수 없는 투명한 장부 — 그게 온체인 분석의 핵심입니다.</strong>
+    </div>
+
+    <div class="signal-table reveal d3">
+      <div class="sig-header">
+        <div class="sig-head">📡 온체인 신호</div>
+        <div class="sig-head">의미와 해석</div>
+        <div class="sig-head">시장 신호</div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">거래소 출금 증가 ↑</div>
+        <div class="sig-meaning">고래가 코인을 거래소에서 개인 지갑으로 이동. "나는 팔지 않겠다"는 신호. 매도 압력 감소.</div>
+        <div><span class="sig-badge bullish">상승 신호</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">거래소 입금 급증 ↑</div>
+        <div class="sig-meaning">고래가 거래소로 대량 입금. 매도 준비 가능성. 즉시 매도가 아닐 수 있으나 주의 필요.</div>
+        <div><span class="sig-badge bearish">하락 주의</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">SOPR &gt; 1 상승</div>
+        <div class="sig-meaning">Spent Output Profit Ratio. 사람들이 수익 상태에서 팔고 있음. 불마켓 지속 신호.</div>
+        <div><span class="sig-badge bullish">상승 신호</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">SOPR &lt; 1 하락</div>
+        <div class="sig-meaning">사람들이 손실 상태에서 팔고 있음. 패닉셀 구간. 반등 전 바닥 구간 가능성.</div>
+        <div><span class="sig-badge bullish">역발상 매집</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">고래 지갑 누적 증가</div>
+        <div class="sig-meaning">1,000 BTC 이상 보유 지갑 수 증가. 기관이 조용히 매집하는 신호.</div>
+        <div><span class="sig-badge bullish">상승 신호</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">MVRV Z-Score 높음</div>
+        <div class="sig-meaning">시장가 vs 실현가 비율. 높으면 고평가(매도 구간), 낮으면 저평가(매집 구간).</div>
+        <div><span class="sig-badge caution">구간 확인</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">Stablecoin 공급 증가</div>
+        <div class="sig-meaning">USDT·USDC가 거래소에 쌓임. 대기 자금 증가 = 매수 준비 자금. 상승 가능성.</div>
+        <div><span class="sig-badge bullish">상승 신호</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-signal">채굴자 매도 증가</div>
+        <div class="sig-meaning">채굴자가 비용 충당을 위해 대량 매도. 단기 하락 압력. 지속되면 베어마켓 신호.</div>
+        <div><span class="sig-badge bearish">하락 주의</span></div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">지표 출처</span>
+      <a href="https://glassnode.com" target="_blank" rel="noopener">Glassnode</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://cryptoquant.com" target="_blank" rel="noopener">CryptoQuant</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://lookintobicoin.com" target="_blank" rel="noopener">Look Into Bitcoin</a>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3: 무료 분석 도구 -->
+<section id="tools" style="background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:6rem 2rem">
+  <div class="wrap-wide">
+    <div class="eyebrow" style="color:var(--g1)">Part 3 · 무료로 쓰는 고래 추적 도구</div>
+    <div class="display-lg reveal d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--g4) 55%,var(--g1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+      돈 안 들이고<br>고래를 추적하는 법
+    </div>
+    <div style="font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;line-height:1.4;text-align:center;max-width:560px;margin:2.5rem auto 0;color:rgba(29,29,31,.82);word-break:keep-all" class="reveal d2">
+      전문가들이 쓰는 도구도 <strong style="color:var(--g1)">무료 버전이 충분합니다.</strong><br>
+      이 6가지만 알아도 시장을 다르게 볼 수 있습니다.
+    </div>
+
+    <div class="tool-grid-light reveal d3">
+      <div class="tool-card-light">
+        <div class="tool-icon">🔍</div>
+        <div class="tool-name">Etherscan</div>
+        <a class="tool-url" href="https://etherscan.io" target="_blank" rel="noopener">etherscan.io</a>
+        <div class="tool-desc">이더리움 모든 거래 조회. 고래 지갑 주소로 실시간 입출금 확인 가능.</div>
+        <span class="tool-badge free">무료</span>
+      </div>
+      <div class="tool-card-light">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">CryptoQuant</div>
+        <a class="tool-url" href="https://cryptoquant.com" target="_blank" rel="noopener">cryptoquant.com</a>
+        <div class="tool-desc">거래소 입출금, 고래 흐름, SOPR 등 핵심 지표 무료 제공. 가장 많이 쓰이는 온체인 도구.</div>
+        <span class="tool-badge free">무료 기본</span>
+      </div>
+      <div class="tool-card-light">
+        <div class="tool-icon">🐋</div>
+        <div class="tool-name">Glassnode</div>
+        <a class="tool-url" href="https://glassnode.com" target="_blank" rel="noopener">glassnode.com</a>
+        <div class="tool-desc">MVRV, SOPR, NVT 등 전문 온체인 지표. 무료 계정으로 핵심 지표 이용 가능.</div>
+        <span class="tool-badge free">무료 계정</span>
+      </div>
+      <div class="tool-card-light">
+        <div class="tool-icon">🦈</div>
+        <div class="tool-name">Whale Alert</div>
+        <a class="tool-url" href="https://whale-alert.io" target="_blank" rel="noopener">whale-alert.io</a>
+        <div class="tool-desc">$1M+ 대형 이동을 실시간 알림. 트위터·텔레그램으로도 받을 수 있어 매우 편리.</div>
+        <span class="tool-badge free">무료</span>
+      </div>
+      <div class="tool-card-light">
+        <div class="tool-icon">💰</div>
+        <div class="tool-name">DeFiLlama</div>
+        <a class="tool-url" href="https://defillama.com" target="_blank" rel="noopener">defillama.com</a>
+        <div class="tool-desc">DeFi TVL 흐름 분석. RWA 포함 프로토콜별 고래 자금 이동 추적.</div>
+        <span class="tool-badge free">무료</span>
+      </div>
+      <div class="tool-card-light">
+        <div class="tool-icon">📈</div>
+        <div class="tool-name">Look Into Bitcoin</div>
+        <a class="tool-url" href="https://lookintobicoin.com" target="_blank" rel="noopener">lookintobicoin.com</a>
+        <div class="tool-desc">비트코인 장기 사이클 지표 한눈에. 파이 사이클 탑 등 바닥·고점 예측 지표 무료.</div>
+        <span class="tool-badge free">무료</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4: 실전 추적 방법 -->
+<section id="practice" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">Part 4 · 실전 5단계 추적법</div>
+    <div class="display-lg reveal d1">
+      오늘부터<br><span class="g-green">바로 해보는</span> 방법
+    </div>
+    <div class="sub-stat reveal d2">
+      복잡하지 않습니다. 이 5단계를 주 1~2회 반복하면<br>
+      <strong>시장의 흐름이 다르게 보이기 시작합니다.</strong>
+    </div>
+
+    <div class="steps reveal d3">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Whale Alert 팔로우하기</div>
+          <div class="step-desc">whale-alert.io에서 텔레그램 채널을 구독합니다. $5M 이상 이동 알림을 받으면 어디서 어디로 갔는지 확인합니다. "Unknown → Exchange"면 매도 준비 신호.</div>
+          <span class="step-code">t.me/whale_alert_io</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">CryptoQuant에서 거래소 흐름 확인</div>
+          <div class="step-desc">cryptoquant.com → BTC → Exchange Flow → 주간 거래소 순유출입 확인. 순유출(거래소 밖으로 나감)이면 긍정 신호. 순유입(거래소 안으로 들어옴)이면 매도 가능성.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">MVRV Z-Score 위치 확인</div>
+          <div class="step-desc">lookintobicoin.com에서 MVRV Z-Score를 확인합니다. 빨간 영역(2.0 이상): 고점 경계. 파란 영역(0 이하): 역대 매집 구간. 지금 어디 있는지만 알아도 됩니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">고래 지갑 주소 직접 추적</div>
+          <div class="step-desc">알려진 고래 지갑 주소를 Etherscan에 입력하면 모든 거래가 보입니다. 특정 지갑이 대량 매수하면 그 종목을 주시합니다.</div>
+          <span class="step-code">etherscan.io/address/[지갑주소]</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">RWA 자금 흐름 체크</div>
+          <div class="step-desc">app.rwa.xyz에서 기관 자금이 어느 RWA 프로토콜로 들어가는지 확인합니다. 최근 7일 급성장 프로토콜은 스마트 머니가 포지션 잡는 중일 수 있습니다.</div>
+          <span class="step-code">app.rwa.xyz</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-dark reveal d4" style="margin-top:3rem">
+      <p>
+        ⚠️ <strong>중요한 경고</strong><br>
+        온체인 데이터는 시장의 힌트이지, 100% 예측 도구가 아닙니다.<br>
+        고래도 틀릴 수 있습니다. 데이터를 <strong>참고 자료</strong>로만 활용하고,<br>
+        반드시 분산 투자와 손실 관리를 병행하세요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="wrap">
+    <div class="eyebrow reveal">마스터클래스 완성</div>
+    <div class="cta-title reveal d1">
+      이제 당신도<br>고래를 볼 수 있다
+    </div>
+    <p class="cta-sub reveal d2">
+      EP.01 블록체인 기초부터 EP.05 고래 분석까지,<br>
+      5개의 강의를 완주한 당신은<br>이미 상위 10%의 시각을 가지고 있습니다.
+    </p>
+    <div class="cta-btn-group reveal d3">
+      <button class="cta-btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 처음으로</button>
+      <a href="https://claude.ai/code/artifact/7024195d-e03e-40b8-aee2-0dac14109368" target="_blank" class="cta-btn">← EP.04 復習하기</a>
+    </div>
+    <div class="ep-series-row reveal d4">
+      <a href="https://claude.ai/code/artifact/f9d6a468-abb7-456e-b9d9-cb10e8d60658" target="_blank" class="ep-pill">EP.01 블록체인 기초</a>
+      <a href="https://claude.ai/code/artifact/16c9de8a-2657-4c67-a718-dba481b90021" target="_blank" class="ep-pill">EP.02 DeFi</a>
+      <a href="https://claude.ai/code/artifact/51fa8d24-6ed9-456a-acee-8a65ddf03060" target="_blank" class="ep-pill">EP.03 RWA 전환</a>
+      <a href="https://claude.ai/code/artifact/7024195d-e03e-40b8-aee2-0dac14109368" target="_blank" class="ep-pill">EP.04 돈의 흐름</a>
+      <span class="ep-pill current">EP.05 고래 분석 (현재)</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <p><strong>참고 도구 및 출처</strong><br>
+        <a href="https://glassnode.com" target="_blank" rel="noopener">Glassnode</a> ·
+        <a href="https://cryptoquant.com" target="_blank" rel="noopener">CryptoQuant</a> ·
+        <a href="https://whale-alert.io" target="_blank" rel="noopener">Whale Alert</a> ·
+        <a href="https://lookintobicoin.com" target="_blank" rel="noopener">Look Into Bitcoin</a> ·
+        <a href="https://defillama.com" target="_blank" rel="noopener">DeFiLlama</a> ·
+        <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a>
+      </p>
+    </div>
+    <div class="footer-right">
+      <p>블록체인 마스터클래스 EP.05 · 교육 목적 자료</p>
+      <p><strong>⚠ 법적 고지:</strong> 본 자료는 순수 교육 목적이며, 금융투자상품 거래나 특정 종목에 대한 어떠한 행위도 권장하지 않습니다. 온체인 분석은 참고 자료이며 투자 결과를 보장하지 않습니다. 모든 투자 결정은 본인 책임이며, 전문 금융 자문가와 상담하시기 바랍니다.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement,b=document.body;
+  const st=h.scrollTop||b.scrollTop;
+  const sh=h.scrollHeight-h.clientHeight;
+  document.getElementById('progress').style.width=(st/sh*100)+'%';
+});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
