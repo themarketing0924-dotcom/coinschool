@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5강을 마친 당신에게 — 코인스쿨</title>
+<meta name="description" content="블록체인 5강을 완주한 분들을 위한 다음 단계. RWA 마스터클래스로 실물자산 온체인 흐름을 완성하세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;background:#0a0a0a;color:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* PROGRESS BAR */
+#prog{position:fixed;top:0;left:0;z-index:999;height:3px;width:0;background:linear-gradient(90deg,#E8A020,#F5C842);transition:width .1s}
+
+/* TOP BAR */
+.topbar{background:#1a1200;border-bottom:1px solid rgba(232,160,32,.25);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.topbar-msg{font-size:.72rem;color:rgba(255,255,255,.6);letter-spacing:.04em}
+.topbar-msg strong{color:#E8A020}
+.countdown{display:flex;gap:.4rem;align-items:center}
+.cd-unit{background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .55rem;text-align:center}
+.cd-num{font-size:.95rem;font-weight:900;color:#E8A020;display:block;line-height:1}
+.cd-label{font-size:.5rem;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase}
+.cd-sep{color:rgba(232,160,32,.5);font-weight:700;font-size:.9rem}
+
+/* HERO */
+.hero{text-align:center;padding:7rem 1.5rem 5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(232,160,32,.08),transparent);pointer-events:none}
+.badge{display:inline-block;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);border-radius:99px;padding:.35em 1.2em;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E8A020;margin-bottom:2rem}
+.hero-title{font-size:clamp(2rem,6vw,4.5rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.5rem;word-break:keep-all}
+.hero-title .accent{background:linear-gradient(135deg,#E8A020,#F5C842,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(.95rem,2vw,1.2rem);color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 2.5rem;line-height:1.75;word-break:keep-all}
+
+/* RECAP */
+.recap{background:#111;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:4rem 1.5rem}
+.section-label{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8A020;text-align:center;margin-bottom:.8rem}
+.section-title{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;letter-spacing:-.03em;text-align:center;margin-bottom:3rem;word-break:keep-all}
+.ep-row{display:flex;align-items:center;gap:1.2rem;max-width:680px;margin:0 auto .8rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1rem 1.4rem}
+.ep-check{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:900}
+.ep-check.done{background:rgba(52,211,153,.15);border:1.5px solid rgba(52,211,153,.4);color:#34D399}
+.ep-info{flex:1}
+.ep-num{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.15rem}
+.ep-name{font-size:.88rem;font-weight:700;color:#fff}
+.ep-takeaway{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.15rem;line-height:1.45}
+
+/* GAP SECTION */
+.gap{padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.gap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(232,160,32,.05),transparent);pointer-events:none}
+.gap-title{font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:1.5rem;word-break:keep-all}
+.gap-title .dim{color:rgba(255,255,255,.25)}
+.gap-body{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.55);max-width:580px;margin:0 auto 3rem;line-height:1.75;word-break:keep-all}
+.tension-box{max-width:680px;margin:0 auto;background:rgba(232,160,32,.05);border:1px solid rgba(232,160,32,.2);border-radius:20px;padding:2rem 2.2rem;text-align:left}
+.tension-row{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.9rem}
+.tension-icon{font-size:1.1rem;flex-shrink:0;margin-top:.1rem}
+.tension-text{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.6}
+.tension-text strong{color:#fff}
+
+/* OFFER */
+.offer{background:#0d0d0d;border-top:1px solid rgba(232,160,32,.15);padding:5rem 1.5rem}
+.offer-wrap{max-width:780px;margin:0 auto}
+.offer-header{text-align:center;margin-bottom:3rem}
+.offer-badge{display:inline-block;background:linear-gradient(135deg,rgba(232,160,32,.2),rgba(245,200,66,.1));border:1px solid rgba(232,160,32,.35);border-radius:10px;padding:.5em 1.4em;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#E8A020;margin-bottom:1.5rem}
+.offer-title{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.08;margin-bottom:1rem;word-break:keep-all}
+.offer-title span{background:linear-gradient(135deg,#E8A020,#F5C842,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.offer-sub{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:560px;margin:0 auto}
+
+/* WHAT YOU GET */
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2.5rem 0}
+.benefit-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem 1.4rem}
+.benefit-icon{font-size:1.6rem;margin-bottom:.8rem}
+.benefit-title{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.benefit-desc{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.55}
+
+/* SOCIAL PROOF */
+.proof{padding:5rem 1.5rem;background:#000}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:860px;margin:2.5rem auto 0}
+.proof-card{background:#141414;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.4rem}
+.proof-stars{color:#E8A020;font-size:.8rem;margin-bottom:.6rem}
+.proof-text{font-size:.8rem;color:rgba(255,255,255,.62);line-height:1.6;margin-bottom:.8rem}
+.proof-name{font-size:.7rem;color:rgba(255,255,255,.3);font-weight:700}
+
+/* CTA SECTION */
+.cta-section{padding:6rem 1.5rem;text-align:center;background:linear-gradient(180deg,#0a0a0a 0%,#050505 100%);border-top:1px solid rgba(232,160,32,.15)}
+.cta-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8A020;margin-bottom:1rem}
+.cta-title{font-size:clamp(2rem,5.5vw,4rem);font-weight:900;letter-spacing:-.04em;line-height:1.08;margin-bottom:1.2rem;word-break:keep-all}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.45);max-width:500px;margin:0 auto 2.5rem;line-height:1.7;word-break:keep-all}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#E8A020,#C8880A);color:#000;font-size:1.1rem;font-weight:900;letter-spacing:.02em;text-decoration:none;border-radius:99px;padding:1em 3em;box-shadow:0 8px 32px rgba(232,160,32,.35);transition:all .25s;border:none;cursor:pointer}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,160,32,.5)}
+.cta-note{margin-top:1rem;font-size:.72rem;color:rgba(255,255,255,.25)}
+
+/* DISCLAIMER */
+footer{background:#060606;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 1.5rem;text-align:center}
+footer p{font-size:.68rem;color:rgba(255,255,255,.18);line-height:1.8;max-width:700px;margin:0 auto}
+footer strong{color:rgba(255,255,255,.3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}
+.delay-2{transition-delay:.22s}
+.delay-3{transition-delay:.36s}
+
+@media(max-width:680px){
+  .topbar{flex-direction:column;align-items:flex-start}
+  .hero{padding:5rem 1rem 3.5rem}
+  .benefits{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:1fr}
+  .ep-row{padding:.8rem 1rem}
+  .cta-btn{font-size:1rem;padding:.9em 2em}
+  .gap,.offer,.proof,.cta-section{padding:3.5rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-msg">🔥 <strong>RWA 마스터클래스</strong> — 무료 수강 기간이 마감됩니다</div>
+  <div class="countdown" id="countdown">
+    <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-label">시간</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-label">분</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-label">초</span></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">5강 완주 축하드립니다 🎉</div>
+  <h1 class="hero-title reveal">
+    블록체인을 이해한 사람들 중<br>
+    <span class="accent">실제로 기회를 잡는 사람은<br>따로 있다.</span>
+  </h1>
+  <p class="hero-sub reveal delay-1">
+    5강을 다 보셨군요.<br>
+    이제 당신은 대부분의 사람들보다 훨씬 앞서 있어요.<br>
+    <strong style="color:rgba(255,255,255,.8)">하지만 아직 하나가 빠져있습니다.</strong>
+  </p>
+</section>
+
+<!-- RECAP: 5강 요약 -->
+<section class="recap">
+  <div class="section-label">무료 5강 완주</div>
+  <h2 class="section-title reveal">지금까지 배운 것들</h2>
+
+  <div class="ep-row reveal">
+    <div class="ep-check done">✓</div>
+    <div class="ep-info">
+      <div class="ep-num" style="color:#7C3AED">EP.01 🟣 블록체인</div>
+      <div class="ep-name">블록체인이 뭔지 이제 설명할 수 있다</div>
+      <div class="ep-takeaway">분산원장·합의알고리즘·스마트컨트랙트의 작동 원리 이해</div>
+    </div>
+  </div>
+  <div class="ep-row reveal delay-1">
+    <div class="ep-check done">✓</div>
+    <div class="ep-info">
+      <div class="ep-num" style="color:#10B981">EP.02 🟢 DeFi</div>
+      <div class="ep-name">은행 없이 금융이 된다는 게 무슨 뜻인지 안다</div>
+      <div class="ep-takeaway">DEX·대출·유동성 공급의 작동 메커니즘 파악</div>
+    </div>
+  </div>
+  <div class="ep-row reveal delay-2">
+    <div class="ep-check done">✓</div>
+    <div class="ep-info">
+      <div class="ep-num" style="color:#E8A020">EP.03 🟡 RWA</div>
+      <div class="ep-name">실물자산이 왜 블록체인으로 오는지 이해했다</div>
+      <div class="ep-takeaway">토큰화·BlackRock 채권·부동산 온체인의 의미</div>
+    </div>
+  </div>
+  <div class="ep-row reveal delay-3">
+    <div class="ep-check done">✓</div>
+    <div class="ep-info">
+      <div class="ep-num" style="color:#F59E0B">EP.04 💰 자산방어</div>
+      <div class="ep-name">인플레이션 시대에 자산을 어떻게 지켜야 하는지 알았다</div>
+      <div class="ep-takeaway">화폐 희석·비트코인 헤지·포트폴리오 구조 개념</div>
+    </div>
+  </div>
+  <div class="ep-row reveal">
+    <div class="ep-check done">✓</div>
+    <div class="ep-info">
+      <div class="ep-num" style="color:#1D4ED8">EP.05 🐋 고래추적</div>
+      <div class="ep-name">큰손이 어떻게 움직이는지 데이터로 읽는 법을 배웠다</div>
+      <div class="ep-takeaway">온체인 분석·고래 지갑 추적·시장 흐름 해석</div>
+    </div>
+  </div>
+</section>
+
+<!-- GAP SECTION -->
+<section class="gap">
+  <h2 class="gap-title reveal">
+    <span class="dim">그런데...</span><br>
+    이걸 알아도<br>
+    <span style="background:linear-gradient(135deg,#E8A020,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">돈이 되지 않는 이유가 있다.</span>
+  </h2>
+  <p class="gap-body reveal delay-1">
+    개념을 아는 것과<br>
+    실제 흐름에서 <strong style="color:rgba(255,255,255,.8)">어디에, 언제, 어떻게 포지션을 잡는지</strong> 아는 것은<br>
+    완전히 다른 이야기입니다.
+  </p>
+  <div class="tension-box reveal delay-2">
+    <div class="tension-row">
+      <span class="tension-icon">❓</span>
+      <p class="tension-text">RWA가 뜬다는 건 알겠는데, <strong>지금 내가 뭘 해야 하는지</strong> 모르겠다</p>
+    </div>
+    <div class="tension-row">
+      <span class="tension-icon">❓</span>
+      <p class="tension-text">고래 지갑을 봐도 <strong>해석을 어떻게 실전에 쓰는지</strong> 연결이 안 된다</p>
+    </div>
+    <div class="tension-row">
+      <span class="tension-icon">❓</span>
+      <p class="tension-text">DeFi 수익률이 높다는 건 아는데 <strong>어떤 프로토콜을, 어떤 타이밍에</strong> 봐야 하는지 모른다</p>
+    </div>
+    <div class="tension-row" style="margin-bottom:0">
+      <span class="tension-icon">❓</span>
+      <p class="tension-text">정보는 넘치는데 <strong>무엇이 노이즈고 무엇이 시그널인지</strong> 구분이 안 된다</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer">
+  <div class="offer-wrap">
+    <div class="offer-header">
+      <div class="offer-badge">NEXT LEVEL</div>
+      <h2 class="offer-title reveal">
+        <span>RWA 마스터클래스</span><br>
+        개념에서 실전으로
+      </h2>
+      <p class="offer-sub reveal delay-1">
+        5강에서 배운 모든 개념들이<br>
+        실제 시장에서 어떻게 연결되는지<br>
+        데이터와 사례 중심으로 해부합니다.
+      </p>
+    </div>
+
+    <div class="benefits reveal delay-2">
+      <div class="benefit-card">
+        <div class="benefit-icon">🏛️</div>
+        <div class="benefit-title">실물자산 토큰화 전체 구조</div>
+        <div class="benefit-desc">부동산·채권·원자재가 온체인에서 어떻게 작동하는지 실제 프로토콜 기반으로 분석</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🐋</div>
+        <div class="benefit-title">고래 지갑 실전 해석법</div>
+        <div class="benefit-desc">온체인 데이터를 읽고 시장 방향성을 해석하는 실전 프레임워크 공개</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📊</div>
+        <div class="benefit-title">RWA 섹터 데이터 분석</div>
+        <div class="benefit-desc">BlackRock·Ondo·Maple 등 주요 RWA 프로토콜의 TVL·성장률·리스크 비교</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔍</div>
+        <div class="benefit-title">시그널 vs 노이즈 구분법</div>
+        <div class="benefit-desc">넘치는 정보 속에서 실제로 의미 있는 온체인 지표를 골라내는 기준 제시</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="section-label" style="text-align:center">수강 후기</div>
+  <h2 class="section-title reveal">먼저 본 분들의 반응</h2>
+  <div class="proof-grid">
+    <div class="proof-card reveal">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">"5강을 다 보고 나서 RWA 마스터클래스를 봤는데 연결이 되니까 완전히 다르게 보였어요. 개념이 실전이 되는 느낌."</p>
+      <div class="proof-name">— 김*현 · 직장인 · 서울</div>
+    </div>
+    <div class="proof-card reveal delay-1">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">"고래 추적 데이터를 어떻게 읽어야 하는지 드디어 이해됐습니다. 설명 방식이 어렵지 않아서 좋았어요."</p>
+      <div class="proof-name">— 이*진 · 자영업 · 부산</div>
+    </div>
+    <div class="proof-card reveal delay-2">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">"무료 강의만 봤을 땐 감이 안 왔는데, 이걸 보고 나서야 전체 구조가 머릿속에 그려졌어요."</p>
+      <div class="proof-name">— 박*우 · 프리랜서 · 대구</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-eyebrow">지금 바로 시작하세요</div>
+  <h2 class="cta-title reveal">
+    알고 있는 사람과<br>
+    <span style="background:linear-gradient(135deg,#E8A020,#F5C842,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">실전에서 쓰는 사람</span>의 차이
+  </h2>
+  <p class="cta-sub reveal delay-1">
+    RWA 마스터클래스는 무료입니다.<br>
+    단, 지금 이 기간에만 전체 공개됩니다.
+  </p>
+  <a href="rwa-masterclass.html" class="cta-btn reveal delay-2">RWA 마스터클래스 지금 보기 →</a>
+  <p class="cta-note reveal delay-3">무료 교육 자료 · 언제든 중단 가능 · 스팸 없음</p>
+</section>
+
+<footer>
+  <p>
+    코인스쿨 블록체인 마스터클래스 · 교육 목적 자료<br>
+    <strong>⚠ 본 자료는 투자 조언이 아닙니다.</strong> 암호화폐 및 블록체인 자산 참여에는 원금 전액 손실을 포함한 높은 리스크가 있습니다. 모든 결정은 본인의 판단과 책임 하에 이루어져야 합니다.
+  </p>
+</footer>
+
+<script>
+// PROGRESS BAR
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+// REVEAL
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// COUNTDOWN — 24시간 카운트다운
+function startCountdown() {
+  const key = 'cd_end';
+  let end = localStorage.getItem(key);
+  if (!end || Date.now() > Number(end)) {
+    end = Date.now() + 24 * 60 * 60 * 1000;
+    try { localStorage.setItem(key, end); } catch(e){}
+  }
+  function tick() {
+    const diff = Math.max(0, Number(end) - Date.now());
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+    if (diff > 0) setTimeout(tick, 1000);
+  }
+  tick();
+}
+startCountdown();
+</script>
+</body>
+</html>
