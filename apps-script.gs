@@ -17,7 +17,7 @@ const CONFIG = {
 const COURSES = [
   { day: 1, title: 'EP.01 블록체인 기초',        url: CONFIG.BASE_URL + '/ep01-blockchain.html' },
   { day: 2, title: 'EP.02 DeFi 탈중앙화 금융',   url: CONFIG.BASE_URL + '/ep02-defi.html' },
-  { day: 3, title: 'EP.03 공기코인의 시대',       url: CONFIG.BASE_URL + '/ep03-aircoin.html' },
+  { day: 3, title: 'EP.03 공기코인의 시대',       url: CONFIG.BASE_URL + '/ep03-rwa.html' },
   { day: 4, title: 'EP.04 자산방어 전략',         url: CONFIG.BASE_URL + '/ep04-money.html' },
   { day: 5, title: 'EP.05 고래 추적',             url: CONFIG.BASE_URL + '/ep05-whale.html' },
   { day: 6, title: 'RWA 마스터클래스 Part 1',     url: CONFIG.BASE_URL + '/rwa-masterclass.html' },
