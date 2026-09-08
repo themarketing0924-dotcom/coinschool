@@ -271,8 +271,8 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 /* ═══ BUILDING ANALOGY ═══ */
 #analogy{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:7rem 2rem}
 .building-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:780px;margin:4rem auto 0;align-items:start}
-.b-before{background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:2rem 1.8rem}
-.b-after{background:linear-gradient(135deg,#047857,#064E3B);border-radius:20px;padding:2rem 1.8rem;position:relative;overflow:hidden}
+.b-before{background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:2rem 1.8rem;text-align:left}
+.b-after{background:linear-gradient(135deg,#047857,#064E3B);border-radius:20px;padding:2rem 1.8rem;position:relative;overflow:hidden;text-align:left}
 .b-after::before{content:'';position:absolute;top:-30%;right:-20%;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
 .b-label{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
 .b-before .b-label{color:rgba(0,0,0,.3)}
@@ -288,13 +288,13 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .b-after .b-text{color:rgba(255,255,255,.72)}
 /* Building visual */
 .bldg-vis{margin-top:1.5rem}
-.bldg-floor{border-radius:8px;padding:.55rem 1rem;text-align:center;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.78);margin-bottom:.35rem;word-break:keep-all;transition:background .3s}
+.bldg-floor{border-radius:8px;padding:.55rem 1rem;text-align:left;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.78);margin-bottom:.35rem;word-break:keep-all;transition:background .3s}
 .bldg-floor.f1{background:rgba(255,255,255,.08)}
 .bldg-floor.f2{background:rgba(255,255,255,.12)}
 .bldg-floor.f3{background:rgba(255,255,255,.18);color:#fff}
 .bldg-floor.f4{background:rgba(255,255,255,.12)}
 .bldg-floor.f5{background:rgba(255,255,255,.08)}
-.bldg-total{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.55);text-align:center;margin-top:.6rem}
+.bldg-total{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.55);text-align:left;margin-top:.8rem}
 .callout-blue{max-width:780px;margin:2.5rem auto 0;background:linear-gradient(135deg,rgba(239,246,255,.8),#fff);border:1px solid rgba(4,120,87,.12);border-radius:18px;padding:1.6rem 2rem}
 .callout-blue p{font-size:.88rem;line-height:1.72;color:rgba(29,29,31,.68);word-break:keep-all}
 .callout-blue strong{color:var(--b1)}
