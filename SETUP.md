@@ -4,7 +4,7 @@
 ```
 신청자 → enroll.html (폼) → Google Apps Script → 구글시트 저장
                                                 ↓ (매일 오전 10시)
-                                         쿨SMS API → 문자 발송
+                                      5일간 쿨SMS API → 문자 발송
 ```
 
 ---
@@ -14,6 +14,8 @@
 1. [sheets.google.com](https://sheets.google.com) → 새 스프레드시트 생성
 2. 시트 이름: **신청자** (탭 더블클릭 → 이름 변경)
 3. URL에서 Sheet ID 복사: `https://docs.google.com/spreadsheets/d/★이부분★/edit`
+
+`apps-script.gs`가 첫 신청 시 교육자료 발송 동의와 선택 마케팅 수신 동의 열을 함께 생성합니다.
 
 ---
 
@@ -76,3 +78,5 @@ Apps Script 편집기에서:
 `github.com/themarketing0924-dotcom/coinschool` → Settings → Pages → Branch: main → Save
 
 접속 주소: `https://themarketing0924-dotcom.github.io/coinschool/enroll.html`
+
+학습실 주소: `https://themarketing0924-dotcom.github.io/coinschool/study-room.html`

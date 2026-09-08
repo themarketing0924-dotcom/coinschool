@@ -521,7 +521,7 @@ footer a { color:rgba(255,255,255,.3); }
     <div class="ring-wrap reveal reveal-delay-3">
       <canvas id="ringChart" width="180" height="180" style="flex-shrink:0"></canvas>
       <div class="ring-legend">
-        <div class="ring-legend-item"><div class="ring-dot" style="background:var(--red)"></div>하락 토큰 — 93%</div>
+        <div class="ring-legend-item"><div class="ring-dot" style="background:var(--red)"></div>기준 가격 하회 — 89%</div>
         <div class="ring-legend-item"><div class="ring-dot" style="background:rgba(50,215,75,.7)"></div>상승 토큰 — 7%</div>
         <div style="margin-top:1rem;font-size:.72rem;color:var(--muted);line-height:1.5">
           7개 중 상당수는<br>단기 급등 후 하락 전환
@@ -1197,7 +1197,7 @@ function drawRing() {
     // Track
     ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = lw; ctx.stroke();
-    // Fill (red for 93%)
+    // Fill (red for 89%)
     ctx.beginPath();
     ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct);
     ctx.strokeStyle = '#FF453A'; ctx.lineWidth = lw;

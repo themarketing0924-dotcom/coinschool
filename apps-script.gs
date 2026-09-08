@@ -13,15 +13,13 @@ const CONFIG = {
   BASE_URL:     'https://themarketing0924-dotcom.github.io/coinschool', // GitHub Pages URL
 };
 
-// 7일 커리큘럼
+// 5일 커리큘럼
 const COURSES = [
-  { day: 1, title: 'EP.01 블록체인 기초',        url: CONFIG.BASE_URL + '/ep01-blockchain.html' },
-  { day: 2, title: 'EP.02 DeFi 탈중앙화 금융',   url: CONFIG.BASE_URL + '/ep02-defi.html' },
-  { day: 3, title: 'EP.03 공기코인의 시대',       url: CONFIG.BASE_URL + '/ep03-rwa.html' },
-  { day: 4, title: 'EP.04 자산방어 전략',         url: CONFIG.BASE_URL + '/ep04-money.html' },
-  { day: 5, title: 'EP.05 고래 추적',             url: CONFIG.BASE_URL + '/ep05-whale.html' },
-  { day: 6, title: 'RWA 마스터클래스 Part 1',     url: CONFIG.BASE_URL + '/rwa-masterclass.html' },
-  { day: 7, title: 'RWA 마스터클래스 Part 2',     url: CONFIG.BASE_URL + '/rwa-masterclass.html#rwa' },
+  { day: 1, title: 'EP.01 블록체인 혁명',         url: CONFIG.BASE_URL + '/ep01-blockchain.html' },
+  { day: 2, title: 'EP.02 DeFi — 은행 없는 금융', url: CONFIG.BASE_URL + '/ep02-defi.html' },
+  { day: 3, title: 'EP.03 공기코인의 민낯',        url: CONFIG.BASE_URL + '/ep03-rwa.html' },
+  { day: 4, title: 'EP.04 거인들의 돈은 어디로',  url: CONFIG.BASE_URL + '/ep04-money.html' },
+  { day: 5, title: 'EP.05 고래를 추적하라',        url: CONFIG.BASE_URL + '/ep05-whale.html' },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -34,7 +32,12 @@ function doPost(e) {
 
     // 헤더가 없으면 생성
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['신청일시', '이름', '전화번호', '현재DAY', '완료여부', '마지막발송']);
+      sheet.appendRow([
+        '신청일시', '이름', '전화번호', '현재DAY', '완료여부', '마지막발송',
+        '교육자료 발송 동의', '마케팅 수신 동의'
+      ]);
+    } else if (sheet.getLastColumn() < 8) {
+      sheet.getRange(1, 7, 1, 2).setValues([['교육자료 발송 동의', '마케팅 수신 동의']]);
     }
 
     // 전화번호 정규화 (하이픈 제거)
@@ -57,7 +60,9 @@ function doPost(e) {
       phone,
       0,          // 현재 DAY (0 = 아직 시작 전)
       'N',        // 완료여부
-      ''          // 마지막발송
+      '',         // 마지막발송
+      data.educationConsent === true ? 'Y' : 'N',
+      data.marketingConsent === true ? 'Y' : 'N'
     ]);
 
     return ContentService
@@ -83,11 +88,12 @@ function sendDailyCourse() {
   const today = new Date();
 
   for (let i = 1; i < rows.length; i++) {
-    const [joinDate, name, phone, currentDay, done, lastSent] = rows[i];
-    if (done === 'Y') continue; // 7일 완료
+    const [joinDate, name, phone, currentDay, done, lastSent, educationConsent] = rows[i];
+    if (educationConsent === 'N') continue;
+    if (done === 'Y') continue; // 5일 완료
 
     const dayNum = Number(currentDay) + 1;
-    if (dayNum > 7) {
+    if (dayNum > COURSES.length) {
       sheet.getRange(i + 1, 5).setValue('Y');
       continue;
     }

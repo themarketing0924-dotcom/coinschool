@@ -77,12 +77,14 @@ body{background:var(--bg);color:#fff;font-family:-apple-system,'Apple SD Gothic 
 .cta-btn:active{transform:translateY(0)}
 .cta-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .form-notice{font-size:.72rem;color:rgba(255,255,255,.28);text-align:center;margin-top:1rem;line-height:1.6}
+.consents{display:grid;gap:.65rem;margin:0 0 1.2rem;text-align:left}.consent{display:flex;align-items:flex-start;gap:.65rem;font-size:.72rem;color:rgba(255,255,255,.52);line-height:1.45}.consent input{margin-top:.2rem;accent-color:var(--gold)}
 
 /* ── SUCCESS STATE ── */
 .success-box{display:none;text-align:center;padding:1rem 0}
 .success-icon{font-size:3rem;margin-bottom:1rem;display:block}
 .success-title{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.5rem}
 .success-sub{font-size:.88rem;color:var(--muted);line-height:1.6}
+.success-link{display:inline-flex;margin-top:1.4rem;background:var(--gold);color:#080808;text-decoration:none;padding:.8rem 1.2rem;border-radius:8px;font-size:.82rem;font-weight:800}
 
 /* ── SOCIAL PROOF ── */
 .proof{padding:20px 24px 0;display:flex;align-items:center;justify-content:center;gap:10px;font-size:.8rem;color:rgba(255,255,255,.38)}
@@ -134,18 +136,17 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <div class="badge reveal">🎓 무료 · 7일 완성 · 링크 문자 발송</div>
+  <div class="badge reveal">무료 · 5일 완성 · 링크 문자 발송</div>
   <div class="hero-eyebrow reveal reveal-d1">블록체인을 제대로 이해하고 싶다면</div>
-  <h1 class="hero-title reveal reveal-d1">7일 만에<br>블록체인<br>완전정복</h1>
+  <h1 class="hero-title reveal reveal-d1">5일 만에<br>블록체인<br>검증 입문</h1>
   <p class="hero-sub reveal reveal-d2">매일 오전 10시, <em>핵심 강의 1개</em>가<br>문자로 바로 도착합니다</p>
 
   <div class="course-strip reveal reveal-d2">
-    <div class="day-chip"><span>Day 1</span>블록체인 기초</div>
-    <div class="day-chip"><span>Day 2</span>DeFi</div>
-    <div class="day-chip"><span>Day 3</span>공기코인</div>
-    <div class="day-chip"><span>Day 4</span>자산방어</div>
+    <div class="day-chip"><span>Day 1</span>블록체인 혁명</div>
+    <div class="day-chip"><span>Day 2</span>은행 없는 금융</div>
+    <div class="day-chip"><span>Day 3</span>공기코인의 민낯</div>
+    <div class="day-chip"><span>Day 4</span>거인들의 돈</div>
     <div class="day-chip"><span>Day 5</span>고래 추적</div>
-    <div class="day-chip"><span>Day 6–7</span>RWA 마스터클래스</div>
   </div>
 
   <!-- FORM CARD -->
@@ -157,6 +158,11 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
       <label class="form-label" for="phone">휴대폰 번호</label>
       <input class="form-input" type="tel" id="phone" placeholder="010-0000-0000" autocomplete="tel" required>
 
+      <div class="consents">
+        <label class="consent"><input type="checkbox" id="education-consent" required><span><strong>[필수]</strong> 교육자료 발송을 위한 개인정보 수집·이용에 동의합니다.</span></label>
+        <label class="consent"><input type="checkbox" id="marketing-consent"><span><strong>[선택]</strong> 신규 과정 및 이벤트 안내 수신에 동의합니다.</span></label>
+      </div>
+
       <button class="cta-btn" id="submit-btn" onclick="submitForm()">
         무료로 시작하기 →
       </button>
@@ -166,9 +172,10 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
     </div>
 
     <div class="success-box" id="success-box">
-      <span class="success-icon">✅</span>
+      <span class="success-icon">✓</span>
       <div class="success-title">신청 완료!</div>
-      <div class="success-sub">내일 오전 10시부터<br>첫 번째 강의가 문자로 발송됩니다<br><br>블록체인의 세계에 오신 것을 환영합니다 🎉</div>
+      <div class="success-sub">내일 오전 10시부터<br>첫 번째 강의가 문자로 발송됩니다.</div>
+      <a class="success-link" href="study-room.html">지금 학습실 열기</a>
     </div>
   </div>
 
@@ -186,58 +193,44 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
 
 <!-- ── COURSE LIST ── -->
 <section class="courses">
-  <div class="section-eyebrow reveal">7일 커리큘럼</div>
+  <div class="section-eyebrow reveal">5일 커리큘럼</div>
   <h2 class="section-title reveal reveal-d1">매일 하나씩, 핵심만</h2>
-  <p class="section-sub reveal reveal-d2">복잡한 블록체인을 7개의 핵심 주제로 압축했습니다</p>
+  <p class="section-sub reveal reveal-d2">복잡한 블록체인을 5개의 핵심 질문으로 압축했습니다</p>
 
   <div class="course-list">
     <div class="course-item reveal">
       <div class="day-num" style="background:rgba(124,58,237,.15);color:#7C3AED">D1</div>
       <div class="course-info">
-        <h3>블록체인이 뭔지 아직도 모른다고?</h3>
-        <p>기술 용어 없이 5분 만에 이해하는 블록체인 본질</p>
+        <h3>블록체인 혁명</h3>
+        <p>돈과 신뢰의 작동 방식이 어떻게 바뀌는지 이해합니다</p>
       </div>
     </div>
     <div class="course-item reveal reveal-d1">
       <div class="day-num" style="background:rgba(16,185,129,.15);color:#10B981">D2</div>
       <div class="course-info">
-        <h3>DeFi — 탈중앙화 금융</h3>
-        <p>은행 없이 돈이 움직이는 구조, 어떻게 작동하는가</p>
+        <h3>DeFi — 은행 없는 금융</h3>
+        <p>코드가 금융의 규칙을 실행하는 구조를 확인합니다</p>
       </div>
     </div>
     <div class="course-item reveal reveal-d1">
       <div class="day-num" style="background:rgba(217,119,6,.15);color:#D97706">D3</div>
       <div class="course-info">
-        <h3>공기코인의 시대는 끝나는가?</h3>
-        <p>신규 상장 93%가 하락하는 시대, 구조를 알아야 산다</p>
+        <h3>공기코인의 민낯</h3>
+        <p>사라지는 토큰과 실제 가치가 연결된 자산을 구분합니다</p>
       </div>
     </div>
     <div class="course-item reveal reveal-d1">
       <div class="day-num" style="background:rgba(245,158,11,.15);color:#F59E0B">D4</div>
       <div class="course-info">
-        <h3>월급과 예금만으로 가난해지는 시대</h3>
-        <p>인플레이션과 자산 불균형, 디지털 자산의 역할</p>
+        <h3>거인들의 돈은 어디로</h3>
+        <p>기관 자금과 실물자산 토큰화의 연결 구조를 읽습니다</p>
       </div>
     </div>
     <div class="course-item reveal reveal-d1">
       <div class="day-num" style="background:rgba(29,78,216,.15);color:#1D4ED8">D5</div>
       <div class="course-info">
-        <h3>고래를 따라가면 답이 보인다</h3>
-        <p>온체인 데이터로 대형 투자자의 움직임을 읽는 법</p>
-      </div>
-    </div>
-    <div class="course-item reveal reveal-d1">
-      <div class="day-num" style="background:rgba(232,160,32,.15);color:#E8A020">D6</div>
-      <div class="course-info">
-        <h3>RWA 마스터클래스 Part 1</h3>
-        <p>실물자산 토큰화 — 게임이 바뀌었다</p>
-      </div>
-    </div>
-    <div class="course-item reveal reveal-d1">
-      <div class="day-num" style="background:rgba(232,160,32,.15);color:#E8A020">D7</div>
-      <div class="course-info">
-        <h3>RWA 마스터클래스 Part 2</h3>
-        <p>$360억 시장, 지금 어떻게 접근할 것인가</p>
+        <h3>고래를 추적하라</h3>
+        <p>온체인 움직임을 단일 매매 신호가 아닌 맥락으로 해석합니다</p>
       </div>
     </div>
   </div>
@@ -262,7 +255,7 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
     <div class="why-card reveal reveal-d2">
       <span class="why-icon">🆓</span>
       <div class="why-title">완전 무료</div>
-      <div class="why-desc">7일 전 과정 무료. 카드번호, 결제 없음</div>
+      <div class="why-desc">5강 전 과정 무료. 카드번호, 결제 없음</div>
     </div>
     <div class="why-card reveal reveal-d1">
       <span class="why-icon">📊</span>
@@ -307,11 +300,18 @@ const SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
 function submitForm() {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
+  const educationConsent = document.getElementById('education-consent').checked;
+  const marketingConsent = document.getElementById('marketing-consent').checked;
   const btn = document.getElementById('submit-btn');
 
   if (!name) { alert('이름을 입력해주세요'); return; }
   if (!phone || phone.replace(/\D/g,'').length < 10) {
     alert('올바른 휴대폰 번호를 입력해주세요'); return;
+  }
+  if (!educationConsent) { alert('교육자료 발송을 위한 필수 동의가 필요합니다'); return; }
+  if (!SCRIPT_URL.startsWith('https://script.google.com/')) {
+    alert('신청 시스템 연결 준비 중입니다. 학습실 미리보기를 이용해주세요.');
+    return;
   }
 
   btn.disabled = true;
@@ -321,7 +321,7 @@ function submitForm() {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, phone, timestamp: new Date().toISOString() })
+    body: JSON.stringify({ name, phone, educationConsent, marketingConsent, timestamp: new Date().toISOString() })
   })
   .then(() => {
     document.getElementById('form-area').style.display = 'none';
