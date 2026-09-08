@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP.04 거인들의 돈은 어디로 — 코인스쿨</title>
+  <!-- ═══ SEO / AEO / GEO ═══ -->
+  <meta name="description" content="인플레이션 시대의 자산 방어법. 화폐 희석과 비트코인 헤지, 포트폴리오 구조를 배우는 무료 강의.">
+  <meta name="keywords" content="자산방어, 인플레이션 헤지, 비트코인 투자, 포트폴리오, 자산 보호">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://themarketing0924-dotcom.github.io/coinschool/ep04-money.html">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="EP.04 거인들의 돈은 어디로 — 코인스쿨">
+  <meta property="og:description" content="인플레이션 시대의 자산 방어법. 화폐 희석과 비트코인 헤지, 포트폴리오 구조를 배우는 무료 강의.">
+  <meta property="og:url" content="https://themarketing0924-dotcom.github.io/coinschool/ep04-money.html">
+  <meta property="og:site_name" content="코인스쿨">
+  <meta property="og:locale" content="ko_KR">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EP.04 거인들의 돈은 어디로 — 코인스쿨">
+  <meta name="twitter:description" content="인플레이션 시대의 자산 방어법. 화폐 희석과 비트코인 헤지, 포트폴리오 구조를 배우는 무료 강의.">
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "EP.04 거인들의 돈은 어디로 — 코인스쿨",
+    "description": "인플레이션 시대의 자산 방어법. 화폐 희석과 비트코인 헤지, 포트폴리오 구조를 배우는 무료 강의.",
+    "url": "https://themarketing0924-dotcom.github.io/coinschool/ep04-money.html",
+    "provider": {
+      "@type": "Organization",
+      "name": "코인스쿨",
+      "url": "https://themarketing0924-dotcom.github.io/coinschool"
+    },
+    "inLanguage": "ko",
+    "educationalCredentialAwarded": "수료증",
+    "isAccessibleForFree": true
+  }
+  </script>
+  <!-- ════════════════════════ -->
+<meta name="description" content="대한민국 40~60대를 위한 30분 완성 돈의 흐름과 RWA 마스터클래스. 고래들의 돈이 어디로 가는지, RWA가 뭔지 중학교 1학년도 이해하는 언어로 설명합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;background:#000;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+:root{
+  --b1:#1D4ED8;--b2:#2563EB;--b3:#60A5FA;--b4:#1E3A8A;--b5:#BFDBFE;
+  --gold:#F59E0B;--red:#EF4444;--green:#10B981;
+  --surface:#0A0A14;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.08);
+}
+
+/* ═══ LEGAL / PROGRESS / NAV ═══ */
+#legal-bar{background:rgba(8,8,20,.96);border-bottom:1px solid rgba(37,99,235,.2);padding:.45rem 1.5rem;text-align:center;font-size:.62rem;color:rgba(255,255,255,.36);line-height:1.6;position:fixed;top:0;left:0;right:0;z-index:999;backdrop-filter:blur(12px)}
+#legal-bar strong{color:rgba(255,255,255,.55)}
+#progress{position:fixed;top:26px;left:0;height:2px;background:linear-gradient(90deg,var(--b4),var(--b2),var(--b3));width:0%;z-index:1000;transition:width .1s linear}
+nav{position:fixed;top:26px;left:0;right:0;z-index:998;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(0,0,0,.82);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.88);letter-spacing:-.01em}
+.nav-links{list-style:none;display:flex;gap:1.8rem}
+.nav-links a{font-size:.76rem;color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s;letter-spacing:-.01em}
+.nav-links a:hover{color:#fff}
+.nav-ep{font-size:.62rem;font-weight:700;letter-spacing:.12em;color:var(--b3);text-transform:uppercase;background:rgba(37,99,235,.15);padding:.28rem .75rem;border-radius:20px;border:1px solid rgba(37,99,235,.32)}
+
+/* ═══ SECTION BASE ═══ */
+section{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:10rem 2rem 7rem;text-align:center}
+.wrap{max-width:840px;margin:0 auto;padding:0 1.5rem;width:100%}
+.wrap-wide{max-width:1080px;margin:0 auto;padding:0 1.5rem;width:100%}
+
+/* ═══ APPLE TYPE SYSTEM ═══ */
+.eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--b3);margin-bottom:1.8rem;word-break:keep-all}
+.eyebrow-dark{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--b1);margin-bottom:1.8rem}
+.display-xl{font-size:clamp(3.5rem,10vw,8.5rem);font-weight:900;line-height:1.04;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-lg{font-size:clamp(2.6rem,7.5vw,6rem);font-weight:900;line-height:1.08;letter-spacing:-.038em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-md{font-size:clamp(2rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.sub-stat{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600;line-height:1.5;text-align:center;max-width:580px;margin:2.2rem auto 0;color:rgba(255,255,255,.82);word-break:keep-all;letter-spacing:-.01em}
+.sub-stat strong,.sub-stat em{font-style:normal;color:var(--b3)}
+.sub-dark{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600;line-height:1.5;text-align:center;max-width:580px;margin:2.2rem auto 0;color:rgba(29,29,31,.78);word-break:keep-all}
+.sub-dark strong{color:var(--b1)}
+.body-copy{font-size:clamp(.9rem,1.7vw,1.08rem);font-weight:400;line-height:1.8;color:rgba(255,255,255,.46);max-width:580px;margin:1.8rem auto 0;word-break:keep-all}
+
+/* ═══ GRADIENT TEXT ═══ */
+.g-blue{background:linear-gradient(135deg,var(--b2) 0%,var(--b3) 48%,#e0f2fe 72%,var(--b2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.g-hero{background:linear-gradient(150deg,#fff 0%,var(--b3) 38%,var(--b1) 68%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ═══ REVEAL ═══ */
+.rv{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+.rv-s{opacity:0;transform:scale(.92);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-s.on{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-44px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-l.on{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(44px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-r.on{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.17s}.d3{transition-delay:.28s}.d4{transition-delay:.42s}.d5{transition-delay:.56s}.d6{transition-delay:.70s}
+
+/* ═══ HERO ═══ */
+#hero{background:#000;overflow:hidden;min-height:100vh;padding-bottom:10rem;clip-path:polygon(0 0,100% 0,100% calc(100% - 90px),50% 100%,0 calc(100% - 90px))}
+/* 역 마름모 하단 — 슈퍼맨 쉴드형 V-chevron */
+.hero-glow{position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:90vw;max-width:1000px;height:70vw;max-height:700px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.18) 0%,rgba(29,78,216,.06) 45%,transparent 70%);animation:breathe 8s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{0%,100%{opacity:.22;transform:translateX(-50%) scale(1)}50%{opacity:.38;transform:translateX(-50%) scale(1.06)}}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:.6}100%{transform:translateY(-80px) scale(1);opacity:0}}
+.scroll-cue{position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bob 2.4s ease infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.scroll-cue-line{width:1px;height:40px;background:linear-gradient(180deg,transparent,rgba(96,165,250,.5),transparent)}
+.scroll-cue-dot{width:6px;height:6px;border-radius:50%;background:var(--b3);animation:pulse 2.4s ease infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.ep-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--b3);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.28);border-radius:99px;padding:.35em 1em;margin-bottom:3.5rem}
+.step-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin-top:2.5rem}
+.step-pill{font-size:.7rem;font-weight:700;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.22);color:var(--b3);border-radius:8px;padding:.32em .85em;letter-spacing:-.005em}
+
+/* ═══ KPIS ═══ */
+#kpis{background:var(--surface);min-height:auto;padding:0}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);width:100%;border-top:1px solid rgba(255,255,255,.05)}
+.kpi-col{padding:4rem 2rem 3.5rem;border-right:1px solid rgba(255,255,255,.05);text-align:center}
+.kpi-col:last-child{border-right:none}
+.kpi-num{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.kpi-num.blue{background:linear-gradient(135deg,var(--b2),var(--b5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-num.red{background:linear-gradient(135deg,#EF4444,#FCA5A5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-num.gold{background:linear-gradient(135deg,#F59E0B,#FDE68A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-label{font-size:.85rem;color:rgba(255,255,255,.48);line-height:1.65;margin-top:.65rem;word-break:keep-all;font-weight:400}
+.kpi-src{font-size:.62rem;color:rgba(255,255,255,.25);margin-top:.5rem;letter-spacing:.02em}
+
+/* ═══ CANVAS CHARTS ═══ */
+.chart-wrap{position:relative;margin:3.5rem auto 0;max-width:680px}
+.chart-label-row{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.38);margin-top:.6rem;padding:0 .2rem}
+/* Bar chart track */
+.bar-track{background:rgba(255,255,255,.06);border-radius:6px;height:10px;margin:1rem 0 .4rem;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:6px;width:0%;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.bar-fill.blue{background:linear-gradient(90deg,var(--b4),var(--b2),var(--b3))}
+.bar-fill.red{background:linear-gradient(90deg,#7f1d1d,#EF4444,#FCA5A5)}
+.bar-fill.gold{background:linear-gradient(90deg,#78350f,#F59E0B,#FDE68A)}
+.bar-fill.green{background:linear-gradient(90deg,#064e3b,#10B981,#A7F3D0)}
+.bar-row{display:grid;grid-template-columns:160px 1fr 52px;align-items:center;gap:1rem;margin-bottom:.5rem}
+.bar-name{font-size:.8rem;color:rgba(255,255,255,.68);text-align:right;word-break:keep-all;line-height:1.4}
+.bar-val{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.62);text-align:left;font-variant-numeric:tabular-nums}
+
+/* ═══ MONEY FLOW SVG DIAGRAM ═══ */
+#money-flow{background:#000}
+.flow-diagram{max-width:720px;margin:4rem auto 0;position:relative}
+.flow-svg-wrap{width:100%;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.015);border:1px solid rgba(37,99,235,.14)}
+
+/* ═══ FLOW CARDS (old/new comparison) ═══ */
+.flow-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;max-width:760px;margin:3.5rem auto 0;align-items:start}
+.flow-side{border-radius:20px;padding:1.8rem 1.6rem;text-align:left}
+.flow-old{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07)}
+.flow-new{background:linear-gradient(135deg,rgba(29,78,216,.1),rgba(30,58,138,.06));border:1px solid rgba(37,99,235,.25)}
+.flow-head{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.flow-old .flow-head{color:rgba(255,255,255,.28)}
+.flow-new .flow-head{color:var(--b3)}
+.flow-vs-center{display:flex;align-items:center;justify-content:center;padding-top:2rem}
+.vs-badge{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.28);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.flow-item{display:flex;gap:.65rem;align-items:flex-start;margin-bottom:.85rem}
+.fi-icon{font-size:.95rem;flex-shrink:0;margin-top:.05rem}
+.fi-text{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.6;word-break:keep-all}
+.fi-text strong{color:#fff}
+
+/* ═══ BINANCE TIMELINE ═══ */
+#binance{background:#050510}
+.bi-wrap{max-width:720px;margin:4rem auto 0;position:relative}
+.bi-line{position:absolute;left:50%;top:20px;bottom:20px;width:1px;background:linear-gradient(180deg,transparent,rgba(37,99,235,.3) 8%,rgba(37,99,235,.3) 92%,transparent);transform:translateX(-50%)}
+.bi-row{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center;margin-bottom:2.8rem;gap:0}
+.bi-left{text-align:right;padding-right:2rem}
+.bi-right{text-align:left;padding-left:2rem}
+.bi-center-col{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:.3rem}
+.bi-node{width:16px;height:16px;border-radius:50%;background:var(--b1);box-shadow:0 0 0 5px rgba(37,99,235,.12),0 0 20px rgba(29,78,216,.3);flex-shrink:0}
+.bi-node.accent{background:linear-gradient(135deg,var(--b2),var(--b3));box-shadow:0 0 0 6px rgba(37,99,235,.18),0 0 30px rgba(37,99,235,.4)}
+.bi-year{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--b3);margin-bottom:.32rem}
+.bi-title{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.32rem;word-break:keep-all}
+.bi-body{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.6;word-break:keep-all}
+/* Stat pills on timeline */
+.bi-stat{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:700;margin-top:.5rem;padding:.25em .7em;border-radius:6px}
+.bi-stat.bad{background:rgba(239,68,68,.1);color:#FCA5A5}
+.bi-stat.good{background:rgba(37,99,235,.12);color:var(--b3)}
+
+/* ═══ REGULATION TABLE ═══ */
+#regulation{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:7rem 2rem}
+.reg-wrap{max-width:860px;margin:3.5rem auto 0;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.08),0 0 0 1px rgba(29,78,216,.1)}
+.reg-head-row{display:grid;grid-template-columns:148px 1fr 1fr;background:linear-gradient(135deg,var(--b1) 0%,var(--b2) 100%);padding:.85rem 1.4rem}
+.rh{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.reg-row{display:grid;grid-template-columns:148px 1fr 1fr;border-bottom:1px solid rgba(0,0,0,.06);align-items:start}
+.reg-row:last-child{border-bottom:none}
+.reg-row:nth-child(odd){background:#fff}
+.reg-row:nth-child(even){background:rgba(239,246,255,.55)}
+.reg-cell{padding:1.1rem 1.4rem;font-size:.8rem;line-height:1.6;word-break:keep-all;vertical-align:top}
+.reg-country{font-weight:700;color:#1D1D1F;font-size:.88rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.reg-status{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-radius:4px;padding:.15em .55em;margin-top:.3rem}
+.reg-status.law{background:rgba(16,185,129,.12);color:#065F46}
+.reg-status.active{background:rgba(37,99,235,.1);color:var(--b4)}
+.reg-status.prog{background:rgba(245,158,11,.1);color:#92400E}
+.reg-detail{font-size:.78rem;color:rgba(0,0,0,.52)}
+.reg-impact{font-size:.8rem;color:var(--b1);font-weight:600}
+
+/* ═══ COMPARE (EXCEL TABLE) ═══ */
+#compare{background:#0A0A14}
+.excel-wrap{overflow-x:auto;margin:3.5rem auto 0;max-width:860px;border-radius:14px;box-shadow:0 0 0 1px rgba(37,99,235,.2),0 12px 48px rgba(0,0,0,.65)}
+.etab{width:100%;border-collapse:collapse;font-size:.84rem;background:#0C1229}
+.e-corner{width:38px;background:#111A38;border-right:1px solid rgba(37,99,235,.18);border-bottom:2px solid rgba(37,99,235,.3)}
+.e-ch{background:linear-gradient(180deg,#18234a,#111A38);color:rgba(255,255,255,.4);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.65rem 1rem;border-right:1px solid rgba(37,99,235,.1);border-bottom:2px solid rgba(37,99,235,.28);text-align:center;white-space:nowrap}
+.e-ch.rwa{color:var(--b3);background:linear-gradient(180deg,#1a2e5e,#111A38);border-bottom:2px solid var(--b2)}
+.e-rn{background:#101828;color:rgba(255,255,255,.18);font-size:.62rem;font-weight:700;text-align:center;padding:.55rem .4rem;border-right:1px solid rgba(37,99,235,.12);border-bottom:1px solid rgba(255,255,255,.03);min-width:38px}
+.e-cell{padding:.9rem 1.1rem;border-right:1px solid rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.03);color:rgba(255,255,255,.48);text-align:left;line-height:1.6;vertical-align:middle;word-break:keep-all}
+.e-cell.item{color:rgba(255,255,255,.78);font-weight:600;background:rgba(255,255,255,.012)}
+.e-cell.coin{color:rgba(252,165,165,.75);font-style:italic}
+.e-cell.rwa{color:var(--b3);font-weight:700;background:rgba(37,99,235,.05);border-right:1px solid rgba(37,99,235,.12);position:relative}
+.e-cell.rwa::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--b1),var(--b2))}
+.e-row:nth-child(even) .e-cell:not(.rwa){background:rgba(255,255,255,.006)}
+.e-row:last-child .e-cell,.e-row:last-child .e-rn{border-bottom:none}
+.rwa-check{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--b1);color:#fff;font-size:.52rem;font-weight:800;margin-right:.38rem;vertical-align:middle;flex-shrink:0}
+.excel-note{font-size:.68rem;color:rgba(255,255,255,.28);margin:1rem auto 0;text-align:center;font-style:italic;max-width:860px}
+
+/* COMPARE BAR VISUAL */
+.compare-bars{max-width:680px;margin:3rem auto 0;display:flex;flex-direction:column;gap:1.2rem}
+.cb-row{display:grid;grid-template-columns:130px 1fr 1fr;gap:.8rem;align-items:center}
+.cb-label{font-size:.78rem;color:rgba(255,255,255,.5);text-align:right;word-break:keep-all;line-height:1.4}
+.cb-bar-wrap{position:relative}
+.cb-track{background:rgba(255,255,255,.05);border-radius:99px;height:8px;overflow:hidden}
+.cb-fill-coin{background:linear-gradient(90deg,#7f1d1d,#EF4444);border-radius:99px;height:100%;width:0%;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.cb-fill-rwa{background:linear-gradient(90deg,var(--b4),var(--b2));border-radius:99px;height:100%;width:0%;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.cb-tag{font-size:.62rem;font-weight:700;color:rgba(255,255,255,.35);margin-top:.3rem;text-align:center}
+
+/* ═══ FEE FLOW (소비자본론) — 수평 좌→우 흐름 ═══ */
+#fee-flow{background:#000}
+/* 수평 플로우 레인 */
+.fee-lanes{display:flex;flex-direction:column;gap:2.4rem;max-width:940px;margin:4rem auto 0}
+.fee-lane{border-radius:20px;padding:1.8rem 1.6rem 1.6rem;position:relative;overflow:hidden}
+.fee-lane.old{background:rgba(255,255,255,.022);border:1px solid rgba(255,255,255,.07)}
+.fee-lane.new{background:linear-gradient(135deg,rgba(29,78,216,.09),rgba(30,58,138,.04));border:1px solid rgba(37,99,235,.22)}
+.fee-lane-head{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.4rem;display:flex;align-items:center;justify-content:space-between}
+.fee-lane.old .fee-lane-head{color:rgba(255,255,255,.28)}
+.fee-lane.new .fee-lane-head{color:var(--b3)}
+.fee-pct-pill{font-size:.8rem;font-weight:900;padding:.18em .65em;border-radius:8px;letter-spacing:-.02em}
+.fee-lane.old .fee-pct-pill{background:rgba(239,68,68,.12);color:#FCA5A5}
+.fee-lane.new .fee-pct-pill{background:rgba(37,99,235,.18);color:var(--b3)}
+/* 수평 노드 열 */
+.fee-hflow{display:flex;align-items:center;gap:0;width:100%;overflow-x:auto}
+.fee-hnode{flex:1;min-width:0;text-align:center;border-radius:12px;padding:.8rem .6rem;font-size:.76rem;font-weight:600;word-break:keep-all;line-height:1.4;position:relative}
+.fee-hnode.producer{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.82)}
+.fee-hnode.middle{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:rgba(252,165,165,.85)}
+.fee-hnode.consumer-bad{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.38)}
+.fee-hnode.smart{background:rgba(37,99,235,.14);border:1px solid rgba(37,99,235,.32);color:var(--b3);font-weight:700}
+.fee-hnode.both{background:linear-gradient(135deg,rgba(29,78,216,.2),rgba(30,58,138,.1));border:1px solid rgba(37,99,235,.4);color:#fff;font-weight:700}
+.fee-hnode small{display:block;font-size:.64rem;font-weight:400;margin-top:.2rem;line-height:1.3}
+/* 화살표 커넥터 */
+.fee-harr{flex:0 0 auto;width:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:1}
+.fee-harr-line{height:2px;width:100%;position:relative;overflow:visible}
+.fee-harr-line.red{background:rgba(239,68,68,.3)}
+.fee-harr-line.blue{background:rgba(37,99,235,.4)}
+/* animated moving dot on arrow */
+.fee-harr-dot{position:absolute;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;animation:slidedot 1.6s linear infinite}
+.fee-harr-dot.red{background:#EF4444;animation-name:slidedot-red}
+.fee-harr-dot.blue{background:var(--b3);animation-name:slidedot-blue}
+@keyframes slidedot-red{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 6px);opacity:0}}
+@keyframes slidedot-blue{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 6px);opacity:0}}
+.fee-harr-head{font-size:.65rem;line-height:1}
+.fee-harr-head.red{color:rgba(239,68,68,.5)}
+.fee-harr-head.blue{color:rgba(37,99,235,.6)}
+/* cut badge */
+.fee-cut-tag{display:inline-block;font-size:.56rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:.1em .4em;background:rgba(239,68,68,.15);color:#FCA5A5;margin-top:.3rem}
+.fee-zero-tag{display:inline-block;font-size:.56rem;font-weight:700;letter-spacing:.04em;border-radius:4px;padding:.1em .4em;background:rgba(37,99,235,.18);color:var(--b3);margin-top:.3rem}
+/* vs divider */
+.fee-vs{display:flex;align-items:center;gap:1rem;max-width:940px;margin:.2rem auto;opacity:.4}
+.fee-vs-line{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.fee-vs-txt{font-size:.65rem;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.3);text-transform:uppercase;white-space:nowrap}
+/* legacy compat */
+.fee-systems,.fee-card,.fee-card-label,.fee-chain-inner,.fee-node,.fee-arr,.fee-pct-badge{display:none}
+
+/* ═══ BUILDING ANALOGY ═══ */
+#analogy{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:7rem 2rem}
+.building-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:780px;margin:4rem auto 0;align-items:start}
+.b-before{background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:2rem 1.8rem}
+.b-after{background:linear-gradient(135deg,#1D4ED8,#1E3A8A);border-radius:20px;padding:2rem 1.8rem;position:relative;overflow:hidden}
+.b-after::before{content:'';position:absolute;top:-30%;right:-20%;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.b-label{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.b-before .b-label{color:rgba(0,0,0,.3)}
+.b-after .b-label{color:rgba(255,255,255,.55)}
+.b-title{font-size:1rem;font-weight:700;color:#1D1D1F;margin-bottom:.8rem;word-break:keep-all}
+.b-after .b-title{color:#fff}
+.b-item{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.7rem}
+.b-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:.5rem}
+.b-before .b-dot{background:rgba(0,0,0,.2)}
+.b-after .b-dot{background:rgba(255,255,255,.45)}
+.b-text{font-size:.8rem;line-height:1.6;word-break:keep-all}
+.b-before .b-text{color:rgba(0,0,0,.5)}
+.b-after .b-text{color:rgba(255,255,255,.72)}
+/* Building visual */
+.bldg-vis{margin-top:1.5rem}
+.bldg-floor{border-radius:8px;padding:.55rem 1rem;text-align:center;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.78);margin-bottom:.35rem;word-break:keep-all;transition:background .3s}
+.bldg-floor.f1{background:rgba(255,255,255,.08)}
+.bldg-floor.f2{background:rgba(255,255,255,.12)}
+.bldg-floor.f3{background:rgba(255,255,255,.18);color:#fff}
+.bldg-floor.f4{background:rgba(255,255,255,.12)}
+.bldg-floor.f5{background:rgba(255,255,255,.08)}
+.bldg-total{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.55);text-align:center;margin-top:.6rem}
+.callout-blue{max-width:780px;margin:2.5rem auto 0;background:linear-gradient(135deg,rgba(239,246,255,.8),#fff);border:1px solid rgba(29,78,216,.12);border-radius:18px;padding:1.6rem 2rem}
+.callout-blue p{font-size:.88rem;line-height:1.72;color:rgba(29,29,31,.68);word-break:keep-all}
+.callout-blue strong{color:var(--b1)}
+
+/* ═══ PROS GRID ═══ */
+.pros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:780px;margin:3.5rem auto 0}
+.pros-card{background:rgba(255,255,255,.03);border:1px solid rgba(37,99,235,.13);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;transition:border-color .28s,transform .28s}
+.pros-card:hover{border-color:rgba(96,165,250,.32);transform:translateY(-3px)}
+.pros-icon{font-size:2rem;margin-bottom:.85rem}
+.pros-title{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:.35rem}
+.pros-body{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.65;word-break:keep-all}
+
+/* ═══ MARKET STRUCTURE ═══ */
+#market{background:#05050F}
+.mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:780px;margin:3.5rem auto 0}
+.mkt-card{border-radius:20px;padding:2rem 1.8rem;text-align:left}
+.mkt-card.tier2{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+.mkt-card.tier1{background:rgba(29,78,216,.08);border:1px solid rgba(37,99,235,.22)}
+.mkt-card-head{font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.mkt-card.tier2 .mkt-card-head{color:rgba(255,255,255,.28)}
+.mkt-card.tier1 .mkt-card-head{color:var(--b3)}
+.mkt-li{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.82rem}
+.mkt-li-icon{font-size:.88rem;flex-shrink:0;margin-top:.06rem}
+.mkt-li-text{font-size:.8rem;color:rgba(255,255,255,.62);line-height:1.6;word-break:keep-all}
+
+/* ═══ DONUT CHART ═══ */
+.donut-row{display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:center;margin:3rem 0 0;align-items:center}
+.donut-item{text-align:center}
+.donut-label{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.8rem;word-break:keep-all;max-width:100px}
+.donut-val{font-size:1.1rem;font-weight:800;color:#fff;margin-top:.2rem}
+
+/* ═══ SUMMARY CARDS ═══ */
+#summary{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:7rem 2rem}
+.sum-cards{max-width:720px;margin:3.5rem auto 0;display:flex;flex-direction:column;gap:1rem}
+.sum-card{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.6rem 1.8rem;display:flex;align-items:flex-start;gap:1.1rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.sum-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;flex-shrink:0}
+.sum-title{font-size:.92rem;font-weight:700;color:#1D1D1F;margin-bottom:.3rem}
+.sum-body{font-size:.78rem;color:rgba(0,0,0,.48);line-height:1.65;word-break:keep-all}
+
+/* ═══ SOURCE BAND ═══ */
+.src-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem;margin-top:2.2rem;padding:.75rem 1.4rem;background:rgba(37,99,235,.04);border:1px solid rgba(37,99,235,.12);border-radius:12px;max-width:720px;margin-left:auto;margin-right:auto}
+.src-lbl{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--b3);flex-shrink:0;margin-right:.3rem}
+.src-band a{font-size:.68rem;color:rgba(255,255,255,.38);text-decoration:none;padding:.12em .45em;border-radius:4px;white-space:nowrap;transition:color .2s}
+.src-band a:hover{color:var(--b3)}
+.src-sep{color:rgba(255,255,255,.14);font-size:.65rem}
+
+/* ═══ CTA ═══ */
+#cta{background:linear-gradient(180deg,#08080F 0%,#000 100%);border-top:1px solid rgba(37,99,235,.12)}
+.cta-kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--b3);margin-bottom:1.5rem}
+.cta-head{font-size:clamp(2.2rem,6.5vw,5.2rem);font-weight:900;line-height:1.04;letter-spacing:-.04em;margin-bottom:2.5rem;background:linear-gradient(135deg,var(--b1) 0%,var(--b3) 42%,#fff 68%,var(--b2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:500px;margin:0 auto 3.5rem;word-break:keep-all}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.4rem;background:var(--b1);color:#fff;font-size:.9rem;font-weight:700;padding:.95rem 2.2rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;transition:all .28s;letter-spacing:-.01em}
+.btn-primary:hover{background:var(--b2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(29,78,216,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:rgba(255,255,255,.48);font-size:.88rem;font-weight:600;padding:.9rem 2rem;border-radius:50px;text-decoration:none;border:1px solid rgba(255,255,255,.14);transition:all .28s;cursor:pointer;letter-spacing:-.01em}
+.btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.28);transform:translateY(-1px)}
+.ep-pills-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin-top:2.2rem}
+.ep-p{font-size:.67rem;color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:99px;padding:.25em .8em;text-decoration:none;transition:color .2s,border-color .2s}
+.ep-p:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.18)}
+.ep-p.cur{color:var(--b3);background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.28)}
+
+/* ═══ CALLOUT DARK ═══ */
+.callout-dark{max-width:720px;margin:2.5rem auto 0;background:linear-gradient(135deg,rgba(29,78,216,.1),rgba(30,58,138,.05));border:1px solid rgba(37,99,235,.18);border-radius:20px;padding:1.7rem 2rem;text-align:center}
+.callout-dark p{font-size:.9rem;line-height:1.72;color:rgba(255,255,255,.72);word-break:keep-all}
+.callout-dark strong{color:var(--b3)}
+
+/* ═══ FOOTER ═══ */
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 2rem}
+.foot-inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:flex-start}
+.foot-l{flex:1 1 280px}
+.foot-r{flex:1 1 340px;text-align:right;border-left:1px solid rgba(37,99,235,.1);padding-left:1.5rem}
+footer p{font-size:.7rem;color:rgba(255,255,255,.3);line-height:1.85}
+footer a{color:rgba(255,255,255,.26);text-decoration:none}
+footer strong{color:rgba(255,255,255,.48)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:720px){
+  .nav-links{display:none}
+  section{padding:5.5rem 1.2rem 4rem}
+  .kpi-grid{grid-template-columns:1fr}
+  .kpi-col{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);padding:2.5rem 1.2rem}
+  .kpi-col:last-child{border-bottom:none}
+  .flow-compare,.mkt-grid,.building-grid,.pros-grid{grid-template-columns:1fr}
+  .fee-hflow{gap:0}
+  .fee-hnode{padding:.6rem .4rem;font-size:.68rem}
+  .fee-harr{width:24px}
+  #hero{clip-path:polygon(0 0,100% 0,100% calc(100% - 50px),50% 100%,0 calc(100% - 50px))}
+  .compare-bars .cb-row{grid-template-columns:100px 1fr 1fr}
+  .reg-head-row,.reg-row{grid-template-columns:1fr}
+  .foot-r{border-left:none;text-align:left;padding-left:0;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem}
+}
+</style>
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<div id="legal-bar">
+  <strong>⚠ 법적 고지:</strong> 본 페이지는 순수 교육 목적입니다. 투자 권유·수익 보장·매수 추천이 아닙니다. 가상자산 투자는 원금 손실 위험이 있습니다. 모든 투자 결정은 본인 책임입니다.
+</div>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-logo">⛓ 블록체인 마스터클래스</div>
+  <ul class="nav-links">
+    <li><a href="#money-flow">돈의 흐름</a></li>
+    <li><a href="#binance">바이낸스</a></li>
+    <li><a href="#regulation">글로벌 규제</a></li>
+    <li><a href="#compare">코인 vs RWA</a></li>
+    <li><a href="#fee-flow">소비자본론</a></li>
+  </ul>
+  <span class="nav-ep">EP. 04</span>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="wrap">
+    <div class="ep-badge rv">🎓 EP.04 · 2026 돈의 흐름과 RWA 마스터클래스</div>
+    <h1 class="display-xl g-hero rv d1" style="margin-bottom:1.8rem">
+      월급과 예금만으로<br>가난해지는 시대
+    </h1>
+    <p style="font-size:clamp(1rem,2.2vw,1.3rem);color:rgba(255,255,255,.48);max-width:600px;margin:0 auto 2.8rem;line-height:1.7;word-break:keep-all" class="rv d2">
+      당신이 열심히 일하는 동안, 전 세계 최고 자산가들과 정부, 대기업의 돈은<br>
+      <strong style="color:#fff">정확히 어디로 향하고 있을까요?</strong>
+    </p>
+    <p class="sub-stat rv d3" style="max-width:520px">고래들의 비밀을 <strong>30분 만에 공개합니다.</strong><br>중학생도 이해하는 언어로.</p>
+    <div class="step-pills rv d4">
+      <span class="step-pill">Part 1. 거인의 돈줄</span>
+      <span class="step-pill">Part 2. 바이낸스 대전환</span>
+      <span class="step-pill">Part 3. 글로벌 규제</span>
+      <span class="step-pill">Part 4. 코인 vs RWA</span>
+      <span class="step-pill">Part 5. 소비자본론</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="scroll-cue-line"></div><div class="scroll-cue-dot"></div></div>
+</section>
+
+<!-- ══════════ KPI BAND ══════════ -->
+<section id="kpis">
+  <div class="kpi-grid rv" style="width:100%">
+    <div class="kpi-col">
+      <div class="kpi-num red" data-count="-78" data-suffix="%">−</div>
+      <div class="kpi-label">2025년 신규 상장 코인<br>평균 수익률</div>
+      <div class="kpi-src">출처: BeinCrypto 2025</div>
+    </div>
+    <div class="kpi-col">
+      <div class="kpi-num gold" data-dollar="38" data-suffix="조">$38조</div>
+      <div class="kpi-label">기관이 블록체인에 올린<br>실물 자산 규모 (2026.08)</div>
+      <div class="kpi-src">출처: RWA.xyz 2026</div>
+    </div>
+    <div class="kpi-col">
+      <div class="kpi-num blue" data-dollar="16" data-suffix="조">$16조</div>
+      <div class="kpi-label">BCG 예측<br>2030년 RWA 시장 규모</div>
+      <div class="kpi-src">출처: BCG Report</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PART 1: 돈의 흐름 ══════════ -->
+<section id="money-flow">
+  <div class="wrap">
+    <span class="eyebrow rv">Part 1 · 거시경제의 거대한 돈줄</span>
+    <h2 class="display-lg rv-s d1"><span class="g-blue">거인들의 돈</span>은<br>지금 어디로?</h2>
+    <p class="sub-stat rv d2">은행 이자는 오르는데 왜 내 생활은 팍팍할까?<br><strong>문제는 돈의 흐름 규칙이 바뀌었기 때문입니다.</strong></p>
+
+    <div class="callout-dark rv d3" style="margin-top:2.8rem">
+      <p>💡 <strong>쉬운 비유</strong> — 돈은 물과 같습니다. 물은 높은 곳에서 낮은 곳으로 흐릅니다.<br>고래(정부·기관·대기업)들의 물이 <strong>어느 웅덩이로 흐르는지</strong> 알면 그 근처에 있을 수 있습니다.</p>
+    </div>
+
+    <!-- FLOW COMPARE -->
+    <div class="flow-compare rv d3" style="margin-top:3.5rem">
+      <div class="flow-side flow-old">
+        <div class="flow-head">기존 자산 구조</div>
+        <div class="flow-item"><span class="fi-icon">🏦</span><span class="fi-text">현금·예금 — 인플레이션에 실질 가치 잠식</span></div>
+        <div class="flow-item"><span class="fi-icon">🏠</span><span class="fi-text">부동산 — 진입 장벽 수억~수십억, 소수만 참여</span></div>
+        <div class="flow-item"><span class="fi-icon">📉</span><span class="fi-text">주식 — 변동성 높고 정보 비대칭 심각</span></div>
+        <div class="flow-item"><span class="fi-icon">⏰</span><span class="fi-text">거래 시간 제한 — 주말·공휴일 불가</span></div>
+      </div>
+      <div class="flow-vs-center"><div class="vs-badge">VS</div></div>
+      <div class="flow-side flow-new">
+        <div class="flow-head">RWA 블록체인 구조</div>
+        <div class="flow-item"><span class="fi-icon">📦</span><span class="fi-text"><strong>실물 연계 자산</strong> — 국채·부동산·기업 매출채권</span></div>
+        <div class="flow-item"><span class="fi-icon">🌍</span><span class="fi-text"><strong>소액 분산 투자</strong> — 1만 원부터 강남 빌딩 참여</span></div>
+        <div class="flow-item"><span class="fi-icon">⚡</span><span class="fi-text"><strong>24시간 실시간 정산</strong> — 국경 없는 즉시 거래</span></div>
+        <div class="flow-item"><span class="fi-icon">🔒</span><span class="fi-text"><strong>투명한 수익 기록</strong> + 법적 권리 보장</span></div>
+      </div>
+    </div>
+
+    <!-- ANIMATED BAR: 기관 자금 흐름 -->
+    <div class="chart-wrap rv d4" id="money-bars">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:left;margin-bottom:1.2rem">기관 자금 RWA 이동 규모 (2026년 기준)</div>
+      <div class="bar-row"><div class="bar-name">블랙록 BUIDL</div><div><div class="bar-track"><div class="bar-fill blue" data-w="92"></div></div></div><div class="bar-val">$6.8조</div></div>
+      <div class="bar-row"><div class="bar-name">피델리티 Tokenized</div><div><div class="bar-track"><div class="bar-fill blue" data-w="74"></div></div></div><div class="bar-val">$4.2조</div></div>
+      <div class="bar-row"><div class="bar-name">JP모건 Onyx</div><div><div class="bar-track"><div class="bar-fill blue" data-w="58"></div></div></div><div class="bar-val">$3.1조</div></div>
+      <div class="bar-row"><div class="bar-name">프랭클린 템플턴</div><div><div class="bar-track"><div class="bar-fill blue" data-w="42"></div></div></div><div class="bar-val">$2.2조</div></div>
+      <div class="bar-row"><div class="bar-name">기타 기관</div><div><div class="bar-track"><div class="bar-fill blue" data-w="88"></div></div></div><div class="bar-val">$21.7조</div></div>
+    </div>
+
+    <div class="src-band rv d5">
+      <span class="src-lbl">출처</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a>
+      <span class="src-sep">·</span>
+      <a href="https://www.blackrock.com/us/individual/products/buidl" target="_blank" rel="noopener">BlackRock BUIDL</a>
+      <span class="src-sep">·</span>
+      <a href="https://www.binance.com/en/research" target="_blank" rel="noopener">Binance Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ANALOGY: 강남 빌딩 ══════════ -->
+<section id="analogy">
+  <div class="wrap">
+    <span class="eyebrow-dark rv">쉬운 비유로 이해하기</span>
+    <h2 class="display-md rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+      강남 빌딩 1,000억을<br>당신도 살 수 있다면?
+    </h2>
+    <div class="building-grid rv d2">
+      <div class="b-before">
+        <div class="b-label">기존 방식</div>
+        <div class="b-title">강남 빌딩 1,000억</div>
+        <div class="b-item"><div class="b-dot"></div><div class="b-text">최소 수백억 자본 필요</div></div>
+        <div class="b-item"><div class="b-dot"></div><div class="b-text">은행 대출 + 복잡한 법적 절차</div></div>
+        <div class="b-item"><div class="b-dot"></div><div class="b-text">소수의 부유층만 접근 가능</div></div>
+        <div class="b-item"><div class="b-dot"></div><div class="b-text">매도까지 수개월 소요</div></div>
+        <div class="b-item"><div class="b-dot"></div><div class="b-text">지역·시간 제약 심각</div></div>
+      </div>
+      <div class="b-after">
+        <div class="b-label">RWA 방식</div>
+        <div class="b-title" style="color:#fff">1만 조각으로 분할 = 조각당 1만 원</div>
+        <div class="bldg-vis">
+          <div class="bldg-floor f5">🏢 5층 / 스마트폰으로 1만 원 투자</div>
+          <div class="bldg-floor f4">🏢 4층 / 매달 월세(배당금) 자동 입금</div>
+          <div class="bldg-floor f3">🏢 3층 / 24시간 사고팔기 가능</div>
+          <div class="bldg-floor f2">🏢 2층 / 전 세계 누구나 참여 가능</div>
+          <div class="bldg-floor f1">🏢 1층 / 법적 소유권 블록체인 기록</div>
+        </div>
+        <div class="bldg-total">이것이 RWA입니다 🎯</div>
+      </div>
+    </div>
+    <div class="callout-blue rv d3">
+      <p>기존에는 강남 빌딩 = <strong>돈 있는 사람만의 세계</strong>였습니다.<br>RWA는 이 빌딩을 <strong>1만 조각으로 쪼개서 누구나 참여</strong>할 수 있게 만듭니다.<br>마치 피자 한 판을 여러 명이 나눠 먹는 것처럼요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PART 2: 바이낸스 ══════════ -->
+<section id="binance">
+  <div class="wrap">
+    <span class="eyebrow rv">Part 2 · 바이낸스의 대전환</span>
+    <h2 class="display-lg rv d1">세계 1위 거래소도<br><span class="g-blue">방향을 바꿨다</span></h2>
+    <p class="sub-stat rv d2">바이낸스가 어떻게 바뀌는지 보면,<br><strong>돈이 어디로 흐르는지 알 수 있습니다.</strong></p>
+
+    <div class="bi-wrap rv d3">
+      <div class="bi-line"></div>
+      <div class="bi-row">
+        <div class="bi-left">
+          <div class="bi-year">2017–2020</div>
+          <div class="bi-title">코인 전성시대</div>
+          <div class="bi-body">이름만 있어도 올랐습니다. 바이낸스 상장 = 가격 폭등 공식이 통했던 시절.</div>
+          <div><span class="bi-stat bad">묻지마 투자 성행</span></div>
+        </div>
+        <div class="bi-center-col"><div class="bi-node"></div></div>
+        <div></div>
+      </div>
+      <div class="bi-row">
+        <div></div>
+        <div class="bi-center-col"><div class="bi-node"></div></div>
+        <div class="bi-right">
+          <div class="bi-year">2024.12</div>
+          <div class="bi-title">바이낸스 알파 등장</div>
+          <div class="bi-body">초기 프로젝트 발견 플랫폼 출시. 알파 프로젝트 중 10%만 정식 상장. 분리 시작.</div>
+        </div>
+      </div>
+      <div class="bi-row">
+        <div class="bi-left">
+          <div class="bi-year">2025</div>
+          <div class="bi-title">89% 하락 표본의 경고</div>
+          <div class="bi-body">신규 상장 100개 중 93개 하락. 투기판이 끝났습니다. 시장이 변했습니다.</div>
+          <div><span class="bi-stat bad">89%가 기준 가격 하회</span></div>
+        </div>
+        <div class="bi-center-col"><div class="bi-node" style="background:var(--red)"></div></div>
+        <div></div>
+      </div>
+      <div class="bi-row">
+        <div></div>
+        <div class="bi-center-col"><div class="bi-node accent"></div></div>
+        <div class="bi-right">
+          <div class="bi-year" style="color:var(--b3)">2025–2026 현재</div>
+          <div class="bi-title" style="color:var(--b3)">컴플라이언스 + 유틸리티 기준</div>
+          <div class="bi-body">① 실제 사업 모델 ② 법률 준수 ③ RWA 연결 여부로 심사. 투기판 → 제도권 금융.</div>
+          <div><span class="bi-stat good">제2 월스트리트화</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상장 결과 도넛 -->
+    <div style="max-width:620px;margin:3rem auto 0" class="rv d4">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;margin-bottom:1.5rem">2025년 바이낸스 신규 상장 100개 결과</div>
+      <div style="display:flex;gap:1.5rem;justify-content:center;align-items:center;flex-wrap:wrap">
+        <canvas id="donut1" width="140" height="140"></canvas>
+        <div style="text-align:left">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem"><div style="width:10px;height:10px;border-radius:50%;background:#EF4444;flex-shrink:0"></div><span style="font-size:.8rem;color:rgba(255,255,255,.62)">하락 — <strong style="color:#FCA5A5">93개</strong></span></div>
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem"><div style="width:10px;height:10px;border-radius:50%;background:var(--b2);flex-shrink:0"></div><span style="font-size:.8rem;color:rgba(255,255,255,.62)">상승 — <strong style="color:var(--b3)">7개</strong></span></div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.32);margin-top:.6rem">출처: BeinCrypto 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-dark rv d5">
+      <p>💡 <strong>핵심 메시지</strong> — 바이낸스가 "실물이 있는 자산" 기준으로 바뀌었다는 건,<br><strong>투기판이 끝나고 진짜 금융시장이 시작됐다</strong>는 신호입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PART 3: 글로벌 규제 ══════════ -->
+<section id="regulation">
+  <div class="wrap-wide">
+    <span class="eyebrow-dark rv">Part 3 · 정부가 왜 움직이는가</span>
+    <h2 class="display-lg rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 50%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+      규제 = 시작의<br>신호입니다
+    </h2>
+    <p class="sub-dark rv d2" style="max-width:560px">규제가 생긴다는 건 시장이 끝났다는 게 아닙니다.<br><strong>진짜 큰 돈이 들어올 문이 열렸다는 뜻입니다.</strong></p>
+
+    <div class="reg-wrap rv d3">
+      <div class="reg-head-row">
+        <div class="rh">🌍 국가</div>
+        <div class="rh">규제 현황 (2026)</div>
+        <div class="rh">우리에게 주는 의미</div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-cell"><div class="reg-country">🇰🇷 대한민국<br><span class="reg-status law">법제화</span></div></div>
+        <div class="reg-cell reg-detail">전자증권법·자본시장법 개정안 국회 통과 (2026.01). 토큰증권 법적 기반. 2027년 2월 시행 예정.</div>
+        <div class="reg-cell reg-impact">국내에서 합법적으로 실물 자산을 블록체인에 올릴 수 있는 길이 열림</div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-cell"><div class="reg-country">🇺🇸 미국<br><span class="reg-status active">시행 중</span></div></div>
+        <div class="reg-cell reg-detail">SEC 가이드라인 확립. 나스닥·FINRA 토큰화 증권 거래 승인. 블랙록 S&P500 ETF 토큰화 실제 출시 (2026.07).</div>
+        <div class="reg-cell reg-impact">세계 최대 자산운용사들이 미국 국채·주식을 블록체인으로 이전 중</div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-cell"><div class="reg-country">🇦🇪 UAE·중동<br><span class="reg-status active">완비</span></div></div>
+        <div class="reg-cell reg-detail">세계 최고 수준 통합 규제(VARA). 부동산·국부펀드 토큰화 제도화. CZ가 12개 정부와 토큰화 논의.</div>
+        <div class="reg-cell reg-impact">전 세계 자본이 합법적으로 RWA를 발행·유통하는 글로벌 허브</div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-cell"><div class="reg-country">🇪🇺 유럽연합<br><span class="reg-status active">전면 시행</span></div></div>
+        <div class="reg-cell reg-detail">MiCA(가상자산시장법) 전면 시행. 스테이블코인 및 자산 토큰화 법적 안전장치 확보. 투자자 보호 강화.</div>
+        <div class="reg-cell reg-impact">4억 5천만 명 유럽 시장에서 안전하게 RWA 거래 가능</div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-cell"><div class="reg-country">🌐 IMF·WEF<br><span class="reg-status prog">공식 인정</span></div></div>
+        <div class="reg-cell reg-detail">IMF (2026.07): "토큰화는 세계 금융 구조를 바꿀 수 있다." WEF: 2026년 = 기업급 배포 전환점.</div>
+        <div class="reg-cell reg-impact">더 이상 실험이 아닌, 글로벌 금융의 새로운 표준으로 공식 인정</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#EBF3FF,#F0F5FF);border:1px solid rgba(29,78,216,.12);border-radius:18px;padding:1.6rem 2rem;max-width:780px;margin:2.5rem auto 0" class="rv d4">
+      <p style="font-size:.88rem;line-height:1.72;color:rgba(29,29,31,.68);word-break:keep-all">🇰🇷 <strong style="color:var(--b1)">한국 역사로 이해하기</strong> — 1970~80년대, 처음 주식 시장이 생겼을 때 "사기 아니야?" 했던 분들이 많았습니다. 하지만 법이 만들어지고 기관이 들어오면서 주식은 국민 재테크가 됐습니다. <strong style="color:var(--b1)">RWA가 지금 그 시점에 있습니다.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PART 4: 코인 vs RWA ══════════ -->
+<section id="compare">
+  <div class="wrap">
+    <span class="eyebrow rv">Part 4 · 결정적 차이</span>
+    <h2 class="display-lg rv d1">코인 vs RWA<br><span class="g-blue">뭐가 다른가?</span></h2>
+    <p class="sub-stat rv d2">이름만 다른 게 아닙니다.<br><strong>돈이 만들어지는 구조가 근본부터 다릅니다.</strong></p>
+
+    <div class="excel-wrap rv d3">
+      <table class="etab">
+        <thead>
+          <tr>
+            <td class="e-corner"></td>
+            <th class="e-ch" style="width:160px">A — 비교 항목</th>
+            <th class="e-ch" style="width:220px">B — 일반 코인</th>
+            <th class="e-ch rwa" style="width:250px">C — RWA ✦</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="e-row"><td class="e-rn">1</td><td class="e-cell item">실물 담보</td><td class="e-cell coin">없음 — 커뮤니티 믿음만</td><td class="e-cell rwa"><span class="rwa-check">✓</span>있음 — 국채·부동산·주식</td></tr>
+          <tr class="e-row"><td class="e-rn">2</td><td class="e-cell item">가치의 근원</td><td class="e-cell coin">수요·공급, 기대 심리</td><td class="e-cell rwa"><span class="rwa-check">✓</span>실제 이자·배당·임대수익</td></tr>
+          <tr class="e-row"><td class="e-rn">3</td><td class="e-cell item">변동성</td><td class="e-cell coin">극심함 — 하루 −50% 가능</td><td class="e-cell rwa"><span class="rwa-check">✓</span>상대적 낮음 — 기초자산 연동</td></tr>
+          <tr class="e-row"><td class="e-rn">4</td><td class="e-cell item">주요 참여자</td><td class="e-cell coin">개인 투기 중심</td><td class="e-cell rwa"><span class="rwa-check">✓</span>정부·기관·연기금·스마트 머니</td></tr>
+          <tr class="e-row"><td class="e-rn">5</td><td class="e-cell item">수익 방식</td><td class="e-cell coin">남이 비싸게 사줘야 수익</td><td class="e-cell rwa"><span class="rwa-check">✓</span>자산 자체가 이자·배당 생성</td></tr>
+          <tr class="e-row"><td class="e-rn">6</td><td class="e-cell item">법적 보호</td><td class="e-cell coin">불명확 — 국가별 규제 미비</td><td class="e-cell rwa"><span class="rwa-check">✓</span>증권법·전자증권법 보호</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="excel-note rv d4">※ BTC, ETH, SOL 등 주요 코인 ETF 편입 자산은 별도의 제도권 금융상품 영역으로 이 비교에서 제외됩니다.</p>
+
+    <!-- 비교 바 차트 -->
+    <div style="max-width:700px;margin:3rem auto 0" class="rv d4" id="compare-bars">
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;margin-bottom:1.8rem">항목별 상대 비교 (낮을수록 좋음 / 높을수록 좋음)</div>
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:.6rem 1rem;align-items:center">
+        <div style="font-size:.62rem;color:rgba(255,255,255,.25);text-align:right"></div>
+        <div style="font-size:.65rem;font-weight:700;color:rgba(252,165,165,.7);text-align:center">일반 코인</div>
+        <div style="font-size:.65rem;font-weight:700;color:var(--b3);text-align:center">RWA</div>
+
+        <div style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:right">변동성 위험</div>
+        <div><div class="bar-track"><div class="bar-fill red" data-w="90"></div></div></div>
+        <div><div class="bar-track"><div class="bar-fill blue" data-w="28"></div></div></div>
+
+        <div style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:right">기관 참여도</div>
+        <div><div class="bar-track"><div class="bar-fill red" data-w="18"></div></div></div>
+        <div><div class="bar-track"><div class="bar-fill blue" data-w="85"></div></div></div>
+
+        <div style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:right">법적 안정성</div>
+        <div><div class="bar-track"><div class="bar-fill red" data-w="22"></div></div></div>
+        <div><div class="bar-track"><div class="bar-fill blue" data-w="88"></div></div></div>
+
+        <div style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:right">실물 수익</div>
+        <div><div class="bar-track"><div class="bar-fill red" data-w="5"></div></div></div>
+        <div><div class="bar-track"><div class="bar-fill blue" data-w="92"></div></div></div>
+
+        <div style="font-size:.78rem;color:rgba(255,255,255,.55);text-align:right">접근 용이성</div>
+        <div><div class="bar-track"><div class="bar-fill red" data-w="75"></div></div></div>
+        <div><div class="bar-track"><div class="bar-fill blue" data-w="82"></div></div></div>
+      </div>
+    </div>
+
+    <div class="pros-grid rv d5">
+      <div class="pros-card"><div class="pros-icon">🏦</div><div class="pros-title">실물 담보</div><div class="pros-body">뒤에 진짜 자산이 있습니다. 코인이 0원이 되어도 건물은 없어지지 않습니다.</div></div>
+      <div class="pros-card"><div class="pros-icon">💰</div><div class="pros-title">자동 수익</div><div class="pros-body">팔지 않아도 됩니다. 보유하는 동안 이자·배당이 자동으로 들어옵니다.</div></div>
+      <div class="pros-card"><div class="pros-icon">🌏</div><div class="pros-title">국경 없는 투자</div><div class="pros-body">스마트폰 하나로 미국 국채, 강남 빌딩에 소액 투자가 가능합니다.</div></div>
+    </div>
+
+    <div class="src-band rv d6">
+      <span class="src-lbl">출처</span>
+      <a href="https://defillama.com/tokenized" target="_blank" rel="noopener">DeFiLlama</a>
+      <span class="src-sep">·</span>
+      <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a>
+      <span class="src-sep">·</span>
+      <a href="https://www.binance.com/en/research" target="_blank" rel="noopener">Binance Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PART 5: 1급·2급 시장 ══════════ -->
+<section id="market">
+  <div class="wrap">
+    <span class="eyebrow rv">Part 5 — 돈의 구조를 이해하다</span>
+    <h2 class="display-lg rv d1">1급 시장 vs 2급 시장<br><span class="g-blue">어디서 기회가 오나?</span></h2>
+    <p class="sub-stat rv d2">항상 투기판에서만 놀았던 이유가 있습니다.<br><strong>구조를 모르면 항상 늦게 들어가 손해봅니다.</strong></p>
+
+    <div class="mkt-grid rv d3">
+      <div class="mkt-card tier2">
+        <div class="mkt-card-head">2급 시장 (우리가 흔히 하는 거래)</div>
+        <div class="mkt-li"><span class="mkt-li-icon">📉</span><span class="mkt-li-text">가격이 오른 후 대중이 몰려들 때 매수</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">🔄</span><span class="mkt-li-text">남이 파는 걸 내가 사고, 내가 파는 걸 남이 사는 제로섬 게임</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">😰</span><span class="mkt-li-text">고점에 물릴 확률이 가장 높은 구간</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">💸</span><span class="mkt-li-text">거래소 수수료·세금·슬리피지 반복 지출</span></div>
+      </div>
+      <div class="mkt-card tier1">
+        <div class="mkt-card-head">1급 시장 (RWA의 구조)</div>
+        <div class="mkt-li"><span class="mkt-li-icon">🏗️</span><span class="mkt-li-text">자산이 처음 발행되는 단계 — 가격 상승 전 참여</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">🤝</span><span class="mkt-li-text">발행 주체(기업·정부)와 투자자가 직접 연결</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">💵</span><span class="mkt-li-text">실물 가치(이자·배당)를 처음부터 나눠받음</span></div>
+        <div class="mkt-li"><span class="mkt-li-icon">🌱</span><span class="mkt-li-text">부의 원천적 창출 구조 — 가치 먼저, 가격이 따라옴</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 소비자본론 ══════════ -->
+<section id="fee-flow">
+  <div class="wrap">
+    <span class="eyebrow rv">소비자본론 + DeFi의 만남</span>
+    <h2 class="display-lg rv d1">중간 수수료를<br><span class="g-blue">없애면?</span></h2>
+    <p class="sub-stat rv d2">기존 자본주의에서는 중간업자들이 수익의 70%를 가져갔습니다.<br><strong>소비자는 항상 찌꺼기만 받았습니다.</strong></p>
+
+    <!-- 수평 좌→우 플로우 다이어그램 -->
+    <div class="fee-lanes rv d3">
+
+      <!-- ROW 1: 기존 자본주의 (좌→우, 돈이 깎이며 흐름) -->
+      <div class="fee-lane old">
+        <div class="fee-lane-head">
+          <span>기존 자본주의 구조 — 중간 착취 구조</span>
+          <span class="fee-pct-pill">소비자 −70%</span>
+        </div>
+        <div class="fee-hflow">
+          <div class="fee-hnode producer">🏭 회사<small>가치 창출</small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line red"><div class="fee-harr-dot red" style="animation-delay:0s"></div></div>
+            <div class="fee-harr-head red">→</div>
+          </div>
+          <div class="fee-hnode middle">🏦 은행<small><span class="fee-cut-tag">−15%</span></small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line red"><div class="fee-harr-dot red" style="animation-delay:.4s"></div></div>
+            <div class="fee-harr-head red">→</div>
+          </div>
+          <div class="fee-hnode middle">📊 증권사<small><span class="fee-cut-tag">−20%</span></small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line red"><div class="fee-harr-dot red" style="animation-delay:.8s"></div></div>
+            <div class="fee-harr-head red">→</div>
+          </div>
+          <div class="fee-hnode middle">🏪 유통·브로커<small><span class="fee-cut-tag">−35%</span></small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line red"><div class="fee-harr-dot red" style="animation-delay:1.2s"></div></div>
+            <div class="fee-harr-head red">→</div>
+          </div>
+          <div class="fee-hnode consumer-bad">😢 소비자<small style="color:rgba(239,68,68,.55)">찌꺼기만 남음</small></div>
+        </div>
+      </div>
+
+      <div class="fee-vs"><div class="fee-vs-line"></div><div class="fee-vs-txt">VS · RWA 혁명</div><div class="fee-vs-line"></div></div>
+
+      <!-- ROW 2: RWA + DeFi (좌↔우 직결) -->
+      <div class="fee-lane new">
+        <div class="fee-lane-head">
+          <span>RWA + DeFi 직결 구조 — 중간 수수료 제로</span>
+          <span class="fee-pct-pill">수수료 ≈ 0%</span>
+        </div>
+        <div class="fee-hflow">
+          <div class="fee-hnode producer" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.82)">🏭 회사<small>가치 창출</small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line blue"><div class="fee-harr-dot blue" style="animation-delay:0s"></div></div>
+            <div class="fee-harr-head blue">→</div>
+          </div>
+          <div class="fee-hnode smart" style="flex:1.5">🤖 스마트컨트랙트<small>자동 실행 · 투명 · 중립</small></div>
+          <div class="fee-harr">
+            <div class="fee-harr-line blue"><div class="fee-harr-dot blue" style="animation-delay:.6s"></div></div>
+            <div class="fee-harr-head blue">→</div>
+          </div>
+          <div class="fee-hnode both" style="flex:1.4">💡 소비자 = 투자자<small><span class="fee-zero-tag">수수료 ZERO</span></small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-dark rv d4">
+      <p>💡 <strong>쉬운 예시 — 배달 앱</strong><br>현재: 식당 → 배달앱 30% → 라이더 수수료 → 소비자 (비싼 배달비)<br>RWA+DeFi: 식당 ↔ 소비자 직접 → 수수료 대폭 감소 → <strong>식당은 더 벌고, 소비자는 덜 냄</strong><br>이 차이가 금융 전체로 확장되는 것이 RWA 혁명입니다.</p>
+    </div>
+
+    <div class="src-band rv d5">
+      <span class="src-lbl">참고</span>
+      <a href="https://www.imf.org/en/blogs/articles/2026/07/02/tokenization-can-change-the-worlds-financial-architecture" target="_blank" rel="noopener">IMF — Tokenization 2026</a>
+      <span class="src-sep">·</span>
+      <a href="https://www.weforum.org/stories/2026/01/digital-economy-inflection-point-what-to-expect-for-digital-assets-in-2026/" target="_blank" rel="noopener">WEF 다보스 2026</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 핵심 요약 ══════════ -->
+<section id="summary">
+  <div class="wrap">
+    <span class="eyebrow-dark rv">오늘의 핵심 요약</span>
+    <h2 class="display-md rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">이것만 기억하세요</h2>
+    <div class="sum-cards rv d2">
+      <div class="sum-card"><div class="sum-num">1</div><div><div class="sum-title">고래들의 돈은 이미 RWA로 이동 중</div><div class="sum-body">블랙록·JP모건 등 $38조+를 블록체인 실물 자산에 올렸습니다. 투기성 코인이 아닌 실물 담보 자산입니다.</div></div></div>
+      <div class="sum-card"><div class="sum-num">2</div><div><div class="sum-title">바이낸스·규제기관이 방향을 바꿨다</div><div class="sum-body">전 세계 정부와 최대 거래소가 "실물이 있는 자산"으로 기준을 전환했습니다. 투기판이 끝나고 제도권이 열렸습니다.</div></div></div>
+      <div class="sum-card"><div class="sum-num">3</div><div><div class="sum-title">중간 수수료 없는 시대가 온다</div><div class="sum-body">RWA + DeFi가 만나면 회사와 소비자가 직접 연결됩니다. 모두가 공동 생산자가 되어 함께 성장하는 새로운 경제 구조입니다.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-kicker rv">다음 단계</div>
+    <h2 class="cta-head rv d1">변화는 언제나<br>준비된 자의 몫</h2>
+    <p class="cta-sub rv d2">90년대 부동산, 2000년대 주식 대폭등기를 놓쳤다고 후회하실 필요 없습니다. 지금 전 세계 자본은 RWA 혁명으로 이동하고 있습니다. 이해한 순간이 당신의 시작입니다.</p>
+    <div class="cta-btns rv d3">
+      <button class="btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 처음으로</button>
+      <a href="ep05-whale.html" class="btn-primary">EP.05 고래를 추적하라 →</a>
+    </div>
+    <div class="ep-pills-row rv d4">
+      <a href="ep01-blockchain.html" class="ep-p">EP.01 블록체인 혁명</a>
+      <a href="ep02-defi.html" class="ep-p">EP.02 DeFi</a>
+      <a href="ep03-rwa.html" class="ep-p">EP.03 공기코인의 민낯</a>
+      <span class="ep-p cur">EP.04 거인들의 돈 (현재)</span>
+      <a href="ep05-whale.html" class="ep-p">EP.05 고래 추적</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-l">
+      <p><strong>주요 출처</strong><br>
+        <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a> ·
+        <a href="https://www.binance.com/en/research" target="_blank" rel="noopener">Binance Research</a> ·
+        <a href="https://www.imf.org" target="_blank" rel="noopener">IMF 2026</a> ·
+        <a href="https://www.weforum.org" target="_blank" rel="noopener">WEF 다보스</a> ·
+        <a href="https://beincrypto.com" target="_blank" rel="noopener">BeinCrypto</a> ·
+        <a href="https://defillama.com" target="_blank" rel="noopener">DeFiLlama</a>
+      </p>
+    </div>
+    <div class="foot-r">
+      <p>블록체인 마스터클래스 EP.04 · 교육 목적 자료</p>
+      <p><strong>⚠ 법적 고지:</strong> 본 자료는 순수 교육 목적이며, 투자 권유·수익 보장·매수 추천이 아닙니다. 가상자산 및 RWA 투자에는 원금 손실, 규제 변화, 스마트컨트랙트, 유동성 위험이 있습니다. 모든 투자 결정은 본인 책임이며, 전문 금융 자문가와 상담하시기 바랍니다.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── PROGRESS ── */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+/* ── REVEAL ── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')});
+},{threshold:.1,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.rv,.rv-s,.rv-l,.rv-r').forEach(el=>ro.observe(el));
+
+/* ── ANIMATED BARS ── */
+const bo=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%'});
+      bo.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('#money-bars,#compare-bars,[data-w]').forEach(el=>{
+  // also collect individual wrappers
+  if(el.hasAttribute('data-w'))bo.observe(el.closest('section')||el.parentElement);
+  else bo.observe(el);
+});
+// Direct section observer for all bar fills
+const bro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill[data-w]').forEach(b=>{
+        setTimeout(()=>{b.style.width=b.dataset.w+'%'},200);
+      });
+      bro.unobserve(e.target);
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('section').forEach(s=>bro.observe(s));
+
+/* ── DONUT CHART ── */
+function drawDonut(canvasId,vals,colors,gutter=18){
+  const c=document.getElementById(canvasId);
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const cx=c.width/2,cy=c.height/2,r=cx-gutter;
+  const total=vals.reduce((a,b)=>a+b,0);
+  let start=-Math.PI/2;
+  ctx.clearRect(0,0,c.width,c.height);
+  vals.forEach((v,i)=>{
+    const angle=2*Math.PI*(v/total);
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+angle);
+    ctx.closePath();
+    ctx.fillStyle=colors[i];
+    ctx.fill();
+    start+=angle;
+  });
+  // hole
+  ctx.beginPath();
+  ctx.arc(cx,cy,r*.58,0,2*Math.PI);
+  ctx.fillStyle='#050510';
+  ctx.fill();
+  // center text
+  ctx.fillStyle='rgba(255,255,255,.78)';
+  ctx.font='bold 18px system-ui';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('89%',cx,cy);
+}
+const dro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      drawDonut('donut1',[93,7],['#EF4444',document.documentElement.style.getPropertyValue('--b2')||'#2563EB']);
+      dro.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+const d1el=document.getElementById('donut1');
+if(d1el)dro.observe(d1el.closest('section')||d1el.parentElement);
+
+/* ── HERO PARTICLES ── */
+(function(){
+  const container=document.getElementById('particles');
+  if(!container)return;
+  const colors=['rgba(37,99,235,.25)','rgba(96,165,250,.18)','rgba(191,219,254,.12)','rgba(29,78,216,.2)'];
+  for(let i=0;i<22;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*4+2;
+    const left=Math.random()*100;
+    const dur=Math.random()*14+8;
+    const delay=Math.random()*-18;
+    p.style.cssText=`width:${size}px;height:${size}px;left:${left}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${dur}s;animation-delay:${delay}s`;
+    container.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
