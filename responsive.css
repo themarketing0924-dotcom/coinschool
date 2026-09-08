@@ -1,0 +1,236 @@
+:root {
+  --cs-blue: #155eef;
+  --cs-navy: #102a43;
+  --cs-teal: #0f766e;
+  --cs-focus: #ffb703;
+}
+
+html {
+  min-width: 0;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+  font: inherit;
+}
+
+table {
+  max-width: 100%;
+}
+
+.table-wrap,
+.cmp-table,
+.signal-table,
+.pain-table,
+.excel-wrap,
+.tvl-chart,
+.growth-chart,
+.btc-dom-chart,
+.chart-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cs-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .nav-links,
+  .top-status {
+    min-width: 0;
+  }
+
+  .display-xl,
+  .hero-title,
+  .title {
+    overflow-wrap: anywhere;
+  }
+
+  .flow-row,
+  .lend-compare,
+  .cmp-grid,
+  .stat-grid,
+  .stats-grid,
+  .check-grid,
+  .inst-grid,
+  .proto-grid,
+  .risk-grid,
+  .tool-grid-light,
+  .building-grid,
+  .quote-grid,
+  .case-grid,
+  .model-grid,
+  .generation,
+  .trust-in {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  body {
+    word-break: keep-all;
+  }
+
+  section,
+  header,
+  footer,
+  main,
+  nav,
+  article,
+  aside,
+  div {
+    min-width: 0;
+  }
+
+  .display-xl,
+  .display-lg,
+  .display-md,
+  .hero-title,
+  .section-title,
+  .cta-title,
+  .gap-title,
+  .offer-title,
+  .title {
+    letter-spacing: 0 !important;
+    text-wrap: balance;
+  }
+
+  .body-lg,
+  .body-lg-dark,
+  .hero-sub,
+  .section-sub,
+  .cta-sub,
+  .course-desc,
+  .intro-copy,
+  .model-copy {
+    overflow-wrap: break-word;
+  }
+
+  .nav-links a,
+  .nav-cta,
+  .cta-btn,
+  .cta-btn-ghost,
+  .btn-primary,
+  .btn-ghost,
+  .btn-main,
+  .open-btn,
+  .bridge-btn {
+    min-height: 44px;
+  }
+
+  .course-desc,
+  .lesson-sub,
+  .ep-takeaway {
+    display: block !important;
+  }
+
+  .flow-row,
+  .lend-compare,
+  .cmp-grid,
+  .stat-grid,
+  .stats-grid,
+  .check-grid,
+  .inst-grid,
+  .proto-grid,
+  .risk-grid,
+  .tool-grid-light,
+  .building-grid,
+  .quote-grid,
+  .case-grid,
+  .model-grid,
+  .generation,
+  .benefits,
+  .proof-grid,
+  .why-grid,
+  .notes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .flow-conn,
+  .flow-arrow,
+  .pool-arrow {
+    transform: rotate(90deg);
+  }
+
+  .src-bar,
+  .ref-row,
+  .source-list,
+  .source-row {
+    align-items: flex-start;
+    overflow-wrap: anywhere;
+  }
+
+  .form-input,
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .hide-mobile {
+    display: initial !important;
+  }
+
+  .wrap,
+  .wrap-wide {
+    max-width: 100% !important;
+  }
+
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(24px) scale(0.97) !important;
+  }
+
+  .reveal-left.visible,
+  .reveal-right.visible {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .nav-logo,
+  .brand,
+  .logo {
+    font-size: 0.75rem !important;
+  }
+
+  .ep-pill,
+  .day-chip,
+  .data-pill,
+  .tag-chip {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

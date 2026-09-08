@@ -34,10 +34,10 @@ function doPost(e) {
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
         '신청일시', '이름', '전화번호', '현재DAY', '완료여부', '마지막발송',
-        '교육자료 발송 동의', '마케팅 수신 동의'
+        '교육자료 발송 동의', '마케팅 수신 동의', '이메일'
       ]);
-    } else if (sheet.getLastColumn() < 8) {
-      sheet.getRange(1, 7, 1, 2).setValues([['교육자료 발송 동의', '마케팅 수신 동의']]);
+    } else if (sheet.getLastColumn() < 9) {
+      sheet.getRange(1, 7, 1, 3).setValues([['교육자료 발송 동의', '마케팅 수신 동의', '이메일']]);
     }
 
     // 전화번호 정규화 (하이픈 제거)
@@ -62,7 +62,8 @@ function doPost(e) {
       'N',        // 완료여부
       '',         // 마지막발송
       data.educationConsent === true ? 'Y' : 'N',
-      data.marketingConsent === true ? 'Y' : 'N'
+      data.marketingConsent === true ? 'Y' : 'N',
+      data.email
     ]);
 
     return ContentService
