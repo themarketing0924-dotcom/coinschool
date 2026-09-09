@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>돈의 흐름과 RWA — 코인스쿨 마스터클래스</title>
+<meta name="description" content="거인들의 돈은 어디로 가는가? 정부에서 소비자까지의 자금 흐름, 기존 금융 vs 토큰화 금융, RWA 실물연계자산의 모든 것을 배웁니다.">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+:root{--bg:#060918;--panel:#10142a;--panel2:#161b38;--line:#252a4a;--txt:#e8ecff;--muted:#8b93b8;--dim:#5a6080;
+  --gold:#F59E0B;--gold2:#D97706;--blue:#3B82F6;--blue2:#2563EB;--blue3:#60A5FA;--green:#10B981;--red:#EF4444}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden;scroll-snap-type:y proximity;
+  background-image:radial-gradient(rgba(255,255,255,.018) 1px,transparent 1px);background-size:26px 26px;
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue3);text-decoration:none}
+
+/* ═══ SLIDE ═══ */
+.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:safe center;align-items:center;
+  text-align:center;padding:80px 24px;position:relative;scroll-snap-align:start;border-bottom:1px solid rgba(255,255,255,.04)}
+.inner{max-width:980px;width:100%;opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.slide.in .inner{opacity:1;transform:none}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue3);margin-bottom:18px}
+h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin:0}
+.sub{color:var(--muted);font-size:clamp(16px,2.3vw,21px);margin-top:22px;line-height:1.7;max-width:740px;margin-left:auto;margin-right:auto}
+.sub b{color:var(--txt)}
+.pill{display:inline-block;font-size:13px;font-weight:700;color:var(--muted);border:1px solid var(--line);background:var(--panel);padding:6px 14px;border-radius:999px;margin-bottom:20px}
+.gold{background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.blue{background:linear-gradient(90deg,var(--blue3),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ═══ COVER ═══ */
+.cover h1{font-size:clamp(32px,6vw,64px);font-weight:900;letter-spacing:-2px;line-height:1.06;margin:18px 0 0}
+.grad{background:linear-gradient(90deg,#60A5FA,#BFDBFE,#3B82F6,#60A5FA);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4.5s linear infinite}
+@keyframes shine{to{background-position:300% 0}}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0;animation:float 10s ease-in-out infinite}
+.orb.a{width:360px;height:360px;background:rgba(59,130,246,.3);top:-60px;right:6%}
+.orb.b{width:300px;height:300px;background:rgba(37,99,235,.2);bottom:-40px;left:4%;animation-delay:-5s}
+.orb.c{width:300px;height:300px;background:rgba(245,158,11,.12);top:36%;left:42%;animation-delay:-2.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(26px)}}
+.cover .inner{position:relative;z-index:1}
+.cover.in h1{animation:titleIn 1s cubic-bezier(.2,.85,.25,1) both}
+@keyframes titleIn{from{opacity:0;transform:translateY(18px) scale(.96);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+/* ═══ KPI ═══ */
+.kpis{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px 26px;min-width:120px;transition:transform .25s,border-color .25s}
+.kpi:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.5)}
+.kpi b{display:block;font-size:clamp(24px,3.6vw,36px);font-weight:900;line-height:1}.kpi span{font-size:12.5px;color:var(--muted);margin-top:5px;display:block}
+
+/* ═══ BIGNUM ═══ */
+.bignum{font-size:clamp(56px,12vw,130px);font-weight:900;line-height:.9;letter-spacing:-4px;animation:numglow 2.8s ease-in-out infinite}
+@keyframes numglow{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 26px rgba(59,130,246,.5))}}
+
+/* ═══ FLOW DIAGRAM ═══ */
+.flow-diagram{max-width:800px;margin:40px auto 0;position:relative}
+.flow-nodes{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.flow-node{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px 16px;text-align:center;flex:1;min-width:100px;transition:all .6s cubic-bezier(.2,.8,.2,1);opacity:.3;transform:scale(.9)}
+.flow-node.active{opacity:1;transform:scale(1);border-color:var(--blue);box-shadow:0 0 30px rgba(59,130,246,.25)}
+.flow-node .icon{font-size:32px;margin-bottom:8px}
+.flow-node .label{font-size:14px;font-weight:800;color:var(--txt)}
+.flow-node .desc{font-size:11px;color:var(--muted);margin-top:4px}
+.flow-arrow{flex:0 0 30px;font-size:20px;color:var(--line);transition:color .6s;text-align:center}
+.flow-arrow.active{color:var(--blue3)}
+@media(max-width:600px){.flow-nodes{flex-direction:column}.flow-arrow{transform:rotate(90deg)}}
+
+/* ═══ PROCESS STEPS ═══ */
+.process-compare{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;max-width:860px;margin:36px auto 0;align-items:start}
+@media(max-width:700px){.process-compare{grid-template-columns:1fr;gap:20px}}
+.process-col{text-align:left}
+.process-col h3{font-size:18px;font-weight:900;margin:0 0 16px;text-align:center}
+.step-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;opacity:.3;transform:translateX(-20px);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.process-col.right .step-item{transform:translateX(20px)}
+.step-item.active{opacity:1;transform:none}
+.step-num{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.old .step-num{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.new .step-num{background:rgba(59,130,246,.15);color:var(--blue3);border:1px solid rgba(59,130,246,.3)}
+.step-text{font-size:14px;line-height:1.6;color:var(--muted)}.step-text b{color:var(--txt)}
+.vs-divider{display:flex;align-items:center;justify-content:center}
+.vs-badge{width:44px;height:44px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--dim)}
+@media(max-width:700px){.vs-divider{justify-content:flex-start;padding-left:20px}}
+
+/* ═══ RWA 4-STEP ═══ */
+.rwa-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:36px auto 0}
+@media(max-width:700px){.rwa-steps{grid-template-columns:repeat(2,1fr)}}
+.rwa-step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center;position:relative;opacity:.2;transform:translateY(20px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+.rwa-step.active{opacity:1;transform:none;border-color:rgba(59,130,246,.4)}
+.rwa-step .rs-icon{font-size:36px;margin-bottom:10px}
+.rwa-step h4{font-size:16px;font-weight:800;margin:0 0 6px}
+.rwa-step p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.rwa-step .rs-arrow{position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--line)}
+@media(max-width:700px){.rwa-step .rs-arrow{display:none}}
+
+/* ═══ WORLD MAP TIMELINE ═══ */
+.world-timeline{max-width:860px;margin:36px auto 0;display:grid;gap:14px}
+.wt-item{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 16px 16px 0;padding:18px 22px;display:grid;grid-template-columns:60px 1fr 100px;gap:16px;align-items:center;opacity:.2;transform:translateX(-30px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+.wt-item.active{opacity:1;transform:none}
+.wt-item.unverified{border-left-color:var(--dim);opacity:.5}
+.wt-item.unverified.active{opacity:.7}
+.wt-flag{font-size:28px;text-align:center}
+.wt-info h4{font-size:15px;font-weight:800;margin:0 0 4px}.wt-info p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.wt-amount{font-size:16px;font-weight:900;text-align:right}
+.wt-amount.blue{color:var(--blue3)}.wt-amount.gold{color:var(--gold)}
+.wt-amount .tag{display:block;font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+@media(max-width:600px){.wt-item{grid-template-columns:40px 1fr;gap:10px}.wt-amount{grid-column:1/-1;text-align:left}}
+
+/* ═══ COMPARISON TABLE ═══ */
+.vs-table{max-width:780px;margin:32px auto 0;border-collapse:collapse;width:100%;text-align:left;font-size:15px}
+.vs-table th,.vs-table td{border:1px solid var(--line);padding:14px 16px}
+.vs-table th{background:var(--panel2);color:var(--muted);font-size:13px;font-weight:700}
+.vs-table th.hl{color:var(--blue3)}
+.vs-table td:first-child{background:var(--panel2);font-weight:700;width:24%}
+.vs-table td b{color:var(--txt)}.vs-table .hl{color:var(--blue3);font-weight:700}
+
+/* ═══ STAIRCASE ═══ */
+.staircase{display:flex;align-items:flex-end;justify-content:center;gap:8px;max-width:700px;margin:40px auto 0;height:320px}
+.stair{flex:1;border-radius:14px 14px 0 0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:16px 8px;transition:height 1.2s cubic-bezier(.2,.8,.2,1);height:0;overflow:hidden;position:relative}
+.stair .s-gen{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--blue3);text-transform:uppercase;margin-bottom:6px}
+.stair h4{font-size:14px;font-weight:800;color:#fff;margin:0;text-align:center}
+.stair p{font-size:11px;color:rgba(255,255,255,.6);margin:4px 0 0;text-align:center;line-height:1.4}
+.stair .s-role{position:absolute;top:12px;font-size:20px}
+.slide.in .stair:nth-child(1){height:25%;background:linear-gradient(180deg,rgba(59,130,246,.2),var(--panel))}
+.slide.in .stair:nth-child(2){height:45%;background:linear-gradient(180deg,rgba(59,130,246,.3),var(--panel))}
+.slide.in .stair:nth-child(3){height:70%;background:linear-gradient(180deg,rgba(59,130,246,.45),var(--panel))}
+.slide.in .stair:nth-child(4){height:95%;background:linear-gradient(180deg,rgba(245,158,11,.4),var(--panel));border:1px solid rgba(245,158,11,.3)}
+
+/* ═══ CHART ═══ */
+.ec{width:100%;height:min(46vh,380px);margin:6px auto 0}
+@media(max-width:600px){.ec{height:300px}}
+.cap{color:var(--dim);font-size:12.5px;margin-top:14px;text-align:center}
+
+/* ═══ FACT LIST ═══ */
+.fact{text-align:left;max-width:780px;margin:28px auto 0;display:grid;gap:12px}
+.fact .f{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 14px 14px 0;padding:16px 20px;font-size:15px;line-height:1.6}
+.fact .f b{color:var(--blue3)}.fact .f span{color:var(--muted)}
+
+/* ═══ NAV DOTS ═══ */
+.dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:10px}
+.dots a{width:9px;height:9px;border-radius:50%;background:rgba(59,130,246,.25);transition:.3s;display:block}
+.dots a.on{background:var(--blue3);transform:scale(1.5);box-shadow:0 0 10px rgba(59,130,246,.7)}
+.hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:12px;letter-spacing:1px;z-index:60;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ═══ COUNTER ═══ */
+.counter{font-variant-numeric:tabular-nums}
+
+@media(prefers-reduced-motion:reduce){.inner{opacity:1!important;transform:none!important}.orb{animation:none}}
+</style>
+</head>
+<body>
+<div class="dots" id="dots"></div>
+<div class="hint">스크롤 ↓</div>
+
+<!-- ═══ 0 COVER ═══ -->
+<section class="slide cover">
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="inner">
+    <div class="eyebrow">📣 코인스쿨 · EP.04 마스터클래스</div>
+    <h1>거인들의 돈은 어디로 —<br><span class="grad">돈의 흐름과 RWA</span></h1>
+    <p class="sub">정부에서 소비자까지 <b>자금이 흐르는 진짜 지도</b>. 그리고 실물자산이 토큰이 되어 <b>당신의 지갑에 도착하는 새로운 배관</b>을 배웁니다.</p>
+    <div class="kpis">
+      <div class="kpi"><b class="blue counter" data-target="16">0</b><span>조 달러 — 토큰화 예측 2030</span></div>
+      <div class="kpi"><b class="blue counter" data-target="300">0</b><span>% RWA 시장 연평균 성장률</span></div>
+      <div class="kpi"><b class="blue">블랙록</b><span>세계 1위 자산운용사 진출</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 1 돈의 이동 ═══ -->
+<section class="slide" id="s-flow">
+  <div class="inner">
+    <div class="pill">💰 돈의 이동</div>
+    <h2>돈은 <span class="blue">위에서 아래로</span> 흐른다</h2>
+    <p class="sub">중앙은행이 찍어낸 돈은 금융기관 → 기업 → 소비자 순서로 흘러간다. <b>스크롤하면 자금 지도가 활성화</b>됩니다.</p>
+    <div class="flow-diagram" id="flow-map">
+      <div class="flow-nodes">
+        <div class="flow-node" data-step="0"><div class="icon">🏛️</div><div class="label">정부·중앙은행</div><div class="desc">통화 발행, 금리 결정</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-step="1"><div class="icon">🏦</div><div class="label">금융기관</div><div class="desc">대출, 투자, 유동성 공급</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-step="2"><div class="icon">🏢</div><div class="label">기업</div><div class="desc">생산, 고용, 투자</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-step="3"><div class="icon">👤</div><div class="label">소비자</div><div class="desc">소비, 저축, 투자</div></div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:24px">📌 문제: 이 파이프를 타고 내려오는 동안 <b>중간 마진·수수료·시간 지연</b>이 발생한다. 토큰화는 이 배관을 <b>직통으로</b> 바꾼다.</p>
+  </div>
+</section>
+
+<!-- ═══ 2 기존 금융 vs 토큰화 금융 ═══ -->
+<section class="slide" id="s-compare">
+  <div class="inner">
+    <div class="pill">⚡ 기존 vs 토큰화</div>
+    <h2>거래의 <span class="gold">배관이 바뀐다</span></h2>
+    <p class="sub">같은 자산을 사고파는데, <b>기존 금융은 5단계</b>, <b>토큰화 금융은 2단계</b>. 중개자가 사라지면 속도와 비용이 혁신된다.</p>
+    <div class="process-compare">
+      <div class="process-col old">
+        <h3 style="color:var(--red)">기존 금융 🏦</h3>
+        <div class="step-item" data-ps="0"><div class="step-num">1</div><div class="step-text"><b>거래 체결</b> — 브로커를 통해 매수·매도 주문</div></div>
+        <div class="step-item" data-ps="1"><div class="step-num">2</div><div class="step-text"><b>대조·확인</b> — 거래소가 쌍방 주문을 매칭</div></div>
+        <div class="step-item" data-ps="2"><div class="step-num">3</div><div class="step-text"><b>청산</b> — CCP가 리스크 관리·네팅 처리</div></div>
+        <div class="step-item" data-ps="3"><div class="step-num">4</div><div class="step-text"><b>결제</b> — 예탁기관이 소유권 이전 (T+2일)</div></div>
+        <div class="step-item" data-ps="4"><div class="step-num">5</div><div class="step-text"><b>보관·보고</b> — 수탁은행, 감사, 규제 보고</div></div>
+      </div>
+      <div class="vs-divider"><div class="vs-badge">VS</div></div>
+      <div class="process-col right new">
+        <h3 style="color:var(--blue3)">토큰화 금융 🔗</h3>
+        <div class="step-item" data-ps="0"><div class="step-num">1</div><div class="step-text"><b>스마트 컨트랙트 체결</b> — 코드가 즉시 매칭·실행</div></div>
+        <div class="step-item" data-ps="1"><div class="step-num">2</div><div class="step-text"><b>즉시 결제·기록</b> — 블록체인에 소유권 자동 이전 (T+0)</div></div>
+      </div>
+    </div>
+    <div class="kpis" style="margin-top:28px">
+      <div class="kpi"><b style="color:var(--red)">T+2일</b><span>기존 결제 소요</span></div>
+      <div class="kpi"><b class="blue">T+0 즉시</b><span>토큰화 결제</span></div>
+      <div class="kpi"><b class="blue">-80%</b><span>중개 비용 절감</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3 RWA 정의 ═══ -->
+<section class="slide" id="s-rwa">
+  <div class="inner">
+    <div class="pill">🔑 RWA란 무엇인가</div>
+    <h2>실물자산이 <span class="blue">토큰</span>이 되는 4단계</h2>
+    <p class="sub">사물함 비유: 실물자산은 <b>사물함 속 물건</b>, 토큰은 <b>그 열쇠</b>, 스마트 컨트랙트는 <b>사물함 규칙</b>입니다.</p>
+    <div class="rwa-steps" id="rwa-4step">
+      <div class="rwa-step" data-rs="0">
+        <div class="rs-icon">🏗️</div>
+        <h4>실물자산</h4>
+        <p>부동산, 채권, 금, 미술품 등 실제 가치가 있는 자산</p>
+        <div class="rs-arrow">→</div>
+      </div>
+      <div class="rwa-step" data-rs="1">
+        <div class="rs-icon">📜</div>
+        <h4>법적 계약</h4>
+        <p>자산의 소유권·수익권을 법적으로 정의하는 계약서</p>
+        <div class="rs-arrow">→</div>
+      </div>
+      <div class="rwa-step" data-rs="2">
+        <div class="rs-icon">🪙</div>
+        <h4>토큰 발행</h4>
+        <p>스마트 컨트랙트로 권리를 디지털 토큰으로 분할</p>
+        <div class="rs-arrow">→</div>
+      </div>
+      <div class="rwa-step" data-rs="3">
+        <div class="rs-icon">🧑‍💼</div>
+        <h4>투자자 권리</h4>
+        <p>토큰 보유자가 배당·수익·소유권을 직접 행사</p>
+      </div>
+    </div>
+    <div class="fact" style="margin-top:28px">
+      <div class="f"><b>🔑 열쇠(토큰)</b> <span>= 사물함(실물자산)을 열 수 있는 권리. 열쇠를 가진 사람이 곧 소유자.</span></div>
+      <div class="f"><b>📋 규칙(스마트 컨트랙트)</b> <span>= "열쇠 3개 중 2개가 동의해야 사물함이 열린다" 같은 자동 실행 조건.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 글로벌 사례 ═══ -->
+<section class="slide" id="s-cases">
+  <div class="inner">
+    <div class="pill">🌍 국내외 실제 사례</div>
+    <h2>세계는 이미 <span class="gold">토큰화</span> 중</h2>
+    <p class="sub">글로벌 기관들이 실물자산 토큰화를 <b>실행</b>하고 있다. 발행 규모를 확인하세요.</p>
+    <div class="world-timeline" id="world-cases">
+      <div class="wt-item" data-wt="0">
+        <div class="wt-flag">🇩🇪</div>
+        <div class="wt-info"><h4>지멘스 — 디지털 채권</h4><p>2023년 블록체인 기반 회사채 발행. 전통 금융 거물의 첫 토큰 채권.</p></div>
+        <div class="wt-amount blue">€60M<div class="tag">발행 규모</div></div>
+      </div>
+      <div class="wt-item" data-wt="1">
+        <div class="wt-flag">🇭🇰</div>
+        <div class="wt-info"><h4>홍콩 정부 — 그린 본드</h4><p>2024년 세계 최초 정부 발행 토큰화 녹색채권. 아시아 RWA 허브 선언.</p></div>
+        <div class="wt-amount blue">HK$800M<div class="tag">발행 규모</div></div>
+      </div>
+      <div class="wt-item" data-wt="2">
+        <div class="wt-flag">🇨🇭</div>
+        <div class="wt-info"><h4>UBS — 토큰화 머니마켓 펀드</h4><p>스위스 최대 은행이 이더리움 기반 펀드 토큰 발행.</p></div>
+        <div class="wt-amount blue">$50M+<div class="tag">초기 규모</div></div>
+      </div>
+      <div class="wt-item" data-wt="3">
+        <div class="wt-flag">🇺🇸</div>
+        <div class="wt-info"><h4>블랙록 — BUIDL 펀드</h4><p>세계 1위 자산운용사($10T AUM)가 이더리움에 토큰화 국채 펀드 출시. 시장의 게임 체인저.</p></div>
+        <div class="wt-amount gold" style="font-size:20px">$500M+<div class="tag">🔥 최대 규모</div></div>
+      </div>
+      <div class="wt-item unverified" data-wt="4">
+        <div class="wt-flag">🇨🇳</div>
+        <div class="wt-info"><h4>마오타이 — 주류 토큰 (미확인)</h4><p>일부 플랫폼에서 마오타이 토큰화를 시도했으나 <b style="color:var(--red)">공식 RWA로 확인되지 않음</b>.</p></div>
+        <div class="wt-amount" style="color:var(--red)">⚠️ 미확인<div class="tag">검증 필요</div></div>
+      </div>
+    </div>
+    <div class="ec" id="ec_cases" style="margin-top:24px"></div>
+    <p class="cap">글로벌 주요 RWA 토큰화 발행 규모 비교</p>
+  </div>
+</section>
+
+<!-- ═══ 5 코인 vs RWA ═══ -->
+<section class="slide" id="s-coinrwa">
+  <div class="inner">
+    <div class="pill">⚖️ 코인 vs RWA</div>
+    <h2>투기 코인과 <span class="blue">RWA</span>는 <span class="gold">본질이 다르다</span></h2>
+    <table class="vs-table">
+      <thead><tr><th>구분</th><th>일반 코인</th><th class="hl">RWA 토큰</th></tr></thead>
+      <tbody>
+        <tr><td>가치 근거</td><td>시장 심리·수요/공급</td><td class="hl">실물자산 (부동산·채권·금)</td></tr>
+        <tr><td>현금 흐름</td><td>없음 (시세 차익만)</td><td class="hl">배당·이자·임대 수익</td></tr>
+        <tr><td>법적 권리</td><td>대부분 없음</td><td class="hl">법적 소유권·청구권</td></tr>
+        <tr><td>상환 의무</td><td>없음</td><td class="hl">만기 원금 상환 가능</td></tr>
+        <tr><td>위험 요소</td><td>극단적 변동성</td><td class="hl">기초자산 리스크 (상대적 안정)</td></tr>
+      </tbody>
+    </table>
+    <div class="ec" id="ec_radar" style="height:min(42vh,360px);margin-top:20px"></div>
+    <p class="cap">가치 근거·현금 흐름·법적 권리·상환·위험 비교 레이더 차트</p>
+  </div>
+</section>
+
+<!-- ═══ 6 유통 4세대 ═══ -->
+<section class="slide" id="s-gen">
+  <div class="inner">
+    <div class="pill">📈 유통의 진화</div>
+    <h2>소비자의 역할이 <span class="gold">커진다</span> — 유통 4세대</h2>
+    <p class="sub">단순 구매자에서 <b>가치 공동 창조자</b>로. 세대가 올라갈수록 소비자의 권한과 참여가 확대됩니다.</p>
+    <div class="staircase" id="staircase">
+      <div class="stair">
+        <div class="s-role">🛒</div>
+        <div class="s-gen">1세대</div>
+        <h4>판매</h4>
+        <p>일방적 구매<br>소비자 = 수동</p>
+      </div>
+      <div class="stair">
+        <div class="s-role">💳</div>
+        <div class="s-gen">2세대</div>
+        <h4>포인트</h4>
+        <p>적립·리워드<br>재구매 유도</p>
+      </div>
+      <div class="stair">
+        <div class="s-role">📣</div>
+        <div class="s-gen">3세대</div>
+        <h4>판매 참여</h4>
+        <p>리뷰·추천·어필리에이트<br>수익 공유 시작</p>
+      </div>
+      <div class="stair">
+        <div class="s-role">🤝</div>
+        <div class="s-gen">4세대</div>
+        <h4>공동 가치</h4>
+        <p>토큰 보유 = 지분<br>가치 상승 공유</p>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:28px">📌 <b>RWA 토큰</b>은 4세대 유통의 핵심 인프라. 소비자가 <b>투자자이자 홍보자</b>가 되는 구조를 기술적으로 가능하게 만든다.</p>
+  </div>
+</section>
+
+<!-- ═══ 7 마무리 ═══ -->
+<section class="slide" style="border-bottom:none">
+  <div class="inner">
+    <div class="eyebrow">EP.04 마무리</div>
+    <h2>돈의 배관이 바뀌면<br><span class="grad">기회의 지도도 바뀐다</span></h2>
+    <p class="sub">실물자산이 토큰이 되고, 중개자가 사라지고, 소비자가 투자자가 되는 시대. <b>이 흐름을 먼저 읽는 사람이 기회를 선점</b>합니다.</p>
+    <div class="kpis">
+      <div class="kpi"><b class="blue">$16T</b><span>2030 토큰화 시장 예측</span></div>
+      <div class="kpi"><b style="color:var(--gold)">블랙록·UBS</b><span>이미 진출 완료</span></div>
+      <div class="kpi"><b class="blue">T+0</b><span>즉시 결제 시대</span></div>
+    </div>
+    <div style="margin-top:32px"><a href="masterclass.html" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:800;padding:14px 32px;border-radius:12px;font-size:16px;transition:transform .2s;box-shadow:0 8px 30px rgba(59,130,246,.4)">마스터클래스 무료 등록 ➔</a></div>
+    <div style="margin-top:24px;color:var(--dim);font-size:13px">코인스쿨 · EP.04 돈의 흐름과 RWA · 2026</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dots=document.getElementById('dots');
+  slides.forEach(function(s){var a=document.createElement('a');a.href='#';a.addEventListener('click',function(e){e.preventDefault();s.scrollIntoView({behavior:'smooth'});});dots.appendChild(a);});
+  var dotEls=[].slice.call(dots.children);
+
+  /* ═══ Counter Animation ═══ */
+  function animateCounters(root){
+    root.querySelectorAll('.counter').forEach(function(el){
+      if(el._done)return;el._done=true;
+      var target=parseInt(el.getAttribute('data-target'),10);
+      var dur=1200,start=performance.now();
+      (function tick(now){
+        var p=Math.min((now-start)/dur,1);
+        var ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(ease*target);
+        if(p<1)requestAnimationFrame(tick);
+      })(start);
+    });
+  }
+
+  /* ═══ Flow Map Sequential Activation ═══ */
+  function activateFlow(){
+    var nodes=document.querySelectorAll('#flow-map .flow-node');
+    var arrows=document.querySelectorAll('#flow-map .flow-arrow');
+    nodes.forEach(function(n,i){
+      setTimeout(function(){n.classList.add('active');if(arrows[i])arrows[i].classList.add('active');},i*400);
+    });
+  }
+
+  /* ═══ Process Steps Sequential ═══ */
+  function activateProcess(){
+    var items=document.querySelectorAll('#s-compare .step-item');
+    items.forEach(function(item,i){
+      setTimeout(function(){item.classList.add('active');},i*250);
+    });
+  }
+
+  /* ═══ RWA Steps Sequential ═══ */
+  function activateRWA(){
+    var steps=document.querySelectorAll('#rwa-4step .rwa-step');
+    steps.forEach(function(s,i){
+      setTimeout(function(){s.classList.add('active');},i*350);
+    });
+  }
+
+  /* ═══ World Timeline Sequential ═══ */
+  function activateWorld(){
+    var items=document.querySelectorAll('#world-cases .wt-item');
+    items.forEach(function(item,i){
+      setTimeout(function(){item.classList.add('active');},i*300);
+    });
+  }
+
+  /* ═══ ECharts ═══ */
+  var EC={};
+  if(window.echarts){
+    var P1='#3B82F6',P2='#1D4ED8',G1='#F59E0B',G2='#D97706';
+    function grd(a,b){return new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:a},{offset:1,color:b}]);}
+    var TIP={backgroundColor:'#161b38',borderColor:'#3B82F6',borderWidth:1,textStyle:{color:'#e8ecff',fontFamily:'Pretendard'},extraCssText:'border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.6);padding:11px 14px;'};
+
+    // Cases bar chart
+    EC.ec_cases={grid:{left:80,right:20,top:20,bottom:40},
+      tooltip:Object.assign({trigger:'axis'},TIP),
+      xAxis:{type:'category',data:['지멘스','홍콩 정부','UBS','블랙록 BUIDL'],axisLabel:{color:'#8b93b8',fontFamily:'Pretendard',fontSize:12},axisLine:{lineStyle:{color:'#252a4a'}},axisTick:{show:false}},
+      yAxis:{type:'value',name:'백만 달러',nameTextStyle:{color:'#5a6080',fontSize:11},axisLabel:{color:'#8b93b8'},splitLine:{lineStyle:{color:'#1a1f3a'}},axisLine:{show:false},axisTick:{show:false}},
+      series:[{type:'bar',barWidth:'52%',data:[
+        {value:65,itemStyle:{color:grd(P1,P2),borderRadius:[7,7,0,0]}},
+        {value:103,itemStyle:{color:grd(P1,P2),borderRadius:[7,7,0,0]}},
+        {value:50,itemStyle:{color:grd(P1,P2),borderRadius:[7,7,0,0]}},
+        {value:500,itemStyle:{color:grd(G1,G2),borderRadius:[7,7,0,0],shadowBlur:16,shadowColor:'rgba(245,158,11,.4)'}}
+      ],label:{show:true,position:'top',color:'#e8ecff',fontWeight:'bold',fontFamily:'Pretendard',formatter:'${c}M'}}],
+      animationDuration:1200,animationDelay:function(i){return i*150;},animationEasing:'cubicOut'};
+
+    // Radar chart
+    EC.ec_radar={tooltip:Object.assign({},TIP),
+      radar:{indicator:[
+        {name:'가치 근거',max:10},{name:'현금 흐름',max:10},{name:'법적 권리',max:10},{name:'상환 의무',max:10},{name:'안정성',max:10}
+      ],axisName:{color:'#8b93b8',fontFamily:'Pretendard',fontSize:12},splitLine:{lineStyle:{color:'#252a4a'}},splitArea:{areaStyle:{color:['transparent']}},axisLine:{lineStyle:{color:'#252a4a'}}},
+      series:[{type:'radar',data:[
+        {value:[3,1,1,1,2],name:'일반 코인',areaStyle:{color:'rgba(239,68,68,.15)'},lineStyle:{color:'#EF4444',width:2},itemStyle:{color:'#EF4444'}},
+        {value:[9,8,9,8,7],name:'RWA 토큰',areaStyle:{color:'rgba(59,130,246,.15)'},lineStyle:{color:'#3B82F6',width:2},itemStyle:{color:'#3B82F6'}}
+      ]}],
+      legend:{bottom:0,textStyle:{color:'#8b93b8',fontFamily:'Pretendard'},itemWidth:14,itemHeight:14},
+      animationDuration:1000};
+  }
+
+  function initECIn(root){if(!window.echarts)return;root.querySelectorAll('.ec').forEach(function(d){if(d._c||!EC[d.id])return;var c=echarts.init(d);c.setOption(EC[d.id]);d._c=c;});}
+  addEventListener('resize',function(){document.querySelectorAll('.ec').forEach(function(d){if(d._c)d._c.resize();});});
+
+  /* ═══ Intersection Observer ═══ */
+  var activated={};
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        var i=slides.indexOf(e.target);
+        dotEls.forEach(function(d,j){d.classList.toggle('on',j===i);});
+        initECIn(e.target);
+        animateCounters(e.target);
+        var id=e.target.id;
+        if(id&&!activated[id]){
+          activated[id]=true;
+          if(id==='s-flow')activateFlow();
+          if(id==='s-compare')activateProcess();
+          if(id==='s-rwa')activateRWA();
+          if(id==='s-cases')activateWorld();
+        }
+      }
+    });},{threshold:.35});
+    slides.forEach(function(s){io.observe(s);});
+  } else {slides.forEach(function(s){s.classList.add('in');});initECIn(document);animateCounters(document);}
+
+  /* ═══ Keyboard Nav ═══ */
+  addEventListener('keydown',function(e){
+    var cur=slides.findIndex(function(s){var t=s.getBoundingClientRect().top;return t>=-5&&t<innerHeight*0.5;});if(cur<0)cur=0;
+    if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();if(slides[cur+1])slides[cur+1].scrollIntoView({behavior:'smooth'});}
+    if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();if(slides[cur-1])slides[cur-1].scrollIntoView({behavior:'smooth'});}
+  });
+
+  /* ═══ Hint fade ═══ */
+  var h=document.querySelector('.hint');
+  addEventListener('scroll',function(){if(h)h.style.opacity=scrollY>200?'0':'1';},{passive:true});
+})();
+</script>
+</body>
+</html>
