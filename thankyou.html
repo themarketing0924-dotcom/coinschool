@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록 완료 - 코인스쿨 마스터클래스</title>
+    <link rel="stylesheet" href="funnel.css">
+    <style>
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <!-- Welcome Header -->
+    <header class="section text-center" style="padding-bottom: 2rem;">
+        <div class="container animate-fade-up">
+            <span class="badge badge-gold" style="animation: pulse 2s infinite;">🔴 LIVE COHORT 2026 실시간 입장 완료</span>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem;">축하합니다!<br><span class="gradient-text-gold">마스터클래스 수강 티켓이 정상 발급되었습니다.</span></h1>
+            <p style="max-width: 700px; margin: 1.5rem auto 0;">수천 명의 투자자들이 거쳐간 전설적인 자산 방어 및 증식 시스템. 이제 여러분의 포트폴리오가 24시간 잠자는 동안에도 성장할 차례입니다.</p>
+        </div>
+    </header>
+
+    <!-- Content Sections (Hidden initially behind Modal) -->
+    <main class="container" style="filter: blur(4px); opacity: 0.6; pointer-events: none;" id="main-content">
+        <section class="section" style="padding-top: 0;">
+            <div class="glass card text-center">
+                <h2 class="text-blue">대한민국 블록체인 투자를 위한 가장 확실한 성공 공식</h2>
+                <p>누구나 높은 수익과 시간적 자유를 원합니다. 하지만 "언제 사고 언제 팔아야 할까?" 감에 의존하는 투자는 위험합니다. 검증된 거시경제 사이클과 온체인 데이터 전략으로 그 과정을 단축시켜 드립니다.</p>
+                
+                <h3 style="margin-top: 3rem; color: #EF4444;">솔직하게 이야기해 봅시다. 당신을 가로막고 있던 것은 무엇이었습니까?</h3>
+                <ul style="text-align: left; max-width: 600px; margin: 1.5rem auto; list-style: none;">
+                    <li style="margin-bottom: 1rem;">✅ 왜 남들은 코인으로 돈을 벌 때, 나는 항상 고점에 물렸을까?</li>
+                    <li style="margin-bottom: 1rem;">✅ 투자를 하고 있지만 매일 시세창만 바라보느라 내 삶의 여유가 사라지진 않았나요?</li>
+                </ul>
+                <p>이번 마스터클래스에서 이 두 가지 고민을 완벽하게 끝내드립니다.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Micro-Survey Modal -->
+    <div class="modal-overlay" id="survey-modal">
+        <div class="modal-content">
+            <h3 class="text-center" style="margin-bottom: 1.5rem;">더 완벽한 맞춤형 교육을 위해<br>몇 가지 질문에 답해주세요.</h3>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 25%;"></div>
+            </div>
+
+            <form id="survey-form">
+                <!-- Step 1 -->
+                <div class="survey-step active" id="step-1">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 1rem;">현재 투자 경험이 어떻게 되시나요?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="experience" value="none"> 코인 투자를 해본 적 없음 (입문자)
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="experience" value="cex"> 국내 거래소(업비트 등) 단타 위주
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="experience" value="defi"> 디파이, 해외 거래소 유경험자
+                    </label>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="survey-step" id="step-2">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 1rem;">현재 운용 가능 자산 규모는 어느 정도인가요?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="capital" value="under_10m"> 1,000만 원 미만
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="capital" value="10m_to_50m"> 1,000만 원 ~ 5,000만 원
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="capital" value="over_50m"> 5,000만 원 이상
+                    </label>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="survey-step" id="step-3">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 1rem;">가장 집중적으로 알고 싶은 분야는 무엇인가요?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="interest" value="rwa"> RWA (실물연계자산) 트렌드
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="interest" value="onchain"> 고래들의 온체인 데이터 분석
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="interest" value="defi"> 안전한 디파이 예치 이자 수익
+                    </label>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="survey-step" id="step-4">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 1rem;">수강 안내를 받을 정보를 입력해주세요.</p>
+                    <input type="text" placeholder="성함" required id="name-input">
+                    <input type="email" placeholder="이메일 주소" required id="email-input">
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                    <button type="button" class="btn btn-outline" id="btn-prev" style="visibility: hidden;">이전</button>
+                    <button type="button" class="btn btn-primary" id="btn-next" disabled>다음 ➔</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit" style="display: none;">제출하고 1강 보기 ➔</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const steps = document.querySelectorAll('.survey-step');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnSubmit = document.getElementById('btn-submit');
+        const progress = document.getElementById('progress');
+        const options = document.querySelectorAll('.radio-option');
+        
+        let currentStep = 0;
+
+        // Selection styling logic
+        options.forEach(opt => {
+            opt.addEventListener('click', function() {
+                const step = this.closest('.survey-step');
+                const siblings = step.querySelectorAll('.radio-option');
+                siblings.forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+                
+                validateStep();
+            });
+        });
+
+        // Input validation logic
+        const inputs = document.querySelectorAll('#step-4 input');
+        inputs.forEach(input => {
+            input.addEventListener('input', validateStep);
+        });
+
+        function validateStep() {
+            let isValid = false;
+            
+            if (currentStep < 3) {
+                const selected = steps[currentStep].querySelector('input[type="radio"]:checked');
+                if (selected) isValid = true;
+            } else {
+                const name = document.getElementById('name-input').value;
+                const email = document.getElementById('email-input').value;
+                if (name.length >= 2 && email.includes('@')) isValid = true;
+            }
+
+            if (currentStep < 3) {
+                btnNext.disabled = !isValid;
+            } else {
+                btnSubmit.disabled = !isValid;
+            }
+        }
+
+        function updateUI() {
+            steps.forEach((step, idx) => {
+                if (idx === currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+
+            const percent = ((currentStep + 1) / steps.length) * 100;
+            progress.style.width = `${percent}%`;
+
+            btnPrev.style.visibility = currentStep > 0 ? 'visible' : 'hidden';
+            
+            if (currentStep === steps.length - 1) {
+                btnNext.style.display = 'none';
+                btnSubmit.style.display = 'inline-flex';
+            } else {
+                btnNext.style.display = 'inline-flex';
+                btnSubmit.style.display = 'none';
+            }
+            
+            validateStep();
+        }
+
+        btnNext.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateUI();
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateUI();
+            }
+        });
+
+        document.getElementById('survey-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Survey complete
+            document.getElementById('survey-modal').style.display = 'none';
+            const mainContent = document.getElementById('main-content');
+            mainContent.style.filter = 'none';
+            mainContent.style.opacity = '1';
+            mainContent.style.pointerEvents = 'auto';
+            mainContent.style.transition = 'all 1s ease';
+            
+            // Auto scroll down to content
+            window.scrollTo({
+                top: document.getElementById('main-content').offsetTop - 50,
+                behavior: 'smooth'
+            });
+            
+            // In a real scenario, we would submit data to a backend here.
+        });
+    </script>
+</body>
+</html>

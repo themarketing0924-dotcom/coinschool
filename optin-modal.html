@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마스터클래스 무료 등록 - 코인스쿨</title>
+    <link rel="stylesheet" href="funnel.css">
+    <style>
+        body {
+            background-color: #0A0F1C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        }
+
+        .modal-container {
+            background: #ffffff;
+            color: #1f2937;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 560px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+
+        .close-btn {
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: #1f2937;
+        }
+
+        .radio-option {
+            display: block;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .radio-option:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .radio-option.selected {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--accent-gold);
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #111827;
+            background: #fff;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn-next, .btn-submit {
+            background: var(--accent-gold);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            background: var(--accent-gold-hover);
+        }
+
+        .btn-next:disabled, .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-prev {
+            background: #e5e7eb;
+            color: #4b5563;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-prev:hover {
+            background: #d1d5db;
+        }
+
+        .step-container {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .step-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terms-text {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-text a {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-container">
+        <div class="modal-header">
+            <h2 class="modal-title">마스터클래스 맞춤형 설계</h2>
+            <button class="close-btn" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 25%;"></div>
+        </div>
+
+        <form id="optin-form" action="thankyou.html">
+            
+            <!-- Step 1 -->
+            <div class="step-container active" id="step-1">
+                <div class="step-title">현재 가장 관심 있는 블록체인 분야는 무엇인가요? *</div>
+                <label class="radio-option">
+                    <input type="radio" name="interest" value="rwa">
+                    RWA(실물연계자산)와 토큰화 시장
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="interest" value="defi">
+                    디파이(DeFi)를 통한 이자 수익 창출
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="interest" value="onchain">
+                    세력과 고래의 온체인 데이터 분석
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="interest" value="basics">
+                    비트코인과 암호화폐 기초
+                </label>
+                
+                <div class="btn-controls" style="justify-content: flex-end;">
+                    <button type="button" class="btn-next" disabled>다음</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-container" id="step-2">
+                <div class="step-title">코인 투자 경험은 어느 정도이신가요? *</div>
+                <label class="radio-option">
+                    <input type="radio" name="experience" value="none">
+                    경험 없음 (이제 막 입문했습니다)
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="experience" value="beginner">
+                    초보 (국내 거래소에서 소액 단타 경험)
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="experience" value="intermediate">
+                    중급 (해외 거래소 및 선물/마진 경험)
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="experience" value="advanced">
+                    고급 (디파이 풀 예치 및 에어드랍 작업 경험)
+                </label>
+
+                <div class="btn-controls">
+                    <button type="button" class="btn-prev">이전</button>
+                    <button type="button" class="btn-next" disabled>다음</button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-container" id="step-3">
+                <div class="step-title">현재 운용 가능한 자산 규모는 어느 정도인가요? *</div>
+                <label class="radio-option">
+                    <input type="radio" name="capital" value="under10">
+                    1,000만 원 미만
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="capital" value="10to50">
+                    1,000만 원 ~ 5,000만 원
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="capital" value="50to100">
+                    5,000만 원 ~ 1억 원
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="capital" value="over100">
+                    1억 원 이상
+                </label>
+
+                <div class="btn-controls">
+                    <button type="button" class="btn-prev">이전</button>
+                    <button type="button" class="btn-next" disabled>다음</button>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-container" id="step-4">
+                <div class="step-title">마스터클래스 무료 수강권을 받으실 정보를 입력해주세요.</div>
+                
+                <input type="text" class="input-field" id="first-name" placeholder="이름 (First Name) *" required>
+                <input type="email" class="input-field" id="email" placeholder="이메일 주소 (Email) *" required>
+                
+                <div class="terms-text">
+                    *본 양식을 제출함으로써 당사의 <a href="#">개인정보 보호정책</a> 및 <a href="#">이용약관</a>에 동의하게 됩니다. 저희는 귀하의 데이터를 판매하지 않습니다.
+                </div>
+
+                <div class="btn-controls" style="flex-direction: column; gap: 1rem; align-items: stretch;">
+                    <button type="submit" class="btn-submit" id="btn-submit" disabled>제출하고 마스터클래스 시작하기</button>
+                    <button type="button" class="btn-prev" style="text-align: center;">이전 단계로</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step-container');
+            const progressFill = document.getElementById('progress-fill');
+            const form = document.getElementById('optin-form');
+            
+            let currentStep = 0;
+            const totalSteps = steps.length;
+
+            // Handle radio button selections
+            const radioOptions = document.querySelectorAll('.radio-option');
+            radioOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from siblings
+                    const parent = this.closest('.step-container');
+                    parent.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked
+                    this.classList.add('selected');
+                    
+                    // Check the hidden radio input
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+
+                    // Enable next button for this step
+                    const nextBtn = parent.querySelector('.btn-next');
+                    if(nextBtn) nextBtn.disabled = false;
+                });
+            });
+
+            // Handle text inputs for final step
+            const nameInput = document.getElementById('first-name');
+            const emailInput = document.getElementById('email');
+            const submitBtn = document.getElementById('btn-submit');
+
+            function validateFinalStep() {
+                if (nameInput.value.length > 1 && emailInput.value.includes('@')) {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            }
+
+            nameInput.addEventListener('input', validateFinalStep);
+            emailInput.addEventListener('input', validateFinalStep);
+
+            // Handle Next buttons
+            const nextBtns = document.querySelectorAll('.btn-next');
+            nextBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (currentStep < totalSteps - 1) {
+                        steps[currentStep].classList.remove('active');
+                        currentStep++;
+                        steps[currentStep].classList.add('active');
+                        updateProgress();
+                    }
+                });
+            });
+
+            // Handle Prev buttons
+            const prevBtns = document.querySelectorAll('.btn-prev');
+            prevBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (currentStep > 0) {
+                        steps[currentStep].classList.remove('active');
+                        currentStep--;
+                        steps[currentStep].classList.add('active');
+                        updateProgress();
+                    }
+                });
+            });
+
+            function updateProgress() {
+                const percentage = ((currentStep + 1) / totalSteps) * 100;
+                progressFill.style.width = percentage + '%';
+            }
+        });
+    </script>
+</body>
+</html>
