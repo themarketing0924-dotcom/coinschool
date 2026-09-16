@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[기업명] 딥다이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Helvetica Neue",Arial,sans-serif;background:#000;color:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:root{
+  --p1:#7C3AED;--p2:#8B5CF6;--p3:#A78BFA;--p4:#5B21B6;--p5:#EDE9FE;
+  --black:#000;--near-black:#0D0D0D;--card:#1C1C1E;--mid:#3A3A3C;
+  --muted:#6E6E73;--white:#fff;--blue:#0A84FF;--red:#FF453A;--green:#32D74B;
+}
+
+/* ── PROGRESS BAR ── */
+#progress{position:fixed;top:0;left:0;z-index:9999;height:2px;width:0%;background:var(--p1);transition:width .1s linear}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(124,58,237,.15)}
+.nav-logo{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--p3)}
+.nav-pill{font-size:.7rem;font-weight:600;color:rgba(255,255,255,.4);background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:99px;padding:.3em .9em}
+
+/* ── SECTION BASE ── */
+section{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:8rem 2rem;text-align:center}
+.wrap{max-width:920px;width:100%;margin:0 auto}
+.wrap-wide{max-width:1140px;width:100%;margin:0 auto}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{font-size:.68rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--p3);margin-bottom:.8rem}
+.display-xl{font-size:clamp(3.5rem,10vw,8rem);font-weight:900;line-height:.95;letter-spacing:-.05em}
+.display-lg{font-size:clamp(2.6rem,6vw,5rem);font-weight:900;line-height:1;letter-spacing:-.04em}
+.display-md{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
+.section-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,.5);max-width:640px;margin:0 auto;line-height:1.6}
+
+/* ── GRADIENT TEXT ── */
+.grad{background:linear-gradient(135deg,#5B21B6 0%,#8B5CF6 40%,#fff 70%,#7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-light{background:linear-gradient(135deg,#A78BFA 0%,#fff 50%,#A78BFA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* ── SOURCE BAR ── */
+.src-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem;margin-top:2rem;padding:.8rem 1.4rem;background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.18);border-radius:12px;max-width:720px;margin-left:auto;margin-right:auto}
+.src-label{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--p3);margin-right:.4rem}
+.src-bar a{font-size:.66rem;font-weight:600;color:rgba(255,255,255,.38);text-decoration:none;padding:.2em .6em;border-radius:6px;transition:color .2s}
+.src-bar a:hover{color:var(--p3)}
+.src-sep{color:rgba(255,255,255,.12);font-size:.7rem}
+
+/* ── STAT TILES ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2.5rem 0}
+.stat-tile{background:var(--card);border:1px solid rgba(124,58,237,.2);border-radius:16px;padding:1.4rem 1rem;text-align:center}
+.stat-num{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.04em;background:linear-gradient(135deg,#A78BFA,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:.7rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:.3rem}
+.stat-note{font-size:.65rem;color:rgba(255,255,255,.2);margin-top:.3rem}
+
+/* ── TABLE ── */
+.cmp-table{width:100%;border-collapse:collapse;text-align:left;font-size:.82rem;margin-top:2rem}
+.cmp-table thead th{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--p3);padding:.7rem 1rem;border-bottom:1px solid rgba(124,58,237,.2)}
+.cmp-table tbody tr{border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s}
+.cmp-table tbody tr:hover{background:rgba(124,58,237,.06)}
+.cmp-table tbody td{padding:.85rem 1rem;color:rgba(255,255,255,.75);vertical-align:middle}
+.cmp-table .highlight-row td{color:#fff;background:rgba(124,58,237,.1)}
+.cmp-table .highlight-row td:first-child{font-weight:700;color:var(--p3)}
+.badge{display:inline-block;font-size:.62rem;font-weight:700;padding:.18em .55em;border-radius:6px;letter-spacing:.04em}
+.badge-green{background:rgba(50,215,75,.15);color:#32D74B}
+.badge-red{background:rgba(255,69,58,.12);color:#FF453A}
+.badge-purple{background:rgba(124,58,237,.2);color:var(--p3)}
+.badge-gray{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+
+/* ── RADAR / CANVAS CHARTS ── */
+.canvas-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+canvas{display:block;max-width:100%}
+
+/* ── FLOW DIAGRAM ── */
+.flow-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:nowrap;margin:2.5rem 0;overflow-x:auto}
+.flow-node{background:var(--card);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:1.1rem 1.3rem;min-width:130px;text-align:center;flex-shrink:0}
+.flow-node-title{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.flow-node-desc{font-size:.62rem;color:var(--muted);line-height:1.4}
+.flow-node.accent{border-color:var(--p1);background:rgba(124,58,237,.12)}
+.flow-node.accent .flow-node-title{color:var(--p3)}
+.flow-arrow{color:rgba(124,58,237,.5);font-size:1.2rem;padding:0 .4rem;flex-shrink:0}
+
+/* ── 2x2 MATRIX ── */
+.matrix-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:.6rem;width:100%;max-width:640px;margin:2rem auto;aspect-ratio:1.4}
+.matrix-cell{border-radius:14px;padding:1.2rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.matrix-cell-label{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.matrix-cell-title{font-size:.92rem;font-weight:700;line-height:1.3}
+.matrix-cell-desc{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:.3rem;line-height:1.5}
+.m-high-high{background:rgba(50,215,75,.1);border:1px solid rgba(50,215,75,.2)}
+.m-high-high .matrix-cell-label{color:#32D74B}
+.m-high-low{background:rgba(255,159,10,.08);border:1px solid rgba(255,159,10,.18)}
+.m-high-low .matrix-cell-label{color:#FF9F0A}
+.m-low-high{background:rgba(10,132,255,.08);border:1px solid rgba(10,132,255,.18)}
+.m-low-high .matrix-cell-label{color:#0A84FF}
+.m-low-low{background:rgba(255,69,58,.08);border:1px solid rgba(255,69,58,.15)}
+.m-low-low .matrix-cell-label{color:#FF453A}
+.matrix-axis-x{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:.5rem}
+.matrix-axis-y{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);margin-right:.5rem}
+.matrix-outer{display:flex;align-items:center;justify-content:center;max-width:680px;margin:0 auto}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;max-width:720px;margin:2.5rem auto 0;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:.7rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--p1),var(--p4))}
+.tl-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+.tl-dot{position:absolute;left:-1.35rem;top:.15rem;width:14px;height:14px;border-radius:50%;background:var(--p1);border:2px solid #000;box-shadow:0 0 0 3px rgba(124,58,237,.3)}
+.tl-date{font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--p3);margin-bottom:.25rem}
+.tl-title{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.tl-desc{font-size:.76rem;color:var(--muted);line-height:1.55}
+.tl-item.future .tl-dot{background:var(--mid);border-color:rgba(255,255,255,.15)}
+.tl-item.future .tl-date{color:var(--muted)}
+.tl-item.future .tl-title{color:rgba(255,255,255,.5)}
+
+/* ── INVESTMENT THESIS CARDS ── */
+.thesis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2.5rem;text-align:left}
+.thesis-card{background:var(--card);border:1px solid rgba(124,58,237,.15);border-radius:16px;padding:1.6rem}
+.thesis-icon{font-size:1.8rem;margin-bottom:.8rem}
+.thesis-num{font-size:.62rem;font-weight:800;letter-spacing:.12em;color:var(--p3);margin-bottom:.3rem}
+.thesis-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.thesis-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* ── HORIZONTAL BAR CHART ── */
+.hbar-list{margin-top:2rem;display:flex;flex-direction:column;gap:.7rem;max-width:640px;margin-left:auto;margin-right:auto;text-align:left}
+.hbar-item{}
+.hbar-label{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:.3rem;display:flex;justify-content:space-between}
+.hbar-track{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p4),var(--p2));transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── TOKEN PIE / DONUT ── */
+.token-layout{display:flex;gap:2rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.token-legend{display:flex;flex-direction:column;gap:.6rem;text-align:left}
+.legend-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── RISK TAGS ── */
+.risk-tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.5rem}
+.risk-tag{font-size:.72rem;font-weight:600;padding:.35em .9em;border-radius:99px;display:flex;align-items:center;gap:.3em}
+
+/* ── CHECKLIST SECTION (inherited purple) ── */
+.check-row{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2rem}
+.check-item{display:flex;align-items:flex-start;gap:.7rem;background:var(--card);border:1px solid rgba(124,58,237,.12);border-radius:12px;padding:1rem 1.2rem;text-align:left;max-width:340px;width:100%}
+.check-icon{width:28px;height:28px;border-radius:50%;background:rgba(124,58,237,.15);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:.1rem}
+.check-title{font-size:.84rem;font-weight:700;margin-bottom:.2rem}
+.check-desc{font-size:.73rem;color:var(--muted);line-height:1.5}
+
+/* ── CTA ── */
+#cta{background:#000}
+.cta-title{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem;background:linear-gradient(135deg,#5B21B6 0%,#A78BFA 40%,#fff 70%,#7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,.45);max-width:560px;margin:0 auto 2.5rem;line-height:1.65}
+
+/* ── FOOTER ── */
+footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,.06);background:#000}
+footer p{font-size:.68rem;color:rgba(255,255,255,.2);line-height:1.8}
+footer a{color:rgba(255,255,255,.25);text-decoration:none}
+footer a:hover{color:var(--p3)}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <div class="nav-logo">RWA 딥다이브 · <span style="color:rgba(255,255,255,.35)">[기업명]</span></div>
+  <div class="nav-pill">Purple Label Series</div>
+</nav>
+
+<!-- ════════════════════════════════════════
+  01. HERO — 기업 핵심 한 줄 + 3대 KPI
+════════════════════════════════════════ -->
+<section id="hero" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">RWA 기업 딥다이브 · 시리즈 [N]</div>
+    <div class="display-xl grad reveal d1" style="margin-bottom:1.2rem">[기업명]</div>
+    <p class="section-sub reveal d2">[한 줄 포지셔닝 — 이 기업이 무엇을 하는지 가장 명확하게]</p>
+
+    <!-- KPI 타일 3개 -->
+    <div class="stat-row reveal d3">
+      <div class="stat-tile">
+        <div class="stat-num">$[X]B</div>
+        <div class="stat-label">총 TVL / AUM</div>
+        <div class="stat-note">[날짜] 기준</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">[X]%</div>
+        <div class="stat-label">시장 점유율</div>
+        <div class="stat-note">카테고리 내</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">[X]개</div>
+        <div class="stat-label">지원 네트워크</div>
+        <div class="stat-note">블록체인 체인</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-label">출처</span>
+      <a href="#">[출처 1]</a><span class="src-sep">·</span>
+      <a href="#">[출처 2]</a><span class="src-sep">·</span>
+      <a href="#">[출처 3]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  02. 레이더 차트 — 역량 6축 평가
+  (기술력 / 규제 / 유동성 / 성장성 / 수익성 / 팀)
+════════════════════════════════════════ -->
+<section id="radar" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">역량 분석</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">[기업명]의 <span class="grad">6축 평가</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">경쟁사 평균 대비 포지션 비교</p>
+
+    <div class="canvas-wrap reveal d3">
+      <canvas id="radarChart" width="500" height="440"></canvas>
+    </div>
+
+    <!-- 범례 -->
+    <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:1.2rem" class="reveal d4">
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.74rem;color:rgba(255,255,255,.55)">
+        <div style="width:12px;height:3px;background:#8B5CF6;border-radius:2px"></div>[기업명]
+      </div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.74rem;color:rgba(255,255,255,.35)">
+        <div style="width:12px;height:3px;background:rgba(255,255,255,.25);border-radius:2px"></div>경쟁사 평균
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="#">[분석 출처]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  03. 비교 테이블 — 경쟁사 포지셔닝
+════════════════════════════════════════ -->
+<section id="compare" style="background:#000">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">경쟁 분석</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">누가 <span class="grad">무엇을</span> 잘하는가</div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">같은 카테고리 주요 플레이어 비교</p>
+
+    <div class="reveal d3" style="overflow-x:auto">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>프로젝트</th>
+          <th>카테고리</th>
+          <th>TVL</th>
+          <th>수익률</th>
+          <th>규제</th>
+          <th>토큰</th>
+          <th>특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>⭐ [기업명]</td>
+          <td><span class="badge badge-purple">[카테고리]</span></td>
+          <td>$[X]B</td>
+          <td>[X]%</td>
+          <td><span class="badge badge-green">준수</span></td>
+          <td>[토큰]</td>
+          <td>[강점 한 줄]</td>
+        </tr>
+        <tr>
+          <td>[경쟁사 1]</td>
+          <td><span class="badge badge-gray">[카테고리]</span></td>
+          <td>$[X]M</td>
+          <td>[X]%</td>
+          <td><span class="badge badge-gray">진행중</span></td>
+          <td>[토큰]</td>
+          <td>[특징]</td>
+        </tr>
+        <tr>
+          <td>[경쟁사 2]</td>
+          <td><span class="badge badge-gray">[카테고리]</span></td>
+          <td>$[X]M</td>
+          <td>[X]%</td>
+          <td><span class="badge badge-red">미정</span></td>
+          <td>없음</td>
+          <td>[특징]</td>
+        </tr>
+        <tr>
+          <td>[경쟁사 3]</td>
+          <td><span class="badge badge-gray">[카테고리]</span></td>
+          <td>$[X]M</td>
+          <td>[X]%</td>
+          <td><span class="badge badge-green">준수</span></td>
+          <td>[토큰]</td>
+          <td>[특징]</td>
+        </tr>
+        <tr>
+          <td>[경쟁사 4]</td>
+          <td><span class="badge badge-gray">[카테고리]</span></td>
+          <td>$[X]M</td>
+          <td>[X]%</td>
+          <td><span class="badge badge-gray">진행중</span></td>
+          <td>없음</td>
+          <td>[특징]</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-label">출처</span>
+      <a href="#">[데이터 출처]</a><span class="src-sep">·</span>
+      <a href="#">[날짜]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  04. 비즈니스 모델 — 플로우 다이어그램
+  도형 연결 방식으로 자금 / 자산 흐름 표현
+════════════════════════════════════════ -->
+<section id="model" style="background:var(--near-black)">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">비즈니스 모델</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">어떻게 <span class="grad">돈이 흐르는가</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">실물 자산이 토큰이 되는 과정</p>
+
+    <!-- 플로우 다이어그램 -->
+    <div class="flow-row reveal d3">
+      <div class="flow-node">
+        <div class="flow-node-title">🏦 실물 자산</div>
+        <div class="flow-node-desc">[자산 유형]<br>[담보 규모]</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node accent">
+        <div class="flow-node-title">⚙️ [기업명]</div>
+        <div class="flow-node-desc">SPV 구조<br>법적 소유권 이전</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">🔗 온체인 발행</div>
+        <div class="flow-node-desc">[토큰명]<br>[체인명]</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">💼 투자자</div>
+        <div class="flow-node-desc">개인 / 기관<br>[최소 투자금]부터</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">💰 수익 분배</div>
+        <div class="flow-node-desc">[수익률]<br>[지급 주기] 지급</div>
+      </div>
+    </div>
+
+    <!-- 수익 구조 상세 — 3단 도형 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(124,58,237,.15);border-radius:16px;overflow:hidden;margin-top:2rem" class="reveal d4">
+      <div style="background:var(--card);padding:1.8rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:.6rem">📥</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--p3);margin-bottom:.4rem">수익 구조 1</div>
+        <div style="font-size:.92rem;font-weight:700;margin-bottom:.4rem">[수익 유형]</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.55">[설명 텍스트]</div>
+      </div>
+      <div style="background:rgba(124,58,237,.08);padding:1.8rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:.6rem">📈</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--p3);margin-bottom:.4rem">수익 구조 2</div>
+        <div style="font-size:.92rem;font-weight:700;margin-bottom:.4rem">[수익 유형]</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.55">[설명 텍스트]</div>
+      </div>
+      <div style="background:var(--card);padding:1.8rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:.6rem">🔄</div>
+        <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--p3);margin-bottom:.4rem">수익 구조 3</div>
+        <div style="font-size:.92rem;font-weight:700;margin-bottom:.4rem">[수익 유형]</div>
+        <div style="font-size:.74rem;color:var(--muted);line-height:1.55">[설명 텍스트]</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="#">[공식 문서]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  05. 토큰 이코노믹스 — 도넛 + 바 차트
+════════════════════════════════════════ -->
+<section id="tokenomics" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">토큰 이코노믹스</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem"><span class="grad">[토큰명]</span> 구조 분석</div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">토큰 배분 + 온체인 성장 지표</p>
+
+    <div class="token-layout reveal d3">
+      <!-- 도넛 차트 -->
+      <div>
+        <canvas id="donutChart" width="260" height="260"></canvas>
+        <div style="text-align:center;margin-top:.5rem;font-size:.7rem;color:var(--muted)">토큰 배분</div>
+      </div>
+      <!-- 범례 -->
+      <div class="token-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#7C3AED"></div><span>[카테고리 1] — [X]%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div><span>[카테고리 2] — [X]%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#A78BFA"></div><span>[카테고리 3] — [X]%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#5B21B6"></div><span>[카테고리 4] — [X]%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3B0764"></div><span>[카테고리 5] — [X]%</span></div>
+      </div>
+    </div>
+
+    <!-- 수평 바 차트 — 온체인 성장 지표 -->
+    <div style="margin-top:2.5rem" class="reveal d4">
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--p3);margin-bottom:1rem;text-align:left">핵심 온체인 지표</div>
+      <div class="hbar-list">
+        <div class="hbar-item">
+          <div class="hbar-label"><span>[지표 1]</span><span>[X]%</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="[X]"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>[지표 2]</span><span>[X]%</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="[X]"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>[지표 3]</span><span>[X]%</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="[X]"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>[지표 4]</span><span>[X]%</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="[X]"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="#">[출처]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  06. 성장 라인 차트 — TVL / AUM 추이
+════════════════════════════════════════ -->
+<section id="growth" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">성장 궤적</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">TVL / AUM <span class="grad">추이</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">[기간] 온체인 실물자산 증가 추이</p>
+
+    <div class="canvas-wrap reveal d3" style="height:320px">
+      <canvas id="growthChart" width="860" height="300"></canvas>
+    </div>
+
+    <!-- 성장 지표 요약 타일 -->
+    <div class="stat-row reveal d4" style="margin-top:2rem">
+      <div class="stat-tile">
+        <div class="stat-num grad-light">+[X]%</div>
+        <div class="stat-label">분기 성장률</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num grad-light">[X]개</div>
+        <div class="stat-label">활성 지갑</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num grad-light">$[X]</div>
+        <div class="stat-label">평균 보유금액</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="#">[데이터 출처]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  07. 리스크 매트릭스 — 2×2 사분면
+  (발생 가능성 × 영향도)
+════════════════════════════════════════ -->
+<section id="risk" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">리스크 분석</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">투자 전 <span class="grad">확인할 것들</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">발생 가능성 × 영향도 매트릭스</p>
+
+    <div class="matrix-outer reveal d3">
+      <div class="matrix-axis-y">발생 가능성 HIGH ↑</div>
+      <div>
+        <div class="matrix-grid">
+          <!-- 좌상: 가능성 높음 + 영향 낮음 = 관리 가능 -->
+          <div class="matrix-cell m-high-low">
+            <div class="matrix-cell-label">⚠️ 관리 가능</div>
+            <div class="matrix-cell-title">[리스크 유형 A]</div>
+            <div class="matrix-cell-desc">[리스크 A 설명 — 모니터링 필요]</div>
+          </div>
+          <!-- 우상: 가능성 높음 + 영향 높음 = 핵심 리스크 -->
+          <div class="matrix-cell m-high-high">
+            <div class="matrix-cell-label">🔴 핵심 리스크</div>
+            <div class="matrix-cell-title">[리스크 유형 B]</div>
+            <div class="matrix-cell-desc">[리스크 B 설명 — 가장 주시해야 할 것]</div>
+          </div>
+          <!-- 좌하: 가능성 낮음 + 영향 낮음 = 무시 가능 -->
+          <div class="matrix-cell m-low-low">
+            <div class="matrix-cell-label">✅ 낮음</div>
+            <div class="matrix-cell-title">[리스크 유형 C]</div>
+            <div class="matrix-cell-desc">[리스크 C 설명]</div>
+          </div>
+          <!-- 우하: 가능성 낮음 + 영향 높음 = 블랙스완 -->
+          <div class="matrix-cell m-low-high">
+            <div class="matrix-cell-label">🌑 블랙스완</div>
+            <div class="matrix-cell-title">[리스크 유형 D]</div>
+            <div class="matrix-cell-desc">[리스크 D 설명 — 낮지만 치명적]</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+          <div class="matrix-axis-x">← 영향도 LOW</div>
+          <div class="matrix-axis-x">영향도 HIGH →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리스크 태그 요약 -->
+    <div class="risk-tags reveal d4">
+      <span class="risk-tag" style="background:rgba(255,69,58,.1);color:#FF453A;border:1px solid rgba(255,69,58,.2)">🔴 [리스크 1]</span>
+      <span class="risk-tag" style="background:rgba(255,159,10,.08);color:#FF9F0A;border:1px solid rgba(255,159,10,.18)">🟡 [리스크 2]</span>
+      <span class="risk-tag" style="background:rgba(50,215,75,.08);color:#32D74B;border:1px solid rgba(50,215,75,.15)">🟢 [리스크 3]</span>
+      <span class="risk-tag" style="background:rgba(10,132,255,.08);color:#0A84FF;border:1px solid rgba(10,132,255,.15)">🔵 [리스크 4]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  08. 마일스톤 타임라인 — 과거 + 미래
+════════════════════════════════════════ -->
+<section id="timeline" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">로드맵</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">과거와 <span class="grad">미래</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">주요 마일스톤 및 향후 계획</p>
+
+    <div class="timeline reveal d3">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">[연도.월] — 달성</div>
+        <div class="tl-title">[마일스톤 1]</div>
+        <div class="tl-desc">[상세 설명]</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">[연도.월] — 달성</div>
+        <div class="tl-title">[마일스톤 2]</div>
+        <div class="tl-desc">[상세 설명]</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">[연도.월] — 달성</div>
+        <div class="tl-title">[마일스톤 3]</div>
+        <div class="tl-desc">[상세 설명]</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-dot"></div>
+        <div class="tl-date">[연도.월] — 예정</div>
+        <div class="tl-title">[향후 계획 1]</div>
+        <div class="tl-desc">[예정 내용]</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-dot"></div>
+        <div class="tl-date">[연도.월] — 예정</div>
+        <div class="tl-title">[향후 계획 2]</div>
+        <div class="tl-desc">[예정 내용]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  09. 투자 논거 — 체크리스트 카드
+════════════════════════════════════════ -->
+<section id="thesis" style="background:#000">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">투자 논거</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">왜 <span class="grad">[기업명]</span>인가</div>
+    <p class="section-sub reveal d2" style="margin-bottom:0">[기업명]을 주목해야 하는 핵심 이유</p>
+
+    <div class="thesis-grid reveal d3">
+      <div class="thesis-card">
+        <div class="thesis-icon">🏛️</div>
+        <div class="thesis-num">THESIS 01</div>
+        <div class="thesis-title">[논거 1 제목]</div>
+        <div class="thesis-desc">[논거 1 설명 — 구체적 데이터 포함]</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-icon">📊</div>
+        <div class="thesis-num">THESIS 02</div>
+        <div class="thesis-title">[논거 2 제목]</div>
+        <div class="thesis-desc">[논거 2 설명 — 구체적 데이터 포함]</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-icon">⚡</div>
+        <div class="thesis-num">THESIS 03</div>
+        <div class="thesis-title">[논거 3 제목]</div>
+        <div class="thesis-desc">[논거 3 설명 — 구체적 데이터 포함]</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-icon">🌐</div>
+        <div class="thesis-num">THESIS 04</div>
+        <div class="thesis-title">[논거 4 제목]</div>
+        <div class="thesis-desc">[논거 4 설명 — 구체적 데이터 포함]</div>
+      </div>
+    </div>
+
+    <!-- 체크리스트 형식 추가 확인 항목 -->
+    <div style="margin-top:2.5rem" class="reveal d4">
+      <div style="font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--p3);margin-bottom:1rem">투자 전 확인 체크리스트</div>
+      <div class="check-row">
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div><div class="check-title">실물 자산 존재 확인</div><div class="check-desc">[확인 방법 및 출처 링크]</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div><div class="check-title">법적 소유권 구조</div><div class="check-desc">SPV / 트러스트 구조 확인 — [문서 링크]</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div><div class="check-title">감사 리포트</div><div class="check-desc">스마트 컨트랙트 감사 — [감사 기관]</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div><div class="check-title">규제 라이선스</div><div class="check-desc">[규제 기관] 라이선스 보유 — [등록 번호]</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  10. CTA — 마무리
+════════════════════════════════════════ -->
+<section id="cta" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="color:var(--p3)">결론</div>
+    <div class="cta-title reveal d1">[기업명]<br>지금 알아야 한다</div>
+    <p class="cta-sub reveal d2">[마무리 핵심 메시지 — 투자자가 이 페이지를 본 후 기억해야 할 한 문장]</p>
+    <div class="reveal d3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#hero" style="display:inline-block;background:var(--p1);color:#fff;font-size:.9rem;font-weight:700;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">처음부터 다시 보기 ↑</a>
+      <a href="index.html" style="display:inline-block;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.7);font-size:.9rem;font-weight:600;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">← RWA 마스터클래스</a>
+    </div>
+    <div class="src-bar reveal d4" style="margin-top:2.5rem">
+      <span class="src-label">출처</span>
+      <a href="#">[공식 사이트]</a><span class="src-sep">·</span>
+      <a href="#">[데이터 출처]</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    RWA 딥다이브 시리즈 · [기업명] 편 · 교육 목적 자료<br>
+    이 자료는 투자 조언이 아닙니다. 모든 투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다.
+  </p>
+</footer>
+
+<script>
+// ── PROGRESS ──
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, { passive: true });
+
+// ── REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── HBAR ANIMATION ──
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.hbar-fill').forEach(bar => {
+      const w = bar.dataset.width || '70';
+      bar.style.width = w + '%';
+    });
+    barObs.unobserve(e.target);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.hbar-list').forEach(el => barObs.observe(el));
+
+// ── RADAR CHART (Canvas) ──
+function drawRadar() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2 + 10;
+  const R = Math.min(W, H) * 0.36;
+  const labels = ['기술력', '규제 준수', '유동성', '성장성', '수익성', '팀'];
+  const N = labels.length;
+  // 플레이스홀더 데이터 — 내용 받으면 교체
+  const dataA = [0.85, 0.72, 0.68, 0.90, 0.78, 0.82]; // 기업
+  const dataB = [0.60, 0.55, 0.70, 0.58, 0.65, 0.60]; // 경쟁사 평균
+
+  const angle = i => (Math.PI * 2 / N) * i - Math.PI / 2;
+  const pt = (i, val) => ({ x: cx + R * val * Math.cos(angle(i)), y: cy + R * val * Math.sin(angle(i)) });
+
+  ctx.clearRect(0, 0, W, H);
+
+  // 배경 그리드
+  [0.25, 0.5, 0.75, 1.0].forEach(lvl => {
+    ctx.beginPath();
+    for (let i = 0; i < N; i++) {
+      const p = pt(i, lvl);
+      i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(124,58,237,' + (lvl === 1.0 ? '.3' : '.12') + ')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // 축선
+  for (let i = 0; i < N; i++) {
+    const p = pt(i, 1);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = 'rgba(124,58,237,.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // 경쟁사 평균 (회색)
+  ctx.beginPath();
+  dataB.forEach((v, i) => { const p = pt(i, v); i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(255,255,255,.05)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.2)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 기업 데이터 (퍼플)
+  ctx.beginPath();
+  dataA.forEach((v, i) => { const p = pt(i, v); i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(124,58,237,.22)';
+  ctx.fill();
+  ctx.strokeStyle = '#8B5CF6';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // 꼭짓점 점
+  dataA.forEach((v, i) => {
+    const p = pt(i, v);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#7C3AED';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+
+  // 레이블
+  ctx.font = '700 13px -apple-system, "Noto Sans KR", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.65)';
+  ctx.textAlign = 'center';
+  labels.forEach((lbl, i) => {
+    const p = pt(i, 1.22);
+    ctx.fillText(lbl, p.x, p.y + 4);
+  });
+}
+
+// ── DONUT CHART ──
+function drawDonut() {
+  const canvas = document.getElementById('donutChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2, R = 100, r = 58;
+
+  // 플레이스홀더 배분 — 내용 받으면 교체
+  const slices = [
+    { pct: 0.30, color: '#7C3AED', label: '[카테고리 1]' },
+    { pct: 0.20, color: '#8B5CF6', label: '[카테고리 2]' },
+    { pct: 0.20, color: '#A78BFA', label: '[카테고리 3]' },
+    { pct: 0.15, color: '#5B21B6', label: '[카테고리 4]' },
+    { pct: 0.15, color: '#3B0764', label: '[카테고리 5]' },
+  ];
+
+  ctx.clearRect(0, 0, W, H);
+  let startAngle = -Math.PI / 2;
+  slices.forEach(s => {
+    const end = startAngle + Math.PI * 2 * s.pct;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, R, startAngle, end);
+    ctx.closePath();
+    ctx.fillStyle = s.color;
+    ctx.fill();
+    startAngle = end;
+  });
+
+  // 가운데 구멍
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+
+  // 가운데 텍스트
+  ctx.font = '800 18px -apple-system, sans-serif';
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('[토큰명]', cx, cy - 8);
+  ctx.font = '600 11px -apple-system, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.4)';
+  ctx.fillText('배분 구조', cx, cy + 11);
+}
+
+// ── GROWTH LINE CHART ──
+function drawGrowth() {
+  const canvas = document.getElementById('growthChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = { t: 30, r: 20, b: 50, l: 60 };
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+
+  // 플레이스홀더 데이터 — 내용 받으면 교체
+  const months = ['[M1]', '[M2]', '[M3]', '[M4]', '[M5]', '[M6]', '[M7]', '[M8]'];
+  const vals   = [100, 145, 190, 260, 380, 520, 680, 950]; // 지수 (100 기준)
+  const maxV = Math.max(...vals) * 1.1;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const x = i => pad.l + (i / (vals.length - 1)) * cW;
+  const y = v => pad.t + cH - (v / maxV) * cH;
+
+  // 그리드
+  [0.25, 0.5, 0.75, 1].forEach(pct => {
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t + cH * (1 - pct));
+    ctx.lineTo(pad.l + cW, pad.t + cH * (1 - pct));
+    ctx.strokeStyle = 'rgba(255,255,255,.06)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // 영역 채우기
+  const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t + cH);
+  grad.addColorStop(0, 'rgba(124,58,237,.4)');
+  grad.addColorStop(1, 'rgba(124,58,237,.01)');
+  ctx.beginPath();
+  ctx.moveTo(x(0), y(vals[0]));
+  vals.forEach((v, i) => ctx.lineTo(x(i), y(v)));
+  ctx.lineTo(x(vals.length - 1), pad.t + cH);
+  ctx.lineTo(x(0), pad.t + cH);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // 라인
+  ctx.beginPath();
+  vals.forEach((v, i) => i === 0 ? ctx.moveTo(x(i), y(v)) : ctx.lineTo(x(i), y(v)));
+  ctx.strokeStyle = '#8B5CF6';
+  ctx.lineWidth = 3;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // 점
+  vals.forEach((v, i) => {
+    ctx.beginPath();
+    ctx.arc(x(i), y(v), 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#7C3AED';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+
+  // X 레이블
+  ctx.font = '600 11px -apple-system, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.35)';
+  ctx.textAlign = 'center';
+  months.forEach((m, i) => ctx.fillText(m, x(i), pad.t + cH + 20));
+
+  // Y 레이블
+  ctx.textAlign = 'right';
+  ['기준', '2.5×', '5×', '7.5×', '10×'].forEach((lbl, i) => {
+    ctx.fillText(lbl, pad.l - 8, pad.t + cH - (i / 4) * cH + 4);
+  });
+}
+
+// 차트 그리기 (로드 시 + 뷰포트 진입 시)
+function initCharts() {
+  drawRadar();
+  drawDonut();
+  drawGrowth();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCharts);
+} else {
+  initCharts();
+}
+
+// IntersectionObserver로 뷰포트 진입 시 재렌더 (리사이즈 대응)
+new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { drawRadar(); drawDonut(); drawGrowth(); } });
+}, { threshold: 0.1 }).observe(document.getElementById('radar') || document.body);
+</script>
+</body>
+</html>
