@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi 탈중앙화 금융 완전정복</title>
+<meta name="description" content="TVL $71.77B, DEX 연간 $4.21T, 스테이블코인 $314B. 블록체인이 바꾸는 금융의 미래를 검증된 데이터로 완전 정복.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#020B14;color:rgba(220,255,255,.9);
+  line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+:root{
+  --c1:#00D4FF;--c2:#0EA5E9;--c3:#00C9A7;--c4:#0369A1;--c5:#E0F9FF;
+  --black:#020B14;--near-black:#040F1A;--card:#0A1A26;--mid:#1A3A4A;
+  --muted:#4A7A8A;--white:rgba(220,255,255,.9);
+  --grad:linear-gradient(135deg,#0369A1 0%,#00D4FF 40%,#00FFD1 70%,#0EA5E9 100%);
+}
+
+/* ── DISCLAIMER BAR ── */
+#disclaimer-bar{
+  position:fixed;top:0;left:0;right:0;z-index:9998;
+  background:rgba(2,11,20,.97);backdrop-filter:blur(12px);
+  padding:.42rem 1.5rem;text-align:center;
+  font-size:.63rem;color:rgba(220,255,255,.45);line-height:1.5;
+  border-bottom:1px solid rgba(0,212,255,.15);
+  display:flex;align-items:center;justify-content:center;gap:.8rem;
+}
+#disclaimer-bar span{flex:1;text-align:center}
+#disclaimer-bar button{
+  background:none;border:none;color:rgba(220,255,255,.25);
+  font-size:.75rem;cursor:pointer;flex-shrink:0;
+  transition:color .2s;font-family:inherit;
+}
+#disclaimer-bar button:hover{color:rgba(220,255,255,.7)}
+
+/* ── PROGRESS BAR ── */
+#progress{
+  position:fixed;top:42px;left:0;z-index:9999;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--c4),var(--c1),var(--c3));
+  transition:width .1s linear;
+  box-shadow:0 0 8px rgba(0,212,255,.5);
+}
+
+/* ── TICKER TAPE ── */
+#ticker{
+  position:fixed;top:42px;left:0;right:0;z-index:9995;
+  height:26px;overflow:hidden;
+  background:rgba(4,15,26,.9);border-bottom:1px solid rgba(0,212,255,.08);
+}
+.ticker-track{
+  display:flex;height:100%;align-items:center;
+  animation:ticker-scroll 30s linear infinite;
+  white-space:nowrap;width:max-content;
+}
+.ticker-item{
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  padding:0 2rem;color:rgba(220,255,255,.35);
+  display:flex;align-items:center;gap:.5rem;
+}
+.ticker-item .t-name{color:var(--c1);font-weight:500}
+.ticker-item .t-val{color:rgba(220,255,255,.6)}
+.ticker-item .t-up{color:#34D399}
+.ticker-item .t-div{color:rgba(0,212,255,.2)}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:68px;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:46px;
+  background:rgba(2,11,20,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,212,255,.1);
+}
+.nav-logo{
+  font-size:.75rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--c1);
+}
+.nav-pill{
+  font-size:.7rem;font-weight:600;
+  color:rgba(220,255,255,.4);
+  background:rgba(0,212,255,.08);
+  border:1px solid rgba(0,212,255,.2);
+  border-radius:99px;padding:.3em .9em;
+}
+
+/* ── SECTION BASE ── */
+section{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:100vh;padding:9rem 2rem 5rem;text-align:center;
+}
+.wrap{max-width:920px;width:100%;margin:0 auto}
+.wrap-wide{max-width:1140px;width:100%;margin:0 auto}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--c1);margin-bottom:1.4rem;
+}
+.display-xl{
+  font-size:clamp(4.5rem,12vw,10rem);
+  font-weight:700;line-height:.95;letter-spacing:-.03em;
+  text-wrap:balance;
+}
+.display-lg{
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:700;line-height:1;letter-spacing:-.025em;
+  text-wrap:balance;
+}
+.display-md{
+  font-size:clamp(2rem,5vw,3.8rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.02em;
+  text-wrap:balance;
+}
+.section-sub{
+  font-size:clamp(1rem,2vw,1.2rem);
+  color:rgba(220,255,255,.4);
+  max-width:560px;margin:0 auto;line-height:1.7;
+}
+
+/* ── GRADIENT TEXT ── */
+.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-light{
+  background:linear-gradient(135deg,var(--c1) 0%,rgba(220,255,255,.9) 50%,var(--c3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}
+.d4{transition-delay:.5s}.d5{transition-delay:.62s}.d6{transition-delay:.74s}
+
+/* ── SOURCE BAR ── */
+.src-bar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:.3rem;margin-top:2rem;padding:.8rem 1.4rem;
+  background:rgba(0,212,255,.03);
+  border:1px solid rgba(0,212,255,.14);
+  border-radius:12px;max-width:720px;
+  margin-left:auto;margin-right:auto;
+}
+.src-label{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--c1);margin-right:.4rem}
+.src-bar a{font-size:.66rem;font-weight:600;color:rgba(220,255,255,.3);text-decoration:none;padding:.2em .6em;border-radius:6px;transition:color .2s}
+.src-bar a:hover{color:var(--c1)}
+.src-sep{color:rgba(0,212,255,.2);font-size:.7rem}
+
+/* ── STAT TILES ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin:2.5rem 0}
+.stat-tile{
+  background:var(--card);border:1px solid rgba(0,212,255,.16);
+  border-radius:16px;padding:1.4rem 1rem;text-align:center;
+  transition:border-color .3s,transform .3s;
+}
+.stat-tile:hover{border-color:rgba(0,212,255,.38);transform:translateY(-3px)}
+.stat-num{
+  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--c1),rgba(220,255,255,.9));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:.7rem;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:.3rem}
+.stat-note{font-size:.65rem;color:rgba(220,255,255,.18);margin-top:.3rem}
+
+/* ── TABLE ── */
+.cmp-table{width:100%;border-collapse:collapse;text-align:left;font-size:.82rem;margin-top:2rem}
+.cmp-table thead th{
+  font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c1);padding:.7rem 1rem;border-bottom:1px solid rgba(0,212,255,.15);
+}
+.cmp-table tbody tr{border-bottom:1px solid rgba(220,255,255,.04);transition:background .2s}
+.cmp-table tbody tr:hover{background:rgba(0,212,255,.04)}
+.cmp-table tbody td{padding:.85rem 1rem;color:rgba(220,255,255,.65);vertical-align:middle;font-variant-numeric:tabular-nums}
+.cmp-table .highlight-row td{color:rgba(220,255,255,.95);background:rgba(0,212,255,.07)}
+.cmp-table .highlight-row td:first-child{font-weight:700;color:var(--c1)}
+.badge{display:inline-block;font-size:.62rem;font-weight:700;padding:.18em .55em;border-radius:6px;letter-spacing:.04em}
+.badge-green{background:rgba(52,211,153,.15);color:#34D399}
+.badge-red{background:rgba(248,113,113,.12);color:#F87171}
+.badge-cyan{background:rgba(0,212,255,.15);color:var(--c1)}
+.badge-gray{background:rgba(220,255,255,.06);color:rgba(220,255,255,.38)}
+
+/* ── CANVAS ── */
+.canvas-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+canvas{display:block;max-width:100%}
+
+/* ── FLOW DIAGRAM ── */
+.flow-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;flex-wrap:nowrap;margin:2.5rem 0;overflow-x:auto;
+}
+.flow-node{
+  background:var(--card);border:1px solid rgba(0,212,255,.25);
+  border-radius:14px;padding:1.1rem 1.3rem;
+  min-width:120px;text-align:center;flex-shrink:0;
+  transition:border-color .3s;
+}
+.flow-node:hover{border-color:rgba(0,212,255,.5)}
+.flow-node-title{font-size:.78rem;font-weight:700;color:rgba(220,255,255,.9);margin-bottom:.3rem}
+.flow-node-desc{font-size:.62rem;color:var(--muted);line-height:1.4}
+.flow-node.accent{border-color:var(--c1);background:rgba(0,212,255,.09)}
+.flow-node.accent .flow-node-title{color:var(--c1)}
+.flow-arrow{color:rgba(0,212,255,.4);font-size:1.2rem;padding:0 .4rem;flex-shrink:0}
+
+/* ── 2×2 MATRIX ── */
+.matrix-grid{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+  gap:.6rem;width:100%;max-width:640px;margin:2rem auto;aspect-ratio:1.4;
+}
+.matrix-cell{
+  border-radius:14px;padding:1.2rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;transition:transform .3s;
+}
+.matrix-cell:hover{transform:scale(1.02)}
+.matrix-cell-label{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.matrix-cell-title{font-size:.92rem;font-weight:700;line-height:1.3;color:rgba(220,255,255,.9)}
+.matrix-cell-desc{font-size:.68rem;color:rgba(220,255,255,.45);margin-top:.3rem;line-height:1.5}
+.m-high-high{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2)}
+.m-high-high .matrix-cell-label{color:#34D399}
+.m-high-low{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2)}
+.m-high-low .matrix-cell-label{color:var(--c1)}
+.m-low-high{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.18)}
+.m-low-high .matrix-cell-label{color:#FBBF24}
+.m-low-low{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.15)}
+.m-low-low .matrix-cell-label{color:#F87171}
+.matrix-axis-x{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:.5rem}
+.matrix-axis-y{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);margin-right:.5rem}
+.matrix-outer{display:flex;align-items:center;justify-content:center;max-width:680px;margin:0 auto}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;max-width:720px;margin:2.5rem auto 0;padding-left:2rem}
+.timeline::before{
+  content:'';position:absolute;left:.7rem;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--c1),var(--c4));
+}
+.tl-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+.tl-dot{
+  position:absolute;left:-1.35rem;top:.15rem;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--c1);border:2px solid var(--black);
+  box-shadow:0 0 0 3px rgba(0,212,255,.2);
+}
+.tl-date{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c1);margin-bottom:.25rem;font-family:'DM Mono',monospace}
+.tl-title{font-size:.92rem;font-weight:700;color:rgba(220,255,255,.92);margin-bottom:.2rem}
+.tl-desc{font-size:.76rem;color:var(--muted);line-height:1.55}
+.tl-item.future .tl-dot{background:var(--mid);border-color:rgba(220,255,255,.1)}
+.tl-item.future .tl-date{color:var(--muted)}
+.tl-item.future .tl-title{color:rgba(220,255,255,.4)}
+
+/* ── THESIS CARDS ── */
+.thesis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2.5rem;text-align:left}
+.thesis-card{
+  background:var(--card);border:1px solid rgba(0,212,255,.12);
+  border-radius:16px;padding:1.6rem;
+  transition:border-color .3s,transform .3s;
+}
+.thesis-card:hover{border-color:rgba(0,212,255,.32);transform:translateY(-3px)}
+.thesis-icon{font-size:1.8rem;margin-bottom:.8rem}
+.thesis-num{font-size:.62rem;font-weight:800;letter-spacing:.12em;color:var(--c1);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.thesis-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:rgba(220,255,255,.9)}
+.thesis-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* ── HORIZONTAL BAR ── */
+.hbar-list{margin-top:2rem;display:flex;flex-direction:column;gap:.7rem;max-width:640px;margin-left:auto;margin-right:auto;text-align:left}
+.hbar-item{}
+.hbar-label{font-size:.75rem;font-weight:600;color:rgba(220,255,255,.6);margin-bottom:.3rem;display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.hbar-track{height:8px;background:rgba(220,255,255,.05);border-radius:99px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--c4),var(--c1));width:0%;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+
+/* ── DONUT ── */
+.token-layout{display:flex;gap:2rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.token-legend{display:flex;flex-direction:column;gap:.6rem;text-align:left}
+.legend-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:rgba(220,255,255,.65)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── CHECKLIST ── */
+.check-row{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2rem}
+.check-item{
+  display:flex;align-items:flex-start;gap:.7rem;
+  background:var(--card);border:1px solid rgba(0,212,255,.1);
+  border-radius:12px;padding:1rem 1.2rem;
+  text-align:left;max-width:340px;width:100%;
+  transition:border-color .3s;
+}
+.check-item:hover{border-color:rgba(0,212,255,.28)}
+.check-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(0,212,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;flex-shrink:0;margin-top:.1rem;
+}
+.check-title{font-size:.84rem;font-weight:700;margin-bottom:.2rem;color:rgba(220,255,255,.9)}
+.check-desc{font-size:.73rem;color:var(--muted);line-height:1.5}
+
+/* ── CTA ── */
+#cta{background:var(--black)}
+.cta-title{
+  font-size:clamp(2.5rem,7vw,5.5rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1;
+  margin-bottom:1.5rem;
+  background:linear-gradient(135deg,var(--c4) 0%,var(--c1) 40%,var(--c3) 70%,rgba(220,255,255,.9) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.cta-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(220,255,255,.35);max-width:560px;margin:0 auto 2.5rem;line-height:1.65}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,var(--c4),var(--c1));
+  color:#020B14;font-weight:700;font-size:.95rem;
+  padding:.9rem 2.2rem;border-radius:50px;border:none;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 0 32px rgba(0,212,255,.28);
+  transition:box-shadow .3s,transform .2s;
+}
+.btn-primary:hover{box-shadow:0 0 52px rgba(0,212,255,.48);transform:translateY(-2px)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--c1);
+  font-weight:600;font-size:.95rem;
+  padding:.9rem 2.2rem;border-radius:50px;
+  border:1px solid rgba(0,212,255,.3);
+  cursor:pointer;text-decoration:none;
+  transition:border-color .3s,background .3s;
+}
+.btn-outline:hover{border-color:var(--c1);background:rgba(0,212,255,.06)}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(0,212,255,.07);background:var(--black)}
+footer p{font-size:.68rem;color:rgba(220,255,255,.16);line-height:1.9;max-width:900px;margin:0 auto}
+footer a{color:rgba(220,255,255,.18);text-decoration:none}
+footer a:hover{color:var(--c1)}
+
+/* ── EP PILLS ── */
+.ep-pills{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.ep-pill{
+  font-size:.68rem;padding:.3rem .75rem;border-radius:20px;
+  text-decoration:none;font-weight:700;
+  border:1px solid rgba(0,212,255,.16);color:rgba(220,255,255,.3);
+  transition:.2s;
+}
+.ep-pill.active{background:linear-gradient(135deg,var(--c4),var(--c1));color:#020B14;border-color:transparent}
+.ep-pill:hover:not(.active){border-color:var(--c1);color:var(--c1)}
+
+/* ── LINE CHART ── */
+.line-chart-wrap{
+  background:var(--card);border:1px solid rgba(0,212,255,.15);
+  border-radius:20px;padding:2rem;max-width:780px;margin:2rem auto;
+}
+
+/* ════════════ MOBILE RESPONSIVE ════════════ */
+@media(max-width:960px){
+  .wrap-wide{max-width:100%;padding:0 1rem}
+  .thesis-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  section{padding:7rem 1.2rem 4rem;min-height:auto}
+  .wrap,.wrap-wide{padding:0}
+  #ticker{display:none}
+  nav{top:42px}
+  #progress{top:42px}
+  .eyebrow{font-size:.62rem}
+  .display-xl{font-size:clamp(2.6rem,12vw,4.5rem)}
+  .display-md{font-size:clamp(1.5rem,7vw,2.2rem)}
+  .section-sub{font-size:.88rem}
+  .stat-row{grid-template-columns:1fr 1fr;gap:.7rem}
+  .stat-num{font-size:1.8rem}
+  .cmp-table{font-size:.7rem;white-space:nowrap}
+  .flow-row{flex-direction:column;align-items:center;gap:.4rem}
+  .flow-arrow{transform:rotate(90deg);padding:.1rem 0}
+  .flow-node{min-width:0;width:100%;max-width:280px}
+  .token-layout{flex-direction:column;gap:1.5rem}
+  .token-layout canvas{max-width:220px}
+  .matrix-outer{flex-direction:column}
+  .matrix-axis-y{writing-mode:horizontal-tb;transform:none;margin-right:0;margin-bottom:.4rem;text-align:center}
+  .matrix-grid{grid-template-columns:1fr;aspect-ratio:auto;gap:.5rem}
+  .thesis-grid{grid-template-columns:1fr}
+  .check-row{flex-direction:column;align-items:stretch}
+  .check-item{max-width:100%}
+  .cta-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;max-width:300px;justify-content:center}
+  .ep-pills{gap:.35rem}
+  .ep-pill{font-size:.62rem;padding:.25rem .6rem}
+  .hbar-list{max-width:100%}
+  nav{padding:0 1rem}
+  .nav-logo{font-size:.65rem}
+}
+@media(max-width:400px){
+  .stat-row{grid-template-columns:1fr}
+  .display-xl{font-size:2.4rem}
+  .cta-title{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ── DISCLAIMER BAR ── -->
+<div id="disclaimer-bar">
+  <span>⚠️ 본 페이지는 <strong>교육 목적 정보 제공</strong>만을 위해 제작되었습니다. 투자 권유·추천이 아니며, 가상자산 투자 시 원금 손실이 발생할 수 있습니다. 「자본시장법」·「가상자산 이용자 보호법」 준수.</span>
+  <button onclick="this.closest('#disclaimer-bar').style.display='none';document.getElementById('progress').style.top='0';document.getElementById('ticker').style.top='0';document.querySelector('nav').style.top='26px'" aria-label="닫기">✕</button>
+</div>
+
+<!-- ── TICKER TAPE ── -->
+<div id="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="t-name">DeFi TVL</span><span class="t-val">$71.77B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Uniswap</span><span class="t-val">$2.9T/yr</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Aave TVL</span><span class="t-val">$24.8B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Lido TVL</span><span class="t-val">$23.1B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">USDT</span><span class="t-val">$158B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">USDC</span><span class="t-val">$62B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Stablecoin 합산</span><span class="t-val">$314B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">DEX 연간</span><span class="t-val">$4.21T</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <!-- duplicate -->
+    <div class="ticker-item"><span class="t-name">DeFi TVL</span><span class="t-val">$71.77B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Uniswap</span><span class="t-val">$2.9T/yr</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Aave TVL</span><span class="t-val">$24.8B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Lido TVL</span><span class="t-val">$23.1B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">USDT</span><span class="t-val">$158B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">USDC</span><span class="t-val">$62B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">Stablecoin 합산</span><span class="t-val">$314B</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+    <div class="ticker-item"><span class="t-name">DEX 연간</span><span class="t-val">$4.21T</span><span class="t-up">↑</span><span class="t-div">|</span></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">코인랩스 아카데미 · <span style="color:rgba(220,255,255,.25)">블록체인 교육 시리즈</span></div>
+  <div class="nav-pill">💎 2편 · DeFi</div>
+</nav>
+
+<!-- ══════════════════════════════════
+  01. HERO
+══════════════════════════════════ -->
+<section id="hero" style="background:var(--black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">블록체인 교육 시리즈 · Episode 2</div>
+    <div class="display-xl grad reveal d1" style="margin-bottom:1.2rem">은행 없는<br>금융</div>
+    <p class="section-sub reveal d2">
+      스마트 컨트랙트가 은행·증권사·보험사를 대체한다.<br>
+      $71.77B TVL, 연간 $4.21T DEX 거래량 — DeFi는 이미 현실이다.
+    </p>
+
+    <div class="stat-row reveal d3">
+      <div class="stat-tile">
+        <div class="stat-num counter" data-target="71.77" data-suffix="B" data-prefix="$">$0</div>
+        <div class="stat-label">DeFi 총 TVL</div>
+        <div class="stat-note">2026년 기준 · 전 체인 합산</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num counter" data-target="4.21" data-suffix="T" data-prefix="$">$0</div>
+        <div class="stat-label">DEX 연간 거래량</div>
+        <div class="stat-note">2025 기준 · Uniswap 1위</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num counter" data-target="314" data-suffix="B" data-prefix="$">$0</div>
+        <div class="stat-label">스테이블코인 총량</div>
+        <div class="stat-note">USDT+USDC+DAI 등 합산</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-num">8M+</div>
+        <div class="stat-label">활성 DeFi 사용자</div>
+        <div class="stat-note">월간 활성 지갑 기준</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-label">출처</span>
+      <a href="https://defillama.com" target="_blank" rel="noopener">DefiLlama</a><span class="src-sep">·</span>
+      <a href="https://dune.com/hagaetc/dex-metrics" target="_blank" rel="noopener">Dune Analytics DEX</a><span class="src-sep">·</span>
+      <a href="https://www.coingecko.com/en/categories/stablecoins" target="_blank" rel="noopener">CoinGecko Stablecoins</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  02. 레이더 — DeFi vs 전통금융 6축
+══════════════════════════════════ -->
+<section id="radar" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">역량 비교 분석</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">DeFi vs 전통금융 <span class="grad">6축 비교</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">스마트 컨트랙트 기반 금융이 기존 인프라 대비 어떤 차원에서 앞서는가</p>
+
+    <div class="canvas-wrap reveal d3">
+      <canvas id="radarChart" width="500" height="440"></canvas>
+    </div>
+
+    <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:1.2rem" class="reveal d4">
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.74rem;color:rgba(220,255,255,.5)">
+        <div style="width:12px;height:3px;background:var(--c1);border-radius:2px"></div>DeFi
+      </div>
+      <div style="display:flex;align-items:center;gap:.4rem;font-size:.74rem;color:rgba(220,255,255,.28)">
+        <div style="width:12px;height:3px;background:rgba(220,255,255,.2);border-radius:2px"></div>전통 금융
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:2rem;max-width:640px;margin-left:auto;margin-right:auto" class="reveal d5">
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:var(--c1);display:block;font-size:.95rem">9.5</strong>24/7 접근성</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:var(--c1);display:block;font-size:.95rem">10</strong>온체인 투명성</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:var(--c1);display:block;font-size:.95rem">9.0</strong>비용 효율</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:var(--c1);display:block;font-size:.95rem">8.0</strong>구성 가능성</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:#FBBF24;display:block;font-size:.95rem">4.5</strong>규제 확실성</div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);padding:.6rem;background:rgba(0,212,255,.03);border-radius:10px;border:1px solid rgba(0,212,255,.1)"><strong style="color:var(--c1);display:block;font-size:.95rem">9.5</strong>성장 잠재력</div>
+    </div>
+
+    <div class="src-bar reveal d6">
+      <span class="src-label">출처</span>
+      <a href="https://defillama.com" target="_blank" rel="noopener">DefiLlama</a><span class="src-sep">·</span>
+      <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  03. 비교 테이블 — 주요 DeFi 프로토콜
+══════════════════════════════════ -->
+<section id="compare" style="background:var(--black)">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">프로토콜 비교</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">누가 <span class="grad">DeFi를 이끄는가</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">카테고리별 1위 DeFi 프로토콜 · 2026년 기준</p>
+
+    <div class="reveal d3" style="overflow-x:auto">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>프로토콜</th>
+          <th>카테고리</th>
+          <th>TVL</th>
+          <th>주요 체인</th>
+          <th>수익 구조</th>
+          <th>상태</th>
+          <th>특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>⭐ Aave</td>
+          <td><span class="badge badge-cyan">대출/예금</span></td>
+          <td>$24.8B</td>
+          <td>Ethereum·Polygon</td>
+          <td>예금 이자 · 대출 이자</td>
+          <td><span class="badge badge-green">운영중</span></td>
+          <td>DeFi 대출 TVL 세계 1위</td>
+        </tr>
+        <tr>
+          <td>Lido Finance</td>
+          <td><span class="badge badge-gray">리퀴드 스테이킹</span></td>
+          <td>$23.1B</td>
+          <td>Ethereum</td>
+          <td>스테이킹 보상 10%</td>
+          <td><span class="badge badge-green">운영중</span></td>
+          <td>ETH 리퀴드 스테이킹 1위</td>
+        </tr>
+        <tr>
+          <td>Uniswap</td>
+          <td><span class="badge badge-gray">DEX</span></td>
+          <td>$6.5B</td>
+          <td>Ethereum·L2 멀티체인</td>
+          <td>LP 수수료 0.05~1%</td>
+          <td><span class="badge badge-green">운영중</span></td>
+          <td>연간 $2.9T · DEX 거래량 1위</td>
+        </tr>
+        <tr>
+          <td>MakerDAO (Sky)</td>
+          <td><span class="badge badge-gray">CDP · 스테이블코인</span></td>
+          <td>$8.2B</td>
+          <td>Ethereum</td>
+          <td>안정화 수수료 · DSR</td>
+          <td><span class="badge badge-cyan">리브랜딩</span></td>
+          <td>DAI 발행 · 최초 DeFi 프로토콜</td>
+        </tr>
+        <tr>
+          <td>Curve Finance</td>
+          <td><span class="badge badge-gray">스테이블 DEX</span></td>
+          <td>$3.1B</td>
+          <td>Ethereum·멀티체인</td>
+          <td>LP 수수료 0.04%</td>
+          <td><span class="badge badge-green">운영중</span></td>
+          <td>스테이블코인 스왑 최저 슬리피지</td>
+        </tr>
+        <tr>
+          <td>Compound</td>
+          <td><span class="badge badge-gray">대출/예금</span></td>
+          <td>$2.4B</td>
+          <td>Ethereum</td>
+          <td>대출 이자 · COMP 보상</td>
+          <td><span class="badge badge-green">운영중</span></td>
+          <td>DeFi Summer 촉발한 유동성 채굴 선구자</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-label">1티어 출처</span>
+      <a href="https://defillama.com/protocols" target="_blank" rel="noopener">DefiLlama Protocols</a><span class="src-sep">·</span>
+      <a href="https://dune.com/hagaetc/dex-metrics" target="_blank" rel="noopener">Dune Analytics</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  04. 플로우 — DeFi 작동 메커니즘
+══════════════════════════════════ -->
+<section id="model" style="background:var(--near-black)">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">DeFi 메커니즘</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">은행 없이 <span class="grad">어떻게 대출이 되나</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">신뢰 없이 작동하는 금융 — 스마트 컨트랙트가 심판이다</p>
+
+    <div class="flow-row reveal d3">
+      <div class="flow-node">
+        <div class="flow-node-title">👤 사용자</div>
+        <div class="flow-node-desc">MetaMask 지갑<br>KYC 불필요</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node accent">
+        <div class="flow-node-title">⚡ 스마트 컨트랙트</div>
+        <div class="flow-node-desc">조건 자동 실행<br>중개자 없음</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">💧 유동성 풀</div>
+        <div class="flow-node-desc">LP가 예치한<br>토큰 저장소</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">📊 수익 배분</div>
+        <div class="flow-node-desc">수수료·이자<br>자동 분배</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-title">🔁 재투자</div>
+        <div class="flow-node-desc">수익 → 재예치<br>복리 자동화</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2.5rem;text-align:left" class="reveal d4">
+      <div style="background:var(--card);border:1px solid rgba(0,212,255,.12);border-radius:14px;padding:1.2rem">
+        <div style="font-size:.65rem;font-weight:700;color:var(--c1);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem">DEX — 거래소</div>
+        <div style="font-size:.85rem;font-weight:700;color:rgba(220,255,255,.9);margin-bottom:.3rem">AMM 유동성 풀</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">오더북 없이 수학 공식(x·y=k)으로 자동 가격 결정. LP는 수수료 수익, 거래자는 24/7 스왑.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(0,212,255,.12);border-radius:14px;padding:1.2rem">
+        <div style="font-size:.65rem;font-weight:700;color:var(--c1);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem">Lending — 대출</div>
+        <div style="font-size:.85rem;font-weight:700;color:rgba(220,255,255,.9);margin-bottom:.3rem">초과 담보 대출</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">ETH 예치 후 USDC 대출. 담보비율 자동 감시. 기준 미달 시 청산. Aave 기준 담보비율 130%.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid rgba(0,212,255,.12);border-radius:14px;padding:1.2rem">
+        <div style="font-size:.65rem;font-weight:700;color:var(--c1);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem">기관 진입 2026</div>
+        <div style="font-size:.85rem;font-weight:700;color:rgba(220,255,255,.9);margin-bottom:.3rem">BlackRock × Uniswap</div>
+        <div style="font-size:.76rem;color:var(--muted);line-height:1.55">2026.2.11 BlackRock BUIDL이 UniswapX에 통합. 기관 자금이 DeFi 유동성 공급자로 직접 진입.</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">1티어 출처</span>
+      <a href="https://blog.uniswap.org/unlocking-defi-liquidity-for-buidl" target="_blank" rel="noopener">Uniswap × BlackRock BUIDL 공식</a><span class="src-sep">·</span>
+      <a href="https://docs.aave.com/risk/asset-risk/risk-parameters" target="_blank" rel="noopener">Aave 리스크 파라미터</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  05. 도넛 + 수평 바 — TVL 분포
+══════════════════════════════════ -->
+<section id="distribution" style="background:var(--black)">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">TVL 분포 분석</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">$71.77B가 <span class="grad">어디에 잠겨 있나</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">카테고리별 TVL 분포 · Ethereum 54% 점유</p>
+
+    <div class="token-layout reveal d3">
+      <div>
+        <canvas id="donutChart" width="260" height="260"></canvas>
+      </div>
+      <div class="token-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#00D4FF"></div><span>Liquid Staking — $26.8B (37.3%)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0EA5E9"></div><span>대출/예금 (Lending) — $19.4B (27.0%)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#00C9A7"></div><span>DEX — $9.8B (13.7%)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0369A1"></div><span>CDP (스테이블코인 발행) — $8.2B (11.4%)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1A3A4A"></div><span>브리지 · 기타 — $5.1B (7.1%)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2A5A6A"></div><span>수익 최적화 — $2.47B (3.5%)</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem" class="reveal d4">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--c1);margin-bottom:1.5rem">체인별 TVL 분포</div>
+      <div class="hbar-list">
+        <div class="hbar-item">
+          <div class="hbar-label"><span>Ethereum</span><span style="font-family:'DM Mono',monospace">54.2% · $38.8B</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="54.2"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>Solana</span><span style="font-family:'DM Mono',monospace">12.4% · $8.9B</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="12.4"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>BNB Chain</span><span style="font-family:'DM Mono',monospace">8.3% · $6.0B</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="8.3"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>Arbitrum</span><span style="font-family:'DM Mono',monospace">7.8% · $5.6B</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="7.8"></div></div>
+        </div>
+        <div class="hbar-item">
+          <div class="hbar-label"><span>Base · Polygon · 기타</span><span style="font-family:'DM Mono',monospace">17.3% · $12.4B</span></div>
+          <div class="hbar-track"><div class="hbar-fill" data-width="17.3"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="https://defillama.com/chains" target="_blank" rel="noopener">DefiLlama · Chain TVL</a><span class="src-sep">·</span>
+      <a href="https://defillama.com/categories" target="_blank" rel="noopener">DefiLlama · Categories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  06. 라인 차트 — TVL 성장
+══════════════════════════════════ -->
+<section id="growth" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">TVL 성장 추이</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">DeFi의 <span class="grad">역대 성장 그래프</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2rem">DeFi Summer(2020) 부터 기관 진입(2026)까지</p>
+
+    <div class="line-chart-wrap reveal d3">
+      <canvas id="lineChart" width="720" height="300"></canvas>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem" class="reveal d4">
+      <div style="text-align:center;padding:1.25rem;background:var(--card);border:1px solid rgba(0,212,255,.14);border-radius:14px">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--c1)">$0.6B</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.3rem;font-weight:600;letter-spacing:.06em">2020년 1월</div>
+        <div style="font-size:.65rem;color:rgba(220,255,255,.2);margin-top:.2rem">DeFi Summer 이전</div>
+      </div>
+      <div style="text-align:center;padding:1.25rem;background:var(--card);border:1px solid rgba(0,212,255,.14);border-radius:14px">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--c1)">$180B</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.3rem;font-weight:600;letter-spacing:.06em">2021년 11월 최고점</div>
+        <div style="font-size:.65rem;color:rgba(220,255,255,.2);margin-top:.2rem">강세장 정점</div>
+      </div>
+      <div style="text-align:center;padding:1.25rem;background:var(--card);border:1px solid rgba(0,212,255,.14);border-radius:14px">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--c1)">$71.8B</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.3rem;font-weight:600;letter-spacing:.06em">2026년 현재</div>
+        <div style="font-size:.65rem;color:rgba(220,255,255,.2);margin-top:.2rem">기관 진입 + 회복세</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d5">
+      <span class="src-label">출처</span>
+      <a href="https://defillama.com" target="_blank" rel="noopener">DefiLlama Historical TVL</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  07. 2×2 매트릭스 — 프로토콜 포지셔닝
+══════════════════════════════════ -->
+<section id="matrix" style="background:var(--black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">프로토콜 포지셔닝</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">DeFi 카테고리 <span class="grad">리스크 vs 수익성</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:1.5rem">온체인 수익성 vs 스마트 컨트랙트 리스크 기준 — <em>교육 목적 분류, 투자 추천 아님</em></p>
+
+    <div class="matrix-outer reveal d3">
+      <div class="matrix-axis-y">← 낮음 | 수익 잠재력 | 높음 →</div>
+      <div>
+        <div class="matrix-grid">
+          <div class="matrix-cell m-high-high">
+            <div class="matrix-cell-label">🟢 고수익 · 저리스크</div>
+            <div class="matrix-cell-title">리퀴드 스테이킹</div>
+            <div class="matrix-cell-desc">Lido·Rocket Pool — ETH 스테이킹 보상 3~4%. 스마트 컨트랙트 감사 완료. $23B+ TVL 검증</div>
+          </div>
+          <div class="matrix-cell m-high-low">
+            <div class="matrix-cell-label">🔵 고수익 · 중간 리스크</div>
+            <div class="matrix-cell-title">대출/예금</div>
+            <div class="matrix-cell-desc">Aave·Compound — 5~12% APY. 초과 담보. 청산 메커니즘 안정. $24.8B TVL</div>
+          </div>
+          <div class="matrix-cell m-low-high">
+            <div class="matrix-cell-label">🟡 중간수익 · 고리스크</div>
+            <div class="matrix-cell-title">수익 최적화 (Yield)</div>
+            <div class="matrix-cell-desc">Yearn·Convex — 복잡한 전략, 고수익. 컨트랙트 복잡도 상승으로 익스플로잇 리스크 존재</div>
+          </div>
+          <div class="matrix-cell m-low-low">
+            <div class="matrix-cell-label">🔴 투기성 · 최고 리스크</div>
+            <div class="matrix-cell-title">신규 DEX / 밈 토큰</div>
+            <div class="matrix-cell-desc">감사 미완료, Rug Pull 가능성. 높은 변동성. 유동성 급격 이탈 위험. 극히 주의 필요</div>
+          </div>
+        </div>
+        <div class="matrix-axis-x">← 낮음 | 스마트 컨트랙트 리스크 | 높음 →</div>
+      </div>
+    </div>
+    <p style="font-size:.7rem;color:var(--muted);margin-top:1rem" class="reveal d4">⚠️ 위 분류는 시장 이해를 위한 교육 목적 프레임워크이며, 특정 자산의 투자를 권장하지 않습니다.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  08. 타임라인 — DeFi 역사
+══════════════════════════════════ -->
+<section id="timeline" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">DeFi 역사</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">DeFi의 <span class="grad">6년 진화</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:2.5rem">DAI 탄생부터 BlackRock 진입까지</p>
+
+    <div class="timeline reveal d3">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2017</div>
+        <div class="tl-title">MakerDAO — DAI 탄생 / DeFi의 시작</div>
+        <div class="tl-desc">ETH 담보 기반 달러 연동 스테이블코인 DAI 출시. 최초의 탈중앙화 금융 프로토콜. 은행 없는 대출의 개념 증명.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2018</div>
+        <div class="tl-title">Uniswap v1 — AMM DEX 탄생</div>
+        <div class="tl-desc">오더북 없는 AMM(자동화 시장 조성자) 최초 구현. x·y=k 공식으로 24/7 자동 가격 결정. DEX 혁명의 시작.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2020 여름</div>
+        <div class="tl-title">DeFi Summer — 유동성 채굴 폭발</div>
+        <div class="tl-desc">Compound의 COMP 토큰 유동성 채굴 도입. TVL $0.6B → $15B (6개월). Yield Farming 열풍. DeFi 대중화 원년.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2021</div>
+        <div class="tl-title">TVL $180B 정점 · L2 확산</div>
+        <div class="tl-desc">강세장에서 DeFi TVL 사상 최고. Arbitrum·Optimism L2 등장. Polygon DeFi 생태계 급성장. 가스비 문제 해결 시작.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2022</div>
+        <div class="tl-title">Terra 붕괴 — 리스크 현실화</div>
+        <div class="tl-desc">알고리즘 스테이블코인 UST 디페깅. $60B 순식간에 소멸. DeFi 리스크 경고. TVL $180B → $40B 급락. 교훈: 담보 없는 스테이블코인 위험.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2024 — 2026</div>
+        <div class="tl-title">기관 진입 · DeFi × TradFi 융합</div>
+        <div class="tl-desc">BlackRock BUIDL이 UniswapX에 통합(2026.2). Aave Arc 기관 전용 풀. GENIUS Act 스테이블코인 법제화. DeFi TVL $71.77B 회복.</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2027 — 2030 전망</div>
+        <div class="tl-title">DeFi 인프라화 · 규제 완성</div>
+        <div class="tl-desc">전통 금융의 온체인 이동 가속. CBDC + DeFi 통합 실험. RWA + DeFi 담보 융합. 글로벌 규제 프레임워크 완성 예상.</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-label">출처</span>
+      <a href="https://defillama.com" target="_blank" rel="noopener">DefiLlama</a><span class="src-sep">·</span>
+      <a href="https://blog.uniswap.org/unlocking-defi-liquidity-for-buidl" target="_blank" rel="noopener">Uniswap 공식 블로그</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  09. 투자 논거 + 체크리스트
+══════════════════════════════════ -->
+<section id="thesis" style="background:var(--black)">
+  <div class="wrap">
+    <div class="eyebrow reveal">핵심 교육 포인트</div>
+    <div class="display-md reveal d1" style="margin-bottom:.6rem">DeFi를 이해하는 <span class="grad">3가지 핵심 논거</span></div>
+    <p class="section-sub reveal d2" style="margin-bottom:1rem"><em>교육 목적 관점 분석 — 투자 결정의 근거로 사용하지 마세요</em></p>
+
+    <div class="thesis-grid reveal d3">
+      <div class="thesis-card">
+        <div class="thesis-icon">🔗</div>
+        <div class="thesis-num">ARGUMENT 01</div>
+        <div class="thesis-title">코드가 심판이다</div>
+        <div class="thesis-desc">스마트 컨트랙트는 사람의 개입 없이 조건을 실행한다. 은행 영업시간, 신용평가, 계좌 동결이 없다. 코드가 규칙이고 블록체인이 기록이다. 이것이 Trustless Finance의 핵심.</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-icon">🏗️</div>
+        <div class="thesis-num">ARGUMENT 02</div>
+        <div class="thesis-title">구성 가능성 — Money Lego</div>
+        <div class="thesis-desc">Aave에서 대출 → Uniswap에서 스왑 → Yearn에서 최적화 → 하나의 트랜잭션에서 가능. 프로토콜을 레고처럼 조합해 새 금융 상품 무한 생성. 전통금융엔 없는 개방형 인프라.</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-icon">⚠️</div>
+        <div class="thesis-num">ARGUMENT 03</div>
+        <div class="thesis-title">리스크 — 코드 버그는 곧 손실</div>
+        <div class="thesis-desc">스마트 컨트랙트 취약점, 오라클 조작, 청산 폭포, Rug Pull. 2022 Terra 붕괴로 $60B 소멸. 높은 수익에는 반드시 상응하는 리스크. 감사(Audit) 여부 확인 필수.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem">
+      <div class="eyebrow reveal" style="margin-bottom:1rem">이해도 체크리스트</div>
+      <div class="check-row reveal d2">
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div>
+            <div class="check-title">AMM이 뭔지 설명할 수 있다</div>
+            <div class="check-desc">x·y=k 공식으로 자동 가격 결정하는 탈중앙 거래소 메커니즘</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div>
+            <div class="check-title">유동성 풀의 원리를 안다</div>
+            <div class="check-desc">LP가 토큰 쌍 예치 → 수수료 수익. 임페머넌트 로스 리스크 존재</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div>
+            <div class="check-title">TVL이 무엇인지 안다</div>
+            <div class="check-desc">Total Value Locked — 프로토콜에 예치된 총 자산 가치</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">✅</div>
+          <div>
+            <div class="check-title">DeFi 대출 구조를 이해한다</div>
+            <div class="check-desc">초과 담보 → 담보비율 감시 → 기준 미달 시 자동 청산</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">⚠️</div>
+          <div>
+            <div class="check-title">스마트 컨트랙트 리스크를 안다</div>
+            <div class="check-desc">코드 버그·익스플로잇·오라클 조작 → 자금 즉시 손실 가능</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">⚠️</div>
+          <div>
+            <div class="check-title">Terra 사태의 교훈을 안다</div>
+            <div class="check-desc">담보 없는 알고리즘 스테이블코인의 붕괴 위험 — $60B 소멸</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  10. CTA
+══════════════════════════════════ -->
+<section id="cta">
+  <div class="wrap">
+    <div class="eyebrow reveal">시리즈 완주</div>
+    <div class="cta-title reveal d1">
+      다음은<br>RWA 실물자산
+    </div>
+    <p class="cta-sub reveal d2">
+      3편에서는 BlackRock·Franklin Templeton이 블록체인 위에 올린<br>
+      금·채권·부동산 — $33.5B 온체인 RWA의 세계를 다룹니다.
+    </p>
+    <div class="cta-btns reveal d3">
+      <a href="#" class="btn-primary">🔔 3편 알림 받기</a>
+      <a href="#" class="btn-outline">← 1편 블록체인 복습</a>
+    </div>
+
+    <div class="ep-pills reveal d4" style="margin-top:3.5rem">
+      <a href="#" class="ep-pill">1편: 블록체인 기초</a>
+      <a href="#" class="ep-pill active">2편: DeFi 완전정복</a>
+      <a href="#" class="ep-pill">3편: RWA 실물자산</a>
+      <a href="#" class="ep-pill">4편: 스마트 컨트랙트 (준비중)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>
+    <strong style="color:rgba(220,255,255,.35)">⚠️ 법적 면책 고지 (Legal Disclaimer)</strong><br><br>
+    본 웹페이지는 블록체인 및 가상자산 관련 <strong>교육 목적의 정보 제공</strong>만을 위해 제작되었으며, 어떠한 형태의 투자 권유·추천·자문을 구성하지 않습니다.
+    제공되는 모든 정보는 공개된 자료를 기반으로 하며, 정확성·완전성·최신성을 보장하지 않습니다.
+    가상자산 및 DeFi 프로토콜은 가격 변동성이 매우 높으며 스마트 컨트랙트 취약점으로 인한 원금 전부 손실이 발생할 수 있습니다.<br><br>
+    본 서비스는 「자본시장과 금융투자업에 관한 법률」,「가상자산 이용자 보호 등에 관한 법률」(2024년 7월 시행),「전자금융거래법」을 준수합니다.
+    언급된 프로토콜·토큰은 교육 사례 설명을 위한 것이며 해당 자산의 매수·매도를 권장하지 않습니다.<br><br>
+    © 2026 코인랩스 (CoinLabs). All rights reserved. · <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>
+  </p>
+</footer>
+
+<!-- ════════════ JAVASCRIPT ════════════ -->
+<script>
+/* ── PROGRESS ── */
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement;
+  document.getElementById('progress').style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%';
+});
+
+/* ── INTERSECTION OBSERVER ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.counter').forEach(animCounter);
+      e.target.querySelectorAll('.hbar-fill').forEach(animBar);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const radarObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){drawRadar();radarObs.disconnect();}},{threshold:.3});
+radarObs.observe(document.getElementById('radar'));
+const donutObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){drawDonut();donutObs.disconnect();}},{threshold:.3});
+donutObs.observe(document.getElementById('distribution'));
+const lineObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){drawLine();lineObs.disconnect();}},{threshold:.25});
+lineObs.observe(document.getElementById('growth'));
+
+/* ── COUNTER ── */
+function animCounter(el){
+  if(el.dataset.done)return;el.dataset.done='1';
+  const target=parseFloat(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const prefix=el.dataset.prefix||'';
+  const dur=1800;const start=performance.now();
+  function tick(now){
+    const t=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-t,3);
+    const val=target*ease;
+    el.textContent=prefix+(val>=10?Math.floor(val):val.toFixed(2))+suffix;
+    if(t<1)requestAnimationFrame(tick);
+    else el.textContent=prefix+target+suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+function animBar(el){
+  if(el.dataset.done)return;el.dataset.done='1';
+  setTimeout(()=>{el.style.width=el.dataset.width+'%';},100);
+}
+
+/* ── RADAR ── */
+function drawRadar(){
+  const cv=document.getElementById('radarChart');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const cx=cv.width/2,cy=cv.height/2+10,r=160;
+  const labels=['24/7 접근성','온체인 투명성','비용 효율','구성 가능성','규제 확실성','성장 잠재력'];
+  const defi= [9.5,10,9,8,4.5,9.5];
+  const trad= [5,3,4,2,9,3];
+  const n=labels.length;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  [2,4,6,8,10].forEach(ring=>{
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const a=(i/n)*Math.PI*2-Math.PI/2;
+      const rr=(ring/10)*r;
+      i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
+    }
+    ctx.closePath();ctx.strokeStyle='rgba(0,212,255,.1)';ctx.lineWidth=1;ctx.stroke();
+  });
+  labels.forEach((_,i)=>{
+    const a=(i/n)*Math.PI*2-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+    ctx.strokeStyle='rgba(0,212,255,.12)';ctx.lineWidth=1;ctx.stroke();
+  });
+  function poly(data,fill,stroke){
+    ctx.beginPath();
+    data.forEach((v,i)=>{
+      const a=(i/n)*Math.PI*2-Math.PI/2;
+      const rr=(v/10)*r;
+      i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
+    });
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();
+  }
+  poly(trad,'rgba(220,255,255,.05)','rgba(220,255,255,.18)');
+  poly(defi,'rgba(0,212,255,.16)','rgba(0,212,255,.85)');
+  ctx.font='bold 12px "Space Grotesk",sans-serif';ctx.fillStyle='rgba(220,255,255,.6)';ctx.textAlign='center';ctx.textBaseline='middle';
+  labels.forEach((lab,i)=>{
+    const a=(i/n)*Math.PI*2-Math.PI/2;const rr=r+28;
+    ctx.fillText(lab,cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
+  });
+  defi.forEach((v,i)=>{
+    const a=(i/n)*Math.PI*2-Math.PI/2;const rr=(v/10)*r;
+    ctx.beginPath();ctx.arc(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr,5,0,Math.PI*2);
+    ctx.fillStyle='#00D4FF';ctx.fill();
+  });
+}
+
+/* ── DONUT ── */
+function drawDonut(){
+  const cv=document.getElementById('donutChart');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const cx=130,cy=130,r=108,ri=65;
+  const data=[26.8,19.4,9.8,8.2,5.1,2.47];
+  const colors=['#00D4FF','#0EA5E9','#00C9A7','#0369A1','#1A3A4A','#2A5A6A'];
+  const total=data.reduce((a,b)=>a+b,0);
+  let angle=-Math.PI/2;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  data.forEach((v,i)=>{
+    const sw=(v/total)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,angle,angle+sw);ctx.closePath();
+    ctx.fillStyle=colors[i];ctx.fill();ctx.strokeStyle='#020B14';ctx.lineWidth=2;ctx.stroke();
+    angle+=sw;
+  });
+  ctx.beginPath();ctx.arc(cx,cy,ri,0,Math.PI*2);ctx.fillStyle='#020B14';ctx.fill();
+  ctx.fillStyle='rgba(0,212,255,.9)';ctx.font='bold 15px "Space Grotesk",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('$71.77B',cx,cy-9);ctx.font='11px "Space Grotesk",sans-serif';ctx.fillStyle='rgba(220,255,255,.3)';ctx.fillText('DeFi TVL',cx,cy+10);
+}
+
+/* ── LINE CHART ── */
+function drawLine(){
+  const cv=document.getElementById('lineChart');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width,H=cv.height;
+  const pad={t:30,r:30,b:50,l:65};
+  const iw=W-pad.l-pad.r,ih=H-pad.t-pad.b;
+  const years=[2019,2020,2021,2022,2023,2024,2025,2026];
+  const tvl=  [0.3,  0.6, 180, 40,  48,  58,  65,  71.77];
+  const maxV=180;
+  function sy(v){return pad.t+ih-(v/maxV)*ih;}
+  function sx(i){return pad.l+(i/(years.length-1))*iw;}
+  ctx.clearRect(0,0,W,H);
+  [0,40,80,120,180].forEach(v=>{
+    const y=sy(v);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+iw,y);
+    ctx.strokeStyle='rgba(0,212,255,.07)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(220,255,255,.22)';ctx.font='10px "DM Mono",monospace';ctx.textAlign='right';ctx.textBaseline='middle';
+    ctx.fillText('$'+v+'B',pad.l-6,y);
+  });
+  ctx.fillStyle='rgba(220,255,255,.28)';ctx.font='10px "DM Mono",monospace';ctx.textAlign='center';
+  years.forEach((y,i)=>ctx.fillText(y,sx(i),H-15));
+
+  // Gradient area
+  const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ih);
+  grad.addColorStop(0,'rgba(0,212,255,.25)');grad.addColorStop(1,'rgba(0,212,255,.01)');
+  ctx.beginPath();
+  tvl.forEach((v,i)=>ctx.lineTo(sx(i),sy(v)));
+  ctx.lineTo(sx(tvl.length-1),sy(0));ctx.lineTo(pad.l,sy(0));ctx.closePath();
+  ctx.fillStyle=grad;ctx.fill();
+
+  // Line
+  ctx.beginPath();tvl.forEach((v,i)=>{i===0?ctx.moveTo(sx(i),sy(v)):ctx.lineTo(sx(i),sy(v));});
+  ctx.strokeStyle='rgba(0,212,255,.9)';ctx.lineWidth=2.5;ctx.stroke();
+
+  // DeFi Summer marker
+  const summerX=sx(1);
+  ctx.beginPath();ctx.moveTo(summerX,pad.t);ctx.lineTo(summerX,pad.t+ih);
+  ctx.strokeStyle='rgba(0,212,255,.25)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(0,212,255,.6)';ctx.font='10px "Space Grotesk",sans-serif';ctx.textAlign='center';
+  ctx.fillText('DeFi Summer →',summerX+60,pad.t+14);
+
+  // Dots
+  tvl.forEach((v,i)=>{
+    ctx.beginPath();ctx.arc(sx(i),sy(v),4,0,Math.PI*2);ctx.fillStyle='#00D4FF';ctx.fill();
+  });
+}
+</script>
+</body>
+</html>
