@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>블록체인이 뭔지 아직도 모른다고? — EP.01 블록체인 기초 완전정복</title>
+<meta name="description" content="비트코인은 알겠는데 블록체인은 설명하기 어렵다면 이 페이지를 읽으세요. 코린이 1,200만 명을 위한 블록체인 기초 완전정복.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalEvent","name":"블록체인 기초 완전정복 EP.01","description":"코린이를 위한 블록체인 기초 교육 랜딩페이지","provider":{"@type":"Organization","name":"블록체인 마스터클래스"}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Sans KR',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+:root{
+  --p1:#7C3AED;--p2:#8B5CF6;--p3:#A78BFA;--p4:#5B21B6;--p5:#C4B5FD;
+  --red:#FF453A;--green:#30D158;--gold:#E8A020;
+  --near-black:#0A0A0F;--muted:rgba(255,255,255,.38);--apple-dark:#1D1D1F;
+}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--p3);margin-bottom:1.4rem}
+.eyebrow-muted{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.35);margin-bottom:1.4rem}
+.display-xl{font-size:clamp(4.5rem,12vw,10rem);font-weight:900;line-height:.95;letter-spacing:-.04em}
+.display-lg{font-size:clamp(3rem,8vw,6.5rem);font-weight:900;line-height:1;letter-spacing:-.035em}
+.display-md{font-size:clamp(2rem,5vw,3.8rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
+.display-dark{color:var(--apple-dark)}
+.body-lg{font-size:clamp(1rem,2vw,1.2rem);font-weight:400;line-height:1.65;color:rgba(255,255,255,.52);max-width:600px;margin:0 auto}
+.body-lg-dark{font-size:clamp(1rem,2vw,1.2rem);font-weight:400;line-height:1.65;color:rgba(0,0,0,.55);max-width:600px;margin:0 auto}
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--p1),var(--p3));width:0%;z-index:1000;transition:width .1s linear}
+#legal-bar{background:rgba(124,58,237,.1);border-bottom:1px solid rgba(124,58,237,.18);padding:.5rem 1.5rem;text-align:center;font-size:.63rem;color:rgba(255,255,255,.38);line-height:1.5;position:sticky;top:0;z-index:999}
+#legal-bar strong{color:rgba(255,255,255,.55)}
+nav{position:sticky;top:36px;z-index:998;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px;background:rgba(0,0,0,.82);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-size:.88rem;font-weight:700;letter-spacing:-.01em;color:rgba(255,255,255,.85)}
+.nav-links{list-style:none;display:flex;gap:2rem}
+.nav-links a{font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-ep{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--p3);text-transform:uppercase;background:rgba(124,58,237,.15);padding:.25rem .7rem;border-radius:20px;border:1px solid rgba(124,58,237,.3)}
+.wrap{max-width:800px;margin:0 auto;padding:0 2rem;text-align:center}
+.wrap-wide{max-width:1000px;margin:0 auto;padding:0 2rem;text-align:center}
+.line{width:48px;height:2px;background:var(--p2);margin:0 auto}
+.line-dark{background:rgba(0,0,0,.15)}
+section{padding:7rem 2rem}
+.tag-chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--p3);border:1px solid rgba(167,139,250,.35);padding:.35rem 1rem;border-radius:20px;margin-bottom:2rem;background:rgba(124,58,237,.1)}
+
+/* HERO */
+#hero{background:#000;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 6rem;position:relative}
+.hero-sub{font-size:clamp(1rem,2vw,1.18rem);line-height:1.7;color:rgba(255,255,255,.5);max-width:560px;margin:2rem auto 2.5rem}
+.hero-sub strong{color:rgba(255,255,255,.88)}
+.hero-sub .accent{color:var(--p3);font-weight:700}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-size:.68rem;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;animation:bounce 2.4s ease infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.ref-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:2rem}
+.ref-link{font-size:.65rem;font-weight:600;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.12);padding:.3rem .8rem;border-radius:12px;text-decoration:none;transition:all .2s}
+.ref-link:hover{color:#fff;border-color:rgba(167,139,250,.5);background:rgba(124,58,237,.1)}
+
+/* SHOCK */
+#shock{background:var(--near-black);text-align:center}
+.shock-wrap{display:flex;align-items:flex-start;justify-content:center;line-height:1;gap:.3rem;margin:1.5rem 0}
+.shock-num{font-size:clamp(7rem,20vw,16rem);font-weight:900;letter-spacing:-.06em;background:linear-gradient(135deg,var(--p1) 0%,var(--p3) 50%,#fff 80%,var(--p2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:.9}
+.shock-denom{font-size:clamp(1.5rem,4vw,3rem);font-weight:700;color:var(--p3);padding-top:1rem}
+.shock-label{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.5);line-height:1.7;max-width:560px;margin:0 auto}
+.shock-label strong{color:rgba(255,255,255,.88)}
+.ring-wrap{display:flex;align-items:center;justify-content:center;gap:2.5rem;margin:3rem auto 0;max-width:500px;flex-wrap:wrap}
+.ring-legend{text-align:left}
+.ring-legend-item{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.78rem;color:rgba(255,255,255,.6)}
+.ring-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* THREE STATS */
+#three-stats{background:#000;padding:0}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.06)}
+.stat-col{padding:4rem 2rem;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+.stat-col:last-child{border-right:none}
+.stat-big{font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;letter-spacing:-.04em;line-height:1}
+.stat-big.purple{color:var(--p3)}.stat-big.red{color:var(--red)}.stat-big.green{color:var(--green)}
+.stat-label-sm{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.6;margin-top:.6rem}
+.stat-src{font-size:.62rem;color:rgba(255,255,255,.22);margin-top:.5rem}
+
+/* PAIN */
+#pain{background:#0D0D14;text-align:center}
+.pain-table{width:100%;max-width:720px;margin:2.5rem auto 0;border-collapse:collapse;font-size:.85rem}
+.pain-table th{padding:.7rem 1rem;text-align:left;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.08)}
+.pain-table td{padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.55);text-align:left;line-height:1.5}
+.pain-table td.now{color:var(--p3);font-weight:600}
+.pain-table tr:last-child td{border-bottom:none}
+
+/* WHY (LIGHT) */
+#why{background:#F5F5F7;color:var(--apple-dark);text-align:center}
+.section-head{margin-bottom:3.5rem}
+.flow-row{display:flex;align-items:flex-start;justify-content:center;gap:.5rem;flex-wrap:wrap;margin:3rem 0}
+.flow-step{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:1.5rem 1.2rem;width:180px;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,.06)}
+.flow-step.good{border-color:rgba(48,209,88,.2);background:#F5FFF8}
+.flow-step-num{width:32px;height:32px;border-radius:50%;background:var(--p1);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem}
+.flow-step.good .flow-step-num{background:var(--green)}
+.flow-step-title{font-size:.88rem;font-weight:700;color:var(--apple-dark);margin-bottom:.4rem}
+.flow-step-sub{font-size:.72rem;color:rgba(0,0,0,.45);line-height:1.5}
+.flow-conn{font-size:1.3rem;color:rgba(0,0,0,.2);display:flex;align-items:center;padding-top:1rem}
+.callout-apple{background:#fff;border:1px solid rgba(0,0,0,.08);border-left:3px solid var(--p1);border-radius:12px;padding:1.4rem 1.8rem;max-width:660px;margin:2.5rem auto 0;text-align:left;font-size:.92rem;color:rgba(0,0,0,.6);line-height:1.65}
+.callout-apple strong{color:var(--apple-dark)}
+.callout-apple-dark{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-left:3px solid var(--p2);border-radius:12px;padding:1.4rem 1.8rem;max-width:660px;margin:2.5rem auto 0;text-align:left;font-size:.92rem;color:rgba(255,255,255,.55);line-height:1.65}
+.callout-apple-dark strong{color:rgba(255,255,255,.88)}
+.src-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem .8rem;font-size:.63rem;color:rgba(255,255,255,.28);margin-top:2rem;padding:.6rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06)}
+.src-bar-light{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem .8rem;font-size:.63rem;color:rgba(0,0,0,.35);margin-top:2rem;padding:.6rem 1rem;background:rgba(0,0,0,.03);border-radius:8px;border:1px solid rgba(0,0,0,.08)}
+.src-bar-label{font-weight:700;color:var(--p3)}
+.src-bar-light .src-bar-label{color:var(--p1)}
+.src-bar a,.src-bar-light a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.05em;transition:color .2s}
+.src-bar a:hover{color:var(--p3)}.src-bar-light a:hover{color:var(--p1)}
+.src-bar-sep{color:rgba(255,255,255,.15)}
+
+/* BLOCKCHAIN DEF */
+#blockchain-def{background:#000;text-align:center}
+.tok-flow{display:flex;align-items:center;justify-content:center;gap:0;margin:3rem auto;max-width:780px;flex-wrap:wrap}
+.tok-box{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:1.2rem 1.5rem;text-align:center;min-width:130px}
+.tok-box-title{font-size:.75rem;font-weight:700;color:var(--p3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
+.tok-box-sub{font-size:.7rem;color:rgba(255,255,255,.4);line-height:1.4}
+.tok-arrow{font-size:1.5rem;color:rgba(124,58,237,.4);padding:0 .3rem;display:flex;align-items:center}
+.props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:720px;margin:3rem auto 0}
+.prop-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.8rem 1.4rem;text-align:center}
+.prop-icon{font-size:2rem;margin-bottom:.8rem}
+.prop-title{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.prop-desc{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.6}
+
+/* TIMELINE (LIGHT) */
+#timeline{background:#FAFAF8;color:var(--apple-dark);text-align:center}
+.tl-track{max-width:680px;margin:3rem auto 0;position:relative}
+.tl-track::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.1);transform:translateX(-50%)}
+.tl-item{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem;position:relative}
+.tl-item:nth-child(even){flex-direction:row-reverse}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--p1);flex-shrink:0;position:absolute;left:50%;transform:translateX(-50%);margin-top:.3rem}
+.tl-side{flex:1;padding:0 1.5rem}
+.tl-item:nth-child(odd) .tl-side{text-align:right}
+.tl-item:nth-child(even) .tl-side:last-child{text-align:left}
+.tl-year{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--p1);text-transform:uppercase;margin-bottom:.3rem}
+.tl-title{font-size:.92rem;font-weight:700;color:var(--apple-dark);margin-bottom:.3rem}
+.tl-desc{font-size:.75rem;color:rgba(0,0,0,.45);line-height:1.5}
+
+/* QUOTE */
+#quote{background:#0A0A0F;text-align:center}
+.quote-mark{font-size:clamp(5rem,12vw,9rem);line-height:.8;color:var(--p2);font-family:Georgia,serif;margin-bottom:.5rem}
+.quote-text{font-size:clamp(1.3rem,3vw,2.2rem);font-weight:700;line-height:1.35;letter-spacing:-.02em;color:#fff;max-width:700px;margin:0 auto}
+.quote-author{font-size:.75rem;color:rgba(255,255,255,.35);margin-top:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* GROWTH (LIGHT) */
+#growth{background:#F5F5F7;color:var(--apple-dark);text-align:center}
+.market-row{display:flex;align-items:center;justify-content:center;gap:3rem;margin:3rem auto;max-width:700px;flex-wrap:wrap}
+.market-big{text-align:center}
+.market-num{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;letter-spacing:-.04em;color:var(--p1);line-height:1}
+.market-label{font-size:.78rem;color:rgba(0,0,0,.5);margin-top:.4rem;line-height:1.4}
+.market-sep{width:1px;height:80px;background:rgba(0,0,0,.1)}
+.mkt-bars{max-width:600px;margin:2.5rem auto 0}
+.mkt-bar-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
+.mkt-bar-name{font-size:.72rem;color:rgba(0,0,0,.45);width:110px;text-align:right;flex-shrink:0}
+.mkt-bar-track{flex:1;height:8px;background:rgba(0,0,0,.07);border-radius:4px;overflow:hidden}
+.mkt-bar-fill{height:100%;border-radius:4px;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.mkt-bar-val{font-size:.7rem;font-weight:700;color:rgba(0,0,0,.5);width:48px;text-align:left;flex-shrink:0}
+
+/* WHY NOW */
+#why-now{background:#000;text-align:center}
+.why-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:760px;margin:3rem auto 0}
+.why-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2rem 1.8rem;text-align:left}
+.why-card-num{font-size:2.8rem;font-weight:900;color:var(--p2);letter-spacing:-.04em;line-height:1;margin-bottom:.8rem}
+.why-card-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.why-card-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.65}
+
+/* CHECKLIST */
+#checklist{background:#0A0A0F;text-align:center}
+.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:760px;margin:3rem auto 0}
+.check-cell{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:14px;padding:1.4rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;text-align:left}
+.check-icon{width:28px;height:28px;border-radius:50%;background:var(--p1);display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;color:#fff;font-weight:700;margin-top:.1rem}
+.check-title{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.check-desc{font-size:.72rem;color:rgba(255,255,255,.38);line-height:1.5}
+
+/* CTA */
+#cta{background:linear-gradient(180deg,#0A0A0F 0%,#000 100%);border-top:1px solid rgba(124,58,237,.15);text-align:center;padding:8rem 2rem}
+.cta-title{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem;background:linear-gradient(135deg,var(--p1) 0%,var(--p3) 45%,#fff 72%,var(--p2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:1.05rem;color:rgba(255,255,255,.38);line-height:1.6;max-width:520px;margin:0 auto 3rem}
+.cta-btn{display:inline-block;background:var(--p1);color:#fff;font-size:.92rem;font-weight:700;padding:1rem 2.4rem;border-radius:50px;text-decoration:none;transition:all .3s}
+.cta-btn:hover{background:var(--p2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,.4)}
+.ep-next{font-size:.72rem;color:rgba(255,255,255,.25);margin-top:1.2rem;letter-spacing:.06em}
+
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 2rem;text-align:center}
+footer p{font-size:.68rem;color:rgba(255,255,255,.16);line-height:1.8}
+footer a{color:rgba(255,255,255,.28);text-decoration:none}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.5s}.d5{transition-delay:.62s}.d6{transition-delay:.74s}
+
+@media(max-width:680px){
+  .nav-links{display:none}
+  section{padding:5rem 1.2rem}
+  .stats-grid,.props-grid,.why-cards,.check-grid{grid-template-columns:1fr}
+  .stat-col{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:2.5rem 1rem}
+  .stat-col:last-child{border-bottom:none}
+  .flow-row{flex-direction:column;align-items:center}
+  .flow-conn{transform:rotate(90deg)}
+  .tok-flow{flex-direction:column}
+  .tok-arrow{transform:rotate(90deg)}
+  .tl-track::before{display:none}
+  .tl-item,.tl-item:nth-child(even){flex-direction:column;padding-left:1.5rem}
+  .tl-dot{left:0;transform:none}
+  .tl-side{padding:0}
+  .tl-item:nth-child(odd) .tl-side,.tl-item:nth-child(even) .tl-side:last-child{text-align:left}
+  .market-sep{display:none}.market-row{gap:2rem}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="legal-bar">
+  <strong>⚠ 법적 고지:</strong> 본 페이지는 순수 교육 목적입니다. 투자 권유 또는 수익 보장이 아닙니다. 가상자산 투자는 원금 손실 위험이 있습니다. 투자 결정은 본인 책임이며 전문가와 상담하시기 바랍니다.
+</div>
+
+<nav>
+  <div class="nav-logo">⛓ 블록체인 마스터클래스</div>
+  <ul class="nav-links">
+    <li><a href="#pain">코린이 현실</a></li>
+    <li><a href="#blockchain-def">블록체인이란</a></li>
+    <li><a href="#timeline">역사</a></li>
+    <li><a href="#growth">시장</a></li>
+    <li><a href="#checklist">배울 내용</a></li>
+  </ul>
+  <span class="nav-ep">EP. 01</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <div class="tag-chip reveal">EP.01 · 2025–2026 블록체인 기초</div>
+    <div class="display-xl reveal d1" style="background:linear-gradient(135deg,var(--p1) 0%,var(--p3) 45%,#fff 72%,var(--p2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">블록체인,<br>당신만<br>모른다</div>
+    <p class="hero-sub reveal d2">
+      비트코인은 샀는데, <strong>블록체인이 뭔지는 설명 못한다</strong>면?<br>
+      한국 가상자산 투자자 <strong>1,200만 명</strong> 중<br>
+      블록체인의 원리를 아는 사람은 <span class="accent">거의 없다.</span>
+    </p>
+    <div class="ref-row reveal d3">
+      <a class="ref-link" href="https://www.binance.com/en/research/analysis/full-year-2025-and-themes-for-2026" target="_blank" rel="noopener">Binance Research 2025 연간 리포트</a>
+      <a class="ref-link" href="https://www.binance.com/en/research/analysis/half-year-2026-macro-bitcoin" target="_blank" rel="noopener">Binance Research 2026 상반기</a>
+      <a class="ref-link" href="https://www.fss.or.kr" target="_blank" rel="noopener">금융감독원 가상자산 현황</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ 스크롤</div>
+</section>
+
+<!-- SHOCK STAT -->
+<section id="shock">
+  <div class="wrap">
+    <div class="eyebrow reveal">2026년 한국 가상자산 시장</div>
+    <div class="shock-wrap reveal d1">
+      <div class="shock-num">1,200</div>
+      <div class="shock-denom">만명</div>
+    </div>
+    <div class="shock-label reveal d2">
+      대한민국 <strong>성인 4명 중 1명</strong>이 가상자산에 투자했다.<br>
+      하지만 블록체인의 원리를 설명할 수 있는 투자자는?
+    </div>
+    <div class="ring-wrap reveal d3">
+      <canvas id="ringChart" width="180" height="180" style="flex-shrink:0"></canvas>
+      <div class="ring-legend">
+        <div class="ring-legend-item"><div class="ring-dot" style="background:var(--p2)"></div>코인 보유자 — 1,200만 명</div>
+        <div class="ring-legend-item"><div class="ring-dot" style="background:rgba(255,255,255,.12)"></div>미투자 성인</div>
+        <div style="margin-top:1rem;font-size:.72rem;color:var(--muted);line-height:1.5">성인 인구 대비 약 25%<br>블록체인 이해도는 낮은 상태</div>
+      </div>
+    </div>
+    <div class="src-bar reveal d4" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.fss.or.kr" target="_blank" rel="noopener">금융감독원 가상자산 투자자 현황 2026</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research/analysis/full-year-2025-and-themes-for-2026" target="_blank" rel="noopener">Binance Research 2025 Annual</a>
+    </div>
+  </div>
+</section>
+
+<!-- THREE STATS -->
+<section id="three-stats">
+  <div class="stats-grid reveal">
+    <div class="stat-col">
+      <div class="stat-big purple">$17조</div>
+      <div class="stat-label-sm">글로벌 블록체인 시장<br>규모 (2026년 추정)</div>
+      <canvas id="stat1Chart" width="240" height="80" style="width:100%;max-width:240px;margin-top:1.2rem"></canvas>
+      <div class="stat-src">Binance Research 2026.06</div>
+      <a class="ref-link" style="margin-top:.5rem;display:inline-block" href="https://www.binance.com/en/research/analysis/half-year-2026-macro-bitcoin" target="_blank" rel="noopener">리포트 확인</a>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big green">+589%</div>
+      <div class="stat-label-sm">온체인 RWA 시장<br>성장률 (2024→2026)</div>
+      <canvas id="stat2Chart" width="100" height="100" style="width:100px;height:100px;margin:1rem auto 0;display:block"></canvas>
+      <div class="stat-src">Binance Research (RWA 섹터)</div>
+      <a class="ref-link" style="margin-top:.5rem;display:inline-block" href="https://www.binance.com/en/research/analysis/10-charts-shaping-2025" target="_blank" rel="noopener">10 Charts 2025</a>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big red">93%</div>
+      <div class="stat-label-sm">2025년 신규 상장 토큰<br>상장 후 하락 비율</div>
+      <canvas id="stat3Chart" width="240" height="80" style="width:100%;max-width:240px;margin-top:1.2rem"></canvas>
+      <div class="stat-src">CryptoRank · 2025 상장 분석</div>
+      <a class="ref-link" style="margin-top:.5rem;display:inline-block" href="https://www.binance.com/en/research/analysis/blockchain-payments-a-fresh-start" target="_blank" rel="noopener">Binance Research</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN / PROBLEM -->
+<section id="pain">
+  <div class="wrap">
+    <div class="eyebrow reveal">코린이라면 한 번쯤</div>
+    <div class="display-lg reveal d1">이런 경험<br>있지 않나요?</div>
+    <p class="body-lg reveal d2" style="margin-top:1.5rem">
+      코인을 사고 팔면서도 <strong style="color:rgba(255,255,255,.88)">왜 오르고 내리는지 모른다.</strong><br>
+      친구가 "블록체인이 뭐야?" 물으면 <strong style="color:rgba(255,255,255,.88)">말문이 막힌다.</strong><br>
+      알트코인 고점에 물려봤다. <strong style="color:var(--p3)">이유도 모른 채.</strong>
+    </p>
+    <table class="pain-table reveal d3">
+      <thead><tr><th>상황</th><th>코린이의 현실</th><th class="now">이 강의 후</th></tr></thead>
+      <tbody>
+        <tr><td>블록체인 설명 요청</td><td>"음… 비트코인 기술?"</td><td class="now">분산원장, 합의 알고리즘을 설명한다</td></tr>
+        <tr><td>알트코인 투자</td><td>SNS 추천 보고 매수</td><td class="now">FDV·토크노믹스를 먼저 확인한다</td></tr>
+        <tr><td>시장 하락 대응</td><td>패닉셀 또는 묻어두기</td><td class="now">사이클 이해 후 근거 있는 판단</td></tr>
+        <tr><td>DeFi/RWA 뉴스</td><td>"무슨 말인지 모르겠다"</td><td class="now">개념을 이해하고 기회를 판단한다</td></tr>
+      </tbody>
+    </table>
+    <div class="src-bar reveal d4" style="margin-top:2rem">
+      <span class="src-bar-label">참고</span>
+      <a href="https://www.binance.com/en/research/analysis/the-future-of-bitcoin-1-the-halving-and-whats-next" target="_blank" rel="noopener">Binance Research · Bitcoin 반감기와 미래</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research/analysis/blockchain-payments-a-fresh-start" target="_blank" rel="noopener">Blockchain Payments 리포트</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / HOW BLOCKCHAIN WORKS (LIGHT) -->
+<section id="why">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div class="eyebrow-muted reveal">블록체인의 구조</div>
+      <div class="display-md display-dark reveal d1">은행 없이 어떻게<br>신뢰가 생기나</div>
+      <div class="line line-dark" style="margin-top:1.5rem"></div>
+      <p class="body-lg-dark reveal d2" style="margin-top:1rem">블록체인의 핵심은 단순하다.<br>중앙 서버 대신 수만 개의 컴퓨터가 같은 장부를 공유한다.</p>
+    </div>
+    <div class="flow-row reveal d2">
+      <div class="flow-step">
+        <div class="flow-step-num">①</div>
+        <div class="flow-step-title">거래 발생</div>
+        <div class="flow-step-sub">A가 B에게 0.1 BTC를 전송한다</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">②</div>
+        <div class="flow-step-title">네트워크 전파</div>
+        <div class="flow-step-sub">수만 개의 노드가 거래를 동시에 수신</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step">
+        <div class="flow-step-num">③</div>
+        <div class="flow-step-title">합의(검증)</div>
+        <div class="flow-step-sub">51% 이상 노드가 거래를 승인</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step good">
+        <div class="flow-step-num" style="background:var(--p1)">④</div>
+        <div class="flow-step-title">블록 추가</div>
+        <div class="flow-step-sub">체인에 영구 기록<br><strong style="color:var(--p1)">변경 불가능</strong></div>
+      </div>
+    </div>
+    <div class="callout-apple reveal d3">
+      <p>한 블록을 변조하려면 그 이후 모든 블록을 동시에 바꾸어야 한다.<br>
+      <strong>전 세계 51% 이상의 컴퓨팅 파워를 장악하지 않는 한 불가능하다.</strong> 이것이 블록체인이 안전한 이유다.</p>
+    </div>
+    <div class="src-bar-light reveal d4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.binance.com/en/research/analysis/blockchain-payments-a-fresh-start" target="_blank" rel="noopener">Binance Research · Blockchain Payments</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Bitcoin 백서 (Satoshi Nakamoto)</a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCKCHAIN DEF (dark) -->
+<section id="blockchain-def">
+  <div class="wrap">
+    <div class="eyebrow reveal">블록체인의 3대 특성</div>
+    <div class="display-md reveal d1">왜 혁명적인가</div>
+    <p class="body-lg reveal d2" style="margin-top:1.2rem">기존 시스템과의 결정적 차이</p>
+    <div class="tok-flow reveal d2">
+      <div class="tok-box" style="background:rgba(255,69,58,.06);border-color:rgba(255,69,58,.2)">
+        <div class="tok-box-title" style="color:var(--red)">기존 시스템</div>
+        <div class="tok-box-sub">중앙 서버<br>단일 장애점<br>검열 가능</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-box" style="background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.4)">
+        <div class="tok-box-title" style="color:var(--p3)">블록체인</div>
+        <div class="tok-box-sub">분산 네트워크<br>단일 장애점 없음<br>검열 저항</div>
+      </div>
+      <div class="tok-arrow" style="color:var(--p2)">→</div>
+      <div class="tok-box" style="background:rgba(48,209,88,.06);border-color:rgba(48,209,88,.2)">
+        <div class="tok-box-title" style="color:var(--green)">결과</div>
+        <div class="tok-box-sub">신뢰 없이도<br>거래 가능<br>Trustless</div>
+      </div>
+    </div>
+    <div class="props-grid reveal d3">
+      <div class="prop-card">
+        <div class="prop-icon">🔗</div>
+        <div class="prop-title">분산성</div>
+        <div class="prop-desc">전 세계 수만 개 노드가 동일한 데이터를 보유. 하나가 꺼져도 네트워크는 작동한다.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">🔍</div>
+        <div class="prop-title">투명성</div>
+        <div class="prop-desc">모든 거래 내역이 공개된다. 누구나 블록 익스플로러에서 확인할 수 있다.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">🔒</div>
+        <div class="prop-title">불변성</div>
+        <div class="prop-desc">한 번 기록된 데이터는 변경 불가. 위변조가 수학적으로 불가능하다.</div>
+      </div>
+    </div>
+    <div class="callout-apple-dark reveal d4">
+      <p>블록체인은 기술이 아니라 <strong>신뢰의 인프라다.</strong><br>
+      은행, 법원, 정부가 제공하던 신뢰를 코드가 대체하는 시대가 시작됐다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE (LIGHT) -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="eyebrow-muted reveal">블록체인의 역사</div>
+    <div class="display-md display-dark reveal d1">15년이<br>만들어낸 혁명</div>
+    <div class="line line-dark" style="margin-top:1.5rem"></div>
+    <div class="tl-track reveal d2">
+      <div class="tl-item">
+        <div class="tl-side"><div class="tl-year">2008</div><div class="tl-title">비트코인 백서 발표</div><div class="tl-desc">사토시 나카모토, "P2P 전자화폐 시스템" 발표. 블록체인 개념 탄생.</div></div>
+        <div class="tl-dot"></div><div class="tl-side"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"></div><div class="tl-dot"></div>
+        <div class="tl-side"><div class="tl-year">2015</div><div class="tl-title">이더리움 메인넷 출범</div><div class="tl-desc">스마트 컨트랙트 도입. 블록체인이 화폐를 넘어 프로그래밍 플랫폼으로 진화.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"><div class="tl-year">2020</div><div class="tl-title">DeFi 여름</div><div class="tl-desc">탈중앙화 금융 폭발적 성장. TVL 10억 달러 돌파. 새로운 금융 패러다임 등장.</div></div>
+        <div class="tl-dot"></div><div class="tl-side"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"></div><div class="tl-dot"></div>
+        <div class="tl-side"><div class="tl-year">2024</div><div class="tl-title">비트코인 ETF 승인</div><div class="tl-desc">블랙록·피델리티 등 기관 참여. 가상자산이 제도권 자산으로 편입.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"><div class="tl-year">2025–26</div><div class="tl-title" style="color:var(--p1)">RWA 토크나이제이션</div><div class="tl-desc">실물자산의 온체인화. 부동산·채권·국채가 블록체인 위에서 거래된다.</div></div>
+        <div class="tl-dot" style="background:var(--p1);box-shadow:0 0 0 4px rgba(124,58,237,.2)"></div>
+        <div class="tl-side"></div>
+      </div>
+    </div>
+    <div class="src-bar-light reveal d3" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.binance.com/en/research/analysis/the-future-of-bitcoin-1-the-halving-and-whats-next" target="_blank" rel="noopener">Binance Research · Bitcoin 미래</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Bitcoin 백서 원문</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://ethereum.org/en/whitepaper/" target="_blank" rel="noopener">이더리움 백서</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div class="wrap">
+    <div class="eyebrow reveal">Andreas Antonopoulos</div>
+    <div class="quote-mark reveal">"</div>
+    <div class="quote-text reveal d1">비트코인은 인터넷이<br>통신에 한 것을<br>금융에 하고 있다.</div>
+    <div class="quote-author reveal d2">Andreas M. Antonopoulos · <em>Mastering Bitcoin</em> 저자 · 블록체인 교육자</div>
+    <div class="callout-apple-dark reveal d3" style="margin-top:3rem">
+      <p>인터넷이 처음 나왔을 때 "이게 왜 필요해?"라고 했던 사람들이 있었다.<br>
+      <strong>블록체인도 지금 그 단계를 지나고 있다.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH (LIGHT) -->
+<section id="growth">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div class="eyebrow-muted reveal">글로벌 시장 데이터</div>
+      <div class="display-md display-dark reveal d1">숫자가<br>말한다</div>
+      <div class="line line-dark" style="margin-top:1.5rem"></div>
+      <p class="body-lg-dark reveal d2" style="margin-top:1rem">블록체인은 이론이 아니다.<br>이미 조 단위의 자금이 이동하고 있다.</p>
+    </div>
+    <div class="market-row reveal d2">
+      <div class="market-big"><div class="market-num">$17조</div><div class="market-label">글로벌 블록체인<br>시장 규모 (2026)</div></div>
+      <div class="market-sep"></div>
+      <div class="market-big"><div class="market-num" style="color:var(--p2)">$600억+</div><div class="market-label">비트코인 ETF<br>운용자산 (AUM)</div></div>
+      <div class="market-sep"></div>
+      <div class="market-big"><div class="market-num" style="color:#30D158">$200억</div><div class="market-label">온체인 RWA<br>시장 규모 (2026.06)</div></div>
+    </div>
+    <div class="mkt-bars reveal d3">
+      <div style="text-align:center;font-size:.68rem;color:rgba(0,0,0,.38);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem">섹터별 블록체인 도입률</div>
+      <div class="mkt-bar-row"><div class="mkt-bar-name">금융/결제</div><div class="mkt-bar-track"><div class="mkt-bar-fill" data-pct="88" style="background:var(--p1)"></div></div><div class="mkt-bar-val">88%</div></div>
+      <div class="mkt-bar-row"><div class="mkt-bar-name">무역/물류</div><div class="mkt-bar-track"><div class="mkt-bar-fill" data-pct="61" style="background:var(--p2)"></div></div><div class="mkt-bar-val">61%</div></div>
+      <div class="mkt-bar-row"><div class="mkt-bar-name">헬스케어</div><div class="mkt-bar-track"><div class="mkt-bar-fill" data-pct="42" style="background:var(--p3)"></div></div><div class="mkt-bar-val">42%</div></div>
+      <div class="mkt-bar-row"><div class="mkt-bar-name">부동산</div><div class="mkt-bar-track"><div class="mkt-bar-fill" data-pct="29" style="background:#9747FF"></div></div><div class="mkt-bar-val">29%</div></div>
+      <div class="mkt-bar-row"><div class="mkt-bar-name">정부/공공</div><div class="mkt-bar-track"><div class="mkt-bar-fill" data-pct="18" style="background:#C4B5FD"></div></div><div class="mkt-bar-val">18%</div></div>
+    </div>
+    <div class="src-bar-light reveal d4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.binance.com/en/research/analysis/10-charts-shaping-2025" target="_blank" rel="noopener">Binance Research · 2025 핵심 차트 10개</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://www.binance.com/en/research/analysis/half-year-2026-macro-bitcoin" target="_blank" rel="noopener">Binance Research 2026 상반기</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section id="why-now">
+  <div class="wrap">
+    <div class="eyebrow reveal">지금 배워야 하는 이유</div>
+    <div class="display-md reveal d1">시장이<br>이미 바뀌었다</div>
+    <p class="body-lg reveal d2" style="margin-top:1.2rem">2025–2026년, 네 가지 거대한 변화가 동시에 일어나고 있다.</p>
+    <div class="why-cards reveal d3">
+      <div class="why-card">
+        <div class="why-card-num">01</div>
+        <div class="why-card-title">기관 자금 유입</div>
+        <div class="why-card-desc">블랙록·피델리티 등 전통 금융의 비트코인 ETF AUM이 $600억을 돌파했다. 이제 기관이 게임의 규칙을 쓴다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">02</div>
+        <div class="why-card-title">규제 명확화</div>
+        <div class="why-card-desc">한국 가상자산 이용자 보호법 시행. 미국 크립토 규제 프레임워크 구축. 제도권 진입이 가속화된다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">03</div>
+        <div class="why-card-title">RWA 실물자산 토크나이제이션</div>
+        <div class="why-card-desc">국채, 부동산, 사모펀드가 블록체인 위로 이동 중. 온체인 RWA 시장 2년 만에 589% 성장.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-num">04</div>
+        <div class="why-card-title">알트코인 사이클 변화</div>
+        <div class="why-card-desc">신규 상장 토큰 93%가 하락. "좋은 프로젝트" 선별이 아닌 구조 이해가 살아남는 법이다.</div>
+      </div>
+    </div>
+    <div class="src-bar reveal d4" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.binance.com/en/research/analysis/full-year-2025-and-themes-for-2026" target="_blank" rel="noopener">Binance Research · 2025 연간 리포트</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research/analysis/10-charts-shaping-2025" target="_blank" rel="noopener">2025 핵심 차트 10개</a>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="eyebrow reveal">EP.01에서 배울 내용</div>
+    <div class="display-md reveal d1">이것을<br>알게 된다</div>
+    <p class="body-lg reveal d2" style="margin-top:1.2rem">블록체인 기초부터 시장 구조까지. 한 번에 정리한다.</p>
+    <div class="check-grid reveal d3">
+      <div class="check-cell"><div class="check-icon">01</div><div><div class="check-title">블록체인의 작동 원리</div><div class="check-desc">블록, 체인, 합의 알고리즘을 쉽게 이해한다. 기술을 몰라도 된다.</div></div></div>
+      <div class="check-cell"><div class="check-icon">02</div><div><div class="check-title">비트코인 vs 이더리움</div><div class="check-desc">두 메이저 체인의 차이와 각각의 역할을 명확히 구분한다.</div></div></div>
+      <div class="check-cell"><div class="check-icon">03</div><div><div class="check-title">토크노믹스 기초</div><div class="check-desc">총 공급량, 유통량, FDV의 의미와 코인 가격과의 관계를 파악한다.</div></div></div>
+      <div class="check-cell"><div class="check-icon">04</div><div><div class="check-title">시장 사이클 이해</div><div class="check-desc">반감기, 불장/하락장 사이클의 역사적 패턴을 데이터로 확인한다.</div></div></div>
+      <div class="check-cell"><div class="check-icon">05</div><div><div class="check-title">DeFi·RWA 기초 개념</div><div class="check-desc">탈중앙화 금융과 실물자산 토크나이제이션이 왜 중요한지 이해한다.</div></div></div>
+      <div class="check-cell"><div class="check-icon">06</div><div><div class="check-title">안전한 투자 판단 기준</div><div class="check-desc">좋은 프로젝트와 나쁜 프로젝트를 구분하는 최소한의 체크리스트.</div></div></div>
+    </div>
+    <div class="callout-apple-dark reveal d4" style="margin-top:2.5rem">
+      <p>이 강의는 <strong>투자 권유가 아닙니다.</strong><br>
+      당신이 스스로 판단할 수 있도록, 기초 지식을 전달하는 교육 콘텐츠입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="wrap">
+    <div class="eyebrow reveal">다음 단계</div>
+    <div class="cta-title reveal d1">기초를 알았다면<br>DeFi로</div>
+    <p class="cta-sub reveal d2">EP.02에서는 탈중앙화 금융(DeFi)의 작동 원리와<br>코린이가 알아야 할 핵심 프로토콜을 다룹니다.</p>
+    <a href="#" class="cta-btn reveal d3">EP.02 DeFi 완전정복 →</a>
+    <p class="ep-next reveal d4">EP.01 블록체인 기초 → <strong style="color:rgba(255,255,255,.45)">EP.02 DeFi</strong> → EP.03 RWA</p>
+    <div class="src-bar reveal d5" style="margin-top:3rem">
+      <span class="src-bar-label">핵심 자료</span>
+      <a href="https://www.binance.com/en/research/analysis/the-future-of-bitcoin-1-the-halving-and-whats-next" target="_blank" rel="noopener">Bitcoin의 미래 (Binance)</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research/analysis/blockchain-payments-a-fresh-start" target="_blank" rel="noopener">블록체인 결제 혁명</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.binance.com/en/research/analysis/10-charts-shaping-2025" target="_blank" rel="noopener">2025 핵심 차트</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>⚠ <strong>법적 고지:</strong> 본 콘텐츠는 순수 교육 목적으로 제공됩니다. 투자 권유, 수익 보장, 매수 추천이 아닙니다.<br>
+  가상자산 투자는 원금 손실 위험이 있으며, 투자 결정은 전적으로 본인 책임입니다.<br>
+  자본시장법 및 가상자산 이용자 보호법 준수 · 2026 블록체인 마스터클래스</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const pct=(d.scrollTop||document.body.scrollTop)/((d.scrollHeight||document.body.scrollHeight)-d.clientHeight)*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const barIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.mkt-bar-fill').forEach((b,i)=>{
+        setTimeout(()=>{b.style.transform=`scaleX(${parseFloat(b.dataset.pct)/100})`;},i*120);
+      });
+      barIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.mkt-bars').forEach(el=>barIO.observe(el));
+function drawRing(id,segments,colors,lineW,bg){
+  const c=document.getElementById(id);if(!c)return;
+  const ctx=c.getContext('2d'),cx=c.width/2,cy=c.height/2,r=cx-lineW;
+  let angle=-Math.PI/2;
+  const total=segments.reduce((a,b)=>a+b,0);
+  segments.forEach((s,i)=>{
+    const arc=2*Math.PI*s/total;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,angle,angle+arc);
+    ctx.closePath();ctx.fillStyle=colors[i];ctx.fill();
+    angle+=arc;
+  });
+  ctx.beginPath();ctx.arc(cx,cy,r-lineW,0,2*Math.PI);
+  ctx.fillStyle=bg||'#0A0A0F';ctx.fill();
+}
+drawRing('ringChart',[25,75],['rgba(139,92,246,.9)','rgba(255,255,255,.08)'],28);
+(function(){
+  const c=document.getElementById('stat1Chart');if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  const pts=[{x:0,y:.85},{x:.25,y:.72},{x:.5,y:.55},{x:.75,y:.3},{x:1,y:.05}];
+  const grd=ctx.createLinearGradient(0,0,W,0);
+  grd.addColorStop(0,'rgba(124,58,237,.3)');grd.addColorStop(1,'rgba(167,139,250,.9)');
+  ctx.beginPath();
+  pts.forEach((p,i)=>{const px=p.x*W,py=p.y*H;i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);});
+  ctx.strokeStyle=grd;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();
+  pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x*W,p.y*H,3,0,2*Math.PI);ctx.fillStyle='rgba(167,139,250,.9)';ctx.fill();});
+})();
+drawRing('stat2Chart',[589,100],['rgba(48,209,88,.75)','rgba(255,255,255,.07)'],20);
+(function(){
+  const c=document.getElementById('stat3Chart');if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  const bars=[{v:.92,l:'하락'},{v:.07,l:'상승'}];
+  const bw=40,gap=50;const startX=(W-(bars.length*bw+(bars.length-1)*gap))/2;
+  const colors=['rgba(255,69,58,.8)','rgba(48,209,88,.7)'];
+  bars.forEach((b,i)=>{
+    const x=startX+i*(bw+gap),bh=b.v*(H-20),y=H-bh;
+    ctx.fillStyle=colors[i];
+    ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,4);else ctx.rect(x,y,bw,bh);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='600 10px Noto Sans KR';
+    ctx.textAlign='center';ctx.fillText(b.l,x+bw/2,H-4);
+  });
+})();
+</script>
+</body>
+</html>
