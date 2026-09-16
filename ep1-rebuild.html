@@ -1,0 +1,1050 @@
+
+<title>EP.01 블록체인 기초</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+  background: #000; color: #fff; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+:root {
+  --black: #000000; --near-black: #0D0D0D; --card-dark: #1C1C1E;
+  --mid: #3A3A3C; --muted: #6E6E73; --light: #F5F5F7; --white: #FFFFFF;
+  --p1: #7C3AED; --p2: #8B5CF6; --p3: #A78BFA; --p4: #5B21B6; --p5: #C4B5FD;
+  --blue: #0A84FF; --red: #FF453A; --green: #32D74B;
+  --apple-dark: #1D1D1F;
+}
+
+/* LEGAL BAR */
+.legal-bar {
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:#0D0D0D;border-bottom:1px solid rgba(124,58,237,.18);
+  padding:.3rem 2rem;text-align:center;
+  font-size:.62rem;color:rgba(255,255,255,.3);letter-spacing:.04em;
+}
+
+/* PROGRESS */
+#progress { position:fixed;top:24px;left:0;z-index:9999;height:2px;width:0%;background:var(--p1);transition:width .1s linear; }
+
+/* NAV */
+nav {
+  position:fixed;top:24px;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:52px;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav-logo { font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6); }
+.nav-links { display:flex;gap:2rem;list-style:none; }
+.nav-links a { font-size:.78rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s; }
+.nav-links a:hover { color:#fff; }
+.nav-next {
+  font-size:.72rem;font-weight:700;color:var(--p3);text-decoration:none;
+  border:1px solid rgba(124,58,237,.35);border-radius:99px;padding:.28em 1em;
+  transition:background .2s,border-color .2s;
+}
+.nav-next:hover { background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.6); }
+
+/* SECTION BASE */
+section { position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:8rem 2rem;text-align:center; }
+.wrap { max-width:900px;width:100%;margin-left:auto;margin-right:auto; }
+.wrap-wide { max-width:1100px;width:100%;margin-left:auto;margin-right:auto; }
+
+/* REVEAL */
+.reveal { opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity:1;transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.22s; }
+.reveal-delay-3 { transition-delay:.36s; }
+.reveal-delay-4 { transition-delay:.5s; }
+
+/* TYPE */
+.eyebrow { font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--p2);margin-bottom:1.4rem;word-break:keep-all; }
+.eyebrow-muted { font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem;word-break:keep-all; }
+.display-xl { font-size:clamp(3.2rem,10vw,10rem);font-weight:900;line-height:.95;letter-spacing:-.04em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-lg { font-size:clamp(2.4rem,7vw,6.5rem);font-weight:900;line-height:1;letter-spacing:-.035em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-md { font-size:clamp(1.7rem,4.5vw,3.8rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.display-dark { color:var(--apple-dark); }
+.body-lg { font-size:clamp(.95rem,2vw,1.2rem);font-weight:400;line-height:1.7;color:rgba(255,255,255,.52);max-width:600px;margin:0 auto;word-break:keep-all;overflow-wrap:break-word; }
+.body-lg-dark { font-size:clamp(.95rem,2vw,1.15rem);font-weight:400;line-height:1.7;color:var(--muted);max-width:620px;margin:0 auto;word-break:keep-all;overflow-wrap:break-word; }
+.purple-text { color:var(--p2); }
+.line { width:40px;height:2px;background:var(--p1);margin:0 auto 2.5rem;border-radius:99px; }
+.line-dark { background:#D1D1D6; }
+
+/* REFERENCE LINKS */
+.ref-link {
+  display:inline-flex;align-items:center;gap:.3em;
+  font-size:.68rem;font-weight:700;letter-spacing:.02em;
+  color:var(--blue);text-decoration:none;
+  border:1px solid rgba(10,132,255,.28);border-radius:5px;
+  padding:.18em .55em;transition:background .2s,border-color .2s;
+}
+.ref-link::before { content:'↗';font-size:.58rem; }
+.ref-link:hover { background:rgba(10,132,255,.1);border-color:rgba(10,132,255,.55); }
+.ref-link-dark { color:#0071E3;border-color:rgba(0,113,227,.25); }
+.ref-link-dark:hover { background:rgba(0,113,227,.07);border-color:rgba(0,113,227,.45); }
+
+/* SOURCE BAR */
+.src-bar {
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:.3rem;margin-top:2rem;padding:.9rem 1.4rem;
+  background:rgba(124,58,237,.04);border:1px solid rgba(124,58,237,.14);
+  border-radius:12px;max-width:720px;margin-left:auto;margin-right:auto;
+}
+.src-bar-label { font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--p2);margin-right:.4rem;flex-shrink:0; }
+.src-bar a { font-size:.68rem;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;padding:.15em .5em;border-radius:4px;transition:color .2s,background .2s;white-space:nowrap; }
+.src-bar a:hover { color:var(--p2);background:rgba(124,58,237,.08); }
+.src-bar-sep { color:rgba(255,255,255,.15);font-size:.7rem; }
+.src-bar-light { background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.14); }
+.src-bar-light a { color:rgba(29,29,31,.45); }
+.src-bar-light a:hover { color:var(--p1);background:rgba(124,58,237,.08); }
+.src-bar-light .src-bar-label { color:#6D28D9; }
+
+/* HERO */
+#hero { background:#000;min-height:100vh; }
+.tag-chip {
+  display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--p2);border:1px solid rgba(124,58,237,.35);border-radius:99px;padding:.3em 1em;margin-bottom:2rem;
+}
+.hero-sub { margin-top:2rem;font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.42);font-weight:400;line-height:1.6; }
+.scroll-hint { position:absolute;bottom:2.5rem;font-size:.72rem;color:rgba(255,255,255,.22);letter-spacing:.1em;text-transform:uppercase;animation:bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* SHOCK */
+#shock { background:var(--near-black); }
+.shock-wrap { display:flex;align-items:flex-end;justify-content:center;gap:.1em; }
+.shock-num { font-size:clamp(7rem,20vw,16rem);font-weight:900;line-height:.85;letter-spacing:-.05em;color:#fff; }
+.shock-denom { font-size:clamp(2.5rem,6vw,5.5rem);font-weight:300;color:rgba(255,255,255,.22);letter-spacing:-.03em;padding-bottom:.4em; }
+.shock-label { margin-top:2rem;font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.48);font-weight:400;line-height:1.5; }
+.shock-label strong { color:rgba(255,255,255,.85);font-weight:700; }
+
+/* RING CHART */
+.ring-wrap { display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;margin-top:2.5rem; }
+.ring-legend { text-align:left; }
+.ring-legend-item { display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,.6); }
+.ring-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+
+/* THREE STATS */
+#three-stats { background:#111;min-height:60vh;padding:5rem 2rem; }
+.stats-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;max-width:960px; }
+.stat-col { padding:3rem 2rem;border-right:1px solid rgba(255,255,255,.08);text-align:center; }
+.stat-col:last-child { border-right:none; }
+.stat-big { font-size:clamp(2.8rem,6vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:.5rem; }
+.stat-big.red { color:var(--red); }
+.stat-big.purple { color:var(--p2); }
+.stat-big.green { color:var(--green); }
+.stat-label-sm { font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.45; }
+.stat-src { font-size:.65rem;color:var(--muted);margin-top:.4rem; }
+
+/* WHY STRUCTURE */
+#why { background:#FAFAF8;min-height:auto;text-align:left;padding:8rem 2rem; }
+.section-head { text-align:center;margin-bottom:3.5rem; }
+.flow-row { display:flex;gap:0;max-width:860px;margin:0 auto 1.5rem;position:relative;align-items:stretch; }
+.flow-step { flex:1;background:#fff;border:1px solid rgba(124,58,237,.1);border-radius:16px;padding:1.4rem 1rem 1.2rem;margin:0 .4rem;text-align:center;position:relative;box-shadow:0 1px 8px rgba(0,0,0,.04); }
+.flow-step-num { width:28px;height:28px;background:var(--apple-dark);color:var(--p2);font-size:.72rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem; }
+.flow-step-title { font-size:.8rem;font-weight:700;color:var(--apple-dark);line-height:1.3;margin-bottom:.3rem; }
+.flow-step-sub { font-size:.68rem;color:var(--muted);line-height:1.4; }
+.flow-step.bad .flow-step-num { background:var(--red);color:#fff; }
+.flow-conn { display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;color:var(--p3);font-size:1.1rem; }
+.callout-apple { max-width:720px;margin:2rem auto 0;background:linear-gradient(135deg,#1A1A1C,#2C2C2E);color:#fff;border-radius:20px;padding:1.8rem 2.2rem;text-align:center;border:1px solid rgba(124,58,237,.2); }
+.callout-apple p { font-size:.95rem;line-height:1.65;color:rgba(255,255,255,.78); }
+.callout-apple strong { color:var(--p3); }
+
+/* COMPARE */
+#compare { background:#111; }
+.cmp-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin:3rem auto 0; }
+.cmp-block { border-radius:20px;padding:2.2rem 1.8rem;text-align:left; }
+.cmp-block.bad { background:rgba(255,69,58,.05);border:1px solid rgba(255,69,58,.2); }
+.cmp-block.good { background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.2); }
+.cmp-header { font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.4rem; }
+.cmp-block.bad .cmp-header { color:var(--red); }
+.cmp-block.good .cmp-header { color:var(--p2); }
+.cmp-row { display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.8rem; }
+.cmp-icon { font-size:.9rem;margin-top:.1rem;flex-shrink:0; }
+.cmp-text { font-size:.82rem;color:rgba(255,255,255,.62);line-height:1.45; }
+.cmp-text strong { color:rgba(255,255,255,.9); }
+
+/* HOW IT WORKS */
+#howworks { background:#FAFAF8; }
+.tok-flow { display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:2.5rem auto;max-width:780px; }
+.tok-node { background:#fff;border:1.5px solid #E5E5EA;border-radius:14px;padding:1rem 1.2rem;text-align:center;min-width:110px; }
+.tok-icon { font-size:1.5rem;margin-bottom:.3rem; }
+.tok-title { font-size:.72rem;font-weight:700;color:var(--apple-dark); }
+.tok-sub { font-size:.62rem;color:var(--muted);margin-top:.2rem; }
+.tok-arrow { font-size:1.4rem;color:#AEAEB2;padding:0 .4rem; }
+
+/* MARKET SIZE */
+#market { background:#030303; }
+.market-big { font-size:clamp(3.5rem,10vw,8rem);font-weight:900;letter-spacing:-.04em;line-height:.95;color:#fff; }
+
+/* MARKET BAR CHART */
+.mkt-bars { max-width:700px;margin:3rem auto 0; }
+.mkt-bar-row { display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem; }
+.mkt-bar-name { font-size:.75rem;color:rgba(255,255,255,.55);width:160px;text-align:right;flex-shrink:0; }
+.mkt-bar-track { flex:1;height:28px;background:rgba(255,255,255,.05);border-radius:6px;overflow:hidden;position:relative; }
+.mkt-bar-fill { height:100%;border-radius:6px;display:flex;align-items:center;padding-left:.6rem;transition:width 1.4s cubic-bezier(.16,1,.3,1);width:0; }
+.mkt-bar-fill span { font-size:.7rem;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap; }
+
+/* TIMELINE */
+#timeline { background:#0A0A0A; }
+.tl-list { max-width:680px;margin:3rem auto 0;position:relative; }
+.tl-list::before { content:'';position:absolute;left:12px;top:0;bottom:0;width:1px;background:rgba(124,58,237,.25); }
+.tl-item { display:flex;gap:1.4rem;align-items:flex-start;margin-bottom:2.5rem;position:relative; }
+.tl-dot { width:26px;height:26px;border-radius:50%;background:#0A0A0A;border:2px solid var(--p1);flex-shrink:0;position:relative;z-index:1;display:flex;align-items:center;justify-content:center; }
+.tl-dot-inner { width:8px;height:8px;background:var(--p1);border-radius:50%; }
+.tl-year { font-size:.72rem;font-weight:800;color:var(--p2);letter-spacing:.06em;margin-bottom:.3rem; }
+.tl-title { font-size:.92rem;font-weight:700;color:#fff;margin-bottom:.3rem; }
+.tl-desc { font-size:.76rem;color:var(--muted);line-height:1.55; }
+
+/* WHY NOW */
+#why-now { background:#000; }
+.why-cards { display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:760px;margin:3rem auto 0; }
+.why-card { background:var(--card-dark);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2rem 1.8rem;text-align:left; }
+.why-card-emoji { font-size:1.8rem;margin-bottom:1rem; }
+.why-card-title { font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.5rem; }
+.why-card-desc { font-size:.77rem;color:var(--muted);line-height:1.55; }
+
+/* PAIN TABLE */
+.pain-table { width:100%;max-width:760px;margin:3rem auto 0;border-collapse:collapse;font-size:.88rem; }
+.pain-table th { padding:.8rem 1.2rem;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);color:var(--muted);text-align:left; }
+.pain-table td { padding:.9rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;color:rgba(255,255,255,.68);line-height:1.4; }
+.pain-table td:first-child { color:rgba(255,255,255,.32);font-size:.8rem; }
+.pain-table td.now { color:rgba(255,255,255,.9);font-weight:700; }
+
+/* CTA */
+#cta { background:linear-gradient(180deg,#0A0A0A 0%,#000 100%);border-top:1px solid rgba(124,58,237,.2); }
+.cta-title { font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem;background:linear-gradient(135deg,#7C3AED 0%,#A78BFA 40%,#fff 70%,#8B5CF6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.cta-sub { font-size:1.05rem;color:rgba(255,255,255,.42);line-height:1.6;max-width:520px;margin:0 auto 3rem; }
+
+/* QUOTE SECTION */
+.quote-mark { font-size:5rem;line-height:.6;color:var(--p1);opacity:.3;font-family:Georgia,serif;margin-bottom:.5rem; }
+.quote-text { font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;max-width:760px;margin:0 auto;background:linear-gradient(135deg,#7C3AED 0%,#A78BFA 35%,#fff 60%,#A78BFA 80%,#5B21B6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.quote-author { margin-top:1.8rem;font-size:.78rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase; }
+
+/* SCORE */
+.score-row { display:flex;gap:1.5rem;justify-content:center;margin-top:2rem;flex-wrap:wrap; }
+.score-item { text-align:center; }
+.score-label { font-size:.7rem;color:var(--muted);margin-bottom:.3rem; }
+.score-bar-v { width:6px;height:60px;background:rgba(255,255,255,.08);border-radius:99px;margin:0 auto;position:relative;overflow:hidden; }
+.score-bar-v-fill { position:absolute;bottom:0;left:0;right:0;border-radius:99px;transition:height 1.2s cubic-bezier(.16,1,.3,1);height:0; }
+.score-val { font-size:.75rem;font-weight:700;margin-top:.4rem; }
+
+/* GROWTH CHART */
+.growth-chart { max-width:680px;margin:2.5rem auto 0;position:relative; }
+
+footer { background:#000;border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 2rem;text-align:center; }
+footer p { font-size:.72rem;color:rgba(255,255,255,.18);line-height:1.7; }
+footer a { color:rgba(255,255,255,.3); }
+
+/* RESPONSIVE — TABLET */
+@media (max-width:900px) {
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .stat-col:nth-child(2) { border-right:none; }
+  .cmp-grid { gap:1rem; }
+  .why-cards { grid-template-columns:1fr 1fr; }
+}
+
+/* RESPONSIVE — MOBILE */
+@media (max-width:680px) {
+  .legal-bar { font-size:.58rem;padding:.25rem 1rem;line-height:1.5; }
+  #progress { top:32px; }
+  nav { top:32px;padding:0 1rem;height:48px; }
+  .nav-links { display:none; }
+  .nav-logo { font-size:.68rem;letter-spacing:.06em; }
+  .nav-next { font-size:.66rem;padding:.24em .8em; }
+  section { padding:5rem 1.2rem;min-height:auto; }
+  #hero { min-height:100vh; }
+  .wrap,.wrap-wide { padding:0; }
+  .tag-chip { font-size:.62rem;padding:.25em .8em;margin-bottom:1.4rem; }
+  .hero-sub { font-size:.9rem;line-height:1.65;word-break:keep-all;overflow-wrap:break-word; }
+  .shock-num { font-size:clamp(5rem,22vw,7rem); }
+  .shock-denom { font-size:clamp(2rem,7vw,3rem); }
+  .shock-label { font-size:.88rem; }
+  .ring-wrap { gap:1.5rem;flex-direction:column;align-items:center; }
+  .stats-grid { grid-template-columns:1fr; }
+  .stat-col { border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:2rem 1rem; }
+  .stat-col:last-child { border-bottom:none; }
+  .flow-row { flex-direction:column;gap:.4rem; }
+  .flow-step { margin:.2rem 0;padding:1rem .8rem; }
+  .flow-conn { transform:rotate(90deg);margin:.1rem auto; }
+  .callout-apple { padding:1.4rem 1.2rem;border-radius:16px; }
+  .callout-apple p { font-size:.85rem; }
+  .cmp-grid { grid-template-columns:1fr;gap:.8rem; }
+  .cmp-block { padding:1.6rem 1.2rem; }
+  .score-row { gap:.8rem; }
+  .tok-flow { flex-direction:column;align-items:center; }
+  .tok-arrow { transform:rotate(90deg);padding:.2rem 0; }
+  .tok-node { min-width:unset;width:160px; }
+  .mkt-bars { padding:0 .2rem; }
+  .mkt-bar-row { gap:.5rem; }
+  .mkt-bar-name { width:72px;font-size:.64rem;text-align:right; }
+  .mkt-bar-fill span { font-size:.62rem; }
+  .tl-list::before { left:10px; }
+  .tl-dot { width:22px;height:22px; }
+  .tl-item { gap:1rem; }
+  .why-cards { grid-template-columns:1fr;gap:.8rem; }
+  .why-card { padding:1.5rem 1.2rem; }
+  .pain-table { font-size:.78rem; }
+  .pain-table th,.pain-table td { padding:.7rem .8rem; }
+  .cta-sub { font-size:.9rem; }
+  .quote-text { font-size:clamp(1.6rem,6vw,3rem); }
+  .src-bar { padding:.7rem 1rem;gap:.25rem; }
+  blockquote { padding:.8rem 1.1rem !important; }
+  blockquote p { font-size:.88rem !important; }
+  footer p { font-size:.65rem; }
+}
+
+/* RESPONSIVE — SMALL MOBILE */
+@media (max-width:390px) {
+  .display-xl { font-size:clamp(2.8rem,9vw,4rem); }
+  .display-lg { font-size:clamp(2.2rem,8vw,3rem); }
+  .display-md { font-size:clamp(1.5rem,6vw,2.2rem); }
+  .stat-big { font-size:clamp(2.2rem,8vw,3.5rem); }
+}
+</style>
+
+<!-- LEGAL BAR -->
+<div class="legal-bar">⚠ 본 교육자료는 투자 조언이 아닙니다. 가상자산 거래는 원금 손실 위험이 있으며, 투자 결정은 본인 책임하에 이루어져야 합니다.</div>
+
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-logo">⛓ EP.01 블록체인 기초</div>
+  <ul class="nav-links">
+    <li><a href="#shock">데이터</a></li>
+    <li><a href="#why">구조</a></li>
+    <li><a href="#compare">비교</a></li>
+    <li><a href="#timeline">역사</a></li>
+    <li><a href="#cta">EP.02</a></li>
+  </ul>
+  <a class="nav-next" href="#cta">다음 → EP.02 DeFi</a>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="tag-chip reveal">2025–2026 · 블록체인 마스터클래스 EP.01</div>
+    <div class="display-xl reveal reveal-delay-1" style="background:linear-gradient(135deg,#7C3AED 0%,#A78BFA 45%,#fff 72%,#8B5CF6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">블록체인은<br>왜 만들어졌나</div>
+    <p class="hero-sub reveal reveal-delay-2">
+      매년 <strong style="color:#fff">$44조의 국제 송금</strong>에서 평균 6.3%가 중개자에게 사라진다.<br>
+      그리고 2008년, 한 익명의 개발자는 <strong style="color:#fff">이 문제 하나</strong>를 해결하기 위해<br>
+      <span style="color:var(--p3);font-weight:700">9페이지짜리 문서</span>를 공개했다.
+    </p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:2rem" class="reveal reveal-delay-3">
+      <a class="ref-link" href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Bitcoin 백서 원문</a>
+      <a class="ref-link" href="https://www.worldbank.org/en/topic/financialinclusion/overview" target="_blank" rel="noopener">World Bank 금융포용 데이터</a>
+      <a class="ref-link" href="https://remittanceprices.worldbank.org" target="_blank" rel="noopener">WB 송금 수수료 현황</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ 스크롤</div>
+</section>
+
+<!-- ════════ SHOCK STAT ════════ -->
+<section id="shock">
+  <div class="wrap">
+    <div class="eyebrow reveal">글로벌 국제 송금 평균 수수료</div>
+    <div class="shock-wrap reveal reveal-delay-1">
+      <div class="shock-num">6.3</div>
+      <div class="shock-denom">%</div>
+    </div>
+    <div class="shock-label reveal reveal-delay-2">
+      100만원을 해외로 보내면 <strong>63,000원이 중개자에게</strong> 간다.<br>
+      전 세계 이주 노동자 2억 8천만명이 매년 이 수수료를 낸다.
+    </div>
+
+    <!-- 링 차트: 수수료 vs 실수령 -->
+    <div class="ring-wrap reveal reveal-delay-3">
+      <canvas id="ringChart" width="180" height="180" style="flex-shrink:0"></canvas>
+      <div class="ring-legend">
+        <div class="ring-legend-item"><div class="ring-dot" style="background:var(--red)"></div>중개 수수료 — 6.3%</div>
+        <div class="ring-legend-item"><div class="ring-dot" style="background:rgba(124,58,237,.7)"></div>실제 수령액 — 93.7%</div>
+        <div style="margin-top:1rem;font-size:.72rem;color:var(--muted);line-height:1.5">
+          비트코인 송금 수수료<br><strong style="color:var(--p3)">평균 $0.5 미만</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal reveal-delay-4" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://remittanceprices.worldbank.org" target="_blank" rel="noopener">World Bank · 국제 송금 비용 데이터베이스 2024</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.statista.com/statistics/816975/remittances-volume-worldwide/" target="_blank" rel="noopener">Statista · 글로벌 송금 규모 2024</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ THREE STATS ════════ -->
+<section id="three-stats">
+  <div class="stats-grid reveal">
+    <div class="stat-col">
+      <div class="stat-big red">14억</div>
+      <div class="stat-label-sm">은행 계좌가 없는 전 세계 성인.<br>스마트폰으로 블록체인에 접근 가능</div>
+      <canvas id="stat1Chart" width="260" height="90" style="width:100%;max-width:260px;margin-top:1rem"></canvas>
+      <div class="stat-src" style="margin-top:.6rem">출처: World Bank Findex 2024</div>
+      <a class="ref-link" style="margin-top:.4rem" href="https://www.worldbank.org/en/publication/globalfindex" target="_blank" rel="noopener">데이터 확인</a>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big red">-23%</div>
+      <div class="stat-label-sm">2023 실리콘밸리은행(SVB) 파산.<br>하룻밤에 $175B 예금이 사라졌다</div>
+      <canvas id="stat2Chart" width="100" height="100" style="width:100px;height:100px;margin:1rem auto 0;display:block"></canvas>
+      <div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.4rem">예금자 보호 한도: 한국 5,000만원</div>
+      <div class="stat-src" style="margin-top:.4rem">FDIC · 한국예금보험공사 2024</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big purple">$942B</div>
+      <div class="stat-label-sm">2032년 블록체인 기술 시장 예상 규모.<br>2024년 대비 11.5배 성장 전망</div>
+      <canvas id="stat3Chart" width="260" height="90" style="width:100%;max-width:260px;margin-top:1rem"></canvas>
+      <div class="stat-src" style="margin-top:.6rem">Grand View Research 2024</div>
+      <a class="ref-link" style="margin-top:.4rem" href="https://www.grandviewresearch.com/industry-analysis/blockchain-technology-market" target="_blank" rel="noopener">리포트 확인</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY BLOCKCHAIN ════════ -->
+<section id="why">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div class="eyebrow-muted reveal">구조적 이해</div>
+      <div class="display-md display-dark reveal reveal-delay-1">왜 중개자가<br>문제인가</div>
+      <div class="line line-dark" style="margin-top:1.5rem"></div>
+      <p class="body-lg-dark reveal reveal-delay-2" style="margin-top:.8rem">
+        은행은 신뢰를 파는 기관이다. 그 신뢰는 거대한 시스템과 수수료로 유지된다.<br>
+        사토시의 질문은 하나였다: <strong>"신뢰 없이도 거래할 수 있을까?"</strong>
+      </p>
+    </div>
+
+    <!-- 기존 송금 vs 블록체인 -->
+    <div style="margin-bottom:.8rem;text-align:center;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em" class="reveal">기존 국제 송금 — 7단계, 최대 5일</div>
+    <div class="flow-row reveal reveal-delay-1">
+      <div class="flow-step bad">
+        <div class="flow-step-num" style="background:var(--red)">①</div>
+        <div class="flow-step-title">송금인 은행</div>
+        <div class="flow-step-sub">국내 은행<br>수수료 부과</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step bad">
+        <div class="flow-step-num" style="background:var(--red)">②</div>
+        <div class="flow-step-title">SWIFT 네트워크</div>
+        <div class="flow-step-sub">메시지 전송<br>추가 수수료</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step bad">
+        <div class="flow-step-num" style="background:var(--red)">③</div>
+        <div class="flow-step-title">환거래 은행</div>
+        <div class="flow-step-sub">2–3곳 경유<br>환율 손실</div>
+      </div>
+      <div class="flow-conn">→</div>
+      <div class="flow-step bad">
+        <div class="flow-step-num" style="background:var(--red)">④</div>
+        <div class="flow-step-title">수취인 은행</div>
+        <div class="flow-step-sub">수령 수수료<br>1–5일 소요</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;margin-bottom:.8rem;text-align:center;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em" class="reveal reveal-delay-2">블록체인 송금 — 3단계, 10분 이내</div>
+    <div class="flow-row reveal reveal-delay-3">
+      <div class="flow-step" style="border-color:rgba(124,58,237,.2)">
+        <div class="flow-step-num">①</div>
+        <div class="flow-step-title">거래 서명</div>
+        <div class="flow-step-sub">개인키로<br>거래에 서명</div>
+      </div>
+      <div class="flow-conn" style="color:var(--p3)">→</div>
+      <div class="flow-step" style="border-color:rgba(124,58,237,.2)">
+        <div class="flow-step-num">②</div>
+        <div class="flow-step-title">네트워크 전파</div>
+        <div class="flow-step-sub">전 세계 노드가<br>동시에 검증</div>
+      </div>
+      <div class="flow-conn" style="color:var(--p3)">→</div>
+      <div class="flow-step" style="border-color:rgba(124,58,237,.2)">
+        <div class="flow-step-num">③</div>
+        <div class="flow-step-title">블록 확정</div>
+        <div class="flow-step-sub">수수료 $0.5<br>10분 내 완료</div>
+      </div>
+    </div>
+
+    <div class="callout-apple reveal reveal-delay-4">
+      <p>
+        중개자가 없으면 신뢰가 사라지는 게 아니다.<br>
+        <strong>코드와 수학이 신뢰를 대신한다.</strong> 이것이 블록체인의 핵심이다.
+      </p>
+    </div>
+    <div class="src-bar src-bar-light reveal reveal-delay-4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.swift.com/our-solutions/compliance-and-shared-services/business-intelligence/payments/how-swift-gpi-is-transforming-cross-border-payments" target="_blank" rel="noopener">SWIFT — 국제 송금 프로세스</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Satoshi Nakamoto — Bitcoin 백서 2008</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ COMPARE ════════ -->
+<section id="compare">
+  <div class="wrap">
+    <div class="eyebrow reveal">핵심 차이</div>
+    <div class="display-lg reveal reveal-delay-1">은행 vs 블록체인</div>
+
+    <div class="cmp-grid reveal reveal-delay-2">
+      <div class="cmp-block bad">
+        <div class="cmp-header">🏦 기존 금융 시스템</div>
+        <div class="cmp-row"><span class="cmp-icon">💸</span><span class="cmp-text">국제 송금 수수료 <strong>평균 6.3%</strong>. 환율 손실 추가.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">🕐</span><span class="cmp-text">은행 영업시간에만 거래. 공휴일·주말 불가.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">🔐</span><span class="cmp-text">계좌 동결·몰수 가능. <strong>제3자가 내 돈을 통제</strong>한다.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">📋</span><span class="cmp-text">신분증·신용점수 없으면 계좌 개설 불가. 14억명 배제.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">⏳</span><span class="cmp-text">국제 거래 최대 5영업일 소요. SWIFT 수동 처리.</span></div>
+      </div>
+      <div class="cmp-block good">
+        <div class="cmp-header">⛓️ 블록체인 네트워크</div>
+        <div class="cmp-row"><span class="cmp-icon">💎</span><span class="cmp-text">송금 수수료 <strong>평균 $0.5 미만</strong>. 거리·금액 무관.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">🌐</span><span class="cmp-text">365일 24시간, 어디서나 거래. 네트워크가 멈추지 않는다.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">🔑</span><span class="cmp-text">개인키를 가진 자만 통제. <strong>No KYC, 검열 불가.</strong></span></div>
+        <div class="cmp-row"><span class="cmp-icon">📱</span><span class="cmp-text">스마트폰 하나로 접근. 은행 계좌 없어도 참여 가능.</span></div>
+        <div class="cmp-row"><span class="cmp-icon">⚡</span><span class="cmp-text">비트코인 10분, 이더리움 12초. 자동화된 스마트컨트랙트.</span></div>
+      </div>
+    </div>
+
+    <!-- 항목별 비교 점수 -->
+    <div style="margin-top:2.5rem" class="reveal reveal-delay-3">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.2rem">항목별 비교 점수</div>
+      <div class="score-row" id="scoreRow">
+        <div class="score-item"><div class="score-label">수수료</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="92" style="background:var(--p2)"></div></div><div class="score-val" style="color:var(--p2)">블체 ↑</div></div>
+        <div class="score-item"><div class="score-label">접근성</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="88" style="background:var(--p2)"></div></div><div class="score-val" style="color:var(--p2)">블체 ↑</div></div>
+        <div class="score-item"><div class="score-label">속도</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="85" style="background:var(--p2)"></div></div><div class="score-val" style="color:var(--p2)">블체 ↑</div></div>
+        <div class="score-item"><div class="score-label">안정성</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="78" style="background:var(--red)"></div></div><div class="score-val" style="color:var(--red)">은행 ↑</div></div>
+        <div class="score-item"><div class="score-label">규제보호</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="25" style="background:var(--red)"></div></div><div class="score-val" style="color:var(--red)">은행 ↑</div></div>
+        <div class="score-item"><div class="score-label">투명성</div><div class="score-bar-v"><div class="score-bar-v-fill" data-rwa="95" style="background:var(--p2)"></div></div><div class="score-val" style="color:var(--p2)">블체 ↑</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ HOW IT WORKS ════════ -->
+<section id="howworks">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div class="eyebrow-muted reveal">작동 원리</div>
+      <div class="display-md display-dark reveal reveal-delay-1">블록체인은<br>어떻게 작동하나</div>
+      <div class="line line-dark" style="margin-top:1.5rem"></div>
+      <p class="body-lg-dark reveal reveal-delay-2" style="margin-top:.8rem">
+        블록에 데이터를 담고, 체인으로 연결한다. 한 블록을 바꾸면 이후 모든 블록이 틀어진다.<br>
+        이것이 변조가 불가능한 이유다.
+      </p>
+    </div>
+
+    <div class="tok-flow reveal reveal-delay-3">
+      <div class="tok-node" style="border-color:rgba(124,58,237,.25)">
+        <div class="tok-icon">📝</div>
+        <div class="tok-title">거래 발생</div>
+        <div class="tok-sub">A → B에게<br>0.01 BTC 송금</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node" style="border-color:rgba(124,58,237,.25)">
+        <div class="tok-icon">📡</div>
+        <div class="tok-title">네트워크 전파</div>
+        <div class="tok-sub">전 세계 노드에<br>동시 전파</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node" style="border-color:rgba(124,58,237,.25)">
+        <div class="tok-icon">✅</div>
+        <div class="tok-title">합의 검증</div>
+        <div class="tok-sub">51% 이상 노드가<br>유효성 확인</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node" style="border-color:rgba(124,58,237,.25)">
+        <div class="tok-icon">🧱</div>
+        <div class="tok-title">블록 생성</div>
+        <div class="tok-sub">거래를 담은<br>블록 생성</div>
+      </div>
+      <div class="tok-arrow">→</div>
+      <div class="tok-node" style="border-color:rgba(124,58,237,.25)">
+        <div class="tok-icon">⛓️</div>
+        <div class="tok-title">체인 연결</div>
+        <div class="tok-sub">이전 블록과<br>암호학적 연결</div>
+      </div>
+    </div>
+
+    <!-- 은행 vs 블록체인 비교표 -->
+    <table class="pain-table reveal reveal-delay-4" style="margin-top:3rem;background:#fff;border-radius:16px;overflow:hidden">
+      <thead>
+        <tr style="background:#F5F5F7">
+          <th style="color:var(--apple-dark)">구분</th>
+          <th style="color:var(--apple-dark)">기존 은행 시스템</th>
+          <th style="color:var(--p1)">블록체인</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="color:var(--muted)">신뢰 기반</td><td>기관(은행·정부)</td><td class="now" style="color:var(--p1)">수학·코드(합의 알고리즘)</td></tr>
+        <tr><td style="color:var(--muted)">데이터 관리</td><td>중앙 서버 (단일 장애점)</td><td class="now" style="color:var(--p1)">분산 노드 (복제·동기화)</td></tr>
+        <tr><td style="color:var(--muted)">거래 확인</td><td>은행 영업일 기준 1–5일</td><td class="now" style="color:var(--p1)">BTC 10분 / ETH 12초</td></tr>
+        <tr><td style="color:var(--muted)">수수료 구조</td><td>거래액의 1–8%</td><td class="now" style="color:var(--p1)">고정 네트워크 수수료 ($0.5↓)</td></tr>
+        <tr><td style="color:var(--muted)">투명성</td><td>내부 장부 (비공개)</td><td class="now" style="color:var(--p1)">공개 블록체인 (누구나 조회)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="src-bar src-bar-light reveal reveal-delay-4" style="margin-top:2rem">
+      <span class="src-bar-label">출처</span>
+      <a href="https://ethereum.org/en/developers/docs/consensus-mechanisms/" target="_blank" rel="noopener">Ethereum 재단 — 합의 메커니즘</a>
+      <span class="src-bar-sep" style="color:rgba(0,0,0,.15)">·</span>
+      <a href="https://bitinfocharts.com/comparison/bitcoin-transactionfees.html" target="_blank" rel="noopener">BitInfoCharts — 실시간 수수료</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MARKET SIZE ════════ -->
+<section id="market">
+  <div class="wrap">
+    <div class="eyebrow reveal">글로벌 시장 규모</div>
+    <div class="market-big reveal reveal-delay-1">
+      <span style="color:var(--p2)">$82B</span><br>
+      <span style="font-size:clamp(1.5rem,4vw,3rem);color:rgba(255,255,255,.3);font-weight:300">2024 블록체인 기술 시장</span>
+    </div>
+    <p class="body-lg reveal reveal-delay-2" style="margin-top:1.2rem">
+      2032년까지 <span style="color:var(--p2);font-weight:700">$942B</span>로 성장 전망.<br>
+      연평균 성장률 35.1% — AI 다음으로 가장 빠른 기술 시장.
+    </p>
+
+    <div class="mkt-bars reveal reveal-delay-3">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:1rem">블록체인 기술 채택 현황 (기업/기관)</div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">금융·결제</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="100" style="background:linear-gradient(90deg,var(--p1),var(--p4))"><span>$29.4B</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">공급망·물류</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="55" style="background:rgba(124,58,237,.65)"><span>$16.2B</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">헬스케어</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="38" style="background:rgba(124,58,237,.45)"><span>$11.1B</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">정부·공공</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="27" style="background:rgba(124,58,237,.35)"><span>$7.9B</span></div></div>
+      </div>
+      <div class="mkt-bar-row">
+        <div class="mkt-bar-name">부동산·RWA</div>
+        <div class="mkt-bar-track"><div class="mkt-bar-fill" data-width="18" style="background:rgba(124,58,237,.25)"><span>$5.3B</span></div></div>
+      </div>
+    </div>
+
+    <!-- 성장 차트 -->
+    <div class="growth-chart reveal reveal-delay-4">
+      <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.8rem">블록체인 기술 시장 성장 추이 ($B)</div>
+      <canvas id="growthChart" width="680" height="160" style="width:100%;max-width:680px"></canvas>
+      <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-top:.3rem;padding:0 .5rem">
+        <span>2020</span><span>2022</span><span>2024</span><span>2026F</span><span>2028F</span><span>2032F</span>
+      </div>
+    </div>
+
+    <div class="src-bar reveal reveal-delay-4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://www.grandviewresearch.com/industry-analysis/blockchain-technology-market" target="_blank" rel="noopener">Grand View Research 2024</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.marketsandmarkets.com/Market-Reports/blockchain-technology-market-90100890.html" target="_blank" rel="noopener">MarketsandMarkets 2024</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research 2024</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TIMELINE ════════ -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="eyebrow reveal">블록체인 역사</div>
+    <div class="display-lg reveal reveal-delay-1">15년간의<br>진화</div>
+    <p class="body-lg reveal reveal-delay-2" style="margin-top:1.2rem">
+      블록체인은 화폐로 시작해서 금융 인프라로 진화했다.
+    </p>
+    <div class="tl-list reveal reveal-delay-3">
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div>
+          <div class="tl-year">2008</div>
+          <div class="tl-title">Bitcoin 백서 발표</div>
+          <div class="tl-desc">사토시 나카모토, "P2P 전자 현금 시스템" 9페이지 백서 공개. 리먼 사태 직후, 중앙 금융 불신 절정기.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div>
+          <div class="tl-year">2015</div>
+          <div class="tl-title">Ethereum 출시 — 스마트컨트랙트</div>
+          <div class="tl-desc">비탈릭 부테린, 프로그래밍 가능한 블록체인 개발. "금융만이 아닌, 모든 계약을 코드로" — DeFi·NFT·RWA의 기반.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div>
+          <div class="tl-year">2020</div>
+          <div class="tl-title">DeFi 폭발 — "화폐 레고"</div>
+          <div class="tl-desc">Uniswap·Aave·Compound 등장. 은행 없이 대출·예금·거래. TVL(예치자산) 1개월 만에 $1B → $10B 돌파.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div>
+          <div class="tl-year">2024</div>
+          <div class="tl-title">비트코인 ETF 승인 + BlackRock 진입</div>
+          <div class="tl-desc">미국 SEC, 비트코인 현물 ETF 승인. BlackRock($10조 AUM)이 블록체인으로 RWA 펀드 BUIDL 출시. 기관 자금 유입 시작.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div>
+          <div class="tl-year">2025–2026</div>
+          <div class="tl-title">RWA — 실물자산의 온체인화</div>
+          <div class="tl-desc">부동산·채권·주식이 블록체인 위로. 온체인 RWA $31.8B 돌파. BCG: 2030년 $16.1조 전망. → EP.03에서 깊게 다룬다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal reveal-delay-4">
+      <span class="src-bar-label">출처</span>
+      <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Bitcoin 백서 원문</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://ethereum.org/en/history/" target="_blank" rel="noopener">Ethereum 공식 역사</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://defillama.com" target="_blank" rel="noopener">DeFiLlama TVL 데이터</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY NOW ════════ -->
+<section id="why-now">
+  <div class="wrap">
+    <div class="eyebrow reveal">왜 지금 공부해야 하는가</div>
+    <div class="display-lg reveal reveal-delay-1">초기 이해자가<br>선점한다</div>
+    <div class="why-cards reveal reveal-delay-2">
+      <div class="why-card">
+        <div class="why-card-emoji">🏦</div>
+        <div class="why-card-title">기관이 이미 들어왔다</div>
+        <div class="why-card-desc">BlackRock·Fidelity·JP Morgan이 블록체인 인프라에 수십억 달러 투자. 개인이 이해하기 전에 기관이 먼저 자리를 잡는다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">📜</div>
+        <div class="why-card-title">규제가 명확해지고 있다</div>
+        <div class="why-card-desc">미국 비트코인 ETF 승인, EU MiCA 시행, 한국 가상자산이용자보호법 발효. 규제 명확성 = 기관 자금 진입 신호.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">🌏</div>
+        <div class="why-card-title">한국은 세계 3위 거래 시장</div>
+        <div class="why-card-desc">글로벌 암호화폐 거래량의 약 10%가 한국에서 발생. 코린이 1,200만명 — 기초 없이 시장에 참여하고 있다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-emoji">⏱️</div>
+        <div class="why-card-title">기술은 아직 초기다</div>
+        <div class="why-card-desc">인터넷 1994년이 지금 블록체인 2025년이다. 인터넷을 1994년에 이해한 사람이 2024년 어디 있는지 생각해보라. <a href="https://research.binance.com" target="_blank" rel="noopener" style="color:var(--p3)">Binance Research →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ QUOTE ════════ -->
+<section id="quote" style="background:var(--near-black)">
+  <div class="wrap">
+    <div class="quote-mark reveal">"</div>
+    <div class="quote-text reveal reveal-delay-1">
+      신뢰가 필요없는<br>전자 결제 시스템이<br>가능하다
+    </div>
+    <div class="quote-author reveal reveal-delay-2">사토시 나카모토 · Bitcoin 백서 · 2008.10.31</div>
+    <p class="body-lg reveal reveal-delay-3" style="margin-top:2.5rem;color:rgba(255,255,255,.35);font-size:.88rem">
+      이 한 문장이 $2.5조 산업을 만들었다.<br>
+      이해한 자가 먼저 움직인다.
+    </p>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="cta">
+  <div class="wrap">
+    <!-- 명언 -->
+    <div class="reveal" style="max-width:680px;margin:0 auto 4.5rem;display:grid;gap:1.2rem">
+      <blockquote style="border-left:2px solid rgba(124,58,237,.45);padding:.9rem 1.6rem;margin:0;text-align:left;background:rgba(124,58,237,.05);border-radius:0 12px 12px 0">
+        <p style="font-size:clamp(.95rem,2vw,1.08rem);color:rgba(255,255,255,.72);line-height:1.7;font-style:italic">"인터넷이 정보를 민주화했다면, 블록체인은 가치를 민주화할 것이다."</p>
+        <cite style="display:block;margin-top:.65rem;font-size:.7rem;color:var(--p3);font-style:normal;font-weight:700;letter-spacing:.07em">— 비탈릭 부테린(Vitalik Buterin) · Ethereum 창시자</cite>
+      </blockquote>
+      <blockquote style="border-left:2px solid rgba(124,58,237,.45);padding:.9rem 1.6rem;margin:0;text-align:left;background:rgba(124,58,237,.05);border-radius:0 12px 12px 0">
+        <p style="font-size:clamp(.95rem,2vw,1.08rem);color:rgba(255,255,255,.72);line-height:1.7;font-style:italic">"블록체인을 이해하는 것은 선택이 아니다. 10년 후 재무제표를 읽는 것처럼 필수가 된다."</p>
+        <cite style="display:block;margin-top:.65rem;font-size:.7rem;color:var(--p3);font-style:normal;font-weight:700;letter-spacing:.07em">— 돈 탭스콧(Don Tapscott) · 『블록체인 혁명』 저자</cite>
+      </blockquote>
+    </div>
+
+    <div class="eyebrow reveal" style="font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p2);margin-bottom:1.5rem">다음 단계</div>
+    <div class="cta-title reveal reveal-delay-1">블록체인을 이해했다.<br>이제 돈이 움직이는 곳으로</div>
+    <p class="cta-sub reveal reveal-delay-2">
+      <strong style="color:rgba(255,255,255,.75)">기초는 끝났다.</strong><br>
+      EP.02에서는 블록체인 위에서 돌아가는 <strong style="color:rgba(255,255,255,.75)">탈중앙화 금융(DeFi)</strong>을 해부한다.<br>
+      은행 없이 어떻게 대출하고, 예금하고, 거래하는가.
+    </p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#" style="display:inline-block;background:var(--p1);color:#fff;font-size:.9rem;font-weight:700;letter-spacing:.02em;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">EP.02 DeFi 바로가기 →</a>
+      <a href="#hero" style="display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:.9rem;font-weight:600;letter-spacing:.02em;text-decoration:none;border-radius:99px;padding:.85em 2.4em;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">처음부터 다시 보기 ↑</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    블록체인 마스터클래스 EP.01 · 교육 목적 자료<br>
+    <strong style="color:rgba(255,255,255,.3)">⚠ 본 자료는 투자 조언이 아닙니다.</strong> 가상자산 거래에는 원금 손실 위험이 있으며, 모든 투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다.<br>
+    <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Bitcoin 백서</a> ·
+    <a href="https://ethereum.org" target="_blank" rel="noopener">Ethereum Foundation</a> ·
+    <a href="https://www.worldbank.org/en/topic/financialinclusion" target="_blank" rel="noopener">World Bank</a> ·
+    <a href="https://research.binance.com" target="_blank" rel="noopener">Binance Research</a>
+  </p>
+</footer>
+
+<script>
+// ── SCROLL PROGRESS ──────────────────────────────────────
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, { passive: true });
+
+// ── INTERSECTION OBSERVER ────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('visible');
+    e.target.querySelectorAll('.mkt-bar-fill[data-width]').forEach(el => {
+      el.style.width = el.dataset.width + '%';
+    });
+    e.target.querySelectorAll('.score-bar-v-fill[data-rwa]').forEach(el => {
+      el.style.height = el.dataset.rwa + '%';
+    });
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── RING CHART ───────────────────────────────────────────
+function drawRing() {
+  const canvas = document.getElementById('ringChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 90, cy = 90, r = 72, lw = 16;
+  let pct = 0;
+  const target = 6.3 / 100;
+
+  function render() {
+    ctx.clearRect(0, 0, 180, 180);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(124,58,237,.15)'; ctx.lineWidth = lw; ctx.stroke();
+    // Fee arc (red)
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct);
+    ctx.strokeStyle = '#FF453A'; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.stroke();
+    // Remainder (purple)
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2 + Math.PI * 2 * Math.max(pct, target), -Math.PI / 2 + Math.PI * 2);
+    ctx.strokeStyle = 'rgba(124,58,237,.7)'; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.stroke();
+    // Center label
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 24px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.round(pct * 100 * 10) / 10 + '%', cx, cy + 5);
+    ctx.fillStyle = 'rgba(255,255,255,.35)';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.fillText('수수료', cx, cy + 20);
+  }
+
+  const obs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    obs.disconnect();
+    const start = performance.now(), dur = 1200;
+    function step(now) {
+      const t = Math.min((now - start) / dur, 1);
+      pct = t < 1 ? t * t * (3 - 2 * t) * target : target;
+      render();
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, { threshold: 0.3 });
+  obs.observe(canvas);
+  render();
+}
+drawRing();
+
+// ── GROWTH LINE CHART ─────────────────────────────────────
+function drawGrowthChart() {
+  const canvas = document.getElementById('growthChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = { t: 14, r: 20, b: 22, l: 44 };
+  const data = [3.1, 7.2, 17.5, 27.8, 45.2, 82.4, 175, 390, 942];
+  const n = data.length;
+  const maxV = 1000, minV = 0;
+
+  function xAt(i) { return pad.l + i / (n - 1) * (W - pad.l - pad.r); }
+  function yAt(v) { return pad.t + (1 - (v - minV) / (maxV - minV)) * (H - pad.t - pad.b); }
+
+  ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = 1;
+  [200, 500, 900].forEach(v => {
+    const y = yAt(v);
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText('$' + v + 'B', pad.l - 5, y + 4);
+  });
+
+  const obs = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    obs.disconnect();
+    const start = performance.now(), dur = 1200;
+    function step(now) {
+      const t = Math.min((now - start) / dur, 1);
+      const ease = t < 1 ? t * t * (3 - 2 * t) : 1;
+      const pts = Math.round(ease * (n - 1));
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.lineWidth = 1;
+      [200, 500, 900].forEach(v => {
+        const y = yAt(v);
+        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+        ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText('$' + v + 'B', pad.l - 5, y + 4);
+      });
+
+      // Gradient fill
+      ctx.beginPath();
+      for (let i = 0; i <= pts; i++) {
+        const x = xAt(i), y = yAt(data[i]);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.lineTo(xAt(pts), H - pad.b);
+      ctx.lineTo(xAt(0), H - pad.b);
+      ctx.closePath();
+      const grad = ctx.createLinearGradient(0, pad.t, 0, H - pad.b);
+      grad.addColorStop(0, 'rgba(124,58,237,.4)');
+      grad.addColorStop(1, 'rgba(124,58,237,.03)');
+      ctx.fillStyle = grad; ctx.fill();
+
+      ctx.beginPath();
+      for (let i = 0; i <= pts; i++) {
+        const x = xAt(i), y = yAt(data[i]);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = '#7C3AED'; ctx.lineWidth = 2.5;
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+
+      for (let i = 0; i <= pts; i++) {
+        ctx.beginPath(); ctx.arc(xAt(i), yAt(data[i]), i === pts ? 4 : 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#8B5CF6'; ctx.fill();
+      }
+      if (pts === n - 1) {
+        ctx.fillStyle = '#A78BFA'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left';
+        ctx.fillText('$942B', xAt(n - 1) - 50, yAt(data[n - 1]) - 8);
+      }
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, { threshold: 0.2 });
+  obs.observe(canvas);
+}
+drawGrowthChart();
+
+// ── THREE STATS CHARTS ───────────────────────────────────
+function drawStatCharts() {
+  // STAT1: 은행 미보유 vs 보유 도넛
+  const c1 = document.getElementById('stat1Chart');
+  if (c1) {
+    const ctx = c1.getContext('2d');
+    const W = c1.width, H = c1.height;
+    const bars = [
+      { label: '비트코인 수수료', val: 2, color: '#7C3AED', display: '$0.5↓' },
+      { label: '은행 국제송금', val: 63, color: '#FF453A', display: '6.3%' }
+    ];
+    const midX = W * 0.4;
+    ctx.clearRect(0, 0, W, H);
+    bars.forEach((b, i) => {
+      const y = 14 + i * 38;
+      ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText(b.label, midX - 6, y + 13);
+      const trackW = W - midX - 10;
+      ctx.fillStyle = 'rgba(255,255,255,.06)';
+      ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(midX, y + 3, trackW, 18, 3); else ctx.rect(midX, y + 3, trackW, 18); ctx.fill();
+      const fillW = b.val / 100 * trackW;
+      ctx.fillStyle = b.color;
+      ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(midX, y + 3, fillW, 18, 3); else ctx.rect(midX, y + 3, fillW, 18); ctx.fill();
+      ctx.fillStyle = b.color; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(b.display, midX + fillW + 5, y + 15);
+    });
+  }
+
+  // STAT2: SVB 파산 도넛
+  const c2 = document.getElementById('stat2Chart');
+  if (c2) {
+    const ctx = c2.getContext('2d');
+    const cx = 50, cy = 50, r = 40, rIn = 26;
+    ctx.clearRect(0, 0, 100, 100);
+    // 파산 부분
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * 0.23);
+    ctx.closePath(); ctx.fillStyle = '#FF453A'; ctx.fill();
+    // 나머지
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, -Math.PI / 2 + Math.PI * 2 * 0.23, -Math.PI / 2 + Math.PI * 2);
+    ctx.closePath(); ctx.fillStyle = 'rgba(255,255,255,.1)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, rIn, 0, Math.PI * 2);
+    ctx.fillStyle = '#111'; ctx.fill();
+    ctx.fillStyle = '#FF453A'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('SVB', cx, cy + 4);
+  }
+
+  // STAT3: 블록체인 시장 성장 미니 라인
+  const c3 = document.getElementById('stat3Chart');
+  if (c3) {
+    const ctx = c3.getContext('2d');
+    const W = c3.width, H = c3.height;
+    const data = [3.1, 7.2, 17.5, 27.8, 45.2, 82.4];
+    const pad = { t: 10, r: 10, b: 18, l: 32 };
+    const min = 0, max = 100;
+    function xAt(i) { return pad.l + i / (data.length - 1) * (W - pad.l - pad.r); }
+    function yAt(v) { return pad.t + (1 - v / max) * (H - pad.t - pad.b); }
+    ctx.clearRect(0, 0, W, H);
+    ctx.beginPath();
+    data.forEach((v, i) => { const x = xAt(i), y = yAt(v); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+    ctx.lineTo(xAt(data.length-1), H - pad.b); ctx.lineTo(xAt(0), H - pad.b); ctx.closePath();
+    const grad = ctx.createLinearGradient(0, pad.t, 0, H - pad.b);
+    grad.addColorStop(0, 'rgba(124,58,237,.4)'); grad.addColorStop(1, 'rgba(124,58,237,.03)');
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.beginPath();
+    data.forEach((v, i) => { const x = xAt(i), y = yAt(v); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+    ctx.strokeStyle = '#8B5CF6'; ctx.lineWidth = 2.5; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+    data.forEach((v, i) => {
+      ctx.beginPath(); ctx.arc(xAt(i), yAt(v), i===data.length-1?4:2.5, 0, Math.PI*2);
+      ctx.fillStyle = '#8B5CF6'; ctx.fill();
+    });
+    ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText('$82B', xAt(data.length-1)-4, yAt(data[data.length-1])-5);
+  }
+}
+
+const statObs = new IntersectionObserver(([e]) => {
+  if (!e.isIntersecting) return;
+  statObs.disconnect();
+  drawStatCharts();
+}, { threshold: 0.2 });
+const statSection = document.getElementById('three-stats');
+if (statSection) statObs.observe(statSection);
+drawStatCharts();
+
+// ── POLYFILL roundRect ───────────────────────────────────
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    const rr = typeof r === 'number' ? [r,r,r,r] : r;
+    this.moveTo(x + rr[0], y);
+    this.lineTo(x + w - rr[1], y); this.arcTo(x + w, y, x + w, y + rr[1], rr[1]);
+    this.lineTo(x + w, y + h - rr[2]); this.arcTo(x + w, y + h, x + w - rr[2], y + h, rr[2]);
+    this.lineTo(x + rr[3], y + h); this.arcTo(x, y + h, x, y + h - rr[3], rr[3]);
+    this.lineTo(x, y + rr[0]); this.arcTo(x, y, x + rr[0], y, rr[0]);
+    this.closePath(); return this;
+  };
+}
+</script>
+
