@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EP01~07 스텝 문자 템플릿</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --orange:#E8600A;--dark-orange:#C95A00;--bg:#0A0800;
+    --card:#1A1200;--border:rgba(232,96,10,.25);--text:#FAF8F5;
+    --muted:rgba(250,248,245,.55);--green:#22c55e;--blue:#3b82f6;
+    --purple:#a855f7;--gold:#eab308;--sky:#0ea5e9;
+  }
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:2rem 1rem;min-height:100vh}
+  h1{font-size:1.6rem;font-weight:900;color:var(--orange);margin-bottom:.4rem}
+  .subtitle{color:var(--muted);font-size:.95rem;margin-bottom:2.5rem}
+
+  /* GitHub 설정 섹션 */
+  .setup-box{background:rgba(232,96,10,.07);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2.5rem}
+  .setup-box h2{font-size:1.1rem;font-weight:700;color:var(--orange);margin-bottom:1rem}
+  .step-row{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.8rem;padding:.8rem;background:rgba(255,255,255,.03);border-radius:10px}
+  .step-num{min-width:28px;height:28px;border-radius:50%;background:var(--orange);color:#fff;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .step-text{font-size:.9rem;line-height:1.6;color:var(--text)}
+  .step-text code{background:rgba(232,96,10,.2);color:var(--orange);padding:.1em .4em;border-radius:4px;font-size:.85em}
+  .url-chip{display:inline-block;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#93c5fd;padding:.3rem .7rem;border-radius:8px;font-size:.82rem;font-family:monospace;margin:.2rem 0;word-break:break-all}
+
+  /* EP 카드 */
+  .ep-grid{display:grid;gap:1.2rem}
+  .ep-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .ep-header{padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;border-bottom:1px solid rgba(255,255,255,.06)}
+  .ep-badge{min-width:52px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff}
+  .ep-title{font-size:1rem;font-weight:700}
+  .ep-url{padding:.6rem 1.2rem;background:rgba(59,130,246,.06);font-family:monospace;font-size:.8rem;color:#93c5fd;word-break:break-all}
+
+  /* 메시지 박스 */
+  .msg-box{padding:1rem 1.2rem}
+  .msg-label{font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+  .kakao-msg{background:#FFE812;color:#3A1A00;border-radius:12px 12px 12px 4px;padding:1rem 1.2rem;font-size:.88rem;line-height:1.7;white-space:pre-wrap;font-family:'Apple SD Gothic Neo',sans-serif;position:relative;margin-bottom:.8rem}
+  .kakao-msg::before{content:'카카오';position:absolute;top:-22px;left:0;font-size:.72rem;color:var(--muted);font-weight:600}
+  .sms-msg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px 12px 12px 4px;padding:1rem 1.2rem;font-size:.88rem;line-height:1.7;white-space:pre-wrap;color:#e2e8f0;position:relative;margin-bottom:.4rem}
+  .sms-msg::before{content:'SMS';position:absolute;top:-22px;left:0;font-size:.72rem;color:var(--muted);font-weight:600}
+
+  /* 복사 버튼 */
+  .copy-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+  .copy-btn{background:rgba(232,96,10,.15);border:1px solid var(--border);color:var(--orange);padding:.4rem .9rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;transition:background .2s}
+  .copy-btn:hover{background:rgba(232,96,10,.3)}
+  .copy-btn.copied{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.4);color:var(--green)}
+
+  /* 색상 - EP별 */
+  .c-purple{background:#7c3aed}
+  .c-green{background:#16a34a}
+  .c-gold{background:#b45309}
+  .c-blue{background:#1d4ed8}
+  .c-emerald{background:#059669}
+  .c-sky{background:#0284c7}
+  .c-orange{background:#c2410c}
+
+  .tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:.9rem 1rem;font-size:.85rem;color:rgba(250,248,245,.8);margin-top:2rem;line-height:1.6}
+  .tip strong{color:var(--green)}
+
+  @media(max-width:580px){
+    h1{font-size:1.35rem}
+    .kakao-msg,.sms-msg{font-size:.84rem}
+  }
+</style>
+</head>
+<body>
+
+<h1>🔗 EP.01~07 스텝 문자 + GitHub Pages 설정 가이드</h1>
+<p class="subtitle">회장님 → 수강생 자동 발송용 카카오/SMS 템플릿 + URL 목록</p>
+
+<!-- GitHub Pages 설정 가이드 -->
+<div class="setup-box">
+  <h2>📋 GitHub Pages 무료 호스팅 — 5분 설정</h2>
+
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-text">
+      <strong>GitHub 저장소 생성</strong><br>
+      <a href="https://github.com/new" target="_blank" style="color:#93c5fd">github.com/new</a> 접속 → 저장소 이름: <code>blockchain-masterclass</code> → <strong>Public</strong> 선택 → Create repository
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-text">
+      <strong>GitHub 토큰 발급</strong><br>
+      <a href="https://github.com/settings/tokens" target="_blank" style="color:#93c5fd">github.com/settings/tokens</a> → Generate new token (classic) → repo 체크 → 생성 후 복사
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-text">
+      <strong>이 세션에서 토큰 입력</strong><br>
+      채팅에 <code>내 GitHub 토큰: ghp_XXXX...</code> 입력하시면 즉시 push 진행합니다
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div class="step-text">
+      <strong>GitHub Pages 활성화</strong><br>
+      저장소 → Settings → Pages → Source: <strong>Deploy from a branch</strong> → Branch: <code>main</code> → / (root) → Save
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num">5</div>
+    <div class="step-text">
+      <strong>완성 URL (5분 후 활성화)</strong><br>
+      <span class="url-chip">https://themarketing0924-dotcom.github.io/blockchain-masterclass/</span>
+    </div>
+  </div>
+</div>
+
+<!-- URL 목록 + 스텝 메시지 -->
+<div class="ep-grid">
+
+  <!-- 신청 완료 웰컴 메시지 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge" style="background:#E8600A">🎉</div>
+      <div class="ep-title">신청 완료 — 웰컴 메시지 (자동발송)</div>
+    </div>
+    <div class="msg-box">
+      <div class="msg-label">카카오/SMS 발송 내용</div>
+      <div class="kakao-msg" id="msg-welcome">[블록체인 마스터클래스]
+안녕하세요, {이름}님! 🎉
+
+무료 수강 신청이 완료되었습니다.
+
+📌 강의는 EP.01부터 순서대로 수강하시면
+   가장 효과적입니다.
+
+▶️ EP.01 지금 바로 시작하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep01.html
+
+* 수강 링크는 본인만 이용하시고
+  타인과 공유하지 마세요.</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-welcome',this)">📋 카카오/SMS 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.01 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-purple">EP.01</div>
+      <div class="ep-title">블록체인이 뭔지 진짜로 이해하기</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep01.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.01 완료 후 → EP.02 유도 문자</div>
+      <div class="kakao-msg" id="msg-ep1">[블록체인 마스터클래스]
+{이름}님, EP.01 어떠셨나요? 🔥
+
+"블록체인이 이런 거였구나" 하는
+순간이 오셨다면 성공입니다.
+
+지금 바로 EP.02로 이어가세요.
+코인 가격이 움직이는 진짜 이유를
+배우실 차례입니다.
+
+▶️ EP.02 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep02.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep1',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.02 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-green">EP.02</div>
+      <div class="ep-title">코인 가격이 움직이는 진짜 구조</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep02.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.02 완료 후 → EP.03 유도 문자</div>
+      <div class="kakao-msg" id="msg-ep2">[블록체인 마스터클래스]
+{이름}님 👍
+
+FDV·유통량의 비밀,
+이제 보이기 시작하셨나요?
+
+EP.03에서는 한 단계 더 깊이 들어갑니다.
+온체인에서 고래가 어떻게 움직이는지
+직접 보여드립니다.
+
+▶️ EP.03 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep03.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep2',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.03 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-gold">EP.03</div>
+      <div class="ep-title">온체인 고래 지갑 추적 실전</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep03.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.03 완료 후 → EP.04 유도 + 중간 점검</div>
+      <div class="kakao-msg" id="msg-ep3">[블록체인 마스터클래스]
+{이름}님, 절반 왔습니다! 🎯
+
+고래 지갑 움직임 보셨나요?
+이걸 알면 차트만 보던 시절로
+못 돌아갑니다.
+
+EP.04는 DEX·CEX 자금 흐름 분석입니다.
+어디서 스마트머니가 들어오는지
+보이게 됩니다.
+
+▶️ EP.04 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep04.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep3',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.04 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-blue">EP.04</div>
+      <div class="ep-title">DEX·CEX 자금 흐름과 스마트머니</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep04.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.04 완료 후 → EP.05 유도 문자</div>
+      <div class="kakao-msg" id="msg-ep4">[블록체인 마스터클래스]
+{이름}님 📊
+
+스마트머니 흐름이 보이기 시작하면
+투자 관점 자체가 달라집니다.
+
+EP.05에서는 토크노믹스 설계 비밀을
+파헤칩니다. 왜 어떤 코인은 오르고
+어떤 코인은 계속 내리는지 —
+구조로 설명됩니다.
+
+▶️ EP.05 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep05.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep4',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.05 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-emerald">EP.05</div>
+      <div class="ep-title">토크노믹스 — 코인 가치의 설계도</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep05.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.05 완료 후 → EP.06 유도 문자</div>
+      <div class="kakao-msg" id="msg-ep5">[블록체인 마스터클래스]
+{이름}님 💡
+
+토크노믹스로 코인 가치를 보는 눈이
+생기셨나요?
+
+이제 거의 다 왔습니다.
+EP.06은 DeFi 프로토콜 실전 분석 —
+어떤 프로젝트가 실제로 살아남는지
+구조로 판단합니다.
+
+▶️ EP.06 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep06.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep5',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.06 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-sky">EP.06</div>
+      <div class="ep-title">DeFi 프로토콜 실전 분석</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep06.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.06 완료 후 → EP.07 유도 + 최종 문자</div>
+      <div class="kakao-msg" id="msg-ep6">[블록체인 마스터클래스]
+{이름}님, 마지막 강의입니다! 🏁
+
+여기까지 오신 분들은
+이미 상위 1%의 시각을 갖게 됩니다.
+
+EP.07은 RWA(실물자산 토큰화) —
+블록체인의 다음 10년을 이끌 섹터입니다.
+마지막까지 완주해 주세요.
+
+▶️ EP.07 (최종강) 바로 수강하기
+https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep07.html</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep6',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP.07 -->
+  <div class="ep-card">
+    <div class="ep-header">
+      <div class="ep-badge c-orange">EP.07</div>
+      <div class="ep-title">RWA — 블록체인의 다음 10년</div>
+    </div>
+    <div class="ep-url">🔗 https://themarketing0924-dotcom.github.io/blockchain-masterclass/ep07.html</div>
+    <div class="msg-box">
+      <div class="msg-label">EP.07 완료 — 완주 축하 + 다음 단계 유도</div>
+      <div class="kakao-msg" id="msg-ep7">[블록체인 마스터클래스]
+{이름}님, 7강 완주 축하드립니다! 🎊
+
+EP.01부터 EP.07까지 완주하신 분들만
+알 수 있는 것들이 있습니다.
+
+이제 시장을 보는 눈이 완전히 달라졌을 겁니다.
+차트 뒤에 있는 구조, 온체인 데이터,
+고래의 움직임 — 다 보이실 거예요.
+
+다음 단계 심화 과정 안내를 드릴게요.
+잠시만 기다려 주세요. 🔥</div>
+      <div class="copy-row">
+        <button class="copy-btn" onclick="copyMsg('msg-ep7',this)">📋 복사</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- URL 전체 목록 -->
+<div class="setup-box" style="margin-top:2rem">
+  <h2>📌 전체 URL 목록 (GitHub Pages 활성화 후)</h2>
+  <div style="display:grid;gap:.5rem;margin-top:.5rem">
+    <div class="url-chip">🏠 메인: https://themarketing0924-dotcom.github.io/blockchain-masterclass/</div>
+    <div class="url-chip">📋 신청 랜딩: .../blockchain-lead.html</div>
+    <div class="url-chip">🟣 EP.01: .../ep01.html</div>
+    <div class="url-chip">🟢 EP.02: .../ep02.html</div>
+    <div class="url-chip">🟡 EP.03: .../ep03.html</div>
+    <div class="url-chip">🔵 EP.04: .../ep04.html</div>
+    <div class="url-chip">🟩 EP.05: .../ep05.html</div>
+    <div class="url-chip">🩵 EP.06: .../ep06.html</div>
+    <div class="url-chip">🟠 EP.07: .../ep07.html</div>
+    <div class="url-chip">📘 RWA 마스터클래스: .../rwa-masterclass.html</div>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>💡 카카오 비즈메시지 자동화 팁:</strong><br>
+  채널 개설 후 <strong>카카오 채널 메시지</strong> 또는 <strong>비즈뿌리오·솔라피</strong> 같은 서비스를 이용하면
+  구글폼 응답 → 자동 발송 연동이 가능합니다 (Zapier 또는 Make.com 사용).
+  일단 수동으로 발송하시고, 수강생이 늘면 자동화 도구 연결을 추천드립니다.
+</div>
+
+<script>
+function copyMsg(id, btn) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    btn.textContent = '✅ 복사됨';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 복사';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
