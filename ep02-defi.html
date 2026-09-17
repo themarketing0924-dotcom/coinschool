@@ -229,6 +229,8 @@ footer p { font-size:.72rem;color:rgba(255,255,255,.18);line-height:1.7; }
 footer a { color:rgba(255,255,255,.3); }
 
 /* RESPONSIVE — TABLET */
+.expert-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:960px;margin:3.5rem auto 0; }
+
 @media (max-width:900px) {
   .stats-grid { grid-template-columns:1fr 1fr; }
   .stat-col:nth-child(2) { border-right:none; }
@@ -237,6 +239,7 @@ footer a { color:rgba(255,255,255,.3); }
   .lend-compare { gap:1rem; }
   .risk-grid { gap:.8rem; }
   .why-cards { grid-template-columns:1fr 1fr; }
+  .expert-grid { grid-template-columns:1fr 1fr; }
 }
 
 /* RESPONSIVE — MOBILE */
@@ -275,6 +278,7 @@ footer a { color:rgba(255,255,255,.3); }
   blockquote { padding:.8rem 1.1rem !important; }
   blockquote p { font-size:.88rem !important; }
   footer p { font-size:.65rem; }
+  .expert-grid { grid-template-columns:1fr;gap:.8rem; }
 }
 
 @media (max-width:390px) {
@@ -830,7 +834,7 @@ footer a { color:rgba(255,255,255,.3); }
   <div class="wrap-wide">
     <div class="eyebrow reveal">전문가 관점</div>
     <div class="display-lg reveal reveal-delay-1">업계 선구자들이<br><span style="background:linear-gradient(135deg,var(--d1) 0%,var(--d3) 60%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">DeFi를 어떻게 보는가</span></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:960px;margin:3.5rem auto 0">
+    <div class="expert-grid">
       <div class="reveal reveal-delay-1" style="background:#1C1C1E;border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2rem 1.8rem;display:flex;flex-direction:column">
         <div style="font-size:3rem;color:var(--d1);opacity:.35;font-family:Georgia,serif;line-height:.75;margin-bottom:1.2rem">"</div>
         <p style="font-size:.85rem;font-weight:600;line-height:1.7;color:rgba(255,255,255,.82);margin-bottom:auto">DeFi가 진정으로 무허가적이고 검열 저항적인 금융을 실현한다면, 전 세계 어디서나 누구나 금융 서비스에 접근할 수 있게 된다. 이것이 Ethereum의 가장 중요한 사용 사례다.</p>
