@@ -112,7 +112,7 @@ section { position:relative;display:flex;flex-direction:column;align-items:cente
 .shock-wrap { display:flex;align-items:flex-end;justify-content:center;gap:.1em; }
 .shock-num { font-size:clamp(7rem,20vw,16rem);font-weight:900;line-height:.85;letter-spacing:-.05em;color:#fff; }
 .shock-denom { font-size:clamp(2.5rem,6vw,5.5rem);font-weight:300;color:rgba(255,255,255,.22);letter-spacing:-.03em;padding-bottom:.4em; }
-.shock-label { margin-top:2rem;font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.78);font-weight:400;line-height:1.5; }
+.shock-label { margin-top:2rem;font-size:clamp(1.15rem,3vw,1.7rem);color:rgba(255,255,255,.82);font-weight:500;line-height:1.55;word-break:keep-all; }
 .shock-label strong { color:rgba(255,255,255,.85);font-weight:700; }
 
 /* THREE STATS */
@@ -340,10 +340,10 @@ footer a { color:rgba(255,255,255,.3); }
     <div style="display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;margin-top:2.5rem" class="reveal reveal-delay-3">
       <canvas id="dexRingChart" width="180" height="180" style="flex-shrink:0"></canvas>
       <div style="text-align:left">
-        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,.6)"><div style="width:10px;height:10px;border-radius:50%;background:var(--d2);flex-shrink:0"></div>DeFi DEX 비중 — 18%</div>
-        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,.6)"><div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0"></div>CEX(중앙화) — 82%</div>
-        <div style="margin-top:1rem;font-size:.72rem;color:var(--muted);line-height:1.5">
-          2020년 DeFi 비중<br><strong style="color:var(--d3)">0.1% → 3년 만에 18%</strong>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;font-size:1.05rem;font-weight:600;color:rgba(255,255,255,.82)"><div style="width:12px;height:12px;border-radius:50%;background:var(--d2);flex-shrink:0"></div>DeFi DEX 비중 — 18%</div>
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;font-size:1.05rem;font-weight:600;color:rgba(255,255,255,.82)"><div style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0"></div>CEX(중앙화) — 82%</div>
+        <div style="margin-top:1.2rem;font-size:.95rem;color:var(--muted);line-height:1.6">
+          2020년 DeFi 비중<br><strong style="color:var(--d3);font-size:1.1rem">0.1% → 3년 만에 18%</strong>
         </div>
       </div>
     </div>
@@ -509,8 +509,8 @@ footer a { color:rgba(255,255,255,.3); }
       은행도 본사도 없지만, 수십조 원의 자산을 관리한다.
     </p>
 
-    <div class="proto-grid reveal reveal-delay-3">
-      <div class="proto-card">
+    <div class="proto-grid">
+      <div class="proto-card reveal reveal-delay-1">
         <div class="proto-header">
           <div class="proto-logo" style="background:rgba(255,0,122,.15)">🦄</div>
           <div>
@@ -522,7 +522,7 @@ footer a { color:rgba(255,255,255,.3); }
         <div class="proto-desc">세계 최대 탈중앙화 거래소. AMM 방식으로 8,000개+ 토큰 교환. 직원 수 40명, 처리 거래량은 나스닥과 비교. UNI 거버넌스 토큰으로 커뮤니티가 운영.</div>
         <a class="ref-link" style="margin-top:.8rem;color:var(--d2);border-color:rgba(16,185,129,.28)" href="https://info.uniswap.org" target="_blank" rel="noopener">실시간 데이터</a>
       </div>
-      <div class="proto-card">
+      <div class="proto-card reveal reveal-delay-2">
         <div class="proto-header">
           <div class="proto-logo" style="background:rgba(180,0,255,.15)">👻</div>
           <div>
@@ -534,7 +534,7 @@ footer a { color:rgba(255,255,255,.3); }
         <div class="proto-desc">탈중앙화 대출 프로토콜. 담보 예치 → 즉시 대출. 신용심사 없음. 20개+ 자산 지원. Flash Loan으로 담보 없이 대출 후 동일 블록 내 상환 가능.</div>
         <a class="ref-link" style="margin-top:.8rem;color:var(--d2);border-color:rgba(16,185,129,.28)" href="https://aave.com" target="_blank" rel="noopener">프로토콜 확인</a>
       </div>
-      <div class="proto-card">
+      <div class="proto-card reveal reveal-delay-3">
         <div class="proto-header">
           <div class="proto-logo" style="background:rgba(0,200,100,.12)">🌿</div>
           <div>
@@ -546,7 +546,7 @@ footer a { color:rgba(255,255,255,.3); }
         <div class="proto-desc">수요·공급에 따라 이자율이 실시간으로 자동 조정. DeFi 최초 유동성 채굴(Yield Farming) 개념 도입. COMP 거버넌스 토큰 보유자가 프로토콜 운영 결정.</div>
         <a class="ref-link" style="margin-top:.8rem;color:var(--d2);border-color:rgba(16,185,129,.28)" href="https://compound.finance" target="_blank" rel="noopener">프로토콜 확인</a>
       </div>
-      <div class="proto-card">
+      <div class="proto-card reveal reveal-delay-4">
         <div class="proto-header">
           <div class="proto-logo" style="background:rgba(240,180,41,.12)">🏛️</div>
           <div>
