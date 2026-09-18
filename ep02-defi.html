@@ -63,6 +63,9 @@ section { position:relative;display:flex;flex-direction:column;align-items:cente
 .display-xl { font-size:clamp(3rem,9vw,8.5rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
 .display-lg { font-size:clamp(2.4rem,7vw,6rem);font-weight:900;line-height:1;letter-spacing:-.035em;color:#fff;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
 .display-md { font-size:clamp(2rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none; }
+.sub-stat{font-size:clamp(1.35rem,3vw,2.1rem);font-weight:700;line-height:1.42;letter-spacing:-.025em;color:rgba(255,255,255,.72);max-width:640px;margin:2.8rem auto 0;text-align:center;word-break:keep-all;overflow-wrap:break-word}
+.sub-stat strong{color:#fff;font-weight:800}
+.sub-stat em{font-style:normal;color:var(--d3)}
 .display-dark { color:var(--apple-dark); }
 .body-lg { font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:400;line-height:1.7;color:rgba(255,255,255,.80);max-width:600px;margin:0 auto;word-break:keep-all;overflow-wrap:break-word; }
 .body-lg-dark { font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:400;line-height:1.7;color:var(--muted);max-width:620px;margin:0 auto;word-break:keep-all;overflow-wrap:break-word; }
@@ -309,9 +312,13 @@ footer a { color:rgba(255,255,255,.3); }
   <div class="wrap">
     <div class="tag-chip reveal">2025–2026 · 블록체인 마스터클래스 EP.02</div>
     <div class="display-xl reveal reveal-delay-1" style="background:linear-gradient(135deg,#10B981 0%,#6EE7B7 45%,#fff 72%,#34D399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">은행 없이<br>금융이 된다</div>
-    <p class="hero-sub reveal reveal-delay-2">
-      대출받으려면 <strong style="color:#fff">신용심사 2–4주</strong>를 기다려야 한다.<br>
-      DeFi는 담보만 있으면 <strong style="color:#fff">10초 만에</strong> 대출이 실행된다.<br>
+    <div class="sub-stat reveal reveal-delay-2">
+      신용심사 2~4주? <strong>DeFi는 담보만 있으면 10초.</strong><br>
+      <em>코드가 은행을 대신하는 시대</em>가 이미 시작됐다.
+    </div>
+    <p class="hero-sub reveal reveal-delay-3" style="margin-top:1.4rem;font-size:clamp(.95rem,1.8vw,1.1rem)">
+      대출받으려면 신용심사 2–4주를 기다려야 한다.<br>
+      DeFi는 담보만 있으면 10초 만에 대출이 실행된다.<br>
       <span style="color:var(--d3);font-weight:700">코드가 은행을 대신한다.</span>
     </p>
     <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:2rem" class="reveal reveal-delay-3">
@@ -449,7 +456,8 @@ footer a { color:rgba(255,255,255,.3); }
   <div class="wrap">
     <div class="eyebrow reveal">핵심 메커니즘</div>
     <div class="display-lg reveal reveal-delay-1">AMM — 자동<br>시장 메이커</div>
-    <p class="body-lg reveal reveal-delay-2" style="margin-top:1.2rem">
+    <div class="sub-stat reveal reveal-delay-2">주문서도 없고, 중개인도 없다.<br><strong>수학 공식 하나가 거래소를 대신한다.</strong></div>
+    <p class="body-lg reveal reveal-delay-3" style="margin-top:1.2rem">
       주문서 없이 수학 공식으로 가격을 결정한다.<br>
       <span style="color:var(--d2);font-weight:700">x × y = k</span> — 이 한 줄이 DEX를 작동시킨다.
     </p>
@@ -505,7 +513,8 @@ footer a { color:rgba(255,255,255,.3); }
   <div class="wrap">
     <div class="eyebrow reveal">주요 프로토콜</div>
     <div class="display-lg reveal reveal-delay-1">DeFi 빅4</div>
-    <p class="body-lg reveal reveal-delay-2" style="margin-top:1.2rem">
+    <div class="sub-stat reveal reveal-delay-2">은행도 본사도 없다.<br><strong>코드만 있고, 수십조 원의 자산이 움직인다.</strong></div>
+    <p class="body-lg reveal reveal-delay-3" style="margin-top:1.2rem">
       은행도 본사도 없지만, 수십조 원의 자산을 관리한다.
     </p>
 
@@ -677,7 +686,11 @@ footer a { color:rgba(255,255,255,.3); }
   <div class="wrap">
     <div class="eyebrow reveal" style="color:var(--red)">⚠ 반드시 알아야 할</div>
     <div class="display-lg reveal reveal-delay-1">DeFi의<br>4가지 리스크</div>
-    <p class="body-lg reveal reveal-delay-2" style="margin-top:1.2rem;color:rgba(255,255,255,.4)">
+    <div class="sub-stat reveal reveal-delay-2">
+      <strong>높은 수익엔 그에 맞는 리스크가 있다.</strong><br>
+      <em>코드는 거짓말을 하지 않는다</em> — 하지만 버그는 있다.
+    </div>
+    <p class="body-lg reveal reveal-delay-3" style="margin-top:1.2rem;color:rgba(255,255,255,.4)">
       높은 수익 가능성 뒤에는 반드시 리스크가 있다. 코드는 거짓말을 하지 않는다.
     </p>
 
