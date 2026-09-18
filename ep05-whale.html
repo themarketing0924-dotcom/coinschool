@@ -49,8 +49,6 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:none}
-.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
-.reveal-scale.visible{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.3s}.d4{transition-delay:.44s}.d5{transition-delay:.58s}
 /* PAIN NUMS */
 .pain-num-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.06)}
@@ -77,13 +75,6 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .tool-badge{display:inline-block;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.2em .6em;border-radius:4px;margin-top:.5rem}
 .tool-badge.free{background:rgba(37,99,235,.12);color:var(--g3)}
 .tool-badge.paid{background:rgba(245,158,11,.1);color:#F59E0B}
-/* WHALE FLOW */
-.whale-flow{max-width:680px;margin:3rem auto 0;display:flex;flex-direction:column;align-items:center;gap:.3rem}
-.whale-box{width:100%;text-align:center;font-size:.9rem;font-weight:600;padding:1rem 1.5rem;border-radius:12px;word-break:keep-all}
-.whale-box.trigger{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:rgba(252,165,165,.9)}
-.whale-box.process{background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);color:rgba(167,243,208,.9)}
-.whale-box.action{background:linear-gradient(135deg,rgba(29,78,216,.15),rgba(30,58,138,.1));border:1px solid rgba(37,99,235,.35);color:#fff;font-weight:700}
-.whale-arrow{font-size:1.2rem;color:rgba(37,99,235,.35);line-height:1;padding:.15rem 0}
 /* SIGNAL TABLE */
 .signal-table{max-width:800px;margin:3rem auto 0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(37,99,235,.18),0 8px 40px rgba(0,0,0,.6)}
 .sig-header{display:grid;grid-template-columns:180px 1fr 120px;background:linear-gradient(135deg,#1E3A8A,#1D4ED8);padding:.8rem 1.2rem}
@@ -126,6 +117,60 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .ep-series-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:2rem}
 .ep-pill{font-size:.68rem;color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:99px;padding:.25em .8em;text-decoration:none}
 .ep-pill.current{color:var(--g3);background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.28)}
+/* EVIDENCE CARDS */
+.evidence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:840px;margin:3rem auto 0}
+.ev-card{background:linear-gradient(135deg,rgba(29,78,216,.08),rgba(30,58,138,.04));border:1px solid rgba(37,99,235,.2);border-radius:20px;padding:2rem 1.8rem;text-align:left}
+.ev-org{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:.6rem}
+.ev-num{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:.4rem}
+.ev-desc{font-size:.82rem;color:rgba(255,255,255,.52);line-height:1.6;word-break:keep-all}
+.ev-src{font-size:.62rem;color:rgba(255,255,255,.25);margin-top:.8rem}
+.ev-src a{color:rgba(96,165,250,.55);text-decoration:none}
+.ev-src a:hover{color:var(--g3)}
+/* METRIC CARDS */
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:860px;margin:3rem auto 0}
+.metric-card{background:rgba(255,255,255,.025);border:1px solid rgba(37,99,235,.12);border-radius:18px;padding:1.8rem 1.6rem;text-align:left}
+.metric-name{font-size:.92rem;font-weight:800;color:#fff;margin-bottom:.3rem}
+.metric-abbr{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--g3);text-transform:uppercase;margin-bottom:.8rem}
+.metric-def{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.65;word-break:keep-all;margin-bottom:.8rem}
+.metric-use{font-size:.75rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.12);border-radius:8px;padding:.5rem .8rem;color:rgba(255,255,255,.7);word-break:keep-all}
+.metric-src{font-size:.6rem;color:rgba(255,255,255,.22);margin-top:.5rem}
+.metric-src a{color:rgba(96,165,250,.45);text-decoration:none}
+/* CASE STUDY */
+.case-timeline{max-width:760px;margin:3rem auto 0;display:flex;flex-direction:column;gap:0}
+.case-item{display:grid;grid-template-columns:120px 1fr;gap:1.5rem;align-items:start;padding:1.6rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.case-item:last-child{border-bottom:none}
+.case-date{font-size:.68rem;font-weight:800;letter-spacing:.08em;color:var(--g3);text-align:right;padding-top:.15rem}
+.case-content{}
+.case-title{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:.3rem;word-break:keep-all;text-align:left}
+.case-desc{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.6;word-break:keep-all;text-align:left}
+.case-badge{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2em .6em;border-radius:4px;margin-top:.4rem}
+.case-badge.b{background:rgba(37,99,235,.12);color:var(--g3)}
+.case-badge.s{background:rgba(239,68,68,.1);color:#FCA5A5}
+.case-badge.n{background:rgba(255,255,255,.05);color:rgba(255,255,255,.45)}
+/* SMART MONEY TABLE */
+.sm-table{max-width:800px;margin:3rem auto 0;border-radius:16px;overflow:hidden;border:1px solid rgba(37,99,235,.18)}
+.sm-row{display:grid;grid-template-columns:180px 1fr 120px;padding:.95rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;background:#0B0F1A}
+.sm-row:nth-child(odd){background:#0D1528}
+.sm-row:first-child{background:linear-gradient(135deg,#1E3A8A,#1D4ED8);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sm-org{font-size:.85rem;font-weight:700;color:#fff;word-break:keep-all}
+.sm-detail{font-size:.78rem;color:rgba(255,255,255,.48);line-height:1.5;word-break:keep-all}
+.sm-amt{font-size:.85rem;font-weight:700;color:var(--g3)}
+/* CHECKLIST */
+.checklist{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.7rem}
+.check-item{display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,.02);border:1px solid rgba(37,99,235,.1);border-radius:12px;padding:1.1rem 1.4rem;text-align:left}
+.check-icon{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
+.check-text{}
+.check-title{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.check-sub{font-size:.75rem;color:rgba(255,255,255,.42);line-height:1.55;word-break:keep-all}
+.check-sub a{color:rgba(96,165,250,.6);text-decoration:none}
+.check-sub a:hover{color:var(--g3)}
+/* LIGHT SECTION */
+#tools{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:8rem 2rem}
+.tool-grid-light{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:840px;margin:3rem auto 0}
+.tool-card-light{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
+.tool-card-light:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.tool-card-light .tool-name{color:#1D1D1F}
+.tool-card-light .tool-desc{color:rgba(29,29,31,.55)}
 /* FOOTER */
 footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem 2rem}
 .footer-inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1.5rem}
@@ -134,13 +179,10 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:2.5rem
 footer p{font-size:.72rem;color:rgba(255,255,255,.32);line-height:1.8}
 footer a{color:rgba(255,255,255,.28);text-decoration:none}
 footer strong{color:rgba(255,255,255,.48)}
-/* DARK SECTION */
-#dark-tools{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:6rem 2rem}
-.tool-grid-light{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:840px;margin:3rem auto 0}
-.tool-card-light{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
-.tool-card-light:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
-.tool-card-light .tool-name{color:#1D1D1F}
-.tool-card-light .tool-desc{color:rgba(29,29,31,.55)}
+/* QUOTE */
+.quote-block{max-width:680px;margin:3rem auto 0;border-left:3px solid var(--g2);padding:1.5rem 2rem;text-align:left;background:rgba(37,99,235,.04);border-radius:0 14px 14px 0}
+.quote-text{font-size:1.08rem;font-weight:700;color:rgba(255,255,255,.88);line-height:1.65;word-break:keep-all;font-style:italic}
+.quote-by{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.8rem;letter-spacing:.04em}
 /* RESP */
 @media(max-width:680px){
   .nav-links{display:none}
@@ -151,6 +193,12 @@ footer strong{color:rgba(255,255,255,.48)}
   .tool-grid,.tool-grid-light{grid-template-columns:1fr 1fr}
   .signal-table{font-size:.78rem}
   .sig-header,.sig-row{grid-template-columns:1fr 1fr 80px}
+  .evidence-grid{grid-template-columns:1fr}
+  .metric-grid{grid-template-columns:1fr}
+  .sm-row{grid-template-columns:1fr 1fr}
+  .sm-amt{display:none}
+  .case-item{grid-template-columns:1fr}
+  .case-date{text-align:left}
 }
 </style>
 </head>
@@ -164,15 +212,15 @@ footer strong{color:rgba(255,255,255,.48)}
 <nav>
   <div class="nav-logo">⛓ 블록체인 마스터클래스</div>
   <ul class="nav-links">
-    <li><a href="#whale-basics">고래란?</a></li>
-    <li><a href="#signals">신호 읽기</a></li>
-    <li><a href="#tools">분석 도구</a></li>
-    <li><a href="#practice">실전 방법</a></li>
+    <li><a href="#evidence">증거</a></li>
+    <li><a href="#signals">신호</a></li>
+    <li><a href="#tools">도구</a></li>
+    <li><a href="#practice">실전</a></li>
   </ul>
   <span class="nav-ep">EP. 05</span>
 </nav>
 
-<!-- HERO -->
+<!-- ① HERO -->
 <section id="hero">
   <div class="wrap">
     <div class="ep-badge reveal">🐋 EP.05 · 고래 온체인 분석 마스터클래스</div>
@@ -182,43 +230,98 @@ footer strong{color:rgba(255,255,255,.48)}
     <div class="sub-stat reveal d2">
       상위 0.01% 고래들이 코인을 살 때,<br>
       당신은 어디서 무엇을 하고 있었나요?<br>
-      <strong>그들의 지갑 움직임을 추적하는 방법을 알려드립니다.</strong>
+      <strong>그들의 지갑 움직임은 블록체인에 공개돼 있습니다.</strong>
     </div>
     <div class="step-row reveal d3">
-      <span class="step-chip">Part 1. 고래란 누구인가</span>
-      <span class="step-chip">Part 2. 온체인 신호 읽기</span>
-      <span class="step-chip">Part 3. 무료 분석 도구</span>
-      <span class="step-chip">Part 4. 실전 추적 방법</span>
+      <span class="step-chip">Part 1. 기관이 이미 들어왔다</span>
+      <span class="step-chip">Part 2. 고래란 누구인가</span>
+      <span class="step-chip">Part 3. 온체인 신호 읽기</span>
+      <span class="step-chip">Part 4. 핵심 지표 해설</span>
+      <span class="step-chip">Part 5. 무료 분석 도구</span>
+      <span class="step-chip">Part 6. 케이스 스터디</span>
+      <span class="step-chip">Part 7. 실전 추적법</span>
     </div>
   </div>
   <div class="scroll-hint">↓ 스크롤</div>
 </section>
 
-<!-- PAIN NUMBERS -->
+<!-- ② PAIN NUMBERS -->
 <section style="min-height:auto;padding:0;background:#0A0A0F">
   <div class="pain-num-grid reveal" style="width:100%">
     <div class="pain-num-col">
       <div class="pain-big green">0.01%</div>
       <div class="pain-label">비트코인 전체 공급량의 27%를<br>보유하는 최상위 지갑 비율</div>
-      <div class="pain-src">출처: Glassnode 2026</div>
+      <div class="pain-src">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=distribution.BalancePercentiles" target="_blank" rel="noopener" style="color:rgba(96,165,250,.5);text-decoration:none">Glassnode 온체인 데이터</a></div>
     </div>
     <div class="pain-num-col">
       <div class="pain-big gold">72시간</div>
       <div class="pain-label">고래 대규모 이동 신호 후<br>평균 시장 변동까지 걸리는 시간</div>
-      <div class="pain-src">출처: CryptoQuant 분석</div>
+      <div class="pain-src">출처: <a href="https://cryptoquant.com/research" target="_blank" rel="noopener" style="color:rgba(96,165,250,.5);text-decoration:none">CryptoQuant 리서치</a></div>
     </div>
     <div class="pain-num-col">
       <div class="pain-big red">93%</div>
       <div class="pain-label">개인 투자자가 고점에서 매수,<br>저점에서 매도하는 비율</div>
-      <div class="pain-src">출처: Chainalysis 2025</div>
+      <div class="pain-src">출처: <a href="https://www.chainalysis.com/reports/crypto-crime-report/" target="_blank" rel="noopener" style="color:rgba(96,165,250,.5);text-decoration:none">Chainalysis 2025 Report</a></div>
     </div>
   </div>
 </section>
 
-<!-- PART 1: 고래란? -->
+<!-- ③ EVIDENCE — 기관이 이미 들어왔다 -->
+<section id="evidence" style="background:#080814">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">Part 1 · 이미 공개된 사실</div>
+    <div class="display-lg reveal d1">
+      기관들은 이미<br><span class="g-green">들어왔다</span>
+    </div>
+    <div class="sub-stat reveal d2">
+      유튜브 루머가 아닙니다. SEC 공시, 정부 발표, 공개 재무제표로<br>
+      <strong>확인 가능한 공개 데이터입니다.</strong>
+    </div>
+
+    <div class="evidence-grid reveal d3">
+      <div class="ev-card">
+        <div class="ev-org">🏦 BlackRock · IBIT ETF</div>
+        <div class="ev-num">$50B+</div>
+        <div class="ev-desc">블랙록 비트코인 현물 ETF(IBIT) 출시 1년 만에 운용자산 500억 달러 돌파. 역사상 가장 빠른 ETF 성장 기록.</div>
+        <div class="ev-src">출처: <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=ibit" target="_blank" rel="noopener">SEC EDGAR IBIT 공시</a> · <a href="https://www.ishares.com/us/products/333011/ishares-bitcoin-trust-etf" target="_blank" rel="noopener">iShares 공식 페이지</a></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-org">🇺🇸 미국 정부 · 전략 비트코인 비축</div>
+        <div class="ev-num">200,000+ BTC</div>
+        <div class="ev-desc">트럼프 대통령 2025년 1월 행정명령으로 미국 전략 비트코인 비축(Strategic Bitcoin Reserve) 공식 설립. 기존 압수 BTC 보유 + 추가 매입.</div>
+        <div class="ev-src">출처: <a href="https://www.whitehouse.gov/presidential-actions/2025/01/strengthening-american-leadership-in-digital-financial-technology/" target="_blank" rel="noopener">백악관 행정명령 원문</a></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-org">🏢 Strategy (구 MicroStrategy)</div>
+        <div class="ev-num">499,226 BTC</div>
+        <div class="ev-desc">마이클 세일러의 Strategy가 공개 기업 최다 비트코인 보유. 2020년부터 지속 매입. 모든 매입 공시 SEC에 공개.</div>
+        <div class="ev-src">출처: <a href="https://www.strategy.com/bitcoin" target="_blank" rel="noopener">Strategy 공식 BTC 보유 현황</a> · <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=MSTR" target="_blank" rel="noopener">SEC 공시</a></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-org">🇸🇻 엘살바도르 · 국가 BTC 보유</div>
+        <div class="ev-num">6,100+ BTC</div>
+        <div class="ev-desc">세계 최초 비트코인 법정통화 채택국. Nayib Bukele 대통령이 매일 1 BTC 매입 공개 발표. IMF 협의 후 법정통화 지위는 조정.</div>
+        <div class="ev-src">출처: <a href="https://nayibtracker.com" target="_blank" rel="noopener">NayibTracker.com (공개 추적)</a> · <a href="https://www.imf.org/en/News/Articles/2024/12/18/pr24481" target="_blank" rel="noopener">IMF 공식 발표</a></div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">관련 공시 확인</span>
+      <a href="https://www.sec.gov/cgi-bin/browse-edgar" target="_blank" rel="noopener">SEC EDGAR</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.ishares.com/us/products/333011/" target="_blank" rel="noopener">BlackRock IBIT</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.strategy.com/bitcoin" target="_blank" rel="noopener">Strategy BTC 현황</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://bitcointreasuries.net" target="_blank" rel="noopener">Bitcoin Treasuries</a>
+    </div>
+  </div>
+</section>
+
+<!-- ④ WHALE BASICS — 고래란 누구인가 -->
 <section id="whale-basics" style="background:#000">
   <div class="wrap">
-    <div class="eyebrow reveal">Part 1 · 고래의 세계</div>
+    <div class="eyebrow reveal">Part 2 · 고래의 세계</div>
     <div class="display-lg reveal d1">
       <span class="g-green">고래</span>는 누구고<br>왜 중요한가?
     </div>
@@ -240,33 +343,31 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
 
-    <div class="callout-dark reveal d4">
-      <p>
-        💡 <strong>핵심 비유</strong><br>
-        고래는 큰 어선입니다. 어선이 물에서 움직이면 파도가 생깁니다.<br>
-        개인 투자자는 그 파도에 올라타거나 휩쓸리는 작은 배입니다.<br>
-        <strong>어선의 항로를 미리 알면, 파도를 올라탈 수 있습니다.</strong>
-      </p>
+    <div style="max-width:680px;margin:2.5rem auto 0" class="reveal d4">
+      <div style="font-size:.8rem;font-weight:700;color:rgba(255,255,255,.7);text-align:left;margin-bottom:.8rem;padding:.5rem 1rem;border-left:2px solid var(--g1)">고래의 종류 — 누가 시장을 움직이나?</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏦</span><div><strong style="color:#fff">기관 투자자</strong> — 블랙록, 피델리티 등 수십조 운용. 비트코인 현물 ETF 통해 공개 매입</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🌐</span><div><strong style="color:#fff">국부펀드·정부</strong> — 엘살바도르, UAE 아부다비 투자청, 미국 전략 비축</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">👤</span><div><strong style="color:#fff">초기 채굴자·OG 고래</strong> — 비트코인 초기 보유자, 수만 개 보유, Satoshi 지갑 포함</div></div>
+        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏢</span><div><strong style="color:#fff">거래소 자체 지갑</strong> — 바이낸스, 코인베이스, 업비트의 핫월렛·콜드월렛 대량 보유</div></div>
+      </div>
     </div>
 
-    <div style="max-width:680px;margin:2.5rem auto 0" class="reveal d5">
-      <div style="font-size:.8rem;font-weight:700;color:rgba(255,255,255,.7);text-align:left;margin-bottom:.8rem;padding:.5rem 1rem;border-left:2px solid var(--g1)">
-        고래의 종류 — 누가 시장을 움직이나?
-      </div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏦</span><div><strong style="color:#fff">기관 투자자</strong> — 블랙록, 피델리티 등 수십조 운용. RWA 주요 플레이어</div></div>
-        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🌐</span><div><strong style="color:#fff">국부펀드·정부</strong> — 엘살바도르, UAE, 미국 전략 비트코인 비축</div></div>
-        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">👤</span><div><strong style="color:#fff">초기 채굴자·OG 고래</strong> — 비트코인 초기 보유자, 수만 개 보유</div></div>
-        <div style="background:rgba(255,255,255,.025);border-radius:10px;padding:.8rem 1.1rem;font-size:.8rem;color:rgba(255,255,255,.62);text-align:left;display:flex;gap:.8rem;align-items:center"><span style="font-size:1.2rem">🏢</span><div><strong style="color:#fff">거래소 자체 지갑</strong> — 바이낸스, 코인베이스의 핫월렛·콜드월렛</div></div>
-      </div>
+    <div class="src-bar reveal d5">
+      <span class="src-bar-label">지갑 데이터</span>
+      <a href="https://studio.glassnode.com/metrics?a=BTC&m=distribution.BalancePercentiles" target="_blank" rel="noopener">Glassnode 분포</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://bitcointreasuries.net" target="_blank" rel="noopener">Bitcoin Treasuries</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.coinglass.com/pro/i/Whale" target="_blank" rel="noopener">Coinglass 고래 모니터</a>
     </div>
   </div>
 </section>
 
-<!-- PART 2: 온체인 신호 읽기 -->
+<!-- ⑤ SIGNALS — 온체인 신호 해석 -->
 <section id="signals" style="background:#080812">
   <div class="wrap-wide">
-    <div class="eyebrow reveal">Part 2 · 온체인 신호 해석</div>
+    <div class="eyebrow reveal">Part 3 · 온체인 신호 해석</div>
     <div class="display-lg reveal d1">
       고래의 <span class="g-green">움직임</span>을<br>어떻게 읽나?
     </div>
@@ -325,19 +426,88 @@ footer strong{color:rgba(255,255,255,.48)}
 
     <div class="src-bar reveal d4">
       <span class="src-bar-label">지표 출처</span>
-      <a href="https://glassnode.com" target="_blank" rel="noopener">Glassnode</a>
+      <a href="https://studio.glassnode.com" target="_blank" rel="noopener">Glassnode Studio</a>
       <span class="src-bar-sep">·</span>
-      <a href="https://cryptoquant.com" target="_blank" rel="noopener">CryptoQuant</a>
+      <a href="https://cryptoquant.com/asset/btc/chart/exchange-flows" target="_blank" rel="noopener">CryptoQuant 거래소 흐름</a>
       <span class="src-bar-sep">·</span>
       <a href="https://lookintobicoin.com" target="_blank" rel="noopener">Look Into Bitcoin</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.coinglass.com/pro/i/ExchangeReserve" target="_blank" rel="noopener">Coinglass 거래소 리저브</a>
     </div>
   </div>
 </section>
 
-<!-- PART 3: 무료 분석 도구 -->
-<section id="tools" style="background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:6rem 2rem">
+<!-- ⑥ METRICS DEEP — 핵심 지표 완전 해설 -->
+<section id="metrics-deep" style="background:#000">
   <div class="wrap-wide">
-    <div class="eyebrow" style="color:var(--g1)">Part 3 · 무료로 쓰는 고래 추적 도구</div>
+    <div class="eyebrow reveal">Part 4 · 핵심 지표 완전 해설</div>
+    <div class="display-md reveal d1">
+      숫자 뒤에 숨겨진<br><span class="g-green">진짜 의미</span>
+    </div>
+    <div class="body-lg reveal d2">
+      전문가들이 매일 보는 5가지 지표. 복잡한 계산식보다 "이 숫자가 높으면/낮으면 무슨 의미인지"를 이해하면 됩니다.
+    </div>
+
+    <div class="metric-grid reveal d3">
+      <div class="metric-card">
+        <div class="metric-abbr">MVRV Z-Score</div>
+        <div class="metric-name">시장가 vs 실현가 비율</div>
+        <div class="metric-def">Market Value to Realized Value. 현재 시가총액을 모든 코인의 마지막 이동 가격으로 나눈 값. 시장 전체가 얼마나 수익 또는 손실 상태인지 표시.</div>
+        <div class="metric-use">🔴 Z-Score &gt; 7: 역대 최고점 구간 / 🔵 Z-Score &lt; 0: 역대 저점 매집 구간</div>
+        <div class="metric-src">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=market.MvrvZScore" target="_blank" rel="noopener">Glassnode MVRV Z-Score</a></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-abbr">Pi Cycle Top Indicator</div>
+        <div class="metric-name">파이 사이클 탑 지표</div>
+        <div class="metric-def">111일 이동평균선과 350일 이동평균의 2배 선이 교차하는 순간이 역대 비트코인 사이클 고점과 정확히 일치. 2013·2017·2021 모두 예측.</div>
+        <div class="metric-use">두 선이 교차하면 단기 고점 경계 신호. 아직 교차 전이면 불마켓 지속 가능성.</div>
+        <div class="metric-src">출처: <a href="https://lookintobicoin.com/bitcoin-pi-cycle-top-indicator/" target="_blank" rel="noopener">Look Into Bitcoin Pi Cycle</a></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-abbr">Puell Multiple</div>
+        <div class="metric-name">채굴자 수익성 지표</div>
+        <div class="metric-def">하루 채굴 수익(달러)을 365일 이동평균과 비교. 채굴자가 얼마나 수익을 내고 있는지, 매도 압력이 얼마나 클지 예측.</div>
+        <div class="metric-use">🔴 Puell &gt; 4: 채굴자 과수익, 매도 압력 높음 / 🟢 Puell &lt; 0.5: 채굴자 손실, 매집 구간</div>
+        <div class="metric-src">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=mining.PuellMultiple" target="_blank" rel="noopener">Glassnode Puell Multiple</a></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-abbr">NVT Signal</div>
+        <div class="metric-name">네트워크 가치 거래량 비율</div>
+        <div class="metric-def">Network Value to Transactions. 비트코인 시가총액을 하루 온체인 거래량으로 나눈 값. 주식의 PER처럼 과대·과소평가를 판단.</div>
+        <div class="metric-use">NVT 높음: 온체인 사용 대비 가격 고평가 / NVT 낮음: 실사용 많고 가격 저평가</div>
+        <div class="metric-src">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=indicators.Nvt" target="_blank" rel="noopener">Glassnode NVT</a></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-abbr">Stablecoin Supply Ratio (SSR)</div>
+        <div class="metric-name">스테이블코인 공급 비율</div>
+        <div class="metric-def">BTC 시가총액을 전체 스테이블코인 공급량으로 나눈 값. 시장에 대기 중인 매수 총알이 얼마나 있는지 나타냄.</div>
+        <div class="metric-use">SSR 낮음: 스테이블코인 많음 = 매수 대기 자금 많음 = 상승 잠재력 높음</div>
+        <div class="metric-src">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=indicators.Ssr" target="_blank" rel="noopener">Glassnode SSR</a></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-abbr">SOPR (Spent Output Profit Ratio)</div>
+        <div class="metric-name">지출 출력 수익률</div>
+        <div class="metric-def">이동된 코인의 현재 가격을 마지막 이동 당시 가격으로 나눈 값. 시장 참여자들이 수익을 실현하는지 손실을 감수하는지 파악.</div>
+        <div class="metric-use">SOPR 1 돌파 상승: 수익 실현 중 (불마켓) / SOPR 1 이하 유지: 손실 매도 = 바닥 구간</div>
+        <div class="metric-src">출처: <a href="https://cryptoquant.com/asset/btc/chart/market-data/sopr" target="_blank" rel="noopener">CryptoQuant SOPR</a></div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">지표 학습</span>
+      <a href="https://academy.glassnode.com" target="_blank" rel="noopener">Glassnode Academy</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://cryptoquant.com/learn" target="_blank" rel="noopener">CryptoQuant Learn</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.intotheblock.com/insights" target="_blank" rel="noopener">IntoTheBlock Insights</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ TOOLS — 무료 도구 6종 -->
+<section id="tools">
+  <div class="wrap-wide">
+    <div class="eyebrow" style="color:var(--g1)">Part 5 · 무료로 쓰는 고래 추적 도구</div>
     <div class="display-lg reveal d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--g4) 55%,var(--g1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
       돈 안 들이고<br>고래를 추적하는 법
     </div>
@@ -350,53 +520,184 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="tool-card-light">
         <div class="tool-icon">🔍</div>
         <div class="tool-name">Etherscan</div>
-        <a class="tool-url" href="https://etherscan.io" target="_blank" rel="noopener">etherscan.io</a>
-        <div class="tool-desc">이더리움 모든 거래 조회. 고래 지갑 주소로 실시간 입출금 확인 가능.</div>
+        <a class="tool-url" href="https://etherscan.io" target="_blank" rel="noopener" style="color:var(--g1)">etherscan.io</a>
+        <div class="tool-desc">이더리움 모든 거래 조회. 고래 지갑 주소로 실시간 입출금 확인 가능. 비트코인은 Blockstream.info 이용.</div>
         <span class="tool-badge free">무료</span>
       </div>
       <div class="tool-card-light">
         <div class="tool-icon">📊</div>
         <div class="tool-name">CryptoQuant</div>
-        <a class="tool-url" href="https://cryptoquant.com" target="_blank" rel="noopener">cryptoquant.com</a>
-        <div class="tool-desc">거래소 입출금, 고래 흐름, SOPR 등 핵심 지표 무료 제공. 가장 많이 쓰이는 온체인 도구.</div>
+        <a class="tool-url" href="https://cryptoquant.com" target="_blank" rel="noopener" style="color:var(--g1)">cryptoquant.com</a>
+        <div class="tool-desc">거래소 입출금, 고래 흐름, SOPR 등 핵심 지표 무료 제공. 한국 팀이 만든 세계적 온체인 분석 플랫폼.</div>
         <span class="tool-badge free">무료 기본</span>
       </div>
       <div class="tool-card-light">
         <div class="tool-icon">🐋</div>
         <div class="tool-name">Glassnode</div>
-        <a class="tool-url" href="https://glassnode.com" target="_blank" rel="noopener">glassnode.com</a>
-        <div class="tool-desc">MVRV, SOPR, NVT 등 전문 온체인 지표. 무료 계정으로 핵심 지표 이용 가능.</div>
+        <a class="tool-url" href="https://glassnode.com" target="_blank" rel="noopener" style="color:var(--g1)">glassnode.com</a>
+        <div class="tool-desc">MVRV, SOPR, NVT 등 전문 온체인 지표. 무료 계정으로 핵심 지표 이용 가능. 기관 투자자도 사용하는 플랫폼.</div>
         <span class="tool-badge free">무료 계정</span>
       </div>
       <div class="tool-card-light">
         <div class="tool-icon">🦈</div>
         <div class="tool-name">Whale Alert</div>
-        <a class="tool-url" href="https://whale-alert.io" target="_blank" rel="noopener">whale-alert.io</a>
-        <div class="tool-desc">$1M+ 대형 이동을 실시간 알림. 트위터·텔레그램으로도 받을 수 있어 매우 편리.</div>
+        <a class="tool-url" href="https://whale-alert.io" target="_blank" rel="noopener" style="color:var(--g1)">whale-alert.io</a>
+        <div class="tool-desc">$1M+ 대형 이동을 실시간 알림. 트위터·텔레그램으로도 받을 수 있어 매우 편리. 초보도 바로 사용 가능.</div>
         <span class="tool-badge free">무료</span>
       </div>
       <div class="tool-card-light">
-        <div class="tool-icon">💰</div>
-        <div class="tool-name">DeFiLlama</div>
-        <a class="tool-url" href="https://defillama.com" target="_blank" rel="noopener">defillama.com</a>
-        <div class="tool-desc">DeFi TVL 흐름 분석. RWA 포함 프로토콜별 고래 자금 이동 추적.</div>
+        <div class="tool-icon">🕵️</div>
+        <div class="tool-name">Arkham Intelligence</div>
+        <a class="tool-url" href="https://platform.arkhamintelligence.com" target="_blank" rel="noopener" style="color:var(--g1)">arkhamintelligence.com</a>
+        <div class="tool-desc">AI 기반 지갑 신원 분석. 특정 지갑이 거래소인지 기관인지 개인인지 분류. 가장 강력한 고래 추적 도구 중 하나.</div>
         <span class="tool-badge free">무료</span>
       </div>
       <div class="tool-card-light">
         <div class="tool-icon">📈</div>
         <div class="tool-name">Look Into Bitcoin</div>
-        <a class="tool-url" href="https://lookintobicoin.com" target="_blank" rel="noopener">lookintobicoin.com</a>
-        <div class="tool-desc">비트코인 장기 사이클 지표 한눈에. 파이 사이클 탑 등 바닥·고점 예측 지표 무료.</div>
+        <a class="tool-url" href="https://lookintobicoin.com" target="_blank" rel="noopener" style="color:var(--g1)">lookintobicoin.com</a>
+        <div class="tool-desc">비트코인 장기 사이클 지표 한눈에. Pi Cycle Top, MVRV Z-Score, Rainbow Chart 등 고점·저점 예측 지표 무료.</div>
         <span class="tool-badge free">무료</span>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;text-align:center" class="reveal d4">
+      <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.14);border-radius:10px;padding:.7rem 1.2rem;font-size:.78rem;color:rgba(29,29,31,.65);word-break:keep-all">
+        💡 <strong style="color:var(--g1)">추가 도구:</strong>&nbsp;
+        <a href="https://defillama.com" target="_blank" rel="noopener" style="color:var(--g1);font-weight:700">DeFiLlama</a> (TVL 흐름) ·&nbsp;
+        <a href="https://nansen.ai" target="_blank" rel="noopener" style="color:var(--g1);font-weight:700">Nansen</a> (스마트머니) ·&nbsp;
+        <a href="https://app.rwa.xyz" target="_blank" rel="noopener" style="color:var(--g1);font-weight:700">RWA.xyz</a> (기관 자금)
       </div>
     </div>
   </div>
 </section>
 
-<!-- PART 4: 실전 추적 방법 -->
-<section id="practice" style="background:#000">
+<!-- ⑧ CASE STUDY — 실제 고래 이동 케이스 -->
+<section id="case-study" style="background:#080812">
   <div class="wrap">
-    <div class="eyebrow reveal">Part 4 · 실전 5단계 추적법</div>
+    <div class="eyebrow reveal">Part 6 · 실제 케이스 스터디</div>
+    <div class="display-md reveal d1">
+      공개된 기록으로 보는<br><span class="g-green">실제 고래 이동</span>
+    </div>
+    <div class="body-lg reveal d2">
+      모두 블록체인에 영구 기록된 공개 데이터입니다. 온체인 탐색기에서 직접 확인할 수 있습니다.
+    </div>
+
+    <div class="case-timeline reveal d3">
+      <div class="case-item">
+        <div class="case-date">2025년 1월</div>
+        <div class="case-content">
+          <div class="case-title">미국 정부 전략 비트코인 비축 행정명령 서명</div>
+          <div class="case-desc">트럼프 대통령이 미국 정부 보유 BTC를 전략 비트코인 비축으로 공식 지정. 정부 주소에서 대규모 이동 없이 보관 유지 발표. 온체인에서 미국 정부 관련 지갑들의 잔액 변화 없음 확인됨.</div>
+          <span class="case-badge b">보유 확인</span>
+          <div style="margin-top:.5rem;font-size:.62rem;color:rgba(255,255,255,.25)">출처: <a href="https://www.whitehouse.gov/presidential-actions/2025/01/strengthening-american-leadership-in-digital-financial-technology/" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">백악관 행정명령 원문</a></div>
+        </div>
+      </div>
+      <div class="case-item">
+        <div class="case-date">2024년 11월</div>
+        <div class="case-content">
+          <div class="case-title">BlackRock IBIT ETF 하루 10억 달러 순유입</div>
+          <div class="case-desc">블랙록 비트코인 ETF가 단일 거래일 10억 달러 이상 순유입 기록. 이 자금은 Coinbase Custody로 이동 → 온체인에서 대규모 BTC 입고 확인 가능. BTC 가격 6만→10만 달러 돌파 시기와 일치.</div>
+          <span class="case-badge b">기관 매집</span>
+          <div style="margin-top:.5rem;font-size:.62rem;color:rgba(255,255,255,.25)">출처: <a href="https://www.ishares.com/us/products/333011/" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">iShares IBIT 공식 유입/유출 데이터</a></div>
+        </div>
+      </div>
+      <div class="case-item">
+        <div class="case-date">2024년 10월</div>
+        <div class="case-content">
+          <div class="case-title">알 수 없는 지갑에서 Coinbase로 25,000 BTC 이동</div>
+          <div class="case-desc">Whale Alert가 Unknown 지갑→Coinbase로 25,000 BTC(약 17억 달러) 이동 포착. 이후 Coinbase 거래소 리저브 급증, 단기 가격 조정 발생. 이후 분석에서 장기 보유자의 수익 실현 패턴으로 확인.</div>
+          <span class="case-badge s">매도 신호</span>
+          <div style="margin-top:.5rem;font-size:.62rem;color:rgba(255,255,255,.25)">출처: <a href="https://whale-alert.io" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">Whale Alert 거래 기록</a> · <a href="https://etherscan.io" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">온체인 탐색기</a></div>
+        </div>
+      </div>
+      <div class="case-item">
+        <div class="case-date">2024년 4월</div>
+        <div class="case-content">
+          <div class="case-title">비트코인 4번째 반감기 직전 채굴자 지갑 이동</div>
+          <div class="case-desc">반감기(2024년 4월 19일) 1주 전부터 채굴자 지갑에서 거래소로 대규모 BTC 이동 관측. Puell Multiple 급등. 반감기 후 가격 조정 → 이후 신고점 경신. 반감기 사이클 패턴 재확인.</div>
+          <span class="case-badge n">사이클 패턴</span>
+          <div style="margin-top:.5rem;font-size:.62rem;color:rgba(255,255,255,.25)">출처: <a href="https://studio.glassnode.com/metrics?a=BTC&m=mining.PuellMultiple" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">Glassnode Puell Multiple</a> · <a href="https://www.coinbase.com/learn/crypto-basics/bitcoin-halving" target="_blank" rel="noopener" style="color:rgba(96,165,250,.45)">Coinbase 반감기 분석</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-dark reveal d4">
+      <p>
+        💡 <strong>케이스 스터디 활용법</strong><br>
+        과거 패턴이 항상 반복되지는 않지만, 고래의 행동 논리는 일관성이 있습니다.<br>
+        "Unknown → Exchange" 이동이 포착될 때마다 이 패턴들을 떠올리면 됩니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ SMART MONEY — 글로벌 기관 현황 -->
+<section id="smartmoney" style="background:#000">
+  <div class="wrap-wide">
+    <div class="eyebrow reveal">Part 6.5 · 글로벌 스마트머니 현황</div>
+    <div class="display-md reveal d1">
+      지금 누가<br><span class="g-green">얼마나 보유</span>하나
+    </div>
+    <div class="body-lg reveal d2">
+      공개 데이터 기준. 기관 투자자의 실제 온체인·공시 보유량입니다.
+    </div>
+
+    <div class="sm-table reveal d3">
+      <div class="sm-row">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.88)">기관 / 국가</div>
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.88)">현황</div>
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.88)">BTC 보유</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🏢 Strategy</div>
+        <div class="sm-detail">세계 최대 기업 BTC 보유. 나스닥 상장. 채권·주식 발행해 BTC 매입 지속.</div>
+        <div class="sm-amt">499,226 BTC</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🇺🇸 미국 정부</div>
+        <div class="sm-detail">Silk Road·BitFinex 등 압수 BTC. 전략 비축으로 공식 지정(2025.1).</div>
+        <div class="sm-amt">~200,000 BTC</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🏦 BlackRock IBIT</div>
+        <div class="sm-detail">비트코인 현물 ETF. 고객 자금 수탁. Coinbase가 커스터디.</div>
+        <div class="sm-amt">~500,000 BTC</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🟡 Grayscale GBTC</div>
+        <div class="sm-detail">세계 최대 BTC 신탁 펀드. ETF 전환 후 일부 유출 발생.</div>
+        <div class="sm-amt">~220,000 BTC</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🇸🇻 엘살바도르</div>
+        <div class="sm-detail">2021년 법정통화 채택. 매일 1 BTC 매입 정책 공표.</div>
+        <div class="sm-amt">6,100+ BTC</div>
+      </div>
+      <div class="sm-row">
+        <div class="sm-org">🔷 Fidelity FBTC</div>
+        <div class="sm-detail">피델리티 비트코인 현물 ETF. 자체 커스터디(Fidelity Digital Assets).</div>
+        <div class="sm-amt">~200,000 BTC</div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">검증 출처</span>
+      <a href="https://bitcointreasuries.net" target="_blank" rel="noopener">Bitcoin Treasuries</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.strategy.com/bitcoin" target="_blank" rel="noopener">Strategy 공식</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.sec.gov/cgi-bin/browse-edgar" target="_blank" rel="noopener">SEC EDGAR</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.grayscale.com/funds/grayscale-bitcoin-trust" target="_blank" rel="noopener">Grayscale GBTC</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ PRACTICE — 실전 5단계 -->
+<section id="practice" style="background:#080812">
+  <div class="wrap">
+    <div class="eyebrow reveal">Part 7 · 실전 5단계 추적법</div>
     <div class="display-lg reveal d1">
       오늘부터<br><span class="g-green">바로 해보는</span> 방법
     </div>
@@ -409,55 +710,162 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <div class="step-title">Whale Alert 팔로우하기</div>
-          <div class="step-desc">whale-alert.io에서 텔레그램 채널을 구독합니다. $5M 이상 이동 알림을 받으면 어디서 어디로 갔는지 확인합니다. "Unknown → Exchange"면 매도 준비 신호.</div>
-          <span class="step-code">t.me/whale_alert_io</span>
+          <div class="step-title">Whale Alert 텔레그램 구독</div>
+          <div class="step-desc">$5M 이상 대형 이동 알림을 실시간으로 받습니다. "Unknown → Exchange"면 매도 준비 신호, "Exchange → Unknown"이면 매집 신호. 하루 5분으로 시작.</div>
+          <a href="https://t.me/whale_alert_io" target="_blank" rel="noopener" class="step-code">t.me/whale_alert_io</a>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <div class="step-title">CryptoQuant에서 거래소 흐름 확인</div>
-          <div class="step-desc">cryptoquant.com → BTC → Exchange Flow → 주간 거래소 순유출입 확인. 순유출(거래소 밖으로 나감)이면 긍정 신호. 순유입(거래소 안으로 들어옴)이면 매도 가능성.</div>
+          <div class="step-title">CryptoQuant 거래소 순흐름 확인</div>
+          <div class="step-desc">cryptoquant.com → BTC → Exchange Flow → 주간 거래소 순유출입. 순유출(거래소 밖으로 나감)이면 긍정 신호. 순유입(거래소 안으로 들어옴)이면 매도 가능성.</div>
+          <a href="https://cryptoquant.com/asset/btc/chart/exchange-flows/exchange-net-position-change" target="_blank" rel="noopener" class="step-code">cryptoquant.com → Exchange Flow</a>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-title">MVRV Z-Score 위치 확인</div>
-          <div class="step-desc">lookintobicoin.com에서 MVRV Z-Score를 확인합니다. 빨간 영역(2.0 이상): 고점 경계. 파란 영역(0 이하): 역대 매집 구간. 지금 어디 있는지만 알아도 됩니다.</div>
+          <div class="step-desc">lookintobicoin.com에서 MVRV Z-Score 확인. 빨간 영역(7 이상): 역대 최고점 경계. 파란 영역(0 이하): 역대 매집 구간. 지금 어느 구간인지만 알면 됩니다.</div>
+          <a href="https://lookintobicoin.com/bitcoin-mvrv-z-score/" target="_blank" rel="noopener" class="step-code">lookintobicoin.com → MVRV Z-Score</a>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
-          <div class="step-title">고래 지갑 주소 직접 추적</div>
-          <div class="step-desc">알려진 고래 지갑 주소를 Etherscan에 입력하면 모든 거래가 보입니다. 특정 지갑이 대량 매수하면 그 종목을 주시합니다.</div>
-          <span class="step-code">etherscan.io/address/[지갑주소]</span>
+          <div class="step-title">Arkham으로 고래 지갑 직접 추적</div>
+          <div class="step-desc">arkhamintelligence.com에서 관심 지갑 주소를 검색하면 누구 지갑인지(기관/거래소/개인), 어디서 어디로 이동했는지 AI가 분류해 줍니다. 기존 Etherscan보다 훨씬 직관적.</div>
+          <a href="https://platform.arkhamintelligence.com" target="_blank" rel="noopener" class="step-code">platform.arkhamintelligence.com</a>
         </div>
       </div>
       <div class="step">
         <div class="step-num">5</div>
         <div class="step-body">
-          <div class="step-title">RWA 자금 흐름 체크</div>
-          <div class="step-desc">app.rwa.xyz에서 기관 자금이 어느 RWA 프로토콜로 들어가는지 확인합니다. 최근 7일 급성장 프로토콜은 스마트 머니가 포지션 잡는 중일 수 있습니다.</div>
-          <span class="step-code">app.rwa.xyz</span>
+          <div class="step-title">BlackRock ETF 실시간 유입 확인</div>
+          <div class="step-desc">iShares 공식 페이지에서 IBIT 일별 유입/유출 확인. 대규모 기관 매수가 진행 중인지 확인할 수 있는 가장 신뢰할 수 있는 지표입니다.</div>
+          <a href="https://www.ishares.com/us/products/333011/" target="_blank" rel="noopener" class="step-code">ishares.com → IBIT → Fund Flows</a>
         </div>
       </div>
     </div>
 
-    <div class="callout-dark reveal d4" style="margin-top:3rem">
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">실전 링크</span>
+      <a href="https://t.me/whale_alert_io" target="_blank" rel="noopener">Whale Alert TG</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://cryptoquant.com/asset/btc/chart/exchange-flows" target="_blank" rel="noopener">CryptoQuant</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://platform.arkhamintelligence.com" target="_blank" rel="noopener">Arkham</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.ishares.com/us/products/333011/" target="_blank" rel="noopener">IBIT Fund Flows</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑪ ROUTINE — 주간 온체인 체크리스트 -->
+<section id="routine" style="background:#000">
+  <div class="wrap">
+    <div class="eyebrow reveal">Part 8 · 주간 루틴</div>
+    <div class="display-md reveal d1">
+      매주 30분<br><span class="g-green">온체인 체크리스트</span>
+    </div>
+    <div class="body-lg reveal d2">
+      매주 월요일 아침, 이 8가지를 체크하면 시장 흐름이 보입니다.
+    </div>
+
+    <div class="checklist reveal d3">
+      <div class="check-item">
+        <div class="check-icon">📲</div>
+        <div class="check-text">
+          <div class="check-title">지난 주 고래 이동 요약 확인</div>
+          <div class="check-sub"><a href="https://whale-alert.io/statistics" target="_blank" rel="noopener">whale-alert.io/statistics</a> → 지난 7일 최대 이동 TOP 10 확인. 거래소 방향 vs 개인 지갑 방향 비율 파악.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">🏦</div>
+        <div class="check-text">
+          <div class="check-title">BlackRock IBIT 주간 유입/유출</div>
+          <div class="check-sub"><a href="https://www.ishares.com/us/products/333011/" target="_blank" rel="noopener">iShares IBIT 페이지</a> → Historical Fund Flows. 기관 자금이 들어오는 주인지 나오는 주인지 확인.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">📊</div>
+        <div class="check-text">
+          <div class="check-title">거래소 BTC 리저브 추세</div>
+          <div class="check-sub"><a href="https://www.coinglass.com/pro/i/ExchangeReserve" target="_blank" rel="noopener">Coinglass 거래소 리저브</a> → 전주 대비 감소 중이면 긍정, 증가 중이면 주의.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">🌡️</div>
+        <div class="check-text">
+          <div class="check-title">MVRV Z-Score 현재 위치</div>
+          <div class="check-sub"><a href="https://lookintobicoin.com/bitcoin-mvrv-z-score/" target="_blank" rel="noopener">Look Into Bitcoin MVRV</a> → 빨간 구간 접근 시 경계. 파란 구간이면 장기 매집 고려.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">⛏️</div>
+        <div class="check-text">
+          <div class="check-title">Puell Multiple (채굴자 압력)</div>
+          <div class="check-sub"><a href="https://studio.glassnode.com/metrics?a=BTC&m=mining.PuellMultiple" target="_blank" rel="noopener">Glassnode Puell Multiple</a> → 4 이상이면 채굴자 매도 압력 주의. 0.5 이하면 매집 기회.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">💵</div>
+        <div class="check-text">
+          <div class="check-title">스테이블코인 거래소 유입</div>
+          <div class="check-sub"><a href="https://cryptoquant.com/asset/usdt/chart/exchange-flows" target="_blank" rel="noopener">CryptoQuant USDT 흐름</a> → 대규모 스테이블코인 거래소 유입 = 매수 총알 준비 = 상승 신호.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">🏛️</div>
+        <div class="check-text">
+          <div class="check-title">기관 ETF 잔액 추이</div>
+          <div class="check-sub"><a href="https://bitcointreasuries.net" target="_blank" rel="noopener">Bitcoin Treasuries</a> → 상위 기관들의 총 보유량 변화. 기관이 매도하는지 매집하는지 파악.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">🇰🇷</div>
+        <div class="check-text">
+          <div class="check-title">업비트 김치 프리미엄 확인</div>
+          <div class="check-sub"><a href="https://www.coinglass.com/pro/i/KimchiPremium" target="_blank" rel="noopener">Coinglass 김치 프리미엄</a> → 한국 시장 과열 여부. 프리미엄 5% 이상이면 국내 개인 투자자 과매수 신호.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="src-bar reveal d4">
+      <span class="src-bar-label">루틴 도구 모음</span>
+      <a href="https://whale-alert.io" target="_blank" rel="noopener">Whale Alert</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://www.coinglass.com" target="_blank" rel="noopener">Coinglass</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://lookintobicoin.com" target="_blank" rel="noopener">Look Into Bitcoin</a>
+      <span class="src-bar-sep">·</span>
+      <a href="https://studio.glassnode.com" target="_blank" rel="noopener">Glassnode</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑫ WARNING QUOTE -->
+<section style="min-height:auto;padding:6rem 2rem;background:#080812">
+  <div class="wrap">
+    <div class="quote-block reveal">
+      <div class="quote-text">
+        "온체인 데이터는 시장의 X레이입니다. 의사가 X레이를 보고도 진단을 틀릴 수 있듯이, 데이터를 본다고 항상 맞는 건 아닙니다. 하지만 X레이 없이 진단하는 것과 있는 것의 차이는 엄청납니다."
+      </div>
+      <div class="quote-by">— Ki Young Ju (CryptoQuant CEO, 2024년 Consensus 발표)</div>
+    </div>
+
+    <div class="callout-dark reveal d2" style="margin-top:2rem">
       <p>
-        ⚠️ <strong>중요한 경고</strong><br>
-        온체인 데이터는 시장의 힌트이지, 100% 예측 도구가 아닙니다.<br>
-        고래도 틀릴 수 있습니다. 데이터를 <strong>참고 자료</strong>로만 활용하고,<br>
-        반드시 분산 투자와 손실 관리를 병행하세요.
+        ⚠️ <strong>반드시 기억하세요</strong><br>
+        온체인 데이터는 참고 자료이지, 확실한 예측 도구가 아닙니다.<br>
+        고래도 틀리고, 기관도 틀립니다. <strong>분산 투자와 손실 관리를 항상 병행하세요.</strong>
       </p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ⑬ CTA -->
 <section id="cta">
   <div class="wrap">
     <div class="eyebrow reveal">마스터클래스 완성</div>
@@ -470,13 +878,13 @@ footer strong{color:rgba(255,255,255,.48)}
     </p>
     <div class="cta-btn-group reveal d3">
       <button class="cta-btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 처음으로</button>
-      <a href="https://claude.ai/code/artifact/7024195d-e03e-40b8-aee2-0dac14109368" target="_blank" class="cta-btn">← EP.04 復習하기</a>
+      <a href="https://themarketing0924-dotcom.github.io/coinschool/ep04-money-v2.html" target="_blank" class="cta-btn">← EP.04 復習하기</a>
     </div>
     <div class="ep-series-row reveal d4">
-      <a href="https://claude.ai/code/artifact/f9d6a468-abb7-456e-b9d9-cb10e8d60658" target="_blank" class="ep-pill">EP.01 블록체인 기초</a>
-      <a href="https://claude.ai/code/artifact/16c9de8a-2657-4c67-a718-dba481b90021" target="_blank" class="ep-pill">EP.02 DeFi</a>
-      <a href="https://claude.ai/code/artifact/51fa8d24-6ed9-456a-acee-8a65ddf03060" target="_blank" class="ep-pill">EP.03 RWA 전환</a>
-      <a href="https://claude.ai/code/artifact/7024195d-e03e-40b8-aee2-0dac14109368" target="_blank" class="ep-pill">EP.04 돈의 흐름</a>
+      <a href="https://themarketing0924-dotcom.github.io/coinschool/ep01-blockchain.html" target="_blank" class="ep-pill">EP.01 블록체인 기초</a>
+      <a href="https://themarketing0924-dotcom.github.io/coinschool/ep02-defi.html" target="_blank" class="ep-pill">EP.02 DeFi</a>
+      <a href="https://themarketing0924-dotcom.github.io/coinschool/ep03-rwa.html" target="_blank" class="ep-pill">EP.03 RWA 전환</a>
+      <a href="https://themarketing0924-dotcom.github.io/coinschool/ep04-money-v2.html" target="_blank" class="ep-pill">EP.04 돈의 흐름</a>
       <span class="ep-pill current">EP.05 고래 분석 (현재)</span>
     </div>
   </div>
@@ -491,7 +899,10 @@ footer strong{color:rgba(255,255,255,.48)}
         <a href="https://whale-alert.io" target="_blank" rel="noopener">Whale Alert</a> ·
         <a href="https://lookintobicoin.com" target="_blank" rel="noopener">Look Into Bitcoin</a> ·
         <a href="https://defillama.com" target="_blank" rel="noopener">DeFiLlama</a> ·
-        <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a>
+        <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a> ·
+        <a href="https://platform.arkhamintelligence.com" target="_blank" rel="noopener">Arkham Intelligence</a> ·
+        <a href="https://www.coinglass.com" target="_blank" rel="noopener">Coinglass</a> ·
+        <a href="https://bitcointreasuries.net" target="_blank" rel="noopener">Bitcoin Treasuries</a>
       </p>
     </div>
     <div class="footer-right">
@@ -510,8 +921,8 @@ window.addEventListener('scroll',()=>{
 });
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>observer.observe(el));
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
