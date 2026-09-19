@@ -1199,10 +1199,18 @@ footer a { color:rgba(255,255,255,.3); }
     <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;letter-spacing:-.02em;line-height:1.2;margin-bottom:1rem">지금 시작하면<br>얼리버드 혜택 적용</h2>
     <p class="reveal" style="color:rgba(255,255,255,.5);font-size:.95rem;margin-bottom:3rem">정규 출시 전 사전 등록 시 특별 가격으로 전체 커리큘럼 이용 가능합니다.</p>
     <div class="reveal" style="background:#1C1C1E;border:1px solid rgba(232,160,32,.3);border-radius:24px;padding:2.5rem 2rem;position:relative;overflow:hidden">
-      <div style="position:absolute;top:1rem;right:1rem;background:#E8A020;color:#000;font-size:.7rem;font-weight:900;padding:.3em .8em;border-radius:99px">EARLY BIRD</div>
-      <div style="font-size:.85rem;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.25rem">정규가 ₩297,000</div>
-      <div style="font-size:3rem;font-weight:900;color:#E8A020;line-height:1">₩97,000</div>
-      <div style="color:rgba(255,255,255,.5);font-size:.85rem;margin:.5rem 0 2rem">VAT 포함 · 평생 소장 · 업데이트 포함</div>
+      <div id="eb-badge" style="position:absolute;top:1rem;right:1rem;background:#E8A020;color:#000;font-size:.7rem;font-weight:900;padding:.3em .8em;border-radius:99px">EARLY BIRD</div>
+      <div id="eb-old" style="font-size:.85rem;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:.25rem">정규가 ₩297,000</div>
+      <div id="eb-price" style="font-size:3rem;font-weight:900;color:#E8A020;line-height:1">₩97,000</div>
+      <div style="color:rgba(255,255,255,.5);font-size:.85rem;margin:.5rem 0 1.2rem">VAT 포함 · 평생 소장 · 업데이트 포함</div>
+      <div id="eb-countdown" style="display:flex;gap:.4rem;align-items:center;justify-content:center;margin-bottom:1.6rem">
+        <span style="font-size:.68rem;color:rgba(255,255,255,.4);margin-right:.3rem">얼리버드 마감까지</span>
+        <div style="background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .5rem;min-width:2.4rem;text-align:center"><span id="eb-h" style="font-size:.85rem;font-weight:900;color:#E8A020;font-variant-numeric:tabular-nums">--</span></div>
+        <span style="color:rgba(232,160,32,.5);font-weight:700">:</span>
+        <div style="background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .5rem;min-width:2.4rem;text-align:center"><span id="eb-m" style="font-size:.85rem;font-weight:900;color:#E8A020;font-variant-numeric:tabular-nums">--</span></div>
+        <span style="color:rgba(232,160,32,.5);font-weight:700">:</span>
+        <div style="background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .5rem;min-width:2.4rem;text-align:center"><span id="eb-s" style="font-size:.85rem;font-weight:900;color:#E8A020;font-variant-numeric:tabular-nums">--</span></div>
+      </div>
       <ul style="list-style:none;text-align:left;display:grid;gap:.7rem;margin-bottom:2rem;padding:0">
         <li style="display:flex;gap:.75rem;font-size:.9rem;color:rgba(255,255,255,.8)"><span style="color:#E8A020">✓</span>7모듈 32강 전체 영상 무제한 수강</li>
         <li style="display:flex;gap:.75rem;font-size:.9rem;color:rgba(255,255,255,.8)"><span style="color:#E8A020">✓</span>강의별 핵심 요약 PDF 자료</li>
@@ -1641,6 +1649,46 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
     this.closePath(); return this;
   };
 }
+
+// ── EARLY-BIRD COUNTDOWN & CART-CLOSE 가격 전환 (bridge.html과 동일 키 공유) ──
+(function () {
+  const KEY = 'cs_earlybird_deadline';
+  const WINDOW_MS = 72 * 60 * 60 * 1000; // 72시간
+  let deadline = Number(localStorage.getItem(KEY));
+  if (!deadline || isNaN(deadline)) {
+    deadline = Date.now() + WINDOW_MS;
+    try { localStorage.setItem(KEY, String(deadline)); } catch (e) {}
+  }
+
+  const elH = document.getElementById('eb-h');
+  const elM = document.getElementById('eb-m');
+  const elS = document.getElementById('eb-s');
+  const cdBox = document.getElementById('eb-countdown');
+  const badge = document.getElementById('eb-badge');
+  const oldPrice = document.getElementById('eb-old');
+  const newPrice = document.getElementById('eb-price');
+  const pad = n => String(n).padStart(2, '0');
+
+  function applyExpiredPricing() {
+    if (cdBox) cdBox.style.display = 'none';
+    if (badge) { badge.textContent = '정규가'; badge.style.background = 'rgba(255,255,255,.12)'; badge.style.color = 'rgba(255,255,255,.7)'; }
+    if (oldPrice) oldPrice.style.display = 'none';
+    if (newPrice) newPrice.textContent = '₩297,000';
+  }
+
+  function tick() {
+    const remain = deadline - Date.now();
+    if (remain <= 0) { applyExpiredPricing(); clearInterval(timer); return; }
+    const totalH = Math.floor(remain / 3600000);
+    const m = Math.floor((remain % 3600000) / 60000);
+    const s = Math.floor((remain % 60000) / 1000);
+    if (elH) elH.textContent = pad(totalH);
+    if (elM) elM.textContent = pad(m);
+    if (elS) elS.textContent = pad(s);
+  }
+  tick();
+  const timer = setInterval(tick, 1000);
+})();
 </script>
 
 
