@@ -55,10 +55,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;back
 .topbar-msg{font-size:.72rem;color:rgba(255,255,255,.6);letter-spacing:.04em}
 .topbar-msg strong{color:#E8A020}
 .countdown{display:flex;gap:.4rem;align-items:center}
-.cd-unit{background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .55rem;text-align:center}
-.cd-num{font-size:.95rem;font-weight:900;color:#E8A020;display:block;line-height:1}
+.cd-unit{background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);border-radius:6px;padding:.2rem .55rem;text-align:center;min-width:2.6rem}
+.cd-num{font-size:.95rem;font-weight:900;color:#E8A020;display:block;line-height:1;font-variant-numeric:tabular-nums}
 .cd-label{font-size:.5rem;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase}
 .cd-sep{color:rgba(232,160,32,.5);font-weight:700;font-size:.9rem}
+.cd-expired{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4)}
+
+/* CART-CLOSE STRIP (final CTA) */
+.close-strip{max-width:520px;margin:0 auto 2.2rem;background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.28);border-radius:16px;padding:1.1rem 1.4rem;text-align:center}
+.close-strip-label{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#E8A020;margin-bottom:.5rem}
+.close-strip-price{display:flex;align-items:baseline;justify-content:center;gap:.6rem;margin-bottom:.4rem}
+.close-strip-old{font-size:.9rem;color:rgba(255,255,255,.35);text-decoration:line-through}
+.close-strip-new{font-size:1.5rem;font-weight:900;color:#E8A020}
+.close-strip-note{font-size:.74rem;color:rgba(255,255,255,.45);line-height:1.5}
 
 /* HERO */
 .hero{text-align:center;padding:7rem 1.5rem 5rem;position:relative;overflow:hidden}
@@ -156,6 +165,14 @@ footer strong{color:rgba(255,255,255,.3)}
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-msg"><strong>COINSCHOOL</strong> — 무료 5강을 마친 수강생의 다음 학습 단계</div>
+  <div class="countdown" id="cd-box">
+    <span class="topbar-msg" style="margin-right:.3rem">얼리버드 마감까지</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-label">시간</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-label">분</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-label">초</span></div>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -326,8 +343,18 @@ footer strong{color:rgba(255,255,255,.3)}
     RWA 마스터클래스에서<br>
     실물자산 토큰화의 구조와 위험을 더 깊이 확인합니다.
   </p>
+
+  <div class="close-strip reveal delay-2" id="close-strip">
+    <div class="close-strip-label">얼리버드 가격 · 5강 완주자 한정 안내</div>
+    <div class="close-strip-price">
+      <span class="close-strip-old">정규가 ₩297,000</span>
+      <span class="close-strip-new">₩97,000</span>
+    </div>
+    <div class="close-strip-note" id="close-strip-note">위 카운트다운이 끝나면 이 페이지의 가격은 정규가로 자동 전환됩니다.</div>
+  </div>
+
   <a href="rwa-masterclass.html" class="cta-btn reveal delay-2">RWA 마스터클래스 지금 보기 →</a>
-  <p class="cta-note reveal delay-3">무료 교육 자료 · 언제든 중단 가능 · 스팸 없음</p>
+  <p class="cta-note reveal delay-3">교육 목적 자료 · 언제든 중단 가능 · 스팸 없음</p>
 </section>
 
 <footer>
@@ -350,6 +377,44 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── EARLY-BIRD COUNTDOWN (개인화 72시간 창) ──
+// 이 방문자가 이 퍼널에 처음 도착한 시점부터 72시간을 부여합니다.
+// 같은 브라우저로 재방문해도 동일한 마감 시점이 유지됩니다(코인스쿨 전체 퍼널 공용 키).
+(function () {
+  const KEY = 'cs_earlybird_deadline';
+  const WINDOW_MS = 72 * 60 * 60 * 1000; // 72시간
+  let deadline = Number(localStorage.getItem(KEY));
+  if (!deadline || isNaN(deadline)) {
+    deadline = Date.now() + WINDOW_MS;
+    try { localStorage.setItem(KEY, String(deadline)); } catch (e) {}
+  }
+
+  const elH = document.getElementById('cd-h');
+  const elM = document.getElementById('cd-m');
+  const elS = document.getElementById('cd-s');
+  const box = document.getElementById('cd-box');
+  const closeNote = document.getElementById('close-strip-note');
+  const pad = n => String(n).padStart(2, '0');
+
+  function renderExpired() {
+    if (box) box.innerHTML = '<span class="cd-expired">얼리버드 마감 · 정규가 적용 중</span>';
+    if (closeNote) closeNote.textContent = '얼리버드 창이 마감되어 이 페이지는 정규가 기준으로 안내됩니다.';
+  }
+
+  function tick() {
+    const remain = deadline - Date.now();
+    if (remain <= 0) { renderExpired(); clearInterval(timer); return; }
+    const totalH = Math.floor(remain / 3600000);
+    const m = Math.floor((remain % 3600000) / 60000);
+    const s = Math.floor((remain % 60000) / 1000);
+    if (elH) elH.textContent = pad(totalH);
+    if (elM) elM.textContent = pad(m);
+    if (elS) elS.textContent = pad(s);
+  }
+  tick();
+  const timer = setInterval(tick, 1000);
+})();
 
 </script>
 </body>
