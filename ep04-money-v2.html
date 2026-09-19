@@ -496,6 +496,18 @@ footer strong{color:rgba(255,255,255,.48)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ═══ SOURCE BAR (섹션 하단 근거 링크) ═══ */
+.src-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem;margin-top:2rem;padding:.8rem 1.4rem;background:rgba(37,99,235,.04);border:1px solid rgba(37,99,235,.12);border-radius:12px;max-width:720px;margin-left:auto;margin-right:auto}
+.src-bar-label{font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-right:.4rem;flex-shrink:0;color:var(--b3);opacity:.85}
+.src-bar a{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.42);text-decoration:none;padding:.15em .5em;border-radius:4px;white-space:nowrap;transition:color .2s,background .2s}
+.src-bar a:hover{background:rgba(37,99,235,.12);color:var(--b3)}
+.src-bar-sep{color:rgba(255,255,255,.15);font-size:.7rem}
+#analogy .src-bar,#summary .src-bar{background:rgba(29,78,216,.05);border-color:rgba(29,78,216,.14)}
+#analogy .src-bar a,#summary .src-bar a{color:rgba(0,0,0,.42)}
+#analogy .src-bar a:hover,#summary .src-bar a:hover{background:rgba(29,78,216,.1);color:var(--b1)}
+#analogy .src-bar-label,#summary .src-bar-label{color:var(--b1)}
+#analogy .src-bar-sep,#summary .src-bar-sep{color:rgba(0,0,0,.14)}
 </style>
 <link rel="stylesheet" href="responsive.css">
 </head>
@@ -616,6 +628,7 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
     <div class="callout-dark rv d4"><p>토큰 모양보다 중요한 것은 <strong>무엇을 받을 권리인지</strong>, 누가 자산을 보관하는지, 문제가 생기면 누가 책임지는지입니다.</p></div>
+    <div class="src-bar rv d5"><span class="src-bar-label">참고자료</span><a href="https://www.bis.org/media-releases/20250624-next-generation-monetary-and-financial-system-takes-shape-based-tokenised-unified-ledger-bis" target="_blank" rel="noopener">BIS</a><span class="src-bar-sep">·</span><a href="https://www.imf.org/en/publications/imf-notes/issues/2026/04/01/tokenized-finance-574921" target="_blank" rel="noopener">IMF</a><span class="src-bar-sep">·</span><a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization-in-crypto-winter" target="_blank" rel="noopener">BCG · ADDX 리서치</a></div>
   </div>
 </section>
 
@@ -692,6 +705,7 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="verify-point"><div class="verify-icon">≋</div><b>유동성</b><span>거래 상대가 있는가</span></div>
     </div>
     <p class="excel-note rv d4">RWA라는 이름만으로 자산 가치나 원금이 보장되지는 않습니다.</p>
+    <div class="src-bar rv d5"><span class="src-bar-label">참고자료</span><a href="https://www.mckinsey.com/industries/financial-services/our-insights/from-ripples-to-waves-the-transformational-power-of-tokenizing-assets" target="_blank" rel="noopener">McKinsey</a><span class="src-bar-sep">·</span><a href="https://www.fsb.org/2023/10/the-financial-stability-implications-of-tokenisation/" target="_blank" rel="noopener">FSB</a><span class="src-bar-sep">·</span><a href="https://www.imf.org/en/publications/imf-notes/issues/2026/04/01/tokenized-finance-574921" target="_blank" rel="noopener">IMF</a></div>
   </div>
 </section>
 
@@ -704,6 +718,7 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="mkt-card tier2"><div class="mkt-card-head">코인 확인 순서</div><div class="mkt-li"><span class="mkt-li-icon">01</span><span class="mkt-li-text">실제 사용료와 서비스 매출이 있는가?</span></div><div class="mkt-li"><span class="mkt-li-icon">02</span><span class="mkt-li-text">보상 재원은 신규 발행인가, 실제 수익인가?</span></div><div class="mkt-li"><span class="mkt-li-icon">03</span><span class="mkt-li-text">수요가 사라져도 운영이 가능한가?</span></div></div>
       <div class="mkt-card tier1"><div class="mkt-card-head">RWA 확인 순서</div><div class="mkt-li"><span class="mkt-li-icon">01</span><span class="mkt-li-text">기초자산과 보관 주체가 실제 존재하는가?</span></div><div class="mkt-li"><span class="mkt-li-icon">02</span><span class="mkt-li-text">이자·상환·배당을 받을 계약상 권리가 있는가?</span></div><div class="mkt-li"><span class="mkt-li-icon">03</span><span class="mkt-li-text">상환 창구와 거래 유동성이 있는가?</span></div></div>
     </div>
+    <div class="src-bar rv d4"><span class="src-bar-label">참고자료</span><a href="https://www.bis.org/media-releases/20250624-next-generation-monetary-and-financial-system-takes-shape-based-tokenised-unified-ledger-bis" target="_blank" rel="noopener">BIS</a><span class="src-bar-sep">·</span><a href="https://www.fsb.org/2023/10/the-financial-stability-implications-of-tokenisation/" target="_blank" rel="noopener">FSB</a></div>
   </div>
 </section>
 
@@ -726,6 +741,7 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="flow-side flow-new"><div class="flow-head">권리를 움직이는 기술</div><div class="flow-item"><span class="fi-icon">R</span><span class="fi-text"><strong>RWA</strong> · 현실 권리와 토큰 연결</span></div><div class="flow-item"><span class="fi-icon">D</span><span class="fi-text"><strong>DeFi</strong> · 이전·거래·담보 기능</span></div></div>
     </div>
     <p class="excel-note rv d6">‘소비자본론 + RWA + DeFi’는 공식 학술 정의가 아니라 코인스쿨의 교육용 해석 모델입니다.</p>
+    <div class="src-bar rv d6"><span class="src-bar-label">참고자료</span><a href="https://www.bis.org/media-releases/20250624-next-generation-monetary-and-financial-system-takes-shape-based-tokenised-unified-ledger-bis" target="_blank" rel="noopener">BIS · 통합원장</a><span class="src-bar-sep">·</span><a href="https://www.mckinsey.com/industries/financial-services/our-insights/from-ripples-to-waves-the-transformational-power-of-tokenizing-assets" target="_blank" rel="noopener">McKinsey</a></div>
   </div>
 </section>
 
@@ -741,6 +757,7 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="sum-card"><div class="sum-num">4</div><div><div class="sum-title">누가 책임지는가?</div><div class="sum-body">발행사·운영사와 문제가 생겼을 때의 절차를 확인합니다.</div></div></div>
       <div class="sum-card"><div class="sum-num">5</div><div><div class="sum-title">어떻게 현금화하는가?</div><div class="sum-body">상환 창구, 거래 가능 조건, 유동성을 확인합니다.</div></div></div>
     </div>
+    <div class="src-bar rv d3"><span class="src-bar-label">공식 근거</span><a href="https://www.fsc.go.kr/no010101/87650" target="_blank" rel="noopener">금융위원회</a><span class="src-bar-sep">·</span><a href="https://www.bis.org/media-releases/20250624-next-generation-monetary-and-financial-system-takes-shape-based-tokenised-unified-ledger-bis" target="_blank" rel="noopener">BIS</a><span class="src-bar-sep">·</span><a href="https://www.imf.org/en/publications/imf-notes/issues/2026/04/01/tokenized-finance-574921" target="_blank" rel="noopener">IMF</a></div>
   </div>
 </section>
 
