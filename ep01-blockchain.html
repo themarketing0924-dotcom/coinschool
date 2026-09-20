@@ -68,7 +68,7 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 /* SHOCK */
 #shock{background:var(--near-black);text-align:center}
 .shock-wrap{display:flex;align-items:flex-start;justify-content:center;line-height:1;gap:.3rem;margin:1.5rem 0}
-.shock-num{font-size:clamp(7rem,20vw,16rem);font-weight:900;letter-spacing:-.06em;background:linear-gradient(135deg,var(--p1) 0%,var(--p3) 50%,#fff 80%,var(--p2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:.9}
+.shock-num{font-size:clamp(2.4rem,7vw,6rem);font-weight:900;letter-spacing:-.06em;background:linear-gradient(135deg,var(--p1) 0%,var(--p3) 50%,#fff 80%,var(--p2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:.9}
 .shock-denom{font-size:clamp(1.5rem,4vw,3rem);font-weight:700;color:var(--p3);padding-top:1rem}
 .shock-label{font-size:clamp(1rem,1.8vw,1.18rem);color:rgba(255,255,255,.5);line-height:1.75;max-width:560px;margin:0 auto}
 .shock-label strong{color:rgba(255,255,255,.88)}
@@ -816,50 +816,63 @@ document.querySelectorAll('.mkt-bars').forEach(el=>barIO.observe(el));
   panels.forEach((p,i)=>{if(i!==0)p.style.display='none';});
   btns.forEach((btn,i)=>btn.addEventListener('click',()=>activateTab(i)));
 })();
-function drawRing(id,segments,colors,lineW,bg){
+/* ── SCROLL-TRIGGERED CHARTS (rwa-masterclass와 동일: 화면 진입 시 1.4초 smoothstep) ── */
+const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateOnView(id,draw,dur){
   const c=document.getElementById(id);if(!c)return;
-  const ctx=c.getContext('2d'),cx=c.width/2,cy=c.height/2,r=cx-lineW;
-  let angle=-Math.PI/2;
-  const total=segments.reduce((a,b)=>a+b,0);
-  segments.forEach((s,i)=>{
-    const arc=2*Math.PI*s/total;
-    ctx.beginPath();ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy,r,angle,angle+arc);
-    ctx.closePath();ctx.fillStyle=colors[i];ctx.fill();
-    angle+=arc;
-  });
-  ctx.beginPath();ctx.arc(cx,cy,r-lineW,0,2*Math.PI);
-  ctx.fillStyle=bg||'#0A0A0F';ctx.fill();
+  const ctx=c.getContext('2d');
+  draw(ctx,c.width,c.height,0);
+  const obs=new IntersectionObserver(([e])=>{
+    if(!e.isIntersecting)return;
+    obs.disconnect();
+    if(reduceMotion){draw(ctx,c.width,c.height,1);return;}
+    const start=performance.now(),d=dur||1400;
+    (function step(now){
+      const t=Math.min((now-start)/d,1),k=t*t*(3-2*t);
+      ctx.clearRect(0,0,c.width,c.height);
+      draw(ctx,c.width,c.height,k);
+      if(t<1)requestAnimationFrame(step);
+    })(start);
+  },{threshold:.3});
+  obs.observe(c);
 }
-drawRing('ringChart',[25,75],['rgba(139,92,246,.9)','rgba(255,255,255,.08)'],28);
-(function(){
-  const c=document.getElementById('stat1Chart');if(!c)return;
-  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+function ringDraw(segments,colors,lineW,bg){
+  return function(ctx,W,H,k){
+    const cx=W/2,cy=H/2,r=cx-lineW,total=segments.reduce((a,b)=>a+b,0);
+    ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);ctx.fillStyle=colors[colors.length-1];ctx.fill();
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+2*Math.PI*segments[0]/total*k);
+    ctx.closePath();ctx.fillStyle=colors[0];ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,r-lineW,0,2*Math.PI);
+    ctx.fillStyle=bg||'#0A0A0F';ctx.fill();
+  };
+}
+animateOnView('ringChart',ringDraw([25,75],['rgba(139,92,246,.9)','rgba(255,255,255,.08)'],28));
+animateOnView('stat1Chart',function(ctx,W,H,k){
   const pts=[{x:0,y:.85},{x:.25,y:.72},{x:.5,y:.55},{x:.75,y:.3},{x:1,y:.05}];
   const grd=ctx.createLinearGradient(0,0,W,0);
   grd.addColorStop(0,'rgba(124,58,237,.3)');grd.addColorStop(1,'rgba(167,139,250,.9)');
+  ctx.save();ctx.beginPath();ctx.rect(0,0,W*k,H);ctx.clip();
   ctx.beginPath();
   pts.forEach((p,i)=>{const px=p.x*W,py=p.y*H;i===0?ctx.moveTo(px,py):ctx.lineTo(px,py);});
   ctx.strokeStyle=grd;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.stroke();
   pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x*W,p.y*H,3,0,2*Math.PI);ctx.fillStyle='rgba(167,139,250,.9)';ctx.fill();});
-})();
-drawRing('stat2Chart',[589,100],['rgba(48,209,88,.75)','rgba(255,255,255,.07)'],20);
-(function(){
-  const c=document.getElementById('stat3Chart');if(!c)return;
-  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  ctx.restore();
+});
+animateOnView('stat2Chart',ringDraw([589,100],['rgba(48,209,88,.75)','rgba(255,255,255,.07)'],20));
+animateOnView('stat3Chart',function(ctx,W,H,k){
   const bars=[{v:.92,l:'하락'},{v:.07,l:'상승'}];
-  const bw=40,gap=50;const startX=(W-(bars.length*bw+(bars.length-1)*gap))/2;
+  const bw=40,gap=50,startX=(W-(bars.length*bw+(bars.length-1)*gap))/2;
   const colors=['rgba(255,69,58,.8)','rgba(48,209,88,.7)'];
   bars.forEach((b,i)=>{
-    const x=startX+i*(bw+gap),bh=b.v*(H-20),y=H-bh;
+    const x=startX+i*(bw+gap),bh=b.v*(H-20)*k,y=H-bh;
     ctx.fillStyle=colors[i];
     ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,4);else ctx.rect(x,y,bw,bh);ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='600 10px Noto Sans KR';
     ctx.textAlign='center';ctx.fillText(b.l,x+bw/2,H-4);
   });
-})();
+});
 </script>
+<script src="scroll-fx.js" defer></script>
 </body>
 </html>
-
-</body></html>
