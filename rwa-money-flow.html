@@ -17,20 +17,24 @@ body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden;scroll-sna
   font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--blue3);text-decoration:none}
 
-/* ═══ SLIDE ═══ */
+/* ═══ SLIDE — 모든 섹션 동일 간격 ═══ */
 .slide{min-height:100vh;display:flex;flex-direction:column;justify-content:safe center;align-items:center;
-  text-align:center;padding:80px 24px;position:relative;scroll-snap-align:start;border-bottom:1px solid rgba(255,255,255,.04)}
+  text-align:center;padding:100px 24px;position:relative;scroll-snap-align:start;border-bottom:1px solid rgba(255,255,255,.04)}
 .inner{max-width:980px;width:100%;opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
 .slide.in .inner{opacity:1;transform:none}
 
-/* ═══ TYPOGRAPHY ═══ */
+/* ═══ TYPOGRAPHY — 통일 컬러 시스템 ═══ */
 .eyebrow{font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue3);margin-bottom:18px}
 h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin:0}
+/* 헤더 강조 = 항상 그라데이션 (통일) */
+h2 .em{background:linear-gradient(90deg,#60A5FA,#BFDBFE,#3B82F6,#60A5FA);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4.5s linear infinite}
+/* 서브카피 강조 = 항상 밝은 흰색 볼드 (통일) */
 .sub{color:var(--muted);font-size:clamp(16px,2.3vw,21px);margin-top:22px;line-height:1.7;max-width:740px;margin-left:auto;margin-right:auto}
-.sub b{color:var(--txt)}
+.sub b{color:#f0f4ff;font-weight:700}
 .pill{display:inline-block;font-size:13px;font-weight:700;color:var(--muted);border:1px solid var(--line);background:var(--panel);padding:6px 14px;border-radius:999px;margin-bottom:20px}
-.gold{background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.blue{background:linear-gradient(90deg,var(--blue3),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* KPI 숫자 컬러 통일 */
+.kpi-hl{background:linear-gradient(90deg,#60A5FA,#93C5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ═══ COVER ═══ */
 .cover h1{font-size:clamp(32px,6vw,64px);font-weight:900;letter-spacing:-2px;line-height:1.06;margin:18px 0 0}
@@ -50,7 +54,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 .kpis{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
 .kpi{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px 26px;min-width:120px;transition:transform .25s,border-color .25s}
 .kpi:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.5)}
-.kpi b{display:block;font-size:clamp(24px,3.6vw,36px);font-weight:900;line-height:1}.kpi span{font-size:12.5px;color:var(--muted);margin-top:5px;display:block}
+.kpi b{display:block;font-size:clamp(24px,3.6vw,36px);font-weight:900;line-height:1;background:linear-gradient(90deg,#60A5FA,#93C5FD);-webkit-background-clip:text;background-clip:text;color:transparent}.kpi span{font-size:12.5px;color:var(--muted);margin-top:5px;display:block}
 
 /* ═══ BIGNUM ═══ */
 .bignum{font-size:clamp(56px,12vw,130px);font-weight:900;line-height:.9;letter-spacing:-4px;animation:numglow 2.8s ease-in-out infinite}
@@ -163,9 +167,9 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
     <h1>거인들의 돈은 어디로 —<br><span class="grad">돈의 흐름과 RWA</span></h1>
     <p class="sub">정부에서 소비자까지 <b>자금이 흐르는 진짜 지도</b>. 그리고 실물자산이 토큰이 되어 <b>당신의 지갑에 도착하는 새로운 배관</b>을 배웁니다.</p>
     <div class="kpis">
-      <div class="kpi"><b class="blue counter" data-target="16">0</b><span>조 달러 — 토큰화 예측 2030</span></div>
-      <div class="kpi"><b class="blue counter" data-target="300">0</b><span>% RWA 시장 연평균 성장률</span></div>
-      <div class="kpi"><b class="blue">블랙록</b><span>세계 1위 자산운용사 진출</span></div>
+      <div class="kpi"><b class="counter" data-target="16">0</b><span>조 달러 — 토큰화 예측 2030</span></div>
+      <div class="kpi"><b class="counter" data-target="300">0</b><span>% RWA 시장 연평균 성장률</span></div>
+      <div class="kpi"><b>블랙록</b><span>세계 1위 자산운용사 진출</span></div>
     </div>
   </div>
 </section>
@@ -174,7 +178,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-flow">
   <div class="inner">
     <div class="pill">💰 돈의 이동</div>
-    <h2>돈은 <span class="blue">위에서 아래로</span> 흐른다</h2>
+    <h2>돈은 <span class="em">위에서 아래로</span> 흐른다</h2>
     <p class="sub">중앙은행이 찍어낸 돈은 금융기관 → 기업 → 소비자 순서로 흘러간다. <b>스크롤하면 자금 지도가 활성화</b>됩니다.</p>
     <div class="flow-diagram" id="flow-map">
       <div class="flow-nodes">
@@ -195,11 +199,11 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-compare">
   <div class="inner">
     <div class="pill">⚡ 기존 vs 토큰화</div>
-    <h2>거래의 <span class="gold">배관이 바뀐다</span></h2>
+    <h2>거래의 <span class="em">배관이 바뀐다</span></h2>
     <p class="sub">같은 자산을 사고파는데, <b>기존 금융은 5단계</b>, <b>토큰화 금융은 2단계</b>. 중개자가 사라지면 속도와 비용이 혁신된다.</p>
     <div class="process-compare">
       <div class="process-col old">
-        <h3 style="color:var(--red)">기존 금융 🏦</h3>
+        <h3 style="color:var(--muted)">기존 금융 🏦</h3>
         <div class="step-item" data-ps="0"><div class="step-num">1</div><div class="step-text"><b>거래 체결</b> — 브로커를 통해 매수·매도 주문</div></div>
         <div class="step-item" data-ps="1"><div class="step-num">2</div><div class="step-text"><b>대조·확인</b> — 거래소가 쌍방 주문을 매칭</div></div>
         <div class="step-item" data-ps="2"><div class="step-num">3</div><div class="step-text"><b>청산</b> — CCP가 리스크 관리·네팅 처리</div></div>
@@ -208,15 +212,15 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
       </div>
       <div class="vs-divider"><div class="vs-badge">VS</div></div>
       <div class="process-col right new">
-        <h3 style="color:var(--blue3)">토큰화 금융 🔗</h3>
+        <h3 style="color:var(--txt)">토큰화 금융 🔗</h3>
         <div class="step-item" data-ps="0"><div class="step-num">1</div><div class="step-text"><b>스마트 컨트랙트 체결</b> — 코드가 즉시 매칭·실행</div></div>
         <div class="step-item" data-ps="1"><div class="step-num">2</div><div class="step-text"><b>즉시 결제·기록</b> — 블록체인에 소유권 자동 이전 (T+0)</div></div>
       </div>
     </div>
     <div class="kpis" style="margin-top:28px">
-      <div class="kpi"><b style="color:var(--red)">T+2일</b><span>기존 결제 소요</span></div>
-      <div class="kpi"><b class="blue">T+0 즉시</b><span>토큰화 결제</span></div>
-      <div class="kpi"><b class="blue">-80%</b><span>중개 비용 절감</span></div>
+      <div class="kpi"><b>T+2일</b><span>기존 결제 소요</span></div>
+      <div class="kpi"><b>T+0 즉시</b><span>토큰화 결제</span></div>
+      <div class="kpi"><b>-80%</b><span>중개 비용 절감</span></div>
     </div>
   </div>
 </section>
@@ -225,7 +229,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-rwa">
   <div class="inner">
     <div class="pill">🔑 RWA란 무엇인가</div>
-    <h2>실물자산이 <span class="blue">토큰</span>이 되는 4단계</h2>
+    <h2>실물자산이 <span class="em">토큰</span>이 되는 4단계</h2>
     <p class="sub">사물함 비유: 실물자산은 <b>사물함 속 물건</b>, 토큰은 <b>그 열쇠</b>, 스마트 컨트랙트는 <b>사물함 규칙</b>입니다.</p>
     <div class="rwa-steps" id="rwa-4step">
       <div class="rwa-step" data-rs="0">
@@ -263,7 +267,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-cases">
   <div class="inner">
     <div class="pill">🌍 국내외 실제 사례</div>
-    <h2>세계는 이미 <span class="gold">토큰화</span> 중</h2>
+    <h2>세계는 이미 <span class="em">토큰화</span> 중</h2>
     <p class="sub">글로벌 기관들이 실물자산 토큰화를 <b>실행</b>하고 있다. 발행 규모를 확인하세요.</p>
     <div class="world-timeline" id="world-cases">
       <div class="wt-item" data-wt="0">
@@ -301,7 +305,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-coinrwa">
   <div class="inner">
     <div class="pill">⚖️ 코인 vs RWA</div>
-    <h2>투기 코인과 <span class="blue">RWA</span>는 <span class="gold">본질이 다르다</span></h2>
+    <h2>투기 코인과 RWA는 <span class="em">본질이 다르다</span></h2>
     <table class="vs-table">
       <thead><tr><th>구분</th><th>일반 코인</th><th class="hl">RWA 토큰</th></tr></thead>
       <tbody>
@@ -321,7 +325,7 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
 <section class="slide" id="s-gen">
   <div class="inner">
     <div class="pill">📈 유통의 진화</div>
-    <h2>소비자의 역할이 <span class="gold">커진다</span> — 유통 4세대</h2>
+    <h2>소비자의 역할이 <span class="em">커진다</span> — 유통 4세대</h2>
     <p class="sub">단순 구매자에서 <b>가치 공동 창조자</b>로. 세대가 올라갈수록 소비자의 권한과 참여가 확대됩니다.</p>
     <div class="staircase" id="staircase">
       <div class="stair">
@@ -360,9 +364,9 @@ h2{font-size:clamp(28px,5.2vw,54px);font-weight:900;letter-spacing:-1.5px;line-h
     <h2>돈의 배관이 바뀌면<br><span class="grad">기회의 지도도 바뀐다</span></h2>
     <p class="sub">실물자산이 토큰이 되고, 중개자가 사라지고, 소비자가 투자자가 되는 시대. <b>이 흐름을 먼저 읽는 사람이 기회를 선점</b>합니다.</p>
     <div class="kpis">
-      <div class="kpi"><b class="blue">$16T</b><span>2030 토큰화 시장 예측</span></div>
-      <div class="kpi"><b style="color:var(--gold)">블랙록·UBS</b><span>이미 진출 완료</span></div>
-      <div class="kpi"><b class="blue">T+0</b><span>즉시 결제 시대</span></div>
+      <div class="kpi"><b>$16T</b><span>2030 토큰화 시장 예측</span></div>
+      <div class="kpi"><b>블랙록·UBS</b><span>이미 진출 완료</span></div>
+      <div class="kpi"><b>T+0</b><span>즉시 결제 시대</span></div>
     </div>
     <div style="margin-top:32px"><a href="masterclass.html" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:800;padding:14px 32px;border-radius:12px;font-size:16px;transition:transform .2s;box-shadow:0 8px 30px rgba(59,130,246,.4)">마스터클래스 무료 등록 ➔</a></div>
     <div style="margin-top:24px;color:var(--dim);font-size:13px">코인스쿨 · EP.04 돈의 흐름과 RWA · 2026</div>
