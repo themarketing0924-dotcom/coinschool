@@ -164,6 +164,10 @@ footer{text-align:center;padding:32px 24px;font-size:.72rem;color:rgba(255,255,2
       <label class="form-label" for="phone">휴대폰 번호</label>
       <input class="form-input" type="tel" id="phone" placeholder="010-0000-0000" autocomplete="tel" required>
 
+      <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+        <label>웹사이트<input type="text" id="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
       <div class="consents">
         <label class="consent"><input type="checkbox" id="education-consent" required><span><strong>[필수]</strong> 교육자료 발송을 위한 개인정보 수집·이용에 동의합니다.</span></label>
         <label class="consent"><input type="checkbox" id="marketing-consent"><span><strong>[선택]</strong> 신규 과정 및 이벤트 안내 수신에 동의합니다.</span></label>
@@ -302,6 +306,7 @@ document.getElementById('phone').addEventListener('input', function() {
 // ── FORM SUBMIT ──
 // ★ 여기에 Google Apps Script 배포 URL을 붙여넣으세요 ★
 const SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const PAGE_LOADED_AT = Date.now();
 
 function submitForm() {
   const name = document.getElementById('name').value.trim();
@@ -329,18 +334,32 @@ function submitForm() {
 
   fetch(SCRIPT_URL, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, phone, educationConsent, marketingConsent, timestamp: new Date().toISOString() })
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      name, email, phone, educationConsent, marketingConsent,
+      website: document.getElementById('website').value,
+      elapsed: Date.now() - PAGE_LOADED_AT,
+      source: 'enroll',
+      utm: location.search
+    })
   })
-  .then(() => {
-    document.getElementById('form-area').style.display = 'none';
-    document.getElementById('success-box').style.display = 'block';
+  .then(res => res.json())
+  .then(out => {
+    if (out.status === 'ok' || out.status === 'duplicate') {
+      document.getElementById('form-area').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+      return;
+    }
+    btn.disabled = false;
+    btn.textContent = '무료로 시작하기 →';
+    alert(out.status === 'invalid' ? '입력하신 정보를 다시 확인해주세요' :
+          out.status === 'busy' ? '신청이 몰리고 있습니다. 잠시 후 다시 시도해주세요' :
+          '일시적인 오류가 발생했습니다. 다시 시도해주세요.');
   })
   .catch(() => {
     btn.disabled = false;
     btn.textContent = '무료로 시작하기 →';
-    alert('일시적인 오류가 발생했습니다. 다시 시도해주세요.');
+    alert('네트워크 오류가 발생했습니다. 연결을 확인하고 다시 시도해주세요.');
   });
 }
 
