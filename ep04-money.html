@@ -34,12 +34,12 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .wrap-wide{max-width:1080px;margin:0 auto;padding:0 1.5rem;width:100%}
 
 /* ═══ APPLE TYPE SYSTEM ═══ */
-.eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--b3);margin-bottom:1.8rem;word-break:keep-all}
-.eyebrow-dark{display:block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--b1);margin-bottom:1.8rem}
+.eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--b3);margin-bottom:1.8rem;word-break:keep-all}
+.eyebrow-dark{display:block;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--b1);margin-bottom:1.8rem}
 .display-xl{font-size:clamp(3.5rem,10vw,8.5rem);font-weight:900;line-height:1.04;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 .display-lg{font-size:clamp(2.6rem,7.5vw,6rem);font-weight:900;line-height:1.08;letter-spacing:-.038em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 .display-md{font-size:clamp(2rem,5vw,4rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.sub-stat{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600;line-height:1.5;text-align:center;max-width:580px;margin:2.2rem auto 0;color:rgba(255,255,255,.82);word-break:keep-all;letter-spacing:-.01em}
+.sub-stat{font-size:clamp(1.35rem,3vw,2.1rem);font-weight:700;line-height:1.42;text-align:center;max-width:580px;margin:2.2rem auto 0;color:rgba(255,255,255,.82);word-break:keep-all;letter-spacing:-.01em}
 .sub-stat strong,.sub-stat em{font-style:normal;color:var(--b3)}
 .sub-dark{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600;line-height:1.5;text-align:center;max-width:580px;margin:2.2rem auto 0;color:rgba(29,29,31,.78);word-break:keep-all}
 .sub-dark strong{color:var(--b1)}
@@ -50,9 +50,15 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .g-hero{background:linear-gradient(150deg,#fff 0%,var(--b3) 38%,var(--b1) 68%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ═══ REVEAL ═══ */
-.rv{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-s{opacity:0;transform:scale(.92);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.on{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.22s}
+.reveal-delay-3{transition-delay:.36s}
+.reveal-delay-4{transition-delay:.5s}
+
+
 .rv-s.on{opacity:1;transform:none}
 .rv-l{opacity:0;transform:translateX(-44px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .rv-l.on{opacity:1;transform:none}
@@ -378,15 +384,15 @@ footer strong{color:rgba(255,255,255,.48)}
   <div class="hero-particles" id="particles"></div>
   <div class="wrap">
     <div class="ep-badge rv">🎓 EP.04 · 2026 돈의 흐름과 RWA 마스터클래스</div>
-    <h1 class="display-xl g-hero rv d1" style="margin-bottom:1.8rem">
+    <h1 class="display-xl g-hero reveal d1" style="margin-bottom:1.8rem">
       월급과 예금만으로<br>가난해지는 시대
     </h1>
-    <p style="font-size:clamp(1rem,2.2vw,1.3rem);color:rgba(255,255,255,.48);max-width:600px;margin:0 auto 2.8rem;line-height:1.7;word-break:keep-all" class="rv d2">
+    <p style="font-size:clamp(1rem,2.2vw,1.3rem);color:rgba(255,255,255,.48);max-width:600px;margin:0 auto 2.8rem;line-height:1.7;word-break:keep-all" class="reveal d2">
       당신이 열심히 일하는 동안, 전 세계 최고 자산가들과 정부, 대기업의 돈은<br>
       <strong style="color:#fff">정확히 어디로 향하고 있을까요?</strong>
     </p>
-    <p class="sub-stat rv d3" style="max-width:520px">고래들의 비밀을 <strong>30분 만에 공개합니다.</strong><br>중학생도 이해하는 언어로.</p>
-    <div class="step-pills rv d4">
+    <p class="sub-stat reveal d3" style="max-width:520px">고래들의 비밀을 <strong>30분 만에 공개합니다.</strong><br>중학생도 이해하는 언어로.</p>
+    <div class="step-pills reveal d4">
       <span class="step-pill">Part 1. 거인의 돈줄</span>
       <span class="step-pill">Part 2. 바이낸스 대전환</span>
       <span class="step-pill">Part 3. 글로벌 규제</span>
@@ -423,14 +429,14 @@ footer strong{color:rgba(255,255,255,.48)}
   <div class="wrap">
     <span class="eyebrow rv">Part 1 · 거시경제의 거대한 돈줄</span>
     <h2 class="display-lg rv-s d1"><span class="g-blue">거인들의 돈</span>은<br>지금 어디로?</h2>
-    <p class="sub-stat rv d2">은행 이자는 오르는데 왜 내 생활은 팍팍할까?<br><strong>문제는 돈의 흐름 규칙이 바뀌었기 때문입니다.</strong></p>
+    <p class="sub-stat reveal d2">은행 이자는 오르는데 왜 내 생활은 팍팍할까?<br><strong>문제는 돈의 흐름 규칙이 바뀌었기 때문입니다.</strong></p>
 
-    <div class="callout-dark rv d3" style="margin-top:2.8rem">
+    <div class="callout-dark reveal d3" style="margin-top:2.8rem">
       <p>💡 <strong>쉬운 비유</strong> — 돈은 물과 같습니다. 물은 높은 곳에서 낮은 곳으로 흐릅니다.<br>고래(정부·기관·대기업)들의 물이 <strong>어느 웅덩이로 흐르는지</strong> 알면 그 근처에 있을 수 있습니다.</p>
     </div>
 
     <!-- FLOW COMPARE -->
-    <div class="flow-compare rv d3" style="margin-top:3.5rem">
+    <div class="flow-compare reveal d3" style="margin-top:3.5rem">
       <div class="flow-side flow-old">
         <div class="flow-head">기존 자산 구조</div>
         <div class="flow-item"><span class="fi-icon">🏦</span><span class="fi-text">현금·예금 — 인플레이션에 실질 가치 잠식</span></div>
@@ -449,7 +455,7 @@ footer strong{color:rgba(255,255,255,.48)}
     </div>
 
     <!-- ANIMATED BAR: 기관 자금 흐름 -->
-    <div class="chart-wrap rv d4" id="money-bars">
+    <div class="chart-wrap reveal d4" id="money-bars">
       <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:left;margin-bottom:1.2rem">기관 자금 RWA 이동 규모 (2026년 기준)</div>
       <div class="bar-row"><div class="bar-name">블랙록 BUIDL</div><div><div class="bar-track"><div class="bar-fill blue" data-w="92"></div></div></div><div class="bar-val">$6.8조</div></div>
       <div class="bar-row"><div class="bar-name">피델리티 Tokenized</div><div><div class="bar-track"><div class="bar-fill blue" data-w="74"></div></div></div><div class="bar-val">$4.2조</div></div>
@@ -458,7 +464,7 @@ footer strong{color:rgba(255,255,255,.48)}
       <div class="bar-row"><div class="bar-name">기타 기관</div><div><div class="bar-track"><div class="bar-fill blue" data-w="88"></div></div></div><div class="bar-val">$21.7조</div></div>
     </div>
 
-    <div class="src-band rv d5">
+    <div class="src-band reveal d5">
       <span class="src-lbl">출처</span>
       <a href="https://app.rwa.xyz" target="_blank" rel="noopener">RWA.xyz</a>
       <span class="src-sep">·</span>
@@ -473,10 +479,10 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="analogy">
   <div class="wrap">
     <span class="eyebrow-dark rv">쉬운 비유로 이해하기</span>
-    <h2 class="display-md rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+    <h2 class="display-md reveal d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
       강남 빌딩 1,000억을<br>당신도 살 수 있다면?
     </h2>
-    <div class="building-grid rv d2">
+    <div class="building-grid reveal d2">
       <div class="b-before">
         <div class="b-label">기존 방식</div>
         <div class="b-title">강남 빌딩 1,000억</div>
@@ -499,7 +505,7 @@ footer strong{color:rgba(255,255,255,.48)}
         <div class="bldg-total">이것이 RWA입니다 🎯</div>
       </div>
     </div>
-    <div class="callout-blue rv d3">
+    <div class="callout-blue reveal d3">
       <p>기존에는 강남 빌딩 = <strong>돈 있는 사람만의 세계</strong>였습니다.<br>RWA는 이 빌딩을 <strong>1만 조각으로 쪼개서 누구나 참여</strong>할 수 있게 만듭니다.<br>마치 피자 한 판을 여러 명이 나눠 먹는 것처럼요.</p>
     </div>
   </div>
@@ -509,10 +515,10 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="binance">
   <div class="wrap">
     <span class="eyebrow rv">Part 2 · 바이낸스의 대전환</span>
-    <h2 class="display-lg rv d1">세계 1위 거래소도<br><span class="g-blue">방향을 바꿨다</span></h2>
-    <p class="sub-stat rv d2">바이낸스가 어떻게 바뀌는지 보면,<br><strong>돈이 어디로 흐르는지 알 수 있습니다.</strong></p>
+    <h2 class="display-lg reveal d1">세계 1위 거래소도<br><span class="g-blue">방향을 바꿨다</span></h2>
+    <p class="sub-stat reveal d2">바이낸스가 어떻게 바뀌는지 보면,<br><strong>돈이 어디로 흐르는지 알 수 있습니다.</strong></p>
 
-    <div class="bi-wrap rv d3">
+    <div class="bi-wrap reveal d3">
       <div class="bi-line"></div>
       <div class="bi-row">
         <div class="bi-left">
@@ -556,7 +562,7 @@ footer strong{color:rgba(255,255,255,.48)}
     </div>
 
     <!-- 상장 결과 도넛 -->
-    <div style="max-width:620px;margin:3rem auto 0" class="rv d4">
+    <div style="max-width:620px;margin:3rem auto 0" class="reveal d4">
       <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;margin-bottom:1.5rem">2025년 바이낸스 신규 상장 100개 결과</div>
       <div style="display:flex;gap:1.5rem;justify-content:center;align-items:center;flex-wrap:wrap">
         <canvas id="donut1" width="140" height="140"></canvas>
@@ -568,7 +574,7 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
 
-    <div class="callout-dark rv d5">
+    <div class="callout-dark reveal d5">
       <p>💡 <strong>핵심 메시지</strong> — 바이낸스가 "실물이 있는 자산" 기준으로 바뀌었다는 건,<br><strong>투기판이 끝나고 진짜 금융시장이 시작됐다</strong>는 신호입니다.</p>
     </div>
   </div>
@@ -578,12 +584,12 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="regulation">
   <div class="wrap-wide">
     <span class="eyebrow-dark rv">Part 3 · 정부가 왜 움직이는가</span>
-    <h2 class="display-lg rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 50%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+    <h2 class="display-lg reveal d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 50%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
       규제 = 시작의<br>신호입니다
     </h2>
-    <p class="sub-dark rv d2" style="max-width:560px">규제가 생긴다는 건 시장이 끝났다는 게 아닙니다.<br><strong>진짜 큰 돈이 들어올 문이 열렸다는 뜻입니다.</strong></p>
+    <p class="sub-dark reveal d2" style="max-width:560px">규제가 생긴다는 건 시장이 끝났다는 게 아닙니다.<br><strong>진짜 큰 돈이 들어올 문이 열렸다는 뜻입니다.</strong></p>
 
-    <div class="reg-wrap rv d3">
+    <div class="reg-wrap reveal d3">
       <div class="reg-head-row">
         <div class="rh">🌍 국가</div>
         <div class="rh">규제 현황 (2026)</div>
@@ -616,7 +622,7 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,#EBF3FF,#F0F5FF);border:1px solid rgba(29,78,216,.12);border-radius:18px;padding:1.6rem 2rem;max-width:780px;margin:2.5rem auto 0" class="rv d4">
+    <div style="background:linear-gradient(135deg,#EBF3FF,#F0F5FF);border:1px solid rgba(29,78,216,.12);border-radius:18px;padding:1.6rem 2rem;max-width:780px;margin:2.5rem auto 0" class="reveal d4">
       <p style="font-size:.88rem;line-height:1.72;color:rgba(29,29,31,.68);word-break:keep-all">🇰🇷 <strong style="color:var(--b1)">한국 역사로 이해하기</strong> — 1970~80년대, 처음 주식 시장이 생겼을 때 "사기 아니야?" 했던 분들이 많았습니다. 하지만 법이 만들어지고 기관이 들어오면서 주식은 국민 재테크가 됐습니다. <strong style="color:var(--b1)">RWA가 지금 그 시점에 있습니다.</strong></p>
     </div>
   </div>
@@ -626,10 +632,10 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="compare">
   <div class="wrap">
     <span class="eyebrow rv">Part 4 · 결정적 차이</span>
-    <h2 class="display-lg rv d1">코인 vs RWA<br><span class="g-blue">뭐가 다른가?</span></h2>
-    <p class="sub-stat rv d2">이름만 다른 게 아닙니다.<br><strong>돈이 만들어지는 구조가 근본부터 다릅니다.</strong></p>
+    <h2 class="display-lg reveal d1">코인 vs RWA<br><span class="g-blue">뭐가 다른가?</span></h2>
+    <p class="sub-stat reveal d2">이름만 다른 게 아닙니다.<br><strong>돈이 만들어지는 구조가 근본부터 다릅니다.</strong></p>
 
-    <div class="excel-wrap rv d3">
+    <div class="excel-wrap reveal d3">
       <table class="etab">
         <thead>
           <tr>
@@ -649,10 +655,10 @@ footer strong{color:rgba(255,255,255,.48)}
         </tbody>
       </table>
     </div>
-    <p class="excel-note rv d4">※ BTC, ETH, SOL 등 주요 코인 ETF 편입 자산은 별도의 제도권 금융상품 영역으로 이 비교에서 제외됩니다.</p>
+    <p class="excel-note reveal d4">※ BTC, ETH, SOL 등 주요 코인 ETF 편입 자산은 별도의 제도권 금융상품 영역으로 이 비교에서 제외됩니다.</p>
 
     <!-- 비교 바 차트 -->
-    <div style="max-width:700px;margin:3rem auto 0" class="rv d4" id="compare-bars">
+    <div style="max-width:700px;margin:3rem auto 0" class="reveal d4" id="compare-bars">
       <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;margin-bottom:1.8rem">항목별 상대 비교 (낮을수록 좋음 / 높을수록 좋음)</div>
       <div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:.6rem 1rem;align-items:center">
         <div style="font-size:.62rem;color:rgba(255,255,255,.25);text-align:right"></div>
@@ -681,13 +687,13 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
 
-    <div class="pros-grid rv d5">
+    <div class="pros-grid reveal d5">
       <div class="pros-card"><div class="pros-icon">🏦</div><div class="pros-title">실물 담보</div><div class="pros-body">뒤에 진짜 자산이 있습니다. 코인이 0원이 되어도 건물은 없어지지 않습니다.</div></div>
       <div class="pros-card"><div class="pros-icon">💰</div><div class="pros-title">자동 수익</div><div class="pros-body">팔지 않아도 됩니다. 보유하는 동안 이자·배당이 자동으로 들어옵니다.</div></div>
       <div class="pros-card"><div class="pros-icon">🌏</div><div class="pros-title">국경 없는 투자</div><div class="pros-body">스마트폰 하나로 미국 국채, 강남 빌딩에 소액 투자가 가능합니다.</div></div>
     </div>
 
-    <div class="src-band rv d6">
+    <div class="src-band reveal d6">
       <span class="src-lbl">출처</span>
       <a href="https://defillama.com/tokenized" target="_blank" rel="noopener">DeFiLlama</a>
       <span class="src-sep">·</span>
@@ -702,10 +708,10 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="market">
   <div class="wrap">
     <span class="eyebrow rv">Part 5 — 돈의 구조를 이해하다</span>
-    <h2 class="display-lg rv d1">1급 시장 vs 2급 시장<br><span class="g-blue">어디서 기회가 오나?</span></h2>
-    <p class="sub-stat rv d2">항상 투기판에서만 놀았던 이유가 있습니다.<br><strong>구조를 모르면 항상 늦게 들어가 손해봅니다.</strong></p>
+    <h2 class="display-lg reveal d1">1급 시장 vs 2급 시장<br><span class="g-blue">어디서 기회가 오나?</span></h2>
+    <p class="sub-stat reveal d2">항상 투기판에서만 놀았던 이유가 있습니다.<br><strong>구조를 모르면 항상 늦게 들어가 손해봅니다.</strong></p>
 
-    <div class="mkt-grid rv d3">
+    <div class="mkt-grid reveal d3">
       <div class="mkt-card tier2">
         <div class="mkt-card-head">2급 시장 (우리가 흔히 하는 거래)</div>
         <div class="mkt-li"><span class="mkt-li-icon">📉</span><span class="mkt-li-text">가격이 오른 후 대중이 몰려들 때 매수</span></div>
@@ -728,11 +734,11 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="fee-flow">
   <div class="wrap">
     <span class="eyebrow rv">소비자본론 + DeFi의 만남</span>
-    <h2 class="display-lg rv d1">중간 수수료를<br><span class="g-blue">없애면?</span></h2>
-    <p class="sub-stat rv d2">기존 자본주의에서는 중간업자들이 수익의 70%를 가져갔습니다.<br><strong>소비자는 항상 찌꺼기만 받았습니다.</strong></p>
+    <h2 class="display-lg reveal d1">중간 수수료를<br><span class="g-blue">없애면?</span></h2>
+    <p class="sub-stat reveal d2">기존 자본주의에서는 중간업자들이 수익의 70%를 가져갔습니다.<br><strong>소비자는 항상 찌꺼기만 받았습니다.</strong></p>
 
     <!-- 수평 좌→우 플로우 다이어그램 -->
-    <div class="fee-lanes rv d3">
+    <div class="fee-lanes reveal d3">
 
       <!-- ROW 1: 기존 자본주의 (좌→우, 돈이 깎이며 흐름) -->
       <div class="fee-lane old">
@@ -789,11 +795,11 @@ footer strong{color:rgba(255,255,255,.48)}
       </div>
     </div>
 
-    <div class="callout-dark rv d4">
+    <div class="callout-dark reveal d4">
       <p>💡 <strong>쉬운 예시 — 배달 앱</strong><br>현재: 식당 → 배달앱 30% → 라이더 수수료 → 소비자 (비싼 배달비)<br>RWA+DeFi: 식당 ↔ 소비자 직접 → 수수료 대폭 감소 → <strong>식당은 더 벌고, 소비자는 덜 냄</strong><br>이 차이가 금융 전체로 확장되는 것이 RWA 혁명입니다.</p>
     </div>
 
-    <div class="src-band rv d5">
+    <div class="src-band reveal d5">
       <span class="src-lbl">참고</span>
       <a href="https://www.imf.org/en/blogs/articles/2026/07/02/tokenization-can-change-the-worlds-financial-architecture" target="_blank" rel="noopener">IMF — Tokenization 2026</a>
       <span class="src-sep">·</span>
@@ -806,8 +812,8 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="summary">
   <div class="wrap">
     <span class="eyebrow-dark rv">오늘의 핵심 요약</span>
-    <h2 class="display-md rv d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">이것만 기억하세요</h2>
-    <div class="sum-cards rv d2">
+    <h2 class="display-md reveal d1" style="background:linear-gradient(135deg,#1D1D1F 0%,var(--b4) 55%,var(--b1) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">이것만 기억하세요</h2>
+    <div class="sum-cards reveal d2">
       <div class="sum-card"><div class="sum-num">1</div><div><div class="sum-title">고래들의 돈은 이미 RWA로 이동 중</div><div class="sum-body">블랙록·JP모건 등 $38조+를 블록체인 실물 자산에 올렸습니다. 투기성 코인이 아닌 실물 담보 자산입니다.</div></div></div>
       <div class="sum-card"><div class="sum-num">2</div><div><div class="sum-title">바이낸스·규제기관이 방향을 바꿨다</div><div class="sum-body">전 세계 정부와 최대 거래소가 "실물이 있는 자산"으로 기준을 전환했습니다. 투기판이 끝나고 제도권이 열렸습니다.</div></div></div>
       <div class="sum-card"><div class="sum-num">3</div><div><div class="sum-title">중간 수수료 없는 시대가 온다</div><div class="sum-body">RWA + DeFi가 만나면 회사와 소비자가 직접 연결됩니다. 모두가 공동 생산자가 되어 함께 성장하는 새로운 경제 구조입니다.</div></div></div>
@@ -819,18 +825,18 @@ footer strong{color:rgba(255,255,255,.48)}
 <section id="cta">
   <div class="wrap">
     <div class="cta-kicker rv">다음 단계</div>
-    <h2 class="cta-head rv d1">변화는 언제나<br>준비된 자의 몫</h2>
-    <p class="cta-sub rv d2">90년대 부동산, 2000년대 주식 대폭등기를 놓쳤다고 후회하실 필요 없습니다. 지금 전 세계 자본은 RWA 혁명으로 이동하고 있습니다. 이해한 순간이 당신의 시작입니다.</p>
-    <div class="cta-btns rv d3">
+    <h2 class="cta-head reveal d1">변화는 언제나<br>준비된 자의 몫</h2>
+    <p class="cta-sub reveal d2">90년대 부동산, 2000년대 주식 대폭등기를 놓쳤다고 후회하실 필요 없습니다. 지금 전 세계 자본은 RWA 혁명으로 이동하고 있습니다. 이해한 순간이 당신의 시작입니다.</p>
+    <div class="cta-btns reveal d3">
       <button class="btn-ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 처음으로</button>
-      <a href="ep05-whale.html" class="btn-primary">EP.05 다음 과정 →</a>
+      <a href="https://claude.ai/code/artifact/a950089e-82f2-4bda-bd48-c92f1c9e85d8" target="_blank" class="btn-primary">EP.05 다음 과정 →</a>
     </div>
-    <div class="ep-pills-row rv d4">
-      <a href="ep01-blockchain.html" class="ep-p">EP.01 블록체인 기초</a>
-      <a href="ep02-defi.html" class="ep-p">EP.02 DeFi</a>
-      <a href="ep03-rwa.html" class="ep-p">EP.03 RWA 전환</a>
+    <div class="ep-pills-row reveal d4">
+      <a href="https://claude.ai/code/artifact/f9d6a468-abb7-456e-b9d9-cb10e8d60658" target="_blank" class="ep-p">EP.01 블록체인 기초</a>
+      <a href="https://claude.ai/code/artifact/16c9de8a-2657-4c67-a718-dba481b90021" target="_blank" class="ep-p">EP.02 DeFi</a>
+      <a href="https://claude.ai/code/artifact/51fa8d24-6ed9-456a-acee-8a65ddf03060" target="_blank" class="ep-p">EP.03 RWA 전환</a>
       <span class="ep-p cur">EP.04 돈의 흐름 (현재)</span>
-      <a href="ep05-whale.html" class="ep-p">EP.05 고래 분석</a>
+      <a href="https://claude.ai/code/artifact/a950089e-82f2-4bda-bd48-c92f1c9e85d8" target="_blank" class="ep-p">EP.05 고래 분석</a>
     </div>
   </div>
 </section>
@@ -953,6 +959,5 @@ if(d1el)dro.observe(d1el.closest('section')||d1el.parentElement);
   }
 })();
 </script>
-<script src="scroll-fx.js" defer></script>
 </body>
 </html>

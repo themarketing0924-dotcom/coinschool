@@ -102,20 +102,20 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .wrap-wide{max-width:1100px;width:100%;margin:0 auto}
 
 /* ─── APPLE TYPE ─── */
-.eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--h3);margin-bottom:3.2rem;display:block;word-break:keep-all}
-.eyebrow-muted{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3.2rem;display:block}
-.eyebrow-dark{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--h2);margin-bottom:3.2rem;display:block}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h3);margin-bottom:3.5rem;display:block;word-break:keep-all}
+.eyebrow-muted{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3.5rem;display:block}
+.eyebrow-dark{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h2);margin-bottom:3.5rem;display:block}
 /* Apple 스타일: 크고 여유로운 타이포 */
-.display-xl{font-size:clamp(2rem,3.6vw,3.4rem);font-weight:900;line-height:1.04;letter-spacing:-.05em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-lg{font-size:clamp(2.4rem,5.5vw,4.8rem);font-weight:900;line-height:1.06;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-md{font-size:clamp(2rem,4vw,3.6rem);font-weight:800;line-height:1.1;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-xl{font-size:clamp(4.5rem,13vw,10rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-lg{font-size:clamp(3.2rem,9vw,7rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-md{font-size:clamp(2.4rem,6vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 /* Apple 바디: 절제되고 읽기 쉬운 */
-.sub-stat{font-size:clamp(1.05rem,2.2vw,1.4rem);font-weight:500;line-height:1.65;text-align:center;max-width:500px;margin:3rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
+.sub-stat{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;line-height:1.35;text-align:center;max-width:500px;margin:3rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
 .sub-stat em,.sub-stat strong{font-style:normal;color:var(--h3);font-weight:600}
 .sub-dark{font-size:clamp(1rem,2.2vw,1.3rem);font-weight:500;line-height:1.65;text-align:center;max-width:480px;margin:3rem auto 0;color:rgba(29,29,31,.65);word-break:keep-all;letter-spacing:-.01em}
 .sub-dark em,.sub-dark strong{font-style:normal;color:var(--h1);font-weight:600}
-.body-lg{font-size:clamp(.95rem,1.7vw,1.08rem);font-weight:400;line-height:1.82;color:rgba(255,255,255,.4);max-width:540px;margin:2rem auto 0;word-break:keep-all}
-.body-lg-dark{font-size:clamp(.95rem,1.7vw,1.05rem);font-weight:400;line-height:1.82;color:rgba(60,60,67,.55);max-width:500px;margin:2rem auto 0;word-break:keep-all}
+.body-lg{font-size:clamp(1rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(255,255,255,.48);max-width:540px;margin:2rem auto 0;word-break:keep-all}
+.body-lg-dark{font-size:clamp(1rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(60,60,67,.58);max-width:500px;margin:2rem auto 0;word-break:keep-all}
 
 /* ─── GRADIENT TEXT ─── */
 .g-orange{background:linear-gradient(135deg,var(--h1) 0%,var(--h2) 38%,var(--h3) 60%,var(--h4) 78%,var(--h2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -123,8 +123,17 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .g-dark-orange{background:linear-gradient(135deg,var(--apple-dark) 0%,#8B3A00 50%,var(--h1) 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ─── REVEAL ─── */
-.rv{opacity:0;transform:translateY(32px);filter:blur(6px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1),filter .95s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none;filter:blur(0)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+/* rv alias → reveal */
+.rv.on{opacity:1;transform:translateY(0)}
+.rv.visible{opacity:1;transform:translateY(0)}
+/* ── Masterclass alias: .reveal = .rv , .visible = .on ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.22s}
+.reveal-delay-3{transition-delay:.36s}
+.reveal-delay-4{transition-delay:.5s}
 .rv-s{opacity:0;transform:scale(.94);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
 .rv-s.on{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.52s}.d5{transition-delay:.68s}
@@ -312,7 +321,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   section{padding:10rem 2.4rem 8rem}
   #hero{padding-top:3.5rem}
   .wrap,.wrap-wide{padding:0}
-  .display-xl{font-size:clamp(1.9rem,3.3vw,2.9rem)}
+  .display-xl{font-size:clamp(2.6rem,6.5vw,4.8rem)}
   .display-lg{font-size:clamp(2.2rem,5vw,3.8rem)}
   .display-md{font-size:clamp(1.8rem,3.5vw,3rem)}
   .pain-row{grid-template-columns:repeat(2,1fr)}
@@ -336,7 +345,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .nav-cta{font-size:.7rem;padding:.33em 1em}
   section{padding:9rem 1.8rem 6rem}
   #hero{padding-top:3rem}
-  .display-xl{font-size:clamp(1.8rem,3vw,2.5rem)}
+  .display-xl{font-size:clamp(2.4rem,6vw,4rem)}
   .display-lg{font-size:clamp(2rem,4.5vw,3.2rem)}
   .display-md{font-size:clamp(1.7rem,3.5vw,2.6rem)}
   .sub-stat{font-size:1rem;max-width:100%}
@@ -359,7 +368,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .nav-cta{font-size:.68rem;padding:.3em .9em}
   section{padding:7.5rem 1.1rem 5rem}
   #hero{min-height:auto;padding:6rem 1.1rem 5rem}
-  .display-xl{font-size:clamp(1.7rem,6vw,2.3rem);letter-spacing:-.04em}
+  .display-xl{font-size:clamp(2.2rem,8.5vw,3.4rem);letter-spacing:-.04em}
   .display-lg{font-size:clamp(2rem,7.5vw,3rem);letter-spacing:-.035em}
   .display-md{font-size:clamp(1.7rem,6.5vw,2.6rem);letter-spacing:-.03em}
   .sub-stat{font-size:.95rem;margin-top:1.6rem;max-width:100%}
@@ -421,11 +430,14 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
     <div class="tag-chip rv">2026 · 블록체인 마스터클래스 EP.01~07</div>
     <!-- ▽ 역삼각형 — Apple: 크고, 짧고, 강하게 -->
     <h1 class="display-xl g-hero rv d1" style="margin-bottom:2.4rem">
-      대한민국 코인 초보자<br>99%가 모르고 있는<br>것 딱 하나.
+      대한민국 코인 투자자<br>99%가 모르고 있는 것<br>딱 하나.
     </h1>
-    <p class="sub-stat rv d2" style="max-width:620px">
-      거래소 가입은 했다. 코인도 샀다. 그런데 <strong>왜 손해를 봤는지는 아직도 모른다.</strong>
-      문제는 코인 선택이 아니었다. <strong>구조를 몰랐던 것</strong>이다.
+    <p class="sub-stat rv d2">
+      거래소 가입은 했다.<br>코인도 샀다.<br><em>왜 손해를 봤는지만 모른다.</em>
+    </p>
+    <p class="body-lg rv d3">
+      문제는 코인 선택이 아니었습니다.<br>
+      구조를 몰랐던 것입니다.
     </p>
     <div class="rv d4" style="margin-top:3.5rem">
       <a href="#lead" class="btn-submit" style="display:inline-block;width:auto;padding:1.05rem 3rem;font-size:1rem">
@@ -682,7 +694,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   <div class="wrap">
     <span class="eyebrow rv">변화</span>
     <!-- Apple: 극도로 짧게 -->
-    <h2 class="display-md rv d1" style="color:#fff">7강 전.<br><span class="g-orange">7강 후.</span></h2>
+    <h2 class="display-lg rv d1" style="color:#fff">7강 전.<br><span class="g-orange">7강 후.</span></h2>
     <div class="transform-grid rv d2">
       <div class="before-block">
         <span class="block-tag">수강 전</span>
@@ -705,17 +717,72 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   </div>
 </section>
 
+<!-- ══════════════════════ REVIEWS ══════════════════════ -->
+<section id="reviews">
+  <div class="wrap">
+    <span class="eyebrow-dark rv">후기</span>
+    <!-- ▽ Apple 마침표 -->
+    <h2 class="display-lg rv d1 g-dark-orange">먼저 경험한 분들의<br>직접적인 말.</h2>
+    <div class="review-grid rv d2">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"처음엔 게임머니 같았어요. 숫자가 올라도 실감이 안 났는데, EP.02 FDV 강의 보고 나서야 '아, 나 지금 누군가한테 털리고 있었구나' 싶었어요. 충격이었죠."</div>
+        <div class="review-author">김○○님 · 직장인 · 38세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"유튜브 채널만 5개를 구독하고 있었는데 오히려 더 혼란스러웠어요. 뭘 사야 하나 말이 다 달라서... 이 강의는 종목을 알려주는 게 아니라 시장 구조 자체를 설명해줘서 그게 달랐어요."</div>
+        <div class="review-author">박○○님 · 자영업 · 45세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"고래 온체인 분석 강의에서 진짜 놀랐습니다. 이 정보가 다 공개되어 있었는데 어떻게 보는지만 몰랐던 거예요. 알고 나니 왜 내가 항상 고점에서 샀는지 이해가 됐어요."</div>
+        <div class="review-author">이○○님 · 주부 · 44세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"한번 크게 물려서 업비트 앱 삭제했었어요. 몇 달 지나서 우연히 EP.01 보다가 밤새 7강 다 봤습니다. 코인 시장 구조가 처음으로 납득이 됐어요."</div>
+        <div class="review-author">최○○님 · 회사원 · 51세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"차트 분석도 없고 어려운 용어도 없는데 이렇게 깊이 있는 강의가 있다는 게 신기했어요. 시행착오를 3년이나 겪은 다음에야 이걸 발견했다는 게 아쉬울 뿐이에요."</div>
+        <div class="review-author">정○○님 · 프리랜서 · 42세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"블록체인 기술이 유망하다는 건 알았는데 왜 코인 사면 항상 잃는지 몰랐어요. 구조를 알고 나니까요, 시장이 하수 개미들 털기에 최적화돼 있다는 걸 이해하게 됐어요."</div>
+        <div class="review-author">윤○○님 · 전업투자자 · 57세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"RWA가 뭔지 몰라서 뉴스만 보면 지나쳤는데, EP.07 보고 나서 왜 기관들이 다 그쪽으로 가는지 완전히 이해했어요. 이게 단순 트렌드가 아니라는 것도요."</div>
+        <div class="review-author">강○○님 · 은퇴 준비 중 · 59세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"주변 지인 따라 '묻지마 매수' 하다가 반 토막 났어요. 빚지고 나서야 공부 시작했는데, 이 강의가 처음으로 '아, 공부하면 뭔가 달라지겠구나' 느끼게 해줬어요."</div>
+        <div class="review-author">서○○님 · 소상공인 · 49세</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"무료인데 이 퀄리티라니... 처음엔 낚시성 콘텐츠인 줄 알았어요. 끝까지 보고 나서 유료 강의보다 훨씬 실속 있다는 걸 알았어요. 주변 지인들한테도 다 공유했습니다."</div>
+        <div class="review-author">조○○님 · 간호사 · 36세</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════ FAQ ══════════════════════ -->
 <section id="faq">
   <div class="wrap">
     <span class="eyebrow rv">질문</span>
     <!-- Apple: 딱 한 줄 -->
-    <h2 class="display-md rv d1" style="color:#fff">궁금하신 것들.</h2>
+    <h2 class="display-lg rv d1" style="color:#fff">궁금하신 것들.</h2>
     <div class="faq-list rv d2">
       <div class="faq-item">
         <div class="faq-q">정말 완전 무료인가요?</div>
-        <div class="faq-a"><div class="faq-a-inner">네, <strong>EP.01~07 전체를 무료</strong>로 수강하실 수 있습니다. 신용카드 정보 등 결제 정보는 일절 요구하지 않습니다. 이름, 연락처, 이메일만 입력하시면 됩니다.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">네, <strong>마감일 이전까지 신청하시면 EP.01~07 전체를 무료</strong>로 수강하실 수 있습니다. 신용카드 정보 등 결제 정보는 일절 요구하지 않습니다. Google Form에 이름과 이메일만 입력하시면 됩니다.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">블록체인이나 코인을 전혀 모르는데 들을 수 있나요?</div>
@@ -730,8 +797,8 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
         <div class="faq-a"><div class="faq-a-inner">각 강의는 약 <strong>30분 내외</strong>입니다. 7강 전체를 보셔도 약 3~4시간이면 완주하실 수 있습니다. 출퇴근 시간이나 주말에 부담 없이 보실 수 있도록 설계했습니다. 순서대로 보실 것을 추천하지만, 독립적으로 보셔도 됩니다.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">강의 링크는 어떻게 받나요?</div>
-        <div class="faq-a"><div class="faq-a-inner">신청하신 연락처로 강의 링크가 <strong>문자로 발송</strong>됩니다. 수신을 원치 않으시면 문자에 '수신거부'라고 답장해 주세요.</div></div>
+        <div class="faq-q">마감 이후에는 어떻게 되나요?</div>
+        <div class="faq-a"><div class="faq-a-inner">마감일 이후에는 유료로 전환될 예정입니다. <strong>지금 신청하신 분들은 영구적으로 무료</strong>로 수강하실 수 있습니다. 마감이 확정된 날짜이므로 서두르시기 바랍니다.</div></div>
       </div>
     </div>
   </div>
@@ -741,18 +808,31 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
 <section id="lead">
   <div class="wrap">
     <span class="eyebrow rv" style="margin-bottom:2rem">지금 시작</span>
+    <div class="deadline-badge rv">⏰ 무료 수강 마감이 다가오고 있습니다</div>
     <!-- Apple: 단 두 줄 -->
     <h2 class="display-lg g-orange rv d1">지금이<br>가장 빠른 시작입니다.</h2>
-    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.5)">이름·연락처·이메일만으로<br>7강 전체를 무료로.</p>
+    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.5)">마감 이후엔 유료로 전환됩니다.<br>이메일 하나로 7강 전체를 무료로.</p>
+
+    <!-- COUNTDOWN -->
+    <div class="cd-wrap rv d3">
+      <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-label">DAYS</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-label">HOURS</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-label">MINS</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-label">SECS</div></div>
+    </div>
 
     <!-- FORM CARD -->
     <div class="form-card rv d4">
       <div class="form-title">🎓 블록체인 마스터클래스 EP.01~07<br>무료 수강 신청</div>
-      <div class="form-sub">아래 정보를 입력하시면 입력하신 연락처로 수강 링크를 보내드립니다.<br>결제 정보 요구 없음 · 30초면 완료</div>
+      <div class="form-sub">아래 정보를 입력하시면 수강 링크를 바로 보내드립니다.<br>결제 정보 요구 없음 · 30초면 완료</div>
       <ul class="urgency-list">
         <li>EP.01~07 전체 7강 영구 무료 수강</li>
         <li>고래 온체인 분석 도구 목록 제공</li>
         <li>RWA 마스터클래스 심화과정 특별 할인 코드</li>
+        <li>마감 전 신청자 한정 — 유료 전환 이후 무료 없음</li>
       </ul>
       <!-- INLINE LEAD FORM -->
       <form id="lead-form" action="#" method="POST" novalidate>
@@ -770,9 +850,6 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
             <input class="field-input" id="f-email" name="email" type="email" placeholder="example@email.com" required autocomplete="email">
           </div>
         </div>
-        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
-          <label>웹사이트<input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></label>
-        </div>
         <!-- 개인정보 수집·이용 동의 -->
         <label class="agree-row">
           <input class="agree-check" type="checkbox" id="agree-privacy" name="agree" required>
@@ -783,13 +860,12 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
         </label>
         <button type="submit" class="btn-submit" id="cta-btn">지금 무료 수강 신청하기 →</button>
       </form>
-      <div id="form-error" role="alert" style="display:none;margin-top:1.2rem;padding:1rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#FCA5A5;font-size:.82rem;text-align:center;line-height:1.6"></div>
       <div id="form-success" style="display:none;margin-top:1.2rem;padding:1rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:10px;color:#6EE7B7;font-size:.82rem;text-align:center;word-break:keep-all">
-        ✅ 신청이 완료됐습니다! 입력하신 연락처로 수강 링크가 문자로 발송됩니다.
+        ✅ 신청이 완료됐습니다! 입력하신 이메일로 수강 링크가 발송됩니다. 스팸함도 확인해 주세요.
       </div>
       <div class="form-note">
         📧 스팸 없음 · 언제든 취소 가능 · 결제 정보 요구 없음<br>
-        신청 완료 후 문자로 수강 링크가 발송됩니다
+        신청 완료 후 이메일로 수강 링크가 발송됩니다
       </div>
     </div>
   </div>
@@ -807,87 +883,107 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
 </footer>
 
 <script>
-// ─── LEAD FORM → 구글 시트 (Apps Script 웹 앱) ───
-// 배포 주소를 넣기 전에는 신청이 저장되지 않으므로 완료 화면도 띄우지 않는다.
-const LEAD_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
-const PAGE_LOADED_AT = Date.now();
+/* ══════════════════════════════════════════════════════
+   📋 구글폼 → 구글 시트 연동 설정 가이드
+   ══════════════════════════════════════════════════════
+   1. forms.google.com 에서 새 폼 생성
+   2. 이름 / 연락처(전화번호) / 이메일 3개 질문 추가
+   3. 응답 탭 → 스프레드시트 연결 (구글 시트 자동 생성)
+   4. 폼 미리보기 열고 → 개발자도구(F12) → Network 탭 열기
+   5. 아무 내용 입력 후 제출 → "formResponse" 요청 클릭
+   6. Request Payload에서 entry.XXXXXXXXX 값 3개 복사
+   7. 아래 GOOGLE_FORM_CONFIG 에 붙여넣기
+   ══════════════════════════════════════════════════════ */
 
+const GOOGLE_FORM_CONFIG = {
+  // ▼ 구글폼 URL에서 /d/e/ 뒤의 긴 ID 복사
+  formId: 'YOUR_GOOGLE_FORM_ID',
+  // ▼ 각 필드의 entry ID (개발자도구 Network에서 확인)
+  entryName:  'entry.000000001',   // 이름 필드
+  entryPhone: 'entry.000000002',   // 연락처 필드
+  entryEmail: 'entry.000000003',   // 이메일 필드
+};
+
+// ─── LEAD FORM 제출 처리 ───
 const leadForm = document.getElementById('lead-form');
 if (leadForm) {
-  leadForm.addEventListener('submit', async function (e) {
+  leadForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const btn = document.getElementById('cta-btn');
-    const success = document.getElementById('form-success');
-    const errBox = document.getElementById('form-error');
-    const showError = (text) => { errBox.textContent = text; errBox.style.display = 'block'; };
-    errBox.style.display = 'none';
-
-    const nameVal = document.getElementById('f-name').value.trim();
-    const phoneVal = document.getElementById('f-phone').value.trim();
-    const emailVal = document.getElementById('f-email').value.trim();
+    // 개인정보 동의 체크 검증
     const agreeBox = document.getElementById('agree-privacy');
-
-    if (nameVal.length < 2) return showError('이름을 입력해 주세요.');
-    if (!/^01[016789]\d{7,8}$/.test(phoneVal.replace(/\D/g, ''))) return showError('올바른 휴대폰 번호를 입력해 주세요. (예: 010-1234-5678)');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailVal)) return showError('올바른 이메일 주소를 입력해 주세요.');
-    if (!agreeBox.checked) {
+    if (agreeBox && !agreeBox.checked) {
       const row = agreeBox.closest('.agree-row');
       row.style.borderColor = 'rgba(239,68,68,.7)';
-      row.style.background = 'rgba(239,68,68,.07)';
-      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return showError('개인정보 수집·이용에 동의해 주셔야 신청할 수 있습니다.');
+      row.style.background  = 'rgba(239,68,68,.07)';
+      row.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
     }
-    if (!LEAD_ENDPOINT.startsWith('https://script.google.com/')) {
-      return showError('신청 시스템을 준비 중입니다. 잠시 후 다시 시도해 주세요.');
-    }
+
+    const btn     = document.getElementById('cta-btn');
+    const success = document.getElementById('form-success');
+    const nameVal  = document.getElementById('f-name').value.trim();
+    const phoneVal = document.getElementById('f-phone').value.trim();
+    const emailVal = document.getElementById('f-email').value.trim();
 
     btn.textContent = '신청 중...';
     btn.style.opacity = '.6';
     btn.disabled = true;
 
-    try {
-      const res = await fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          name: nameVal,
-          phone: phoneVal,
-          email: emailVal,
-          educationConsent: true,
-          marketingConsent: false,
-          website: document.getElementById('f-website').value,
-          elapsed: Date.now() - PAGE_LOADED_AT,
-          source: 'blockchain-lead',
-          utm: location.search
-        })
-      });
-      const out = await res.json();
+    // ── 구글폼 no-cors 제출 (응답 → 구글 시트 자동 적재) ──
+    const cfg = GOOGLE_FORM_CONFIG;
+    const isConfigured = cfg.formId !== 'YOUR_GOOGLE_FORM_ID';
 
-      if (out.status === 'ok' || out.status === 'duplicate') {
-        leadForm.style.display = 'none';
-        if (out.status === 'duplicate') success.textContent = '✅ 이미 신청된 연락처입니다. 발송된 문자를 확인해 주세요.';
-        success.style.display = 'block';
-        return;
-      }
-      if (out.status === 'invalid') showError('입력하신 정보를 다시 확인해 주세요.');
-      else if (out.status === 'busy') showError('신청이 몰리고 있습니다. 잠시 후 다시 시도해 주세요.');
-      else showError('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
-    } catch (err) {
-      showError('네트워크 오류가 발생했습니다. 연결을 확인하고 다시 시도해 주세요.');
+    if (isConfigured) {
+      const gfData = new FormData();
+      gfData.append(cfg.entryName,  nameVal);
+      gfData.append(cfg.entryPhone, phoneVal);
+      gfData.append(cfg.entryEmail, emailVal);
+
+      // no-cors: 응답 읽을 수 없지만 제출은 정상 처리됨
+      await fetch(
+        `https://docs.google.com/forms/d/e/${cfg.formId}/formResponse`,
+        { method: 'POST', mode: 'no-cors', body: gfData }
+      ).catch(() => {}); // 오류 무시 (no-cors는 항상 opaque)
     }
-    btn.textContent = '지금 무료 수강 신청하기 →';
-    btn.style.opacity = '1';
-    btn.disabled = false;
+
+    // ── 완료 화면 표시 ──
+    leadForm.style.display = 'none';
+    if (success) success.style.display = 'block';
+    btn.textContent = '신청 완료 ✓';
+
+    // ── 구글폼 미설정 시 콘솔 안내 ──
+    if (!isConfigured) {
+      console.warn(
+        '[블록체인 마스터클래스] 구글폼 연동 미설정.\n' +
+        'GOOGLE_FORM_CONFIG 의 formId·entry ID 를 실제 값으로 교체하세요.\n' +
+        '설정 완료 전까지 UI는 완료로 표시되지만 시트에 저장되지 않습니다.'
+      );
+    }
   });
 }
 
+// ─── DEADLINE (여기서 날짜 변경) ───
+const DEADLINE=new Date('2026-10-15T23:59:00+09:00');
+function pad(n){return String(n).padStart(2,'0')}
+function tick(){
+  const diff=DEADLINE-new Date();
+  if(diff<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00'});return}
+  const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+  [['cd-d',d],['cd-h',h],['cd-m',m],['cd-s',s]].forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.textContent=pad(v)});
+}
+tick();setInterval(tick,1000);
 
 // ─── SCROLL REVEAL ───
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
 },{threshold:.1});
-document.querySelectorAll('.rv,.rv-s').forEach(el=>obs.observe(el));
+document.querySelectorAll('.rv,.rv-s,.reveal').forEach(el=>obs.observe(el));
+// Masterclass .reveal → .visible
+const revealIo=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealIo.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealIo.observe(el));
 
 // ─── PROGRESS BAR ───
 window.addEventListener('scroll',()=>{

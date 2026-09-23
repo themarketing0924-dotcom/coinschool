@@ -39,16 +39,17 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-.reveal.on{opacity:1;transform:none}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.on{opacity:1;transform:none;}
 .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.3s}.d4{transition-delay:.44s}.d5{transition-delay:.58s}
 
 /* TYPE */
-.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);margin-bottom:1.2rem;word-break:keep-all}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);margin-bottom:1.2rem;word-break:keep-all}
 .eyebrow-gray{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gray4);margin-bottom:1.2rem;word-break:keep-all}
 .eyebrow-red{color:#FF453A}
-.display-xl{font-size:clamp(3rem,9vw,8.5rem);font-weight:900;line-height:.92;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-lg{font-size:clamp(2.2rem,6.5vw,6rem);font-weight:900;line-height:.97;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-md{font-size:clamp(2rem,5vw,4rem);font-weight:700;line-height:1.08;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-xl{font-size:clamp(3rem,9vw,8.5rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-lg{font-size:clamp(2.2rem,6.5vw,6rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-md{font-size:clamp(2rem,5vw,4rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 .sub-stat{font-size:clamp(1.35rem,3vw,2.1rem);font-weight:700;line-height:1.42;letter-spacing:-.025em;color:rgba(255,255,255,.72);max-width:640px;margin:2.8rem auto 0;text-align:center;word-break:keep-all;overflow-wrap:break-word}
 .sub-stat strong{color:#fff;font-weight:800}
 .sub-stat em{font-style:normal;color:var(--a3)}
@@ -904,7 +905,7 @@ window.addEventListener('scroll', () => {
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    e.target.classList.add('on');
+    e.target.classList.add('visible'); e.target.classList.add('visible'); e.target.classList.add('on'); io.unobserve(e.target); revealIo.unobserve(e.target);
     e.target.querySelectorAll('.bar-fill[data-w]').forEach(el => {
       el.style.width = el.dataset.w + '%';
     });
