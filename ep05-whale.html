@@ -37,7 +37,7 @@ nav{position:fixed;top:26px;left:0;right:0;z-index:998;display:flex;align-items:
 /* SECTIONS */
 section{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:11rem 2rem;text-align:center}
 .wrap{max-width:820px;margin:0 auto;padding:0 2rem;text-align:center}
-.wrap-wide{max-width:1060px;margin:0 auto;padding:0 2rem;text-align:center}
+.wrap-wide{max-width:1060px;width:100%;min-width:0;box-sizing:border-box;margin:0 auto;padding:0 2rem;text-align:center}
 /* HERO */
 #hero{background:#000;overflow:hidden}
 #hero::before{content:'';position:absolute;top:-15%;left:50%;transform:translateX(-50%);width:80vw;max-width:900px;height:80vw;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.18) 0%,transparent 68%);animation:pulse-glow 7s ease-in-out infinite;pointer-events:none}
@@ -70,7 +70,7 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .tool-card:hover{border-color:rgba(96,165,250,.35);transform:translateY(-3px)}
 .tool-icon{font-size:2rem;margin-bottom:.8rem}
 .tool-name{font-size:.98rem;font-weight:800;color:#fff;margin-bottom:.3rem}
-.tool-url{font-size:.65rem;font-weight:700;color:var(--g3);text-decoration:none;margin-bottom:.6rem;display:block;letter-spacing:.04em}
+.tool-url{font-size:.65rem;font-weight:700;color:var(--g3);text-decoration:none;margin-bottom:.6rem;display:block;letter-spacing:.04em;word-break:break-all}
 .tool-desc{font-size:.78rem;color:rgba(255,255,255,.48);line-height:1.6;word-break:keep-all}
 .tool-badge{display:inline-block;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.2em .6em;border-radius:4px;margin-top:.5rem}
 .tool-badge.free{background:rgba(37,99,235,.12);color:var(--g3)}
@@ -167,7 +167,7 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 /* LIGHT SECTION */
 #tools{background:#F5F5F7;color:#1D1D1F;min-height:auto;padding:8rem 2rem}
 .tool-grid-light{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;max-width:840px;margin:3rem auto 0}
-.tool-card-light{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s}
+.tool-card-light{background:#fff;border:1px solid rgba(29,78,216,.1);border-radius:18px;padding:1.8rem 1.4rem;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;min-width:0;box-sizing:border-box}
 .tool-card-light:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
 .tool-card-light .tool-name{color:#1D1D1F}
 .tool-card-light .tool-desc{color:rgba(29,29,31,.55)}
@@ -190,12 +190,12 @@ footer strong{color:rgba(255,255,255,.48)}
   .pain-num-grid{grid-template-columns:1fr}
   .pain-num-col{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:2rem 1rem}
   .pain-num-col:last-child{border-bottom:none}
-  .tool-grid,.tool-grid-light{grid-template-columns:1fr 1fr}
+  .tool-grid,.tool-grid-light{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .signal-table{font-size:.78rem}
   .sig-header,.sig-row{grid-template-columns:1fr 1fr 80px}
   .evidence-grid{grid-template-columns:1fr}
   .metric-grid{grid-template-columns:1fr}
-  .sm-row{grid-template-columns:1fr 1fr}
+  .sm-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .sm-amt{display:none}
   .case-item{grid-template-columns:1fr}
   .case-date{text-align:left}
@@ -562,7 +562,7 @@ footer strong{color:rgba(255,255,255,.48)}
     </div>
 
     <div style="margin-top:2.5rem;text-align:center" class="reveal d4">
-      <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.14);border-radius:10px;padding:.7rem 1.2rem;font-size:.78rem;color:rgba(29,29,31,.65);word-break:keep-all">
+      <div style="display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.4rem .5rem;max-width:100%;background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.14);border-radius:10px;padding:.7rem 1.2rem;font-size:.78rem;color:rgba(29,29,31,.65);word-break:keep-all">
         💡 <strong style="color:var(--g1)">추가 도구:</strong>&nbsp;
         <a href="https://defillama.com" target="_blank" rel="noopener" style="color:var(--g1);font-weight:700">DeFiLlama</a> (TVL 흐름) ·&nbsp;
         <a href="https://nansen.ai" target="_blank" rel="noopener" style="color:var(--g1);font-weight:700">Nansen</a> (스마트머니) ·&nbsp;
