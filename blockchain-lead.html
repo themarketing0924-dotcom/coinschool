@@ -102,18 +102,18 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .wrap-wide{max-width:1100px;width:100%;margin:0 auto}
 
 /* ─── APPLE TYPE ─── */
-.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h3);margin-bottom:3.5rem;display:block;word-break:keep-all}
-.eyebrow-muted{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3.5rem;display:block}
-.eyebrow-dark{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h2);margin-bottom:3.5rem;display:block}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h3);margin-bottom:2rem;display:block;word-break:keep-all}
+.eyebrow-muted{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;display:block}
+.eyebrow-dark{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--h2);margin-bottom:2rem;display:block}
 /* Apple 스타일: 크고 여유로운 타이포 */
-.display-xl{font-size:clamp(4.5rem,13vw,10rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-xl{font-size:clamp(3rem,8vw,6.5rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 .display-lg{font-size:clamp(3.2rem,9vw,7rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 .display-md{font-size:clamp(2.4rem,6vw,5rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 /* Apple 바디: 절제되고 읽기 쉬운 */
-.sub-stat{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;line-height:1.35;text-align:center;max-width:500px;margin:3rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
-.sub-stat em,.sub-stat strong{font-style:normal;color:var(--h3);font-weight:600}
-.sub-dark{font-size:clamp(1rem,2.2vw,1.3rem);font-weight:500;line-height:1.65;text-align:center;max-width:480px;margin:3rem auto 0;color:rgba(29,29,31,.65);word-break:keep-all;letter-spacing:-.01em}
-.sub-dark em,.sub-dark strong{font-style:normal;color:var(--h1);font-weight:600}
+.sub-stat{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;line-height:1.35;text-align:center;max-width:500px;margin:2rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
+.sub-stat em,.sub-stat strong{font-style:normal;color:var(--h2);font-weight:800}
+.sub-dark{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:600;line-height:1.45;text-align:center;max-width:480px;margin:2rem auto 0;color:rgba(29,29,31,.72);word-break:keep-all;letter-spacing:-.01em}
+.sub-dark em,.sub-dark strong{font-style:normal;color:var(--h2);font-weight:800}
 .body-lg{font-size:clamp(1rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(255,255,255,.48);max-width:540px;margin:2rem auto 0;word-break:keep-all}
 .body-lg-dark{font-size:clamp(1rem,1.8vw,1.1rem);font-weight:400;line-height:1.72;color:rgba(60,60,67,.58);max-width:500px;margin:2rem auto 0;word-break:keep-all}
 
@@ -142,7 +142,7 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 #hero{background:#000;min-height:100vh;padding-top:4rem}
 .hero-glow{position:absolute;top:-5%;left:50%;transform:translateX(-50%);width:85vw;max-width:900px;height:65vw;max-height:650px;border-radius:50%;background:radial-gradient(circle,rgba(232,96,10,.15) 0%,rgba(200,70,0,.05) 42%,transparent 68%);animation:breathe 9s ease-in-out infinite;pointer-events:none}
 @keyframes breathe{0%,100%{opacity:.2;transform:translateX(-50%) scale(1)}50%{opacity:.35;transform:translateX(-50%) scale(1.06)}}
-.tag-chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--h3);border:1px solid rgba(232,96,10,.32);border-radius:99px;padding:.3em 1.1em;margin-bottom:4rem}
+.tag-chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--h3);border:1px solid rgba(232,96,10,.32);border-radius:99px;padding:.3em 1.1em;margin-bottom:2.4rem}
 
 /* ─── SHOCK BAND ─── */
 #shock{background:#0A0800;min-height:auto;padding:9rem 2rem}
@@ -187,7 +187,7 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 
 /* ─── SOLUTION (라이트) ─── */
 #solution{background:var(--light);color:var(--apple-dark);min-height:auto;padding:9rem 2rem}
-.solution-big{font-size:clamp(1.8rem,4.5vw,3.5rem);font-weight:900;letter-spacing:-.04em;line-height:1.08;background:linear-gradient(135deg,var(--apple-dark) 0%,var(--h1) 50%,var(--apple-dark) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;word-break:keep-all;text-align:center;margin-bottom:3rem}
+.solution-big{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:1.08;background:linear-gradient(135deg,var(--apple-dark) 0%,var(--h1) 50%,var(--apple-dark) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;word-break:keep-all;text-align:center;margin-bottom:2rem}
 
 /* ─── STATS GRID ─── */
 #stats-band{background:#080400;min-height:auto;padding:0}
@@ -405,7 +405,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .faq-a-inner{padding:0 1.2rem 1.1rem;font-size:.78rem}
   .empathy-callout{padding:1.6rem 1.4rem;border-radius:16px}
   .empathy-callout p{font-size:.9rem}
-  .solution-big{font-size:clamp(1.4rem,5.5vw,2.2rem)}
+  .solution-big{font-size:clamp(1.8rem,6.5vw,3rem)}
   .src-bar{padding:.65rem .9rem}
   .review-card{padding:1.4rem 1.2rem}
   .pain-card{padding:1.5rem 1.2rem}
@@ -429,17 +429,13 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   <div class="wrap">
     <div class="tag-chip rv">2026 · 블록체인 마스터클래스 EP.01~07</div>
     <!-- ▽ 역삼각형 — Apple: 크고, 짧고, 강하게 -->
-    <h1 class="display-xl g-hero rv d1" style="margin-bottom:2.4rem">
+    <h1 class="display-xl g-hero rv d1" style="margin-bottom:1.6rem">
       대한민국 코인 투자자<br>99%가 모르고 있는 것<br>딱 하나.
     </h1>
     <p class="sub-stat rv d2">
       거래소 가입은 했다.<br>코인도 샀다.<br><em>왜 손해를 봤는지만 모른다.</em>
     </p>
-    <p class="body-lg rv d3">
-      문제는 코인 선택이 아니었습니다.<br>
-      구조를 몰랐던 것입니다.
-    </p>
-    <div class="rv d4" style="margin-top:3.5rem">
+    <div class="rv d3" style="margin-top:2.8rem">
       <a href="#lead" class="btn-submit" style="display:inline-block;width:auto;padding:1.05rem 3rem;font-size:1rem">
         무료로 구조를 이해하러 가기 →
       </a>
@@ -461,7 +457,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
       구조를 모른 채 투자한다.
     </div>
     <div class="sub-stat rv d3" style="margin-top:2.4rem;color:rgba(255,255,255,.55)">
-      코인을 사고, 오르길 기다리고,<br>손실이 나도 <em>왜인지 모른다.</em><br>그게 전부다.
+      코인을 샀다. 손실이 났다.<br><em>이유조차 모른 채.</em>
     </div>
     <div class="src-bar rv d4">
       <span class="src-bar-label">시장 데이터</span>
@@ -502,7 +498,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
     <span class="eyebrow-dark rv">공감</span>
     <!-- ▽ 역삼각형 — Apple: 짧고 마침표 -->
     <h2 class="display-lg rv d1 g-dark-orange">당신만<br>그런 게 아닙니다.</h2>
-    <div class="sub-dark rv d2">대한민국 코인 투자자 대부분이 정확히 같은 경험을 합니다.<br>구조를 모른 채 구조에 당한 것입니다.</div>
+    <div class="sub-dark rv d2">대한민국 코인 투자자 대부분이 정확히 같은 경험을 합니다.<br>구조를 모른 채 <em>구조에 당한 것</em>입니다.</div>
     <div class="pain-row rv d3">
       <div class="pain-card">
         <div class="pain-emoji">😮</div>
@@ -538,8 +534,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
     <div class="empathy-callout rv d4">
       <p>
         이건 당신 실력의 문제가 아닙니다.<br>
-        <strong>구조를 모른 채 구조에 당한 것입니다.</strong><br>
-        <span style="color:rgba(255,255,255,.45);font-size:.9em">코인 시장의 구조는 교과서에 없습니다. 배운 적이 없으니 모르는 게 당연합니다.</span>
+        <strong>구조를 모른 채 구조에 당한 것입니다.</strong>
       </p>
     </div>
   </div>
@@ -605,11 +600,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
     <div class="sub-dark rv d2">
       7강 동안 블록체인 기초부터 고래 온체인 분석까지.<br><em>완전히 다른 눈</em>을 갖게 됩니다.
     </div>
-    <p class="body-lg-dark rv d3">
-      정보를 찾아다니는 게 아니라,<br>
-      정보를 스스로 해석하게 됩니다.
-    </p>
-    <div style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2.4rem" class="rv d4">
+    <div style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2rem" class="rv d3">
       <span style="font-size:.78rem;font-weight:600;color:rgba(0,0,0,.5);background:rgba(201,90,0,.08);border:1px solid rgba(201,90,0,.15);border-radius:8px;padding:.3em .9em">블록체인 원리 이해</span>
       <span style="font-size:.78rem;font-weight:600;color:rgba(0,0,0,.5);background:rgba(201,90,0,.08);border:1px solid rgba(201,90,0,.15);border-radius:8px;padding:.3em .9em">DeFi 구조 파악</span>
       <span style="font-size:.78rem;font-weight:600;color:rgba(0,0,0,.5);background:rgba(201,90,0,.08);border:1px solid rgba(201,90,0,.15);border-radius:8px;padding:.3em .9em">공기코인 vs 진짜코인 구분</span>
@@ -625,8 +616,8 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   <div class="wrap-wide">
     <span class="eyebrow rv">커리큘럼</span>
     <!-- ◇ 마름모 — Apple: 짧고 강함 -->
-    <h2 class="display-lg rv d1"><span class="g-orange">EP.01~EP.07</span><br>7강. 핵심만.</h2>
-    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.55)">각 강의는 앞 강의 위에 쌓입니다.<br>EP.07까지 완주하면 완전히 다른 시각이 생깁니다.</p>
+    <h2 class="display-lg rv d1"><span class="g-orange">EP.01~EP.07</span><br>7강, 핵심만.</h2>
+    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.55)">각 강의는 앞 강의 위에 쌓입니다.<br>EP.07까지 완주하면 <em>완전히 다른 시각</em>이 생깁니다.</p>
 
     <div class="ep-grid rv d3">
       <div class="ep-card ep1">
@@ -811,7 +802,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
     <div class="deadline-badge rv">⏰ 무료 수강 마감이 다가오고 있습니다</div>
     <!-- Apple: 단 두 줄 -->
     <h2 class="display-lg g-orange rv d1">지금이<br>가장 빠른 시작입니다.</h2>
-    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.5)">마감 이후엔 유료로 전환됩니다.<br>이메일 하나로 7강 전체를 무료로.</p>
+    <p class="sub-stat rv d2" style="color:rgba(255,255,255,.5)">마감 이후엔 유료로 전환됩니다.<br>이메일 하나로 <em>7강 전체</em>를 무료로.</p>
 
     <!-- COUNTDOWN -->
     <div class="cd-wrap rv d3">
