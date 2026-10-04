@@ -252,6 +252,21 @@ body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;back
   background-clip:text;
   line-height:1.15;
 }
+/* Hero-scale headings — matches hero-title size & impact */
+.hed-hero{
+  display:block;
+  text-align:center;
+  font-size:clamp(2rem,6vw,4.2rem);
+  font-weight:900;
+  letter-spacing:-.04em;
+  line-height:1.05;
+  word-break:keep-all;
+  color:var(--gold);
+  background:linear-gradient(135deg,var(--gold),var(--gold2),#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 /* 전체 section-title 폴백 보장 */
 .section-title{color:#fff}
 .cta-title{color:#fff}
@@ -705,7 +720,7 @@ section{padding:8rem 2rem}
 <!-- ══ AUTHORITY ══ -->
 <section class="authority">
   <div class="section-label">신뢰와 검증</div>
-  <h2 class="section-title reveal-scale"><span class="hed-main">이 강의를 신뢰할 수 있는 이유</span></h2>
+  <h2 class="section-title reveal-scale" style="font-size:clamp(2rem,6vw,4.2rem);letter-spacing:-.04em;margin-bottom:1rem"><span class="hed-hero">이 강의를 신뢰할 수 있는 이유</span></h2>
   <p class="section-sub reveal-fade delay-1">혼자 공부한 게 아닙니다. 업계 최전선에서 직접 확인한 것만 담았습니다</p>
 
   <div class="logos-row reveal-zoom delay-2">
@@ -886,7 +901,7 @@ section{padding:8rem 2rem}
 <!-- ══ PRICE JUSTIFY ══ -->
 <section class="price-justify">
   <div class="section-label">이 가격이 비싼 게 아닌 이유</div>
-  <h2 class="section-title reveal-scale"><span class="hed-main">지금 모르면 얼마를 더 잃게 되는가</span></h2>
+  <h2 class="section-title reveal-scale" style="font-size:clamp(2rem,6vw,4.2rem);letter-spacing:-.04em;margin-bottom:1rem"><span class="hed-hero">지금 모르면 얼마를 더 잃게 되는가</span></h2>
   <p class="section-sub reveal-fade delay-1">대안과 비교했을 때 이 강의의 가격은 실제로 저렴합니다</p>
 
   <div class="pj-grid reveal-left delay-2">
