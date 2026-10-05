@@ -151,7 +151,7 @@ body{font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;back
 .slider-track{display:flex;gap:1.2rem;will-change:transform;cursor:grab}
 .slider-track.marquee-running{animation:marqueeScroll 40s linear infinite}
 .slider-track.marquee-paused{animation-play-state:paused}
-@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marqueeScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
 .t-card{min-width:300px;max-width:300px;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.5rem;flex-shrink:0;transition:opacity .4s,transform .4s}
 .t-card.active{border-color:rgba(232,160,32,.3);transform:scale(1.02)}
 .t-stars{color:var(--gold);font-size:.8rem;letter-spacing:.05em;margin-bottom:.8rem}
