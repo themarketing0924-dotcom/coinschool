@@ -130,10 +130,10 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.52s}.d5{transition-delay:.68s}
 
 /* ─── HERO ─── */
-#hero{background:#000;min-height:100vh;padding-top:4rem}
+#hero{background:#000;min-height:100vh;padding-top:8rem}
 .hero-glow{position:absolute;top:-5%;left:50%;transform:translateX(-50%);width:85vw;max-width:900px;height:65vw;max-height:650px;border-radius:50%;background:radial-gradient(circle,rgba(232,96,10,.15) 0%,rgba(200,70,0,.05) 42%,transparent 68%);animation:breathe 9s ease-in-out infinite;pointer-events:none}
 @keyframes breathe{0%,100%{opacity:.2;transform:translateX(-50%) scale(1)}50%{opacity:.35;transform:translateX(-50%) scale(1.06)}}
-.tag-chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--h3);border:1px solid rgba(232,96,10,.32);border-radius:99px;padding:.3em 1.1em;margin-bottom:4rem}
+.tag-chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--h3);border:1px solid rgba(232,96,10,.32);border-radius:99px;padding:.3em 1.1em;margin-bottom:1.2rem}
 
 /* ─── SHOCK BAND ─── */
 #shock{background:#0A0800;min-height:auto;padding:9rem 2rem}
@@ -310,7 +310,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
 /* ── iPad & small laptop (≤ 1024px) ── */
 @media(max-width:1024px){
   section{padding:10rem 2.4rem 8rem}
-  #hero{padding-top:3.5rem}
+  #hero{padding-top:6.5rem}
   .wrap,.wrap-wide{padding:0}
   /* display-xl/lg/md: clamp()가 자동으로 반응형 처리 — 별도 override 불필요 */
   .pain-row{grid-template-columns:repeat(2,1fr)}
@@ -333,7 +333,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .nav-logo{font-size:.74rem}
   .nav-cta{font-size:.7rem;padding:.33em 1em}
   section{padding:9rem 1.8rem 6rem}
-  #hero{padding-top:3rem}
+  #hero{padding-top:6rem}
   /* display: clamp()가 자연스럽게 축소 */
   .sub-stat{font-size:clamp(.9rem,2.8vw,1.1rem);max-width:100%;word-break:keep-all}
   .body-lg,.body-lg-dark{font-size:clamp(.88rem,2.5vw,1rem);max-width:100%;word-break:keep-all}
@@ -362,7 +362,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .sub-dark{font-size:clamp(.8rem,3.5vw,.92rem);margin-top:1.6rem;word-break:keep-all}
   .body-lg,.body-lg-dark{font-size:clamp(.82rem,3.5vw,.95rem);line-height:1.72;margin-top:1.4rem;word-break:keep-all;overflow-wrap:break-word}
   .eyebrow,.eyebrow-muted,.eyebrow-dark{font-size:.66rem;margin-bottom:1.8rem}
-  .tag-chip{font-size:.62rem;margin-bottom:2rem}
+  .tag-chip{font-size:.62rem;margin-bottom:1rem}
   .shock-num{font-size:clamp(4rem,18vw,7rem)}
   .shock-sub{font-size:.9rem}
   .pain-row,.review-grid{grid-template-columns:1fr;gap:.7rem}
