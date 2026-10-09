@@ -106,11 +106,11 @@ section{position:relative;display:flex;flex-direction:column;align-items:center;
 .eyebrow-muted{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3.2rem;display:block}
 .eyebrow-dark{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--h2);margin-bottom:3.2rem;display:block}
 /* Apple 스타일: 크고 여유로운 타이포 */
-.display-xl{font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-lg{font-size:clamp(2.4rem,4.8vw,4.4rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-.display-md{font-size:clamp(1.9rem,3.8vw,3.6rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-xl{font-size:clamp(3.5rem,8vw,7rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-lg{font-size:clamp(2.8rem,6.5vw,5.5rem);font-weight:900;line-height:1.08;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
+.display-md{font-size:clamp(2rem,4.5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:break-word;hyphens:none}
 /* Apple 바디: 절제되고 읽기 쉬운 */
-.sub-stat{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:500;line-height:1.65;text-align:center;max-width:500px;margin:3rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
+.sub-stat{font-size:clamp(1rem,2vw,1.2rem);font-weight:500;line-height:1.65;text-align:center;max-width:500px;margin:3rem auto 0;color:rgba(255,255,255,.72);word-break:keep-all;overflow-wrap:break-word;hyphens:none;letter-spacing:-.01em}
 .sub-stat em,.sub-stat strong{font-style:normal;color:var(--h3);font-weight:600}
 .sub-dark{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:500;line-height:1.65;text-align:center;max-width:480px;margin:3rem auto 0;color:rgba(29,29,31,.65);word-break:keep-all;letter-spacing:-.01em}
 .sub-dark em,.sub-dark strong{font-style:normal;color:var(--h1);font-weight:600}
@@ -312,7 +312,9 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   section{padding:10rem 2.4rem 8rem}
   #hero{padding-top:6.5rem}
   .wrap,.wrap-wide{padding:0}
-  /* display-xl/lg/md: clamp()가 자동으로 반응형 처리 — 별도 override 불필요 */
+  .display-xl{font-size:clamp(3rem,7.5vw,5rem);}
+  .display-lg{font-size:clamp(2.4rem,6vw,3.8rem);}
+  .display-md{font-size:clamp(1.8rem,5vw,2.8rem);}
   .pain-row{grid-template-columns:repeat(2,1fr)}
   .review-grid{grid-template-columns:repeat(2,1fr)}
   .ep-grid{grid-template-columns:repeat(2,1fr)}
@@ -334,7 +336,9 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .nav-cta{font-size:.7rem;padding:.33em 1em}
   section{padding:9rem 1.8rem 6rem}
   #hero{padding-top:6rem}
-  /* display: clamp()가 자연스럽게 축소 */
+  .display-xl{font-size:clamp(2.8rem,9vw,4rem);}
+  .display-lg{font-size:clamp(2.2rem,8vw,3rem);}
+  .display-md{font-size:clamp(1.5rem,6vw,2.2rem);}
   .sub-stat{font-size:clamp(.9rem,2.8vw,1.1rem);max-width:100%;word-break:keep-all}
   .body-lg,.body-lg-dark{font-size:clamp(.88rem,2.5vw,1rem);max-width:100%;word-break:keep-all}
   .shock-num{font-size:clamp(4.5rem,14vw,8rem)}
@@ -355,9 +359,9 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
   .nav-cta{font-size:.68rem;padding:.3em .9em}
   section{padding:7.5rem 1.1rem 5rem}
   #hero{min-height:auto;padding:6rem 1.1rem 5rem}
-  .display-xl{font-size:clamp(3rem,11vw,4.5rem);letter-spacing:-.04em;word-break:keep-all}
-  .display-lg{font-size:clamp(2.2rem,9vw,3.2rem);letter-spacing:-.035em;word-break:keep-all}
-  .display-md{font-size:clamp(1.8rem,7vw,2.8rem);letter-spacing:-.03em;word-break:keep-all}
+  .display-xl{font-size:clamp(2rem,8vw,2.8rem);letter-spacing:-.04em;word-break:keep-all}
+  .display-lg{font-size:clamp(1.8rem,7vw,2.4rem);letter-spacing:-.035em;word-break:keep-all}
+  .display-md{font-size:clamp(1.4rem,6vw,2rem);letter-spacing:-.03em;word-break:keep-all}
   .sub-stat{font-size:clamp(.82rem,3.8vw,.95rem);margin-top:1.6rem;max-width:100%;word-break:keep-all;overflow-wrap:break-word}
   .sub-dark{font-size:clamp(.8rem,3.5vw,.92rem);margin-top:1.6rem;word-break:keep-all}
   .body-lg,.body-lg-dark{font-size:clamp(.82rem,3.5vw,.95rem);line-height:1.72;margin-top:1.4rem;word-break:keep-all;overflow-wrap:break-word}
@@ -401,7 +405,7 @@ footer{background:#000;border-top:1px solid rgba(255,255,255,.05);padding:3rem 2
 }
 /* ── iPhone mini / Galaxy S 소형 (≤ 390px) ── */
 @media(max-width:390px){
-  .display-xl{font-size:clamp(2.4rem,10vw,3rem)}
+  .display-xl{font-size:clamp(1.8rem,7.5vw,2.4rem)}
   .display-lg{font-size:clamp(2rem,9vw,2.4rem)}
   .display-md{font-size:clamp(1.6rem,7vw,2rem)}
   .sub-stat,.sub-dark{font-size:clamp(.78rem,4vw,.9rem)}
