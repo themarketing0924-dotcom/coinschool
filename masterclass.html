@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>당신의 자산을 지키고 불리는 완벽한 웹3 로드맵 - 코인스쿨 마스터클래스</title>
-    <meta name="description" content="고물가 시대 인플레이션을 이기는 시스템 구축. RWA, 디파이, 세력 온체인 데이터 분석까지 마스터클래스에서 확인하세요.">
-    <link rel="stylesheet" href="funnel.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>당신의 자산을 지키고 불리는 완벽한 웹3 로드맵 - 코인스쿨 마스터클래스</title>
+  <meta name="description" content="고물가 시대 인플레이션을 이기는 시스템 구축. RWA, 디파이, 세력 온체인 데이터 분석까지 마스터클래스에서 확인하세요.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://themarketing0924-dotcom.github.io/coinschool/masterclass.html">
   <meta property="og:title" content="RWA 마스터클래스 — 실물자산 토큰화 완전 정복">
@@ -17,102 +16,523 @@
   <meta property="og:site_name" content="코인스쿨">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://themarketing0924-dotcom.github.io/coinschool/og-image.png">
-  <meta name="description" content="게임이 바뀌었다. 기관이 움직이는 실물자산 토큰화(RWA) 투자 전략.">
+
+  <!-- Google Fonts: Noto Sans KR (Apple SF Pro 대체) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ───────── RESET & BASE ───────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:            #000;
+  --bg-card:       rgba(255,255,255,.04);
+  --border:        rgba(255,255,255,.08);
+  --gold:          #F59E0B;
+  --gold-light:    #FDE68A;
+  --blue:          #60A5FA;
+  --text:          #F5F5F7;
+  --text-sub:      rgba(245,245,247,.7);
+  --text-muted:    rgba(245,245,247,.45);
+  --radius:        18px;
+
+  /* 타이포 스케일 — Apple처럼 큰 헤드, 세밀한 tracking */
+  --fs-display:    clamp(3rem, 7.5vw, 6.5rem);
+  --fs-h2:         clamp(2rem, 4.5vw, 4rem);
+  --fs-h3:         clamp(1.25rem, 2.5vw, 1.75rem);
+  --fs-body:       1.0625rem;
+  --fs-caption:    0.875rem;
+
+  --lh-display:    1.06;
+  --lh-heading:    1.2;
+  --lh-body:       1.75;
+
+  --ls-display:    -0.04em;
+  --ls-heading:    -0.03em;
+  --ls-body:       -0.01em;
+  --ls-caption:    0.03em;
+
+  /* 간격 리듬 (8px 기반) */
+  --sp-xs:   0.5rem;
+  --sp-sm:   1rem;
+  --sp-md:   2rem;
+  --sp-lg:   4rem;
+  --sp-xl:   7rem;
+  --sp-2xl: 12rem;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ───────── LAYOUT ───────── */
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+.section {
+  padding: var(--sp-xl) 0;
+}
+
+.section--hero {
+  padding: var(--sp-2xl) 0 var(--sp-xl);
+  text-align: center;
+}
+
+.section--footer {
+  padding: var(--sp-lg) 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* ───────── TYPOGRAPHY ───────── */
+.display {
+  font-size: var(--fs-display);
+  font-weight: 900;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  word-break: keep-all;
+}
+
+h2, .h2 {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  word-break: keep-all;
+}
+
+h3, .h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  margin-bottom: var(--sp-xs);
+}
+
+.body-lg {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  color: var(--text-sub);
+  word-break: keep-all;
+}
+
+.body-sm {
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: var(--ls-caption);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+  display: block;
+}
+
+/* ───────── COLOR UTILITIES ───────── */
+.gold {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blue {
+  background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────── BADGE ───────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.35em 1em;
+  border-radius: 999px;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-md);
+}
+
+.badge--gold {
+  background: rgba(245,158,11,.12);
+  color: var(--gold);
+  border: 1px solid rgba(245,158,11,.25);
+}
+
+.badge--blue {
+  background: rgba(96,165,250,.12);
+  color: var(--blue);
+  border: 1px solid rgba(96,165,250,.25);
+  margin-bottom: var(--sp-sm);
+}
+
+/* ───────── BUTTON ───────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 1.1em 2.5em;
+  border-radius: 980px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.25,.1,.25,1),
+              box-shadow .25s cubic-bezier(.25,.1,.25,1);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--gold) 0%, #D97706 100%);
+  color: #000;
+  box-shadow: 0 4px 24px rgba(245,158,11,.35);
+}
+
+.btn--primary:hover {
+  transform: scale(1.03) translateY(-1px);
+  box-shadow: 0 8px 32px rgba(245,158,11,.5);
+}
+
+.btn--lg {
+  font-size: 1.1875rem;
+  padding: 1.2em 3em;
+}
+
+/* ───────── CARD ───────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-md) calc(var(--sp-md) * 1.25);
+  transition: border-color .3s ease, transform .3s cubic-bezier(.25,.1,.25,1);
+}
+
+.card:hover {
+  border-color: rgba(255,255,255,.16);
+  transform: translateY(-4px);
+}
+
+/* ───────── STAT GRID ───────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+  margin-top: var(--sp-lg);
+}
+
+@media (max-width: 680px) {
+  .stat-row { grid-template-columns: 1fr; gap: var(--sp-sm); }
+}
+
+.stat-item { text-align: center; }
+
+.stat-num {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.4em;
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ───────── MODULE GRID ───────── */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-md);
+  margin-top: var(--sp-lg);
+}
+
+@media (max-width: 680px) {
+  .module-grid { grid-template-columns: 1fr; }
+}
+
+/* ───────── WHY FREE BOX ───────── */
+.why-box {
+  max-width: 720px;
+  margin: var(--sp-md) auto var(--sp-lg);
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-md) calc(var(--sp-md) * 1.5);
+  text-align: left;
+}
+
+.why-box p {
+  color: var(--text-sub);
+  line-height: var(--lh-body);
+  margin-bottom: var(--sp-sm);
+}
+.why-box p:last-child { margin-bottom: 0; }
+
+/* ───────── DIVIDER ───────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ───────── SCROLL ANIMATIONS ───────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity  .85s cubic-bezier(.16,1,.3,1),
+    transform .85s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger delays for children */
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+.reveal-d4 { transition-delay: .4s; }
+
+/* scale reveal variant (for numbers) */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.94) translateY(20px);
+  transition:
+    opacity  .8s cubic-bezier(.16,1,.3,1),
+    transform .8s cubic-bezier(.16,1,.3,1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ───────── BG GLOW ───────── */
+.bg-glow {
+  position: fixed;
+  top: -30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120vw;
+  height: 120vw;
+  max-width: 1400px;
+  background: radial-gradient(ellipse at center,
+    rgba(59,130,246,.06) 0%,
+    rgba(245,158,11,.04) 40%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* keep content above glow */
+section, footer { position: relative; z-index: 1; }
+
+/* ───────── FOOTER ───────── */
+.footer-text {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  line-height: 2;
+}
+</style>
 </head>
+
 <body>
-    <div class="bg-glow"></div>
-    
-    <!-- Hero Section -->
-    <section class="section text-center">
-        <div class="container animate-fade-up">
-            <span class="badge badge-gold">🔴 코인스쿨 런칭 마스터클래스에 오신 것을 환영합니다</span>
-            <h1>당신의 자산을 지키고 불리는<br><span class="gradient-text-gold">완벽한 웹3 로드맵</span></h1>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 1.5rem auto 2.5rem; color: #D1D5DB;">
-                검증된 거시경제 사이클, RWA 실물자산 전략, 그리고 세력의 자금 흐름을 읽는 법까지. 고물가 시대를 이기는 가장 확실한 가이드.
-            </p>
-            <a href="thankyou.html" class="btn btn-primary" style="font-size: 1.25rem; padding: 1.25rem 3rem;">지금 바로 무료로 등록하세요! ➔</a>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 1rem;">
-                🔒 100% 무료 온라인 마스터클래스 • 한정된 기간 동안만 특별 공개
-            </p>
-        </div>
-    </section>
+<div class="bg-glow"></div>
 
-    <!-- Social Proof Section -->
-    <section class="section">
-        <div class="container animate-fade-up delay-1">
-            <div class="glass" style="padding: 3rem; text-align: center;">
-                <h3 class="gradient-text-blue" style="margin-bottom: 1.5rem;">월스트리트 기관의 자금 1조 달러가 유입된 블록체인 시장</h3>
-                <p style="max-width: 800px; margin: 0 auto 2rem;">
-                    수많은 초기 투자자와 혁신가들이 이미 디파이와 RWA를 통해 인플레이션을 방어하고 새로운 자산을 구축했습니다. 이제 대한민국 투자자 여러분의 포트폴리오에 이 시스템을 그대로 적용할 차례입니다.
-                </p>
-                <div class="grid-3">
-                    <div>
-                        <h2 class="text-gold">300%</h2>
-                        <p style="font-size: 0.875rem;">RWA 시장 연평균 성장률 예측</p>
-                    </div>
-                    <div>
-                        <h2 class="text-gold">5만+</h2>
-                        <p style="font-size: 0.875rem;">코인스쿨 커뮤니티 누적 수강생</p>
-                    </div>
-                    <div>
-                        <h2 class="text-gold">24/7</h2>
-                        <p style="font-size: 0.875rem;">쉬지 않고 일하는 무인 자산 배관</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ─── HERO ─── -->
+<section class="section section--hero">
+  <div class="wrap">
+    <span class="badge badge--gold reveal">🔴 코인스쿨 런칭 마스터클래스</span>
 
-    <!-- What You'll Learn (4 Modules) -->
-    <section class="section">
-        <div class="container animate-fade-up delay-2">
-            <h2 class="text-center" style="margin-bottom: 3rem;">마스터클래스 <span class="text-blue">4대 핵심 모듈</span></h2>
-            <div class="grid-2">
-                <div class="glass card">
-                    <span class="badge badge-blue">모듈 1</span>
-                    <h3>기회 발견: 거인들의 돈은 어디로 가는가?</h3>
-                    <p>월스트리트 기관과 고래들의 자금 흐름을 읽는 법. 왜 비트코인 현물 ETF와 RWA가 메가 트렌드인지 분석합니다.</p>
-                </div>
-                <div class="glass card">
-                    <span class="badge badge-blue">모듈 2</span>
-                    <h3>디파이(DeFi)와 RWA 기초</h3>
-                    <p>인플레이션을 이기는 시스템 구축. 은행 예금 금리를 뛰어넘는 탈중앙화 금융의 수익화 원리를 배웁니다.</p>
-                </div>
-                <div class="glass card">
-                    <span class="badge badge-blue">모듈 3</span>
-                    <h3>고래 분석: 세력의 온체인 데이터</h3>
-                    <p>감각에 의존하는 투자는 끝났습니다. 온체인 데이터를 통해 시장의 매수/매도 시점을 파악하는 기술을 터득합니다.</p>
-                </div>
-                <div class="glass card">
-                    <span class="badge badge-blue">모듈 4</span>
-                    <h3>나만의 포트폴리오 완공 로드맵</h3>
-                    <p>배운 내용을 토대로 나만의 안전하고 수익률 높은 암호화폐 자산 포트폴리오를 구성하는 28일 완성 로드맵.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <h1 class="display reveal reveal-d1">
+      당신의 자산을<br>
+      <span class="gold">지키고 불리는</span><br>
+      완벽한 웹3 로드맵
+    </h1>
 
-    <!-- Why is it Free? (Goodwill) & CTA -->
-    <section class="section text-center">
-        <div class="container animate-fade-up delay-3">
-            <h2>마지막 질문: <span class="gradient-text-gold">왜 무료인가요?</span></h2>
-            <div style="max-width: 700px; margin: 2rem auto; text-align: left; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light);">
-                <p>답은 매우 단순하고 투명합니다.</p>
-                <p>먼저 여러분에게 압도적인 가치를 증명하여 성과를 내게 해드리면, 그중 일부는 자연스럽게 코인스쿨의 정규 VIP 패밀리이자 평생의 파트너가 될 것임을 확신하기 때문입니다.</p>
-                <p style="margin-bottom: 0;">여러분이 성공해야 저희 비즈니스가 성장합니다. 그것이 본 마스터클래스를 조건 없이 공개하는 호혜성의 본질입니다.</p>
-            </div>
-            
-            <div style="margin-top: 4rem;">
-                <h2 style="margin-bottom: 2rem;">마스터클래스에 참여하시려면 지금 바로 자리를 예약하세요.</h2>
-                <a href="thankyou.html" class="btn btn-primary" style="font-size: 1.25rem; padding: 1.25rem 3rem;">무료로 자리를 예약하세요 ➔</a>
-            </div>
-        </div>
-    </section>
+    <p class="body-lg reveal reveal-d2" style="max-width:580px;margin:var(--sp-md) auto var(--sp-lg);">
+      검증된 거시경제 사이클, RWA 실물자산 전략, 그리고 세력의 자금 흐름을 읽는 법까지.<br>
+      고물가 시대를 이기는 가장 확실한 가이드.
+    </p>
 
-    <footer class="section text-center" style="padding-top: 2rem; border-top: 1px solid var(--border-light); font-size: 0.875rem; color: var(--text-muted);">
-        <div class="container">
-            저작권 © 2026 코인스쿨 (Coin School). All rights reserved. | 이용약관 | 개인정보 보호정책 | 투자 유의 고지 사항
-        </div>
-    </footer>
+    <div class="reveal reveal-d3">
+      <a href="thankyou.html" class="btn btn--primary btn--lg">지금 바로 무료로 등록하세요 →</a>
+    </div>
+
+    <p class="body-sm reveal reveal-d4" style="margin-top:var(--sp-sm);">
+      🔒 100% 무료 온라인 마스터클래스 &nbsp;·&nbsp; 한정된 기간 동안만 특별 공개
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── SOCIAL PROOF ─── -->
+<section class="section">
+  <div class="wrap" style="text-align:center;">
+    <span class="eyebrow reveal">시장 현황</span>
+    <h2 class="h2 reveal reveal-d1">
+      월스트리트 기관의 자금<br>
+      <span class="blue">1조 달러</span>가 유입된 블록체인 시장
+    </h2>
+    <p class="body-lg reveal reveal-d2" style="max-width:720px;margin:var(--sp-md) auto 0;">
+      수많은 초기 투자자와 혁신가들이 이미 디파이와 RWA를 통해 인플레이션을 방어하고 새로운 자산을 구축했습니다.
+      이제 대한민국 투자자 여러분의 포트폴리오에 이 시스템을 그대로 적용할 차례입니다.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-item card reveal reveal-scale reveal-d1">
+        <div class="stat-num gold">300%</div>
+        <div class="stat-label">RWA 시장 연평균<br>성장률 예측</div>
+      </div>
+      <div class="stat-item card reveal reveal-scale reveal-d2">
+        <div class="stat-num gold">5만+</div>
+        <div class="stat-label">코인스쿨 커뮤니티<br>누적 수강생</div>
+      </div>
+      <div class="stat-item card reveal reveal-scale reveal-d3">
+        <div class="stat-num gold">24/7</div>
+        <div class="stat-label">쉬지 않고 일하는<br>무인 자산 배관</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── MODULES ─── -->
+<section class="section">
+  <div class="wrap">
+    <div style="text-align:center;">
+      <span class="eyebrow reveal">커리큘럼</span>
+      <h2 class="h2 reveal reveal-d1">마스터클래스 <span class="blue">4대 핵심 모듈</span></h2>
+    </div>
+
+    <div class="module-grid">
+      <div class="card reveal reveal-d1">
+        <span class="badge badge--blue">모듈 1</span>
+        <h3>기회 발견: 거인들의 돈은 어디로 가는가?</h3>
+        <p class="body-sm" style="color:var(--text-sub);margin-top:var(--sp-xs);">
+          월스트리트 기관과 고래들의 자금 흐름을 읽는 법. 왜 비트코인 현물 ETF와 RWA가 메가 트렌드인지 분석합니다.
+        </p>
+      </div>
+      <div class="card reveal reveal-d2">
+        <span class="badge badge--blue">모듈 2</span>
+        <h3>디파이(DeFi)와 RWA 기초</h3>
+        <p class="body-sm" style="color:var(--text-sub);margin-top:var(--sp-xs);">
+          인플레이션을 이기는 시스템 구축. 은행 예금 금리를 뛰어넘는 탈중앙화 금융의 수익화 원리를 배웁니다.
+        </p>
+      </div>
+      <div class="card reveal reveal-d3">
+        <span class="badge badge--blue">모듈 3</span>
+        <h3>고래 분석: 세력의 온체인 데이터</h3>
+        <p class="body-sm" style="color:var(--text-sub);margin-top:var(--sp-xs);">
+          감각에 의존하는 투자는 끝났습니다. 온체인 데이터를 통해 시장의 매수/매도 시점을 파악하는 기술을 터득합니다.
+        </p>
+      </div>
+      <div class="card reveal reveal-d4">
+        <span class="badge badge--blue">모듈 4</span>
+        <h3>나만의 포트폴리오 완공 로드맵</h3>
+        <p class="body-sm" style="color:var(--text-sub);margin-top:var(--sp-xs);">
+          배운 내용을 토대로 나만의 안전하고 수익률 높은 암호화폐 자산 포트폴리오를 구성하는 28일 완성 로드맵.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WHY FREE ─── -->
+<section class="section" style="text-align:center;">
+  <div class="wrap">
+    <span class="eyebrow reveal">투명한 약속</span>
+    <h2 class="h2 reveal reveal-d1">마지막 질문: <span class="gold">왜 무료인가요?</span></h2>
+
+    <div class="why-box reveal reveal-d2">
+      <p>답은 매우 단순하고 투명합니다.</p>
+      <p>먼저 여러분에게 압도적인 가치를 증명하여 성과를 내게 해드리면, 그중 일부는 자연스럽게 코인스쿨의 정규 VIP 패밀리이자 평생의 파트너가 될 것임을 확신하기 때문입니다.</p>
+      <p>여러분이 성공해야 저희 비즈니스가 성장합니다. 그것이 본 마스터클래스를 조건 없이 공개하는 호혜성의 본질입니다.</p>
+    </div>
+
+    <h2 class="h2 reveal reveal-d3" style="margin-bottom:var(--sp-md);">
+      마스터클래스에 참여하시려면<br>지금 바로 자리를 예약하세요.
+    </h2>
+    <div class="reveal reveal-d4">
+      <a href="thankyou.html" class="btn btn--primary btn--lg">무료로 자리를 예약하세요 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="section--footer">
+  <div class="wrap">
+    <p class="footer-text reveal">
+      저작권 © 2026 코인스쿨 (Coin School). All rights reserved.<br>
+      이용약관 &nbsp;·&nbsp; 개인정보 보호정책 &nbsp;·&nbsp; 투자 유의 고지 사항
+    </p>
+  </div>
+</footer>
+
+<!-- ─── SCROLL REVEAL JS ─── -->
+<script>
+(function () {
+  'use strict';
+
+  // 모든 .reveal 요소에 IntersectionObserver 적용
+  const io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target); // 한 번만 재생 (Apple 방식)
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  // reveal-scale도 동일하게 처리
+  document.querySelectorAll('.reveal, .reveal-scale').forEach(function (el) {
+    io.observe(el);
+  });
+
+  // 히어로는 페이지 로드 즉시 표시
+  document.querySelectorAll('.section--hero .reveal, .section--hero .reveal-scale').forEach(function (el) {
+    // 약간 delay 후 visible 처리
+    var delay = parseFloat(getComputedStyle(el).transitionDelay) * 1000 || 0;
+    setTimeout(function () { el.classList.add('visible'); }, 100 + delay);
+  });
+})();
+</script>
 </body>
 </html>
